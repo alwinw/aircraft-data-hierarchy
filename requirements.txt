@@ -1,5 +1,5 @@
-pydantic
-numpy
+pydantic>=2.0
+numpy>=2.0
 graphviz
 tabulate
 IPython

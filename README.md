@@ -33,10 +33,10 @@ To ensure a clean and isolated environment for running the Aircraft Data Hierarc
 ### 2. Create a new Anaconda environment:
 
 ```shell
-conda create -n your-environment-name
+conda create -n your-environment-name python=your-py-version
 ```
 
-Replacing `your-environment-name` with the desired name for your environment. 
+Replacing `your-environment-name` with the desired name for your environment and `your-py=version` with the desired Python version.
 
 ### 3. Activate the new environment:
 
@@ -64,7 +64,7 @@ Once you have `pip`, install the package dependencies.
 pip install -r requirements.txt
 ```
 
-Alternatively you can install the dependencies specified in the [pyproject.yml](pyproject.yml) file.
+Alternatively you can install the dependencies specified in the [pyproject.toml](pyproject.toml) file. You can also use `pip -e` to install in editable mode for development.
 
 ```shell
 pip install .
@@ -121,10 +121,10 @@ Test dependencies are specified in the [pyproject.yml](pyproject.toml) file.
 ```shell
 pip install .[test]
 ```
- 
+
 ### 3. Run tests
 
-```
+```shell
 pytest
 ```
 
@@ -133,4 +133,3 @@ This command will automatically discover and run all the tests in the project di
 ### 4. Review the test results
 
 The pytest framework will provide detailed information about the tests that passed or failed. If the Aircraft Data Hierarchy package was installed correctly and everything works, you should see all tests pass.
-
