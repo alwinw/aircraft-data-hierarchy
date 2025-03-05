@@ -31,10 +31,13 @@ dependencies = [
     "IPython"
 ]
 
-dynamic = ["version", "scripts"]
+dynamic = ["version"]
 
 # [tool.setuptools.dynamic]
 # version = {attr = "designemypackagexplorer.__version__"}
+
+[project.scripts]
+adh-validate-json = "aircraft_data_hierarchy.validate_json:main"
 
 [project.optional-dependencies]
 test = [
