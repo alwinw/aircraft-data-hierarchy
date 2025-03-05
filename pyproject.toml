@@ -9,7 +9,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "aircraft_data_hierarchy"
-description = "Project description"
+description = "Aircraft Data Hierarchy"
 readme = "README.md"
 authors = [
     {name = "Ranald M Engelbeck "},
@@ -44,6 +44,13 @@ test = [
     "pytest>=6.0",
     "pytest-cov",
     "coverage",
+]
+docs = [
+  "mkdocs>=1.6",
+  "mkdocs-material>=9.5",
+  "mkdocs-literate-nav >=0.6",
+  "mkdocs-section-index >= 0.3",
+  "mkdocstrings[python]>=0.28",
 ]
 
 [tool.setuptools.packages.find]

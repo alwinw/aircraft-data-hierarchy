@@ -26,7 +26,7 @@ By default the cloned project directory created will be named `aircraft-data-hie
 
 ## Setting Up The Python Environment
 
-To ensure a clean and isolated environment for running the Aircraft Data Hierarchy package, we recommend you create a new Anaconda environment. If you wish to skip creating an Anaconda environment continue to [Step 5](#4-install-the-required-packages-from-the-requirementsadhtxt-file) of this section.
+To ensure a clean and isolated environment for running the Aircraft Data Hierarchy package, we recommend you create a new Anaconda environment. If you wish to skip creating an Anaconda environment continue to [Step 5](#5-install-the-required-packages-from-the-requirementstxt-file) of this section.
 
 ### 1. Open a command or Anaconda Prompt.
 
@@ -96,7 +96,7 @@ This will create a `dist` directory containing the built distribution files.
 pip install dist/your-package-name-<version>.whl
 ```
 
-Replace <version> with the actual version number of the package wheel file from [Step 3](#3-build-the-package-using-python-build).
+Replace <version> with the actual version number of the package wheel file from [Step 2](#2-build-the-package-using-python-build).
 
 ### 4. Now you can import and use the Aircraft Data Hierarchy package in your Python code:
 
