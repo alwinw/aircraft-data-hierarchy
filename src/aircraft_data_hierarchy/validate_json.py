@@ -51,8 +51,8 @@ def main() -> None:
         logger.error(f"File not found: {json_file_path=}")
         return
 
-    with open(json_file_path, "r") as file:
-        json_data = json.load(file)
+    with open(json_file_path, "r") as f:
+        json_data = json.load(f)
 
     if validate_json(json_data):
         logger.info("JSON file is valid.")
