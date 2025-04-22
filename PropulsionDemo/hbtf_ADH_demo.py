@@ -1,8 +1,12 @@
-import numpy as np
-from aircraft_data_hierarchy.performanceLib.propulsion.hbtf_builder import HBTFBuilder, MPhbtfBuilder
-from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_performance_builder import pyCycleBuilder
-from generate_demo_adh import generate_test_ADH_propulsion
+import sys
 import openmdao.api as om
+from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_performance_builder import pyCycleBuilder
+from utils.generate_demo_adh import generate_test_ADH_propulsion
+from aircraft_data_hierarchy.performanceLib.propulsion.utils.pycycle_to_ADH import initialize_engine_deck_ADH, append_data_point_ADH, append_data_point_json
+from pydantic.v1 import utils
+from aircraft_data_hierarchy.behaviorLib.propulsion.propulsion_cycle_behavior import (
+    MultiPointCycle,
+)
 
 def HBTFprep(prob, ADHInstance):
     """
@@ -82,11 +86,63 @@ def HBTFprep(prob, ADHInstance):
 
     return prob, flight_env
 
+def viewer(prob, pt, file=sys.stdout):
+    """
+    print a report of all the relevant cycle properties
+    """
+
+    if pt == 'DESIGN':
+        MN = prob['DESIGN.fc.Fl_O:stat:MN']
+        LPT_PR = prob['DESIGN.balance.lpt_PR']
+        HPT_PR = prob['DESIGN.balance.hpt_PR']
+        FAR = prob['DESIGN.balance.FAR']
+    else:
+        MN = prob[pt+'.fc.Fl_O:stat:MN']
+        LPT_PR = prob[pt+'.lpt.PR']
+        HPT_PR = prob[pt+'.hpt.PR']
+        FAR = prob[pt+'.balance.FAR']
+
+    summary_data = (MN, prob[pt+'.fc.alt'], prob[pt+'.inlet.Fl_O:stat:W'], prob[pt+'.perf.Fn'],
+                        prob[pt+'.perf.Fg'], prob[pt+'.inlet.F_ram'], prob[pt+'.perf.OPR'],
+                        prob[pt+'.perf.TSFC'], prob[pt+'.splitter.BPR'])
+    
+    # outputs = prob.model.list_outputs(
+    #     out_stream=None, units=True
+    # )
+
+    # inputs = prob.model.list_inputs(
+    #     out_stream=None, units=True
+    # )
+
+    # from pprint import pprint
+
+    # with open("output.txt", "w") as f:
+    #     pprint(outputs, stream=f)
+
+    # with open("input.txt", "w") as f:
+    #     pprint(inputs, stream=f)
+
+    print(file=file, flush=True)
+    print(file=file, flush=True)
+    print(file=file, flush=True)
+    print("----------------------------------------------------------------------------", file=file, flush=True)
+    print("                              POINT:", pt, file=file, flush=True)
+    print("----------------------------------------------------------------------------", file=file, flush=True)
+    print("                       PERFORMANCE CHARACTERISTICS", file=file, flush=True)
+    print("    Mach      Alt       W      Fn      Fg    Fram     OPR     TSFC      BPR ", file=file, flush=True)
+    print(" %7.5f  %7.1f %7.3f %7.1f %7.1f %7.1f %7.3f  %7.5f  %7.3f" %summary_data, file=file, flush=True)
+
 if __name__ == "__main__":
+    # Generate a test propulsion ADH
     ADHInstance = generate_test_ADH_propulsion()
+
+    # Intantiate the pyCycle builder class
     pycTest = pyCycleBuilder(ADHInstance)
+
+    # Load inputs to builder from ADH
     pycTest.getInput()
 
+    # Output the OpenMDAO model to the problem
     prob = om.Problem()
     prob.model = pycTest.getOutput()
 
@@ -94,11 +150,36 @@ if __name__ == "__main__":
 
     # USER SCRIPT FOR RUNNING ANALYSIS BELOW THIS LINE
     # -----------------------------------------------
-    prob, flight_env = HBTFprep(prob, ADHInstance)
+    prob, flight_env = HBTFprep(prob, ADHInstance) #Sets initial guess and mach #, altitute pairs
     om.n2(prob, show_browser=False)
     prob.set_solver_print(level=-1)
     prob.set_solver_print(level=2, depth=1)
 
+    # Promoted names for data that we want to write back to the ADH engine deck
+    promoted_names = {
+        "mn": "OD_part_pwr.fc.MN",
+        "alt": "OD_part_pwr.fc.alt",
+        "throttle": "OD_part_pwr.PC",
+        "gross_thrust": "OD_part_pwr.perf.Fg",
+        "net_thrust": "OD_part_pwr.perf.Fn",
+        "ram_drag": "OD_part_pwr.perf.ram_drag",
+        "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
+        "temp": "OD_full_pwr.T4_MAX",
+        "shaft_power": "OD_part_pwr.lp_shaft.HPX"
+        # PyCycle doesn't return nox rate 
+    }
+    
+    # Define the canonical order for the engine deck.
+    ordered_keys = ["mn", "alt", "throttle", "gross_thrust", "net_thrust", "ram_drag", "fuel_flow", "temp", "shaft_power"]
+    
+    # Specify the JSON file path for the engine deck.
+    json_file_path = "pycycle_engine.json"
+
+    #Initialize the Engine Deck in the ADH (sets up the DaveML structure in the behavior branch but no data points yet)
+    deck_index = initialize_engine_deck_ADH(prob, ADHInstance, promoted_names=promoted_names, ordered_keys=ordered_keys)
+
+
+    # Start the main analysis loop over all Mach number altitude pairs
     viewer_file = open("hbtf_view.out", "w")
     first_pass = True
     for MN, alt in flight_env:
@@ -121,20 +202,19 @@ if __name__ == "__main__":
             prob.run_model()
 
             if first_pass:
-                # viewer(prob, "DESIGN", file=viewer_file)
+                viewer(prob, "DESIGN", file=viewer_file)
                 first_pass = False
-            # viewer(prob, "OD_part_pwr", file=viewer_file)
+            viewer(prob, "OD_part_pwr", file=viewer_file)
+
+            #Write the data point to the ADHInstance
+            append_data_point_ADH(prob, ADHInstance.behavior.engine_decks[deck_index].ungridded_table_def[0], promoted_names=promoted_names, ordered_keys=ordered_keys)
+
+            #Write the data poin to JSON(for later use in Aviary)
+            append_data_point_json(prob, json_file_path, promoted_names=promoted_names, ordered_keys=ordered_keys)
+
 
         # run throttle back up to full power
         for PC in [1, 0.85]:
             prob["OD_part_pwr.PC"] = PC
             prob.run_model()
-
-    outputs = prob.model.list_outputs(
-        out_stream=None, residuals_tol=1e-2, implicit=True, explicit=False, residuals=True
-    )
-
-    from pprint import pprint
-
-    with open("output.txt", "w") as f:
-        pprint(outputs, stream=f)
+        
