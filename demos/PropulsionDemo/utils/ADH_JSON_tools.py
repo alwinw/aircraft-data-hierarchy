@@ -5,7 +5,7 @@ def ADH_to_JSON(ADHInstance, path, exclude_unset=True, exclude_defaults=False):
     """
     Outputs an ADHInstance to JSON at specified path
 
-    ADHInstance: 
+    ADHInstance:
     pydantic ADH instance
 
     path: str
@@ -17,31 +17,35 @@ def ADH_to_JSON(ADHInstance, path, exclude_unset=True, exclude_defaults=False):
     exclude_defaults: bool
     excludes default values
 
-     """
-    
-    ADHJSON = ADHInstance.model_dump_json(indent=4,exclude_unset=exclude_unset,exclude_defaults=exclude_defaults)
+    """
+
+    ADHJSON = ADHInstance.model_dump_json(
+        indent=4, exclude_unset=exclude_unset, exclude_defaults=exclude_defaults
+    )
     ADHJSONDict = json.loads(ADHJSON)
-    ADHJSONON = json.dumps({"OuterNest":ADHJSONDict}, indent=4)
+    ADHJSONON = json.dumps({"OuterNest": ADHJSONDict}, indent=4)
     with open(path, "w") as file:
         file.write(ADHJSONON)
         file.close()
 
-def JSON_to_ADH(path,ADHInstance):
+
+def JSON_to_ADH(path, ADHInstance):
     """
     Reads and validates a JSON file against an existing ADHInstance. Updates the ADHInstance with data from the JSON and returns it.
     """
 
     # Open and read the JSON file
-    with open(path, 'r') as file:
+    with open(path, "r") as file:
         adhData = json.load(file)
 
     # Convert read new ADH JSON to string
     adhData = json.dumps(adhData["OuterNest"])
-    
+
     # Read in the new ADH
     ADHInstanceNew = ADHInstance.model_validate_json(adhData)
 
     return ADHInstanceNew
+
 
 def ADH_to_Engine_Deck(input_path, output_path):
     """
@@ -60,7 +64,9 @@ def ADH_to_Engine_Deck(input_path, output_path):
 
     # Check if "engine_decks" exists in the JSON data
     if "engine_decks" in adh_data["OuterNest"]["behavior"]:
-        engine_decks_data = adh_data["OuterNest"]["behavior"]["engine_decks"][0]  # Extract only engine_decks
+        engine_decks_data = adh_data["OuterNest"]["behavior"]["engine_decks"][
+            0
+        ]  # Extract only engine_decks
 
         # Convert extracted data to formatted JSON string
         engine_decks_json = json.dumps(engine_decks_data, indent=4)

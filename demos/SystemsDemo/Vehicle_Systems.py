@@ -96,7 +96,9 @@ class PhysicalCharacteristics(BaseModel):
     def validate_cog(cls, v: Dict[str, float]) -> Dict[str, float]:
         """Validate that center of gravity includes x, y, and z coordinates."""
         if set(v.keys()) != {"x", "y", "z"}:
-            raise ValueError("Center of gravity must include 'x', 'y', and 'z' coordinates")
+            raise ValueError(
+                "Center of gravity must include 'x', 'y', and 'z' coordinates"
+            )
         return v
 
 
@@ -127,7 +129,9 @@ class FluidFlowCharacteristics(BaseModel):
     def validate_temperature_range(cls, v: Tuple[float, float]) -> Tuple[float, float]:
         """Validate that the minimum temperature is less than the maximum temperature."""
         if v[0] >= v[1]:
-            raise ValueError("Minimum temperature must be less than maximum temperature")
+            raise ValueError(
+                "Minimum temperature must be less than maximum temperature"
+            )
         return v
 
 

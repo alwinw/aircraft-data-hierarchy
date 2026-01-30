@@ -24,6 +24,7 @@ class AircraftSystem(CommonBaseModel):
         if not value.startswith("1.") or len(value) < 3:
             raise ValueError(f"Invalid WBS number: {value}")
         return value
+
     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class AircraftSystemIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -34,6 +35,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class AirVehicle(CommonBaseModel):
@@ -44,6 +46,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class AirVehicleIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -54,6 +57,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Airframe(CommonBaseModel):
@@ -64,6 +68,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AirframeIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -74,6 +79,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Fuselage(CommonBaseModel):
@@ -84,6 +90,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class BasicStructure(CommonBaseModel):
@@ -94,6 +101,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class Skins(CommonBaseModel):
@@ -104,7 +112,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Stringers(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.2")
@@ -114,7 +125,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Frames(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.3")
@@ -124,7 +138,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Clips(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.4")
@@ -134,7 +151,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Beams(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.5")
@@ -144,7 +164,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Floors(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.6")
@@ -154,7 +177,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Bulkheads(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.7")
@@ -164,7 +190,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Longerons(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.8")
@@ -174,7 +203,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Supports(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.9")
@@ -184,7 +216,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                 class SecondaryStructure(CommonBaseModel):
                     wbs_no: Optional[str] = Field("1.2.2.2.2")
@@ -194,6 +229,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class Enclosures(CommonBaseModel):
@@ -204,7 +240,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Flooring(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.2")
@@ -214,7 +253,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Partitions(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.3")
@@ -224,7 +266,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Windows(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.4")
@@ -234,7 +279,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Doors(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.5")
@@ -244,7 +292,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Ramps(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.6")
@@ -254,7 +305,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Panels(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.7")
@@ -264,7 +318,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Misc(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.8")
@@ -274,7 +331,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
             class Wing(CommonBaseModel):
                 wbs_no: Optional[str] = Field("1.2.2.3")
@@ -284,6 +344,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class BasicStructure(CommonBaseModel):
@@ -294,6 +355,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class CenterSection(CommonBaseModel):
@@ -304,7 +366,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                         class Skins(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.1")
@@ -314,7 +379,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Spars(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.2")
@@ -324,7 +392,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Ribs(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.3")
@@ -334,7 +405,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Stringers(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.4")
@@ -344,7 +418,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Clips(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.5")
@@ -354,7 +431,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                     class IntermediatePanel(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.3.1.2")
@@ -364,7 +444,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                         class Skins(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.1")
@@ -374,7 +457,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Spars(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.2")
@@ -384,7 +470,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Ribs(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.3")
@@ -394,7 +483,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Stringers(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.4")
@@ -404,7 +496,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Clips(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.5")
@@ -414,7 +509,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                     class OuterPanel(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.3.1.3")
@@ -424,7 +522,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                         class Skins(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.1")
@@ -434,7 +535,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Spars(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.2")
@@ -444,7 +548,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Ribs(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.3")
@@ -454,7 +561,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Stringers(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.4")
@@ -464,7 +574,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                         class Clips(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.5")
@@ -474,7 +587,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                 class SecondaryStructure(CommonBaseModel):
                     wbs_no: Optional[str] = Field("1.2.2.3.2")
@@ -484,6 +600,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class AccessPanels(CommonBaseModel):
@@ -494,7 +611,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                 class Ailerons(CommonBaseModel):
                     wbs_no: Optional[str] = Field("1.2.2.3.3")
@@ -504,6 +624,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Elevons(CommonBaseModel):
@@ -514,6 +635,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Spoilers(CommonBaseModel):
@@ -524,6 +646,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class TrailingEdgeFlaps(CommonBaseModel):
@@ -534,6 +657,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class LeadingEdgeFlaps(CommonBaseModel):
@@ -544,6 +668,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Slats(CommonBaseModel):
@@ -554,6 +679,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Empennage(CommonBaseModel):
@@ -564,6 +690,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Stabilizer(CommonBaseModel):
@@ -574,6 +701,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class BasicStructure(CommonBaseModel):
@@ -584,7 +712,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                         class CenterSection(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.4.1.1.1")
@@ -594,7 +725,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                             class Skins(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.1")
@@ -604,7 +738,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Spars(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.2")
@@ -614,7 +751,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Ribs(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.3")
@@ -624,7 +764,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Stringers(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.4")
@@ -634,7 +777,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Clips(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.5")
@@ -644,7 +790,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                         class IntermediatePanel(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.4.1.1.2")
@@ -654,7 +803,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                             class Skins(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.1")
@@ -664,7 +816,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Spars(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.2")
@@ -674,7 +829,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Ribs(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.3")
@@ -684,7 +842,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Stringers(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.4")
@@ -694,7 +855,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Clips(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.5")
@@ -704,7 +868,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                         class OuterPanel(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.4.1.1.3")
@@ -714,7 +881,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                             class Skins(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.1")
@@ -724,7 +894,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Spars(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.2")
@@ -734,7 +907,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Ribs(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.3")
@@ -744,7 +920,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Stringers(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.4")
@@ -754,7 +933,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                             class Clips(CommonBaseModel):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.5")
@@ -764,7 +946,10 @@ class AircraftSystem(CommonBaseModel):
                                     if not value.startswith("1."):
                                         raise ValueError(f"Invalid WBS number: {value}")
                                     return value
-                                model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                                model_config = ConfigDict(
+                                    validate_assignment=True, extra="allow"
+                                )
 
                     class SecondaryStructure(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.4.2")
@@ -774,7 +959,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                         class AccessPanels(CommonBaseModel):
                             wbs_no: Optional[str] = Field("1.2.2.4.2.1")
@@ -784,7 +972,10 @@ class AircraftSystem(CommonBaseModel):
                                 if not value.startswith("1."):
                                     raise ValueError(f"Invalid WBS number: {value}")
                                 return value
-                            model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                            model_config = ConfigDict(
+                                validate_assignment=True, extra="allow"
+                            )
 
                 class Ailerons(CommonBaseModel):
                     wbs_no: Optional[str] = Field("1.2.2.4.3")
@@ -794,6 +985,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Elevons(CommonBaseModel):
@@ -804,6 +996,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Spoilers(CommonBaseModel):
@@ -811,10 +1004,10 @@ class AircraftSystem(CommonBaseModel):
 
                     @field_validator("wbs_no")
                     def validate_wbs_no(cls, value: str) -> str:
-
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class TrailingEdgeFlaps(CommonBaseModel):
@@ -825,6 +1018,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class LeadingEdgeFlaps(CommonBaseModel):
@@ -835,6 +1029,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Slats(CommonBaseModel):
@@ -845,6 +1040,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Nacelle(Component):
@@ -855,6 +1051,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class BasicStructure(CommonBaseModel):
@@ -865,6 +1062,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class Skins(CommonBaseModel):
@@ -875,7 +1073,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Stringers(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.2")
@@ -885,7 +1086,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Frames(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.3")
@@ -895,7 +1099,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Clips(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.4")
@@ -905,7 +1112,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Beams(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.5")
@@ -915,7 +1125,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Floors(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.6")
@@ -925,7 +1138,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Bulkheads(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.7")
@@ -935,7 +1151,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Longerons(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.8")
@@ -945,7 +1164,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Supports(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.9")
@@ -955,7 +1177,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                 class SecondaryStructure(CommonBaseModel):
                     wbs_no: Optional[str] = Field("1.2.2.5.2")
@@ -965,6 +1190,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                     class Enclosures(CommonBaseModel):
@@ -975,7 +1201,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Flooring(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.2")
@@ -985,7 +1214,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Partitions(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.3")
@@ -995,7 +1227,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Windows(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.4")
@@ -1005,7 +1240,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Doors(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.5")
@@ -1015,7 +1253,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Ramps(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.6")
@@ -1025,7 +1266,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Panels(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.7")
@@ -1035,7 +1279,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
                     class Misc(CommonBaseModel):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.8")
@@ -1045,7 +1292,10 @@ class AircraftSystem(CommonBaseModel):
                             if not value.startswith("1."):
                                 raise ValueError(f"Invalid WBS number: {value}")
                             return value
-                        model_config = ConfigDict(validate_assignment=True, extra="allow")
+
+                        model_config = ConfigDict(
+                            validate_assignment=True, extra="allow"
+                        )
 
         class Propulsion(CommonBaseModel):
             wbs_no: Optional[str] = Field("1.2.3")
@@ -1055,6 +1305,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Engine(Propulsion):
@@ -1065,6 +1316,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class EngineInstallation(CommonBaseModel):
@@ -1075,6 +1327,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AccessoryGearBoxesAndDrive(CommonBaseModel):
@@ -1085,6 +1338,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ExhaustSystem(CommonBaseModel):
@@ -1095,6 +1349,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class EngineCooling(CommonBaseModel):
@@ -1105,6 +1360,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class WaterInjection(CommonBaseModel):
@@ -1115,6 +1371,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class EngineControls(CommonBaseModel):
@@ -1125,6 +1382,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class StartingSystem(CommonBaseModel):
@@ -1135,6 +1393,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class PropellerOrFanInstallation(CommonBaseModel):
@@ -1145,6 +1404,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class LubricatingSystem(CommonBaseModel):
@@ -1155,6 +1415,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class FuelSystem(CommonBaseModel):
@@ -1165,6 +1426,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class ProtectedTanks(CommonBaseModel):
@@ -1175,6 +1437,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class UnprotectedTanks(CommonBaseModel):
@@ -1185,6 +1448,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Plumbing(CommonBaseModel):
@@ -1195,6 +1459,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Etc(CommonBaseModel):
@@ -1205,6 +1470,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class DriveSystem(CommonBaseModel):
@@ -1215,6 +1481,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class GearBoxes(CommonBaseModel):
@@ -1225,6 +1492,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class LubSys(CommonBaseModel):
@@ -1235,6 +1503,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class RtrBrk(CommonBaseModel):
@@ -1245,6 +1514,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class TransmissionDrive(CommonBaseModel):
@@ -1255,6 +1525,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class RotorShaft(CommonBaseModel):
@@ -1265,6 +1536,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class GasDrive(CommonBaseModel):
@@ -1275,6 +1547,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class VehicleSubsystems(CommonBaseModel):
@@ -1285,6 +1558,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class VehicleSubsystemIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -1295,6 +1569,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class FlightControlSubsystem(CommonBaseModel):
@@ -1305,6 +1580,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class CockpitControls(CommonBaseModel):
@@ -1315,6 +1591,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class AutomaticFlightControlSystem(CommonBaseModel):
@@ -1325,6 +1602,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class SystemControls(CommonBaseModel):
@@ -1335,6 +1613,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AuxiliaryPowerSubsystem(CommonBaseModel):
@@ -1345,6 +1624,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class HydraulicSubsystem(CommonBaseModel):
@@ -1355,6 +1635,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ElectricalAntiIcingSystem(CommonBaseModel):
@@ -1365,6 +1646,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class CrewStationSubsystem(CommonBaseModel):
@@ -1375,6 +1657,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class EnvironmentalControlSubsystem(CommonBaseModel):
@@ -1385,6 +1668,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class FuelSubsystem(CommonBaseModel):
@@ -1395,6 +1679,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Instruments(CommonBaseModel):
@@ -1405,6 +1690,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class PneumaticSubsystem(CommonBaseModel):
@@ -1415,6 +1701,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AntiIcingSubsystem(CommonBaseModel):
@@ -1425,6 +1712,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class VehicleSubsystemSoftware(CommonBaseModel):
@@ -1435,6 +1723,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherSubsystems(CommonBaseModel):
@@ -1445,6 +1734,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Avionics(CommonBaseModel):
@@ -1455,6 +1745,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AvionicsIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -1465,6 +1756,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class CommunicationIdentification(CommonBaseModel):
@@ -1475,6 +1767,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class NavigationGuidance(CommonBaseModel):
@@ -1485,6 +1778,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class MissionComputerProcessing(CommonBaseModel):
@@ -1495,6 +1789,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class FireControl(CommonBaseModel):
@@ -1505,6 +1800,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class DataDisplayAndControls(CommonBaseModel):
@@ -1515,6 +1811,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Survivability(CommonBaseModel):
@@ -1525,6 +1822,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Reconnaissance(CommonBaseModel):
@@ -1535,6 +1833,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ElectronicWarfare(CommonBaseModel):
@@ -1545,6 +1844,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AutomaticFlightControl(CommonBaseModel):
@@ -1555,6 +1855,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class HealthMonitoringSystem(CommonBaseModel):
@@ -1565,6 +1866,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class StoresManagement(CommonBaseModel):
@@ -1575,6 +1877,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AvionicsSoftwareRelease(CommonBaseModel):
@@ -1585,6 +1888,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherAvionicsSubsystems(CommonBaseModel):
@@ -1595,6 +1899,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Installation(CommonBaseModel):
@@ -1605,6 +1910,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ArmamentWeaponsDelivery(CommonBaseModel):
@@ -1615,6 +1921,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class AuxiliaryEquipment(CommonBaseModel):
@@ -1625,6 +1932,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class FurnishingsAndEquipment(CommonBaseModel):
@@ -1635,6 +1943,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AccommodationForPersonnel(CommonBaseModel):
@@ -1645,6 +1954,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class MiscellaneousEquipment(CommonBaseModel):
@@ -1655,6 +1965,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Furnishings(CommonBaseModel):
@@ -1665,6 +1976,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class EmergencyEquipment(CommonBaseModel):
@@ -1675,6 +1987,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class AirVehicleSoftwareRelease(CommonBaseModel):
@@ -1685,6 +1998,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class LoadAndHandlingSystem(CommonBaseModel):
@@ -1695,6 +2009,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AircraftHandling(CommonBaseModel):
@@ -1705,6 +2020,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class LoadHandling(CommonBaseModel):
@@ -1715,6 +2031,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class BallastGroup(CommonBaseModel):
@@ -1725,6 +2042,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ManufacturingVariation(CommonBaseModel):
@@ -1735,6 +2053,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Contingency(CommonBaseModel):
@@ -1745,6 +2064,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OperatingItems(CommonBaseModel):
@@ -1755,6 +2075,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Crew(CommonBaseModel):
@@ -1765,6 +2086,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class UnusableFuel(CommonBaseModel):
@@ -1775,6 +2097,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class TrappedOil(CommonBaseModel):
@@ -1785,6 +2108,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class EngineOil(CommonBaseModel):
@@ -1795,6 +2119,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AuxFuelTanks(CommonBaseModel):
@@ -1805,6 +2130,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class InternalFuelTanks(CommonBaseModel):
@@ -1815,6 +2141,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ExternalFuelTanks(CommonBaseModel):
@@ -1825,6 +2152,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class WaterInjectionFluid(CommonBaseModel):
@@ -1835,6 +2163,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Baggage(CommonBaseModel):
@@ -1845,6 +2174,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class GunInstallations(CommonBaseModel):
@@ -1855,6 +2185,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Guns(CommonBaseModel):
@@ -1865,6 +2196,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
                 class Supports(CommonBaseModel):
@@ -1875,6 +2207,7 @@ class AircraftSystem(CommonBaseModel):
                         if not value.startswith("1."):
                             raise ValueError(f"Invalid WBS number: {value}")
                         return value
+
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class WeaponsProvisions(CommonBaseModel):
@@ -1885,6 +2218,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Chaff(CommonBaseModel):
@@ -1895,6 +2229,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Flares(CommonBaseModel):
@@ -1905,6 +2240,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class SurvivalKits(CommonBaseModel):
@@ -1915,6 +2251,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class LifeRafts(CommonBaseModel):
@@ -1925,6 +2262,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Oxygen(CommonBaseModel):
@@ -1935,6 +2273,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Passengers(CommonBaseModel):
@@ -1945,6 +2284,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Troops(CommonBaseModel):
@@ -1955,6 +2295,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Cargo(CommonBaseModel):
@@ -1965,6 +2306,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Ammunition(CommonBaseModel):
@@ -1975,6 +2317,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Weapons(CommonBaseModel):
@@ -1985,6 +2328,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class InternalUsableFuel(CommonBaseModel):
@@ -1995,6 +2339,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ExternalUsableFuel(CommonBaseModel):
@@ -2005,6 +2350,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OtherAirVehicle(CommonBaseModel):
@@ -2015,6 +2361,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class PayloadMissionSystem(CommonBaseModel):
@@ -2025,6 +2372,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class PayloadIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -2035,6 +2383,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SurvivabilityPayload(CommonBaseModel):
@@ -2045,6 +2394,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ReconnaissancePayload(CommonBaseModel):
@@ -2055,6 +2405,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ElectronicWarfarePayload(CommonBaseModel):
@@ -2065,6 +2416,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ArmamentWeaponsDeliveryPayload(CommonBaseModel):
@@ -2075,6 +2427,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class PayloadSoftwareRelease(CommonBaseModel):
@@ -2085,6 +2438,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OtherPayload(CommonBaseModel):
@@ -2095,6 +2449,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class GroundHostSegment(CommonBaseModel):
@@ -2105,6 +2460,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class GroundSegmentIntegrationAssemblyTestAndCheckout(CommonBaseModel):
@@ -2115,6 +2471,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class GroundControlSystems(CommonBaseModel):
@@ -2125,6 +2482,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class CommandAndControlSubsystem(CommonBaseModel):
@@ -2135,6 +2493,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class LaunchEquipment(CommonBaseModel):
@@ -2145,6 +2504,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class RecoveryEquipment(CommonBaseModel):
@@ -2155,6 +2515,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class TransportVehicles(CommonBaseModel):
@@ -2165,6 +2526,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class GroundSegmentSoftwareRelease(CommonBaseModel):
@@ -2175,6 +2537,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OtherGroundHostSegment(CommonBaseModel):
@@ -2185,6 +2548,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class AircraftSystemSoftwareRelease(CommonBaseModel):
@@ -2195,6 +2559,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class SystemsEngineering(CommonBaseModel):
@@ -2205,6 +2570,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SoftwareSystemsEngineering(CommonBaseModel):
@@ -2215,6 +2581,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class IntegratedLogisticsSupportSystemsEngineering(CommonBaseModel):
@@ -2225,6 +2592,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class CybersecuritySystemsEngineering(CommonBaseModel):
@@ -2235,6 +2603,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class CoreSystemsEngineering(CommonBaseModel):
@@ -2245,6 +2614,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OtherSystemsEngineering(CommonBaseModel):
@@ -2255,6 +2625,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class ProgramManagement(CommonBaseModel):
@@ -2265,6 +2636,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SoftwareProgramManagement(CommonBaseModel):
@@ -2275,6 +2647,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class IntegratedLogisticsSupportProgramManagement(CommonBaseModel):
@@ -2285,6 +2658,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class CybersecurityManagement(CommonBaseModel):
@@ -2295,6 +2669,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class CoreProgramManagement(CommonBaseModel):
@@ -2305,6 +2680,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OtherProgramManagement(CommonBaseModel):
@@ -2315,6 +2691,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class SystemTestAndEvaluation(CommonBaseModel):
@@ -2325,6 +2702,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class DevelopmentalTestAndEvaluation(CommonBaseModel):
@@ -2335,6 +2713,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class SystemAcceptanceTest(CommonBaseModel):
@@ -2345,6 +2724,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class WindTunnelTests(CommonBaseModel):
@@ -2355,6 +2735,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class StructuralTests(CommonBaseModel):
@@ -2365,6 +2746,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class FlightTests(CommonBaseModel):
@@ -2375,6 +2757,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class GroundTests(CommonBaseModel):
@@ -2385,6 +2768,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class CybersecurityTestAndEvaluation(CommonBaseModel):
@@ -2395,6 +2779,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherDTEtests(CommonBaseModel):
@@ -2405,6 +2790,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class OperationalTestAndEvaluation(CommonBaseModel):
@@ -2415,6 +2801,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class LimitedUserEvaluation(CommonBaseModel):
@@ -2425,6 +2812,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class InteroperabilityTesting(CommonBaseModel):
@@ -2435,6 +2823,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class FlightTests(CommonBaseModel):
@@ -2445,6 +2834,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class GroundTests(CommonBaseModel):
@@ -2455,6 +2845,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class CybersecurityTestAndEvaluation(CommonBaseModel):
@@ -2465,6 +2856,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherOTEtests(CommonBaseModel):
@@ -2475,6 +2867,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class LiveFireTestAndEvaluation(CommonBaseModel):
@@ -2485,6 +2878,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class MockupsSystemIntegrationLabs(CommonBaseModel):
@@ -2495,6 +2889,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class TestAndEvaluationSupport(CommonBaseModel):
@@ -2505,6 +2900,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class TestFacilities(CommonBaseModel):
@@ -2515,6 +2911,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class Training(CommonBaseModel):
@@ -2525,6 +2922,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Equipment(CommonBaseModel):
@@ -2535,6 +2933,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OperatorInstructionalEquipment(CommonBaseModel):
@@ -2545,6 +2944,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class MaintainerInstructionalEquipment(CommonBaseModel):
@@ -2555,6 +2955,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Services(CommonBaseModel):
@@ -2565,6 +2966,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OperatorInstructionalServices(CommonBaseModel):
@@ -2575,6 +2977,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class MaintainerInstructionalServices(CommonBaseModel):
@@ -2585,6 +2988,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class Facilities(CommonBaseModel):
@@ -2595,6 +2999,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class TrainingSoftware(CommonBaseModel):
@@ -2605,6 +3010,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class Data(CommonBaseModel):
@@ -2615,6 +3021,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class DataDeliverables(CommonBaseModel):
@@ -2625,6 +3032,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class DataRepository(CommonBaseModel):
@@ -2635,6 +3043,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class DataRights(CommonBaseModel):
@@ -2645,6 +3054,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class PeculiarSupportEquipment(CommonBaseModel):
@@ -2655,6 +3065,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class TestAndMeasurementEquipment(CommonBaseModel):
@@ -2665,6 +3076,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AirframeHullVehicle(CommonBaseModel):
@@ -2675,6 +3087,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Propulsion(CommonBaseModel):
@@ -2685,6 +3098,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ElectronicsAvionics(CommonBaseModel):
@@ -2695,6 +3109,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherMajorSubsystems(CommonBaseModel):
@@ -2705,6 +3120,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SupportAndHandlingEquipment(CommonBaseModel):
@@ -2715,6 +3131,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AirframeHullVehicle(CommonBaseModel):
@@ -2725,6 +3142,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Propulsion(CommonBaseModel):
@@ -2735,6 +3153,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ElectronicsAvionics(CommonBaseModel):
@@ -2745,6 +3164,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherMajorSubsystems(CommonBaseModel):
@@ -2755,6 +3175,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class CommonSupportEquipment(CommonBaseModel):
@@ -2765,6 +3186,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class TestAndMeasurementEquipment(CommonBaseModel):
@@ -2775,6 +3197,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AirframeHullVehicle(CommonBaseModel):
@@ -2785,6 +3208,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Propulsion(CommonBaseModel):
@@ -2795,6 +3219,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ElectronicsAvionics(CommonBaseModel):
@@ -2805,6 +3230,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherMajorSubsystems(CommonBaseModel):
@@ -2815,6 +3241,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SupportAndHandlingEquipment(CommonBaseModel):
@@ -2825,6 +3252,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class AirframeHullVehicle(CommonBaseModel):
@@ -2835,6 +3263,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Propulsion(CommonBaseModel):
@@ -2845,6 +3274,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class ElectronicsAvionics(CommonBaseModel):
@@ -2855,6 +3285,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class OtherMajorSubsystems(CommonBaseModel):
@@ -2865,6 +3296,7 @@ class AircraftSystem(CommonBaseModel):
                     if not value.startswith("1."):
                         raise ValueError(f"Invalid WBS number: {value}")
                     return value
+
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class OperationalSiteActivation(CommonBaseModel):
@@ -2875,6 +3307,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SystemAssemblyInstallationAndCheckoutOnSite(CommonBaseModel):
@@ -2885,6 +3318,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ContractorTechnicalSupport(CommonBaseModel):
@@ -2895,6 +3329,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SiteConstruction(CommonBaseModel):
@@ -2905,6 +3340,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class SiteShipVehicleConversion(CommonBaseModel):
@@ -2915,6 +3351,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class InterimContractorSupport(CommonBaseModel):
@@ -2925,6 +3362,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class ContractorLogisticsSupport(CommonBaseModel):
@@ -2935,6 +3373,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class IndustrialFacilities(CommonBaseModel):
@@ -2945,6 +3384,7 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class ConstructionConversionExpansion(CommonBaseModel):
@@ -2955,6 +3395,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class EquipmentAcquisitionOrModernization(CommonBaseModel):
@@ -2965,6 +3406,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
         class IndustrialFacilitiesMaintenance(CommonBaseModel):
@@ -2975,6 +3417,7 @@ class AircraftSystem(CommonBaseModel):
                 if not value.startswith("1."):
                     raise ValueError(f"Invalid WBS number: {value}")
                 return value
+
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
     class InitialSparesAndRepairParts(CommonBaseModel):
@@ -2985,4 +3428,5 @@ class AircraftSystem(CommonBaseModel):
             if not value.startswith("1."):
                 raise ValueError(f"Invalid WBS number: {value}")
             return value
+
         model_config = ConfigDict(validate_assignment=True, extra="allow")

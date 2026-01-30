@@ -1,5 +1,6 @@
 import pydantic
 
+
 class WorkBreakdownStructure:
     @staticmethod
     def hello_world():

@@ -6,6 +6,7 @@ from ...requirements import Requirement
 from ...performance import Discipline
 from ...behavior import Behavior
 
+
 class System(CommonBaseModel):
     """
     Represents a system within aircraft systems, detailing its specifications, functionalities, and interrelations.
@@ -26,14 +27,30 @@ class System(CommonBaseModel):
     """
 
     name: Optional[str] = Field(None, description="The name of the system.")
-    description: Optional[str] = Field(None, description="A brief description of the system.")
-    parameters: Optional[Dict[str, Any]] = Field(default=None, description="Parameters of the system.")
-    diagram: Optional[Dict[str, Any]] = Field(default=None, description="Flow diagram of the system.")
-    metadata: Optional[Metadata] = Field(None, description="Additional metadata for the system.")
-    subsystems: Optional[List[System]] = Field(default=None, description="Sub-systems within this system.")
-    requirements: Optional[List[Requirement]] = Field(default=None, description="Specific requirements for the system.")
-    performance: Optional[List[Discipline]] = Field(default=None, description="List of disciplines analyzing the system.")
-    behavior: Optional[List[Behavior]] = Field(default=None, description="Specific behaviors for the system.")
+    description: Optional[str] = Field(
+        None, description="A brief description of the system."
+    )
+    parameters: Optional[Dict[str, Any]] = Field(
+        default=None, description="Parameters of the system."
+    )
+    diagram: Optional[Dict[str, Any]] = Field(
+        default=None, description="Flow diagram of the system."
+    )
+    metadata: Optional[Metadata] = Field(
+        None, description="Additional metadata for the system."
+    )
+    subsystems: Optional[List[System]] = Field(
+        default=None, description="Sub-systems within this system."
+    )
+    requirements: Optional[List[Requirement]] = Field(
+        default=None, description="Specific requirements for the system."
+    )
+    performance: Optional[List[Discipline]] = Field(
+        default=None, description="List of disciplines analyzing the system."
+    )
+    behavior: Optional[List[Behavior]] = Field(
+        default=None, description="Specific behaviors for the system."
+    )
 
     @field_validator("name", "description", mode="before")
     @classmethod
@@ -51,9 +68,13 @@ class System(CommonBaseModel):
             ValueError: If the input value is empty or consists only of whitespace.
         """
         if value is not None and not value.strip():
-            raise ValueError("Name and description fields must not be empty or whitespace only.")
+            raise ValueError(
+                "Name and description fields must not be empty or whitespace only."
+            )
         return value
+
     model_config = ConfigDict(arbitrary_types_allowed=True, from_attributes=True)
+
 
 # Ensure all models are fully defined
 System.model_rebuild()

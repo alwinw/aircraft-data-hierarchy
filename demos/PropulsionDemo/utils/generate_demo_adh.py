@@ -24,33 +24,54 @@ from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_cycle_performa
     PropulsionCyclePerformance,
 )
 
+
 def generate_test_ADH_propulsion():
     # Set-up the ADH Propulsion instance for demo purposes
 
     metadata = Metadata(key="example_key", value="example_value")
 
     fc = FlightConditions(name="fc", mn=[0.8], alt=[35000])
-    inlet = Inlet(name="inlet", type = "inlet")
-    fan = Compressor(name="fan", type = "comp", map_data="FanMap", bleed_names=[], map_extrap=True)
-    splitter = Splitter(name="splitter", type = "splitter")
-    duct4 = Duct(name="duct4", type = "duct")
-    lpc = Compressor(name="lpc", type = "comp", map_data="LPCMap", bleed_names=[], map_extrap=True)
-    duct6 = Duct(name="duct6", type = "duct")
-    hpc = Compressor(name="hpc", type = "comp", map_data="HPCMap", bleed_names=["cool1", "cool2", "cust"], map_extrap=True)
-    bld3 = Bleed(name="bld3", type = "bleed", bleed_names=["cool3", "cool4"])
-    burner = Combustor(name="burner", type = "comb", fuel_type="Jet-A(g)")
-    hpt = Turbine(name="hpt", type = "turb", map_data="HPTMap", bleed_names=["cool3", "cool4"], map_extrap=True)
-    duct11 = Duct(name="duct11", type = "duct")
-    lpt = Turbine(name="lpt", type = "turb", map_data="LPTMap", bleed_names=["cool1", "cool2"], map_extrap=True)
-    duct13 = Duct(name="duct13", type = "duct")
-    core_nozz = Nozzle(name="core_nozz", type = "nozz", nozz_type="CV", loss_coef="Cv")
-    byp_bld = Bleed(name="byp_bld", type = "bleed", bleed_names=["bypBld"])
-    duct15 = Duct(name="duct15", type = "duct")
-    byp_nozz = Nozzle(name="byp_nozz", type = "nozz", nozz_type="CV", loss_coef="Cv")
-    lp_shaft = Shaft(name="lp_shaft", type = "shaft", nmech_type="LP", num_ports=3)
-    hp_shaft = Shaft(name="hp_shaft", type = "shaft", nmech_type="HP", num_ports=2)
-
-
+    inlet = Inlet(name="inlet", type="inlet")
+    fan = Compressor(
+        name="fan", type="comp", map_data="FanMap", bleed_names=[], map_extrap=True
+    )
+    splitter = Splitter(name="splitter", type="splitter")
+    duct4 = Duct(name="duct4", type="duct")
+    lpc = Compressor(
+        name="lpc", type="comp", map_data="LPCMap", bleed_names=[], map_extrap=True
+    )
+    duct6 = Duct(name="duct6", type="duct")
+    hpc = Compressor(
+        name="hpc",
+        type="comp",
+        map_data="HPCMap",
+        bleed_names=["cool1", "cool2", "cust"],
+        map_extrap=True,
+    )
+    bld3 = Bleed(name="bld3", type="bleed", bleed_names=["cool3", "cool4"])
+    burner = Combustor(name="burner", type="comb", fuel_type="Jet-A(g)")
+    hpt = Turbine(
+        name="hpt",
+        type="turb",
+        map_data="HPTMap",
+        bleed_names=["cool3", "cool4"],
+        map_extrap=True,
+    )
+    duct11 = Duct(name="duct11", type="duct")
+    lpt = Turbine(
+        name="lpt",
+        type="turb",
+        map_data="LPTMap",
+        bleed_names=["cool1", "cool2"],
+        map_extrap=True,
+    )
+    duct13 = Duct(name="duct13", type="duct")
+    core_nozz = Nozzle(name="core_nozz", type="nozz", nozz_type="CV", loss_coef="Cv")
+    byp_bld = Bleed(name="byp_bld", type="bleed", bleed_names=["bypBld"])
+    duct15 = Duct(name="duct15", type="duct")
+    byp_nozz = Nozzle(name="byp_nozz", type="nozz", nozz_type="CV", loss_coef="Cv")
+    lp_shaft = Shaft(name="lp_shaft", type="shaft", nmech_type="LP", num_ports=3)
+    hp_shaft = Shaft(name="hp_shaft", type="shaft", nmech_type="HP", num_ports=2)
 
     perf = Performance(
         name="perf",
@@ -156,7 +177,13 @@ def generate_test_ADH_propulsion():
             lp_shaft,
             hp_shaft,
         ],
-        global_connections=["fan,lp_shaft", "lpc,lp_shaft", "lpt,lp_shaft", "hpc,hp_shaft", "hpt,hp_shaft"],
+        global_connections=[
+            "fan,lp_shaft",
+            "lpc,lp_shaft",
+            "lpt,lp_shaft",
+            "hpc,hp_shaft",
+            "hpt,hp_shaft",
+        ],
         flow_connections=[
             ["fc", "inlet"],
             ["inlet", "fan"],
@@ -196,8 +223,42 @@ def generate_test_ADH_propulsion():
     ODpoints = []
     fc2 = FlightConditions(
         name="od_full_pwr_fc",
-        mn=[0.8, 0.4, 0.6, 0.8, 0.6, 0.4, 0.2, 0.001, 0.001, 0.2, 0.4, 0.6, 0.6, 0.4, 0.2, 0.001],
-        alt=[35000, 20000, 20000, 20000, 10000, 10000, 10000, 10000, 1000, 1000, 1000, 1000, 0, 0, 0, 0],
+        mn=[
+            0.8,
+            0.4,
+            0.6,
+            0.8,
+            0.6,
+            0.4,
+            0.2,
+            0.001,
+            0.001,
+            0.2,
+            0.4,
+            0.6,
+            0.6,
+            0.4,
+            0.2,
+            0.001,
+        ],
+        alt=[
+            35000,
+            20000,
+            20000,
+            20000,
+            10000,
+            10000,
+            10000,
+            10000,
+            1000,
+            1000,
+            1000,
+            1000,
+            0,
+            0,
+            0,
+            0,
+        ],
         d_ts=0.0,
     )
     fc3 = FlightConditions(

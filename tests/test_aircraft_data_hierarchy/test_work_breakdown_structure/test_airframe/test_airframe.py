@@ -19,24 +19,22 @@ class TestComponent(unittest.TestCase):
         component = Component(
             name="Engine",
             description="Main engine component",
-            requirements=[Requirement(
-                name="Req1",
-                description="Requirement 1",
-                priority="High",
-                verification_method="Test",
-                status="Open",
-                acceptance_criteria="Criteria 1"
-            )],
+            requirements=[
+                Requirement(
+                    name="Req1",
+                    description="Requirement 1",
+                    priority="High",
+                    verification_method="Test",
+                    status="Open",
+                    acceptance_criteria="Criteria 1",
+                )
+            ],
             subcomponents=[],
             metadata=metadata,
-            performance=[Discipline(
-                name="Performance1",
-                description="Performance description"
-            )],
-            behavior=[Behavior(
-                name="Behavior1",
-                description="Behavior description"
-            )]
+            performance=[
+                Discipline(name="Performance1", description="Performance description")
+            ],
+            behavior=[Behavior(name="Behavior1", description="Behavior description")],
         )
         self.assertEqual(component.name, "Engine")
         self.assertEqual(component.description, "Main engine component")
@@ -93,7 +91,7 @@ class TestComponent(unittest.TestCase):
         component = Component(
             name="Engine",
             description="Main engine component",
-            subcomponents=[subcomponent]
+            subcomponents=[subcomponent],
         )
         self.assertEqual(len(component.subcomponents), 1)
         self.assertEqual(component.subcomponents[0].name, "SubEngine")
@@ -101,4 +99,4 @@ class TestComponent(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(argv=[''], exit=False)
+    unittest.main(argv=[""], exit=False)

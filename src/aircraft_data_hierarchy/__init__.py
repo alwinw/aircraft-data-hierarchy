@@ -1,4 +1,4 @@
-""" A Python module for Aircraft Data Hierarchy """
+"""A Python module for Aircraft Data Hierarchy"""
 
 from .behavior import *
 from .performance import *

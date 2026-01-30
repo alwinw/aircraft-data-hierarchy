@@ -4,8 +4,17 @@ from enum import Enum
 from math import sqrt
 from math import isfinite as math_isfinite
 from typing import Dict, Any, List, Optional, Tuple
-from pydantic import BaseModel, Field, model_validator, field_validator, constr, AnyUrl, EmailStr
+from pydantic import (
+    BaseModel,
+    Field,
+    model_validator,
+    field_validator,
+    constr,
+    AnyUrl,
+    EmailStr,
+)
 from ...common_base_model import CommonBaseModel, Metadata
+
 
 class String(CommonBaseModel):
     """Represents a string data type with enhanced attributes for engineering applications.
@@ -97,7 +106,9 @@ class Boolean(CommonBaseModel):
             elif lower_value in {"false", "0", "f", "n", "no"}:
                 return False
             else:
-                raise ValueError(f"Invalid string value for a boolean conversion: {value}")
+                raise ValueError(
+                    f"Invalid string value for a boolean conversion: {value}"
+                )
         return value
 
 
@@ -145,7 +156,9 @@ class Float(CommonBaseModel):
             try:
                 return float(value)
             except ValueError:
-                raise ValueError(f"Invalid string value for a float conversion: {value}")
+                raise ValueError(
+                    f"Invalid string value for a float conversion: {value}"
+                )
         return value
 
 
@@ -216,7 +229,7 @@ class Point(BaseModel):
     def coordinates(self) -> Tuple[float, float, float]:
         """Return the coordinates as a tuple (x, y, z)."""
         return self.x, self.y, self.z
-        
+
     x: float = Field(..., description="The x-coordinate of the point.")
     y: float = Field(..., description="The y-coordinate of the point.")
     z: float = Field(..., description="The z-coordinate of the point.")
@@ -255,6 +268,7 @@ class Point(BaseModel):
     def __hash__(self):
         """Return the hash value of the Point object."""
         return hash(self.coordinates)
+
 
 class Polyline(CommonBaseModel):
     """Represents a polyline, a series of connected 3D points forming a continuous line or path.
@@ -365,12 +379,12 @@ class Spline(BaseModel):
     points: List[Point] = Field(
         ...,
         description="Control points that define the spline.",
-        min_length=2  # Ensuring there's at least two points to define a curve
+        min_length=2,  # Ensuring there's at least two points to define a curve
     )
     degree: int = Field(
         default=3,
         gt=0,
-        description="The degree of the spline curve. Commonly 2 (quadratic) or 3 (cubic)."
+        description="The degree of the spline curve. Commonly 2 (quadratic) or 3 (cubic).",
     )
 
     @field_validator("points", mode="before")
@@ -387,7 +401,9 @@ class Spline(BaseModel):
         Raises:
             ValueError: If the number of points is less than the required for the spline's degree.
         """
-        degree = values.degree if hasattr(values, "degree") else 3  # Default to cubic if degree is not yet validated
+        degree = (
+            values.degree if hasattr(values, "degree") else 3
+        )  # Default to cubic if degree is not yet validated
         if len(value) < degree + 1:
             raise ValueError(
                 f"At least {degree + 1} points are required to define a spline of degree {degree}."
@@ -516,6 +532,7 @@ class Mesh(CommonBaseModel):
         Returns:
             The calculated volume of the mesh.
         """
+
         def signed_tetrahedron_volume(a: Point, b: Point, c: Point, d: Point) -> float:
             """Calculate the signed volume of a tetrahedron given its four vertices.
 
@@ -633,6 +650,7 @@ class Loft(CommonBaseModel):
             A list of lists representing the lofted surface points, where each inner list represents a point
             on the surface with [x, y, z] coordinates.
         """
+
         def interpolate_points(p1: Point, p2: Point, t: float) -> Point:
             """Interpolate between two points.
 
@@ -647,10 +665,12 @@ class Loft(CommonBaseModel):
             return Point(
                 x=p1.x + t * (p2.x - p1.x),
                 y=p1.y + t * (p2.y - p1.y),
-                z=p1.z + t * (p2.z - p1.z)
+                z=p1.z + t * (p2.z - p1.z),
             )
 
-        def interpolate_splines(spline1: Spline, spline2: Spline, t: float) -> List[Point]:
+        def interpolate_splines(
+            spline1: Spline, spline2: Spline, t: float
+        ) -> List[Point]:
             """Interpolate between two splines.
 
             Args:
@@ -679,6 +699,7 @@ class Loft(CommonBaseModel):
 
         return surface_points
 
+
 class Airfoil(CommonBaseModel):
     """
     Represents an airfoil section, a fundamental component in aircraft design for wings and control surfaces.
@@ -695,7 +716,7 @@ class Airfoil(CommonBaseModel):
         description="A spline defining the contour of the airfoil section.",
     )
 
-    @field_validator("spline",mode='before')
+    @field_validator("spline", mode="before")
     def validate_spline(cls, value: Optional[Spline]) -> Spline:
         """
         Validates the spline defining the airfoil contour.
@@ -710,8 +731,11 @@ class Airfoil(CommonBaseModel):
             ValueError: If the spline is not provided.
         """
         if value is None:
-            raise ValueError("The spline defining the airfoil contour must be provided.")
+            raise ValueError(
+                "The spline defining the airfoil contour must be provided."
+            )
         return value
+
 
 # ToDo: ReferenceAxis is needed by airframe_geometry, propulsion_geometry, systems_parameters?, and equipment_?...
 #       where should it go? AirVehicle level, with other Topology/Reference parameters? Its related to
@@ -736,10 +760,12 @@ class ReferenceAxis(CommonBaseModel):
         None, description="A brief description of the reference axis."
     )
     metadata: Metadata = Field(
-        default_factory=Metadata, description="Additional metadata for the reference axis."
+        default_factory=Metadata,
+        description="Additional metadata for the reference axis.",
     )
     relative_to: Optional[str] = Field(
-        None, description="The name of another reference axis to which this axis is relative."
+        None,
+        description="The name of another reference axis to which this axis is relative.",
     )
 
     # Class-level dictionary to map names to ReferenceAxis instances
@@ -797,7 +823,9 @@ class ReferenceAxis(CommonBaseModel):
         if relative_to_name:
             relative_to_axis = cls._registry.get(relative_to_name)
             if not relative_to_axis:
-                raise ValueError(f"ReferenceAxis with name '{relative_to_name}' does not exist.")
+                raise ValueError(
+                    f"ReferenceAxis with name '{relative_to_name}' does not exist."
+                )
             values["relative_to"] = relative_to_axis
         return values
 
@@ -805,6 +833,7 @@ class ReferenceAxis(CommonBaseModel):
         super().__init__(**data)
         # Register the instance after initialization
         self._registry[self.name] = self
+
 
 class LiftingSurface(CommonBaseModel):
     """
@@ -832,10 +861,8 @@ class LiftingSurface(CommonBaseModel):
         description="List of Airfoil objects representing the airfoil shapes along the span.",
     )
 
-    @field_validator("airfoil_sections", mode='before')
-    def validate_airfoil_sections(
-        cls, value: List[Airfoil]
-    ) -> List[Airfoil]:
+    @field_validator("airfoil_sections", mode="before")
+    def validate_airfoil_sections(cls, value: List[Airfoil]) -> List[Airfoil]:
         """
         Ensures that at least one Airfoil object is provided.
 
@@ -854,6 +881,7 @@ class LiftingSurface(CommonBaseModel):
             )
         return value
 
+
 class CrossSection(CommonBaseModel):
     """
     Represents a cross-section of a body component at a specific station along its length.
@@ -867,11 +895,20 @@ class CrossSection(CommonBaseModel):
         ValueError: If neither an upper nor a lower curve spline is provided.
     """
 
-    station: float = Field(..., ge=0, le=1, description="Normalized station of the cross-section along the body's length.")
-    upper_curve: Optional[Spline] = Field(None, description="Spline defining the upper curve of the cross-section.")
-    lower_curve: Optional[Spline] = Field(None, description="Spline defining the lower curve of the cross-section.")
+    station: float = Field(
+        ...,
+        ge=0,
+        le=1,
+        description="Normalized station of the cross-section along the body's length.",
+    )
+    upper_curve: Optional[Spline] = Field(
+        None, description="Spline defining the upper curve of the cross-section."
+    )
+    lower_curve: Optional[Spline] = Field(
+        None, description="Spline defining the lower curve of the cross-section."
+    )
 
-    @model_validator(mode='before')
+    @model_validator(mode="before")
     def validate_curves(cls, values: dict) -> dict:
         """
         Validates that at least one of the upper or lower curve splines is provided.
@@ -889,10 +926,12 @@ class CrossSection(CommonBaseModel):
         lower_curve = values.get("lower_curve")
 
         if upper_curve is None and lower_curve is None:
-            raise ValueError("At least one of the upper or lower curve splines must be provided.")
+            raise ValueError(
+                "At least one of the upper or lower curve splines must be provided."
+            )
 
         return values
-        
+
 
 class Body(CommonBaseModel):
     """
@@ -915,7 +954,7 @@ class Body(CommonBaseModel):
         description="List of CrossSection objects defining the body's shape at various stations.",
     )
 
-    @field_validator("cross_sections", mode='before')
+    @field_validator("cross_sections", mode="before")
     def validate_cross_sections(cls, value: List[CrossSection]) -> List[CrossSection]:
         """
         Ensures that at least one CrossSection object is provided.
@@ -935,6 +974,7 @@ class Body(CommonBaseModel):
             )
         return value
 
+
 class Geometry(CommonBaseModel):
     point: Optional[Point]
     polyline: Optional[Polyline]
@@ -944,4 +984,3 @@ class Geometry(CommonBaseModel):
     airfoil: Optional[Airfoil]
     lifting_surface: Optional[LiftingSurface]
     body: Optional[Body]
-
