@@ -80,6 +80,7 @@ addopts = [
 ]
 
 [tool.ruff]
+required-version = ">=0.14"
 target-version = "py39"
 
 [tool.ruff.lint]

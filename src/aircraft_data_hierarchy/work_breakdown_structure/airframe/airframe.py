@@ -1,13 +1,15 @@
 from __future__ import annotations
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from typing import List, Optional
+
+from pydantic import ConfigDict, Field, field_validator
+
+from ...behavior import Behavior
 from ...common_base_model import CommonBaseModel, Metadata
+from ...performance import Discipline
+from ...requirements import Requirement
 from .airframe_geometry import Geometry
 from .airframe_parameters import Parameters
-from ...requirements import Requirement
-from ...performance import Discipline
-from ...behavior import Behavior
 
 
 class Component(CommonBaseModel):

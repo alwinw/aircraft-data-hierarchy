@@ -1,19 +1,20 @@
 import sys
+
 import openmdao.api as om
-from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_performance_builder import (
-    pyCycleBuilder,
-)
-from utils.generate_demo_adh import generate_test_ADH_propulsion
-from utils.ADH_JSON_tools import JSON_to_ADH, ADH_to_JSON
-from aircraft_data_hierarchy.performanceLib.propulsion.utils.pycycle_to_ADH import (
-    initialize_engine_deck_ADH,
-    append_data_point_ADH,
-    append_data_point_json,
-)
-from pydantic.v1 import utils
 from aircraft_data_hierarchy.behaviorLib.propulsion.propulsion_cycle_behavior import (
     MultiPointCycle,
 )
+from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_performance_builder import (
+    pyCycleBuilder,
+)
+from aircraft_data_hierarchy.performanceLib.propulsion.utils.pycycle_to_ADH import (
+    append_data_point_ADH,
+    append_data_point_json,
+    initialize_engine_deck_ADH,
+)
+from pydantic.v1 import utils
+from utils.ADH_JSON_tools import ADH_to_JSON, JSON_to_ADH
+from utils.generate_demo_adh import generate_test_ADH_propulsion
 
 
 def HBTFprep(prob, ADHInstance):
@@ -161,7 +162,7 @@ if __name__ == "__main__":
     ADHInstance = generate_test_ADH_propulsion()
     ADHInstance = JSON_to_ADH(output + "step8_adh.json", ADHInstance)
 
-    # Intantiate the pyCycle builder class
+    # Instantiate the pyCycle builder class
     pycTest = pyCycleBuilder(ADHInstance)
 
     # Load inputs to builder from ADH
@@ -177,7 +178,7 @@ if __name__ == "__main__":
     # -----------------------------------------------
     prob, flight_env = HBTFprep(
         prob, ADHInstance
-    )  # Sets initial guess and mach #, altitute pairs
+    )  # Sets initial guess and mach #, altitude pairs
     om.n2(prob, show_browser=False)
     prob.set_solver_print(level=-1)
     prob.set_solver_print(level=2, depth=1)
@@ -251,7 +252,7 @@ if __name__ == "__main__":
                 ordered_keys=ordered_keys,
             )
 
-            # Write the data poin to JSON(for later use in Aviary)
+            # Write the data point to JSON(for later use in Aviary)
             append_data_point_json(
                 prob,
                 json_file_path,

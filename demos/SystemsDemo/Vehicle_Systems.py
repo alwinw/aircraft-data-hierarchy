@@ -5,9 +5,10 @@ This module provides Pydantic models for representing various aspects of aircraf
 including functional blocks, data signals, physical characteristics, and system attributes.
 """
 
-from pydantic import BaseModel, Field, field_validator
-from typing import List, Dict, Optional, Literal, Tuple
 from enum import Enum
+from typing import Dict, List, Literal, Optional, Tuple
+
+from pydantic import BaseModel, Field, field_validator
 
 
 class SignalType(str, Enum):

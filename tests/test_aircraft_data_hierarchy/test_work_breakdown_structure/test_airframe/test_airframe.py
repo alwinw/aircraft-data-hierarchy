@@ -1,10 +1,11 @@
 import unittest
+
 from pydantic import ValidationError
-from typing import List, Dict, Any, Optional
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel, Metadata
-from aircraft_data_hierarchy.requirements import Requirement
-from aircraft_data_hierarchy.performance import Discipline
+
 from aircraft_data_hierarchy.behavior import Behavior
+from aircraft_data_hierarchy.common_base_model import Metadata
+from aircraft_data_hierarchy.performance import Discipline
+from aircraft_data_hierarchy.requirements import Requirement
 from aircraft_data_hierarchy.work_breakdown_structure.airframe import Component
 
 

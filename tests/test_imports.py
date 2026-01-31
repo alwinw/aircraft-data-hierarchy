@@ -16,8 +16,8 @@ class TestImports(unittest.TestCase):
     def test_import_work_breakdown_structure(self):
         try:
             from aircraft_data_hierarchy.work_breakdown_structure import (
-                Equipment,
                 AircraftSystem,
+                Equipment,
             )
         except ImportError:
             self.fail(
@@ -27,9 +27,9 @@ class TestImports(unittest.TestCase):
     def test_import_work_breakdown_structure_airframe(self):
         try:
             from aircraft_data_hierarchy.work_breakdown_structure.airframe import (
+                AerodynamicsData,
                 Component,
                 Loft,
-                AerodynamicsData,
             )
         except ImportError:
             self.fail(
@@ -40,8 +40,8 @@ class TestImports(unittest.TestCase):
         try:
             from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
                 Propulsion,
-                PropulsionGeometry,
                 PropulsionCycle,
+                PropulsionGeometry,
             )
         except ImportError:
             self.fail(

@@ -1,27 +1,28 @@
-from aircraft_data_hierarchy.common_base_model import Metadata
-from aircraft_data_hierarchy.behavior import FileHeader, Author
-from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
-    Propulsion,
-    PropulsionCycle,
-    Inlet,
-    Compressor,
-    Splitter,
-    Duct,
-    Turbine,
-    Bleed,
-    Nozzle,
-    Shaft,
-    Combustor,
-)
 from aircraft_data_hierarchy.behaviorLib.propulsion.propulsion_cycle_behavior import (
-    PropulsionCycleBehavior,
-    Performance,
     FlightConditions,
     MultiPointCycle,
     OffDesignPoint,
+    Performance,
+    PropulsionCycleBehavior,
 )
 from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_cycle_performance import (
     PropulsionCyclePerformance,
+)
+
+from aircraft_data_hierarchy.behavior import Author, FileHeader
+from aircraft_data_hierarchy.common_base_model import Metadata
+from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
+    Bleed,
+    Combustor,
+    Compressor,
+    Duct,
+    Inlet,
+    Nozzle,
+    Propulsion,
+    PropulsionCycle,
+    Shaft,
+    Splitter,
+    Turbine,
 )
 
 

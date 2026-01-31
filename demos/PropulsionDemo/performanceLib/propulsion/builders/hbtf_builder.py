@@ -148,7 +148,7 @@ class HBTFBuilder(pyc.Cycle):
                 )
 
     # Add Performance Component
-    def add_perfomance(self, cycleData):
+    def add_performance(self, cycleData):
         for perf in cycleData["perf"]:
             self.add_subsystem(
                 perf["name"],
@@ -199,12 +199,10 @@ class HBTFBuilder(pyc.Cycle):
             # if len(fc) > 2:
             if "__" in fc[1]:
                 fcsplit = fc[1].split("__")
-                self.pyc_connect_flow(
-                    "{}.Fl_O{}".format(fc[0], fcsplit[1]), "{}.Fl_I".format(fcsplit[0])
-                )
+                self.pyc_connect_flow(f"{fc[0]}.Fl_O{fcsplit[1]}", f"{fcsplit[0]}.Fl_I")
                 # print("{}.Fl_O{}".format(fc[0], fc[2]) + "{}.Fl_I".format(fc[1]))
             else:
-                self.pyc_connect_flow("{}.Fl_O".format(fc[0]), "{}.Fl_I".format(fc[1]))
+                self.pyc_connect_flow(f"{fc[0]}.Fl_O", f"{fc[1]}.Fl_I")
                 # print("{}.Fl_O".format(fc[0]) + "{}.Fl_I".format(fc[1]))
 
     # Connect the bleeds flows automatically based on the names specified by the user in the ADH
@@ -233,8 +231,8 @@ class HBTFBuilder(pyc.Cycle):
             # print(cWB)
             if len(cWB) > 1:
                 self.pyc_connect_flow(
-                    "{}.{}".format(cWB[0], bn),
-                    "{}.{}".format(cWB[1], bn),
+                    f"{cWB[0]}.{bn}",
+                    f"{cWB[1]}.{bn}",
                     connect_stat=False,
                 )
                 # print("{}.{}".format(cWB[0], bn) + "{}.{}".format(cWB[1], bn))
@@ -314,7 +312,7 @@ class HBTFBuilder(pyc.Cycle):
         self.add_shafts(cycleData["shafts"])
 
         # Add and connect the performance component
-        self.add_perfomance(cycleData)
+        self.add_performance(cycleData)
 
         # Connect turbo machinery to shafts
         self.connect_compturb_to_shafts(
@@ -322,13 +320,13 @@ class HBTFBuilder(pyc.Cycle):
             cycleData["shafts"],
             cycleData["cycleInfo"]["global_connections"],
         )
-        # Ideally expanding flow by conneting flight condition static pressure to nozzle exhaust pressure
+        # Ideally expanding flow by connecting flight condition static pressure to nozzle exhaust pressure
         self.connect_nozz_to_fc(cycleData["nozz"], cycleData["fc"])
 
         # Create a balance component
         # Balances can be a bit confusing, here's some explanation -
         #   State Variables:
-        #           (W)        Inlet mass flow rate to implictly balance thrust
+        #           (W)        Inlet mass flow rate to implicitly balance thrust
         #                      LHS: perf.Fn  == RHS: Thrust requirement (set when TF is instantiated)
         #
         #           (FAR)      Fuel-air ratio to balance Tt4
@@ -525,7 +523,7 @@ class MPhbtfBuilder(pyc.MPCycle):
 
         self.pyc_add_pnt(
             "DESIGN", HBTFBuilder(adhCycleData=cycleData)
-        )  # Create an instace of the High Bypass ratio Turbofan
+        )  # Create an instance of the High Bypass ratio Turbofan
 
         for inlet in cycleData["inlets"]:
             self.set_input_defaults(

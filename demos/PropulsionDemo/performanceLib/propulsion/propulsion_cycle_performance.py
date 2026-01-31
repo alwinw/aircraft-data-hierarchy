@@ -1,6 +1,7 @@
-from typing import List, Optional
+from typing import Optional
+
 from pydantic import Field, field_validator
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel
+
 from aircraft_data_hierarchy.performance import ModelDescription
 
 
@@ -25,7 +26,7 @@ class PropulsionCyclePerformance(ModelDescription):
     )
     throttle_mode: str = Field(
         "T4",
-        description="What quanity should be used to throttle engine for off-design cases.",
+        description="What quantity should be used to throttle engine for off-design cases.",
     )
     solver_settings: Optional[dict] = Field(
         None, description="The solver settings for the engine cycle."

@@ -1,0 +1,74 @@
+# Adapted from:
+# - https://github.com/BrianPugh/python-template/blob/main/.pre-commit-config.yaml
+# - https://github.com/astral-sh/ruff/blob/main/.pre-commit-config.yaml
+
+exclude: |
+  (?x)^(
+    .vscode/.*|
+    target/.*|
+    uv.lock
+  )$
+
+repos:
+  # Priority 0: Read-only hooks; hooks that modify disjoint file types.
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+        priority: 0
+      - id: check-added-large-files
+        args: [--maxkb=250]
+        priority: 0
+      - id: check-case-conflict
+        priority: 0
+      - id: check-merge-conflict
+        priority: 0
+      - id: check-json
+        priority: 0
+      - id: check-toml
+        priority: 0
+      - id: check-yaml
+        priority: 0
+      - id: end-of-file-fixer
+        exclude: .*.json$
+        priority: 1
+      - id: mixed-line-ending
+        files: \.(py|txt|yaml|yml|json|md|toml|lock|cfg|html|sh|js|rst)$
+        priority: 1
+      - id: no-commit-to-branch
+        args: [--branch, main]
+        priority: 0
+      - id: trailing-whitespace
+        files: \.(py|txt|yaml|yml|md|toml|lock|cfg|html|sh|js|rst)$
+        priority: 1
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.24.1
+    hooks:
+      - id: validate-pyproject
+        priority: 0
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.42.0
+    hooks:
+      - id: typos
+        priority: 0
+
+  # Priority 1: Formatting (e.g. ruff-format before ruff-check)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.14
+    hooks:
+      - id: ruff-format
+        priority: 1
+      - id: ruff-check
+        args: [--fix, --exit-non-zero-on-fix]
+        types_or: [python, pyi]
+        require_serial: true
+        priority: 2
+
+  # Priority 2: Second-pass fixers (e.g., markdownlint-fix runs after mdformat).

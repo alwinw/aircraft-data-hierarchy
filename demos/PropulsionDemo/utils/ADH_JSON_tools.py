@@ -35,7 +35,7 @@ def JSON_to_ADH(path, ADHInstance):
     """
 
     # Open and read the JSON file
-    with open(path, "r") as file:
+    with open(path) as file:
         adhData = json.load(file)
 
     # Convert read new ADH JSON to string
@@ -59,7 +59,7 @@ def ADH_to_Engine_Deck(input_path, output_path):
     """
 
     # Read the ADH JSON file
-    with open(input_path, "r") as file:
+    with open(input_path) as file:
         adh_data = json.load(file)  # Load as dictionary
 
     # Check if "engine_decks" exists in the JSON data

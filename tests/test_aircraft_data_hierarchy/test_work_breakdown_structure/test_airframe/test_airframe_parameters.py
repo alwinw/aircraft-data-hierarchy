@@ -1,40 +1,36 @@
 import unittest
-from pydantic import ValidationError
-from typing import List, Optional
-from enum import Enum
 
-# Import the models from the provided code
-from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_parameters import (
-    ReferenceData,
-    FlightConditions,
-    ConfigurationLayout,
-    Airfoil,
-    PlanformType,
-    LiftingSurface,
-    TwinVerticalTail,
-    GroundEffectsDefinition,
-    FlapType,
-    NoseType,
-    BlowingType,
-    SymmetricFlap,
-    ControlType,
-    AsymmetricControl,
-    BodyShape,
-    TailShape,
-    Body,
-    LowAspectRatioWingBody,
-    TransverseJetControl,
-    HypersonicFlapControl,
-    EngineType,
-    PropellerPowerProperties,
-    JetEngineType,
-    JetPowerProperties,
-    AerodynamicsData,
-)
+from pydantic import ValidationError
 
 from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
     Point,
     Spline,
+)
+
+# Import the models from the provided code
+from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_parameters import (
+    AerodynamicsData,
+    Airfoil,
+    AsymmetricControl,
+    BlowingType,
+    Body,
+    BodyShape,
+    ConfigurationLayout,
+    ControlType,
+    FlapType,
+    FlightConditions,
+    GroundEffectsDefinition,
+    HypersonicFlapControl,
+    JetPowerProperties,
+    LiftingSurface,
+    LowAspectRatioWingBody,
+    NoseType,
+    PlanformType,
+    PropellerPowerProperties,
+    ReferenceData,
+    SymmetricFlap,
+    TransverseJetControl,
+    TwinVerticalTail,
 )
 
 
@@ -62,7 +58,7 @@ class TestPydanticModels(unittest.TestCase):
             "velocities": [300.0, 400.0],
             "qty_alphas": 2,
             "alphas": [5.0, 10.0],
-            "reynolds_indicies": [1e6, 2e6],
+            "reynolds_indices": [1e6, 2e6],
             "qty_altitudes": 2,
             "altitudes": [10000.0, 20000.0],
             "static_pressures": [101325.0, 90000.0],
@@ -81,7 +77,7 @@ class TestPydanticModels(unittest.TestCase):
         self.assertEqual(model.velocities, [300.0, 400.0])
         self.assertEqual(model.qty_alphas, 2)
         self.assertEqual(model.alphas, [5.0, 10.0])
-        self.assertEqual(model.reynolds_indicies, [1e6, 2e6])
+        self.assertEqual(model.reynolds_indices, [1e6, 2e6])
         self.assertEqual(model.qty_altitudes, 2)
         self.assertEqual(model.altitudes, [10000.0, 20000.0])
         self.assertEqual(model.static_pressures, [101325.0, 90000.0])

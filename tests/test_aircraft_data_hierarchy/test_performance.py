@@ -1,13 +1,15 @@
 import unittest
+import uuid
 from datetime import datetime
+
 from pydantic import ValidationError
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel, Metadata
+
+from aircraft_data_hierarchy.common_base_model import Metadata
 from aircraft_data_hierarchy.performance import (
     DataExchange,
-    ModelDescription,
     Discipline,
+    ModelDescription,
 )
-import uuid
 
 # Assuming the classes DataExchange, ModelDescription, and Discipline are already defined as provided
 

@@ -1,18 +1,16 @@
 from __future__ import annotations
-from datetime import date, datetime
-from enum import Enum
-from math import sqrt
+
 from math import isfinite as math_isfinite
-from typing import Dict, Any, List, Optional, Tuple
+from math import sqrt
+from typing import Any, Dict, List, Optional, Tuple
+
 from pydantic import (
     BaseModel,
     Field,
-    model_validator,
     field_validator,
-    constr,
-    AnyUrl,
-    EmailStr,
+    model_validator,
 )
+
 from ...common_base_model import CommonBaseModel, Metadata
 
 
@@ -252,7 +250,7 @@ class Point(BaseModel):
             raise ValueError("Coordinate values must be finite.")
         return value
 
-    def distance_to(self, other: "Point") -> float:
+    def distance_to(self, other: Point) -> float:
         """Calculate the Euclidean distance between this point and another point.
 
         Args:

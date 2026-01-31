@@ -1,6 +1,7 @@
 import unittest
-from typing import Any, Dict, Optional
+
 from pydantic import ValidationError
+
 from aircraft_data_hierarchy.common_base_model import (
     CommonBaseModel,
     Metadata,

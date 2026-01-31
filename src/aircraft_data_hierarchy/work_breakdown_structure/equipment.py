@@ -1,10 +1,13 @@
 from __future__ import annotations
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, ConfigDict, Field, field_validator
-from ..common_base_model import CommonBaseModel, Metadata
-from ..requirements import Requirement
-from ..performance import Discipline
+
+from typing import Any, Dict, List, Optional
+
+from pydantic import ConfigDict, Field, field_validator
+
 from ..behavior import Behavior
+from ..common_base_model import CommonBaseModel, Metadata
+from ..performance import Discipline
+from ..requirements import Requirement
 
 
 class Equipment(CommonBaseModel):
@@ -13,7 +16,7 @@ class Equipment(CommonBaseModel):
 
     Attributes:
         name (Optional[str]): The name of the equipment, acting as a unique identifier.
-        description (Optional[str]): A brief description of the equipments's purpose and functionality.
+        description (Optional[str]): A brief description of the equipment's purpose and functionality.
         geometry (Optional[Dict[str, Any]]): Geometric information of the equipment, if applicable.
         parameters (Optional[Dict[str, Any]]): Operational or physical parameters associated with the equipment.
         metadata (Optional[Metadata]): Additional metadata providing context or details about the equipment.

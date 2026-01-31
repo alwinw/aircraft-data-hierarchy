@@ -1,6 +1,3 @@
-import pydantic
-
-
 class PropulsionGeometry:
     @staticmethod
     def hello_world():

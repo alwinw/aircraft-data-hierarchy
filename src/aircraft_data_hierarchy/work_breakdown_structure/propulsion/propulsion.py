@@ -1,6 +1,9 @@
 from __future__ import annotations
-from typing import Dict, Any, List, Optional, Union
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+from typing import Any, Dict, List, Optional
+
+from pydantic import ConfigDict, Field, field_validator
+
 from ...common_base_model import CommonBaseModel, Metadata
 from ...requirements import Requirement
 from .propulsion_cycle import PropulsionCycle

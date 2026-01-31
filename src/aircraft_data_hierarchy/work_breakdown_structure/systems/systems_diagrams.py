@@ -1,7 +1,9 @@
+from typing import List
+
 import graphviz
+from IPython.display import HTML, Image, display
 from tabulate import tabulate
-from typing import List, Optional
-from IPython.display import display, Image, HTML
+
 from .systems import System
 
 

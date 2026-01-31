@@ -1,5 +1,7 @@
 from typing import List, Optional
-from pydantic import Field, field_validator, InstanceOf, SerializeAsAny
+
+from pydantic import Field, InstanceOf, SerializeAsAny, field_validator
+
 from ...common_base_model import CommonBaseModel
 
 
@@ -39,7 +41,7 @@ class EngineElement(CommonBaseModel):
         None, description="Names of the bleed ports"
     )
     pr_des: Optional[float] = Field(None, description="On-design pressure ratio(Input)")
-    eff_des: Optional[float] = Field(None, description="On-design efficeincy(Input)")
+    eff_des: Optional[float] = Field(None, description="On-design efficiency(Input)")
     mn: Optional[float] = Field(None, description="On-design mach number(Input)")
     s_PR: Optional[float] = Field(None, description="On-design pressure ratio(Output)")
     s_eff: Optional[float] = Field(None, description="On-design efficiency(Output)")
@@ -147,7 +149,7 @@ class Compressor(EngineElement):
     pr_des : Optional[float]
         Design condition pressure ratio
     eff_des : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
     statics: Optional[bool] = Field(
@@ -164,7 +166,7 @@ class Compressor(EngineElement):
         None, description="Names of the bleed ports"
     )
     pr_des: Optional[float] = Field(None, description="On-design pressure ratio(Input)")
-    eff_des: Optional[float] = Field(None, description="On-design efficeincy(Input)")
+    eff_des: Optional[float] = Field(None, description="On-design efficiency(Input)")
     mn: Optional[float] = Field(None, description="On-design mach number(Input)")
     s_PR: Optional[float] = Field(None, description="On-design pressure ratio(Output)")
     s_eff: Optional[float] = Field(None, description="On-design efficiency(Output)")
@@ -206,7 +208,7 @@ class Turbine(EngineElement):
     pr_des : Optional[float]
         Design condition pressure ratio
     effDes : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
     statics: Optional[bool] = Field(
@@ -223,7 +225,7 @@ class Turbine(EngineElement):
         None, description="Names of the bleed ports"
     )
     pr_des: Optional[float] = Field(None, description="On-design pressure ratio(Input)")
-    eff_des: Optional[float] = Field(None, description="On-design efficeincy(Input)")
+    eff_des: Optional[float] = Field(None, description="On-design efficiency(Input)")
     mn: Optional[float] = Field(None, description="On-design mach number(Input)")
     s_PR: Optional[float] = Field(None, description="On-design pressure ratio(Output)")
     s_eff: Optional[float] = Field(None, description="On-design efficiency(Output)")

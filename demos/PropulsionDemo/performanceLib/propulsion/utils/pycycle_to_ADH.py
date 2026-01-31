@@ -1,13 +1,14 @@
 import json
 import os
+
 from aircraft_data_hierarchy.behavior import (
-    DAVEfunc,
-    UngriddedTableDef,
     DataPoint,
-    IndependentVarRef,
+    DAVEfunc,
     DependentVarRef,
-    Function,
     FileHeader,
+    Function,
+    IndependentVarRef,
+    UngriddedTableDef,
 )
 
 
@@ -53,7 +54,7 @@ def initialize_engine_deck_ADH(
     """
     Initializes a new engine deck in the ADH propulsion behavior branch in DaveML format.
     The function appends a new deck if there are existing decks and returns the index associated with the added deck.
-    The function intializes the DaveML structure, independent variables, dependent variables, and the units.
+    The function initializes the DaveML structure, independent variables, dependent variables, and the units.
 
     The canonical order (and comment order) is:
          "mn, alt, throttle, gross_thrust, ram_drag, fuel_flow, nox_rate"
@@ -195,7 +196,7 @@ def append_data_point_ADH(
 
     # Assemble the data point string.
     # Example: "0.0 0.0 21.0 1110.0 0.0 500.3 55.372 <!-- mn, alt, throttle, gross_thrust, ram_drag, fuel_flow, nox_rate-->"
-    values_str = " ".join("{:.4f}".format(v) for v in data_values)
+    values_str = " ".join(f"{v:.4f}" for v in data_values)
     comment_str = " <!-- " + ", ".join(ordered_keys) + " -->"
     full_value_str = values_str + comment_str
 
@@ -207,7 +208,7 @@ def append_data_point_ADH(
     else:
         engine_data.data_point.append(DataPoint(value=full_value_str))
 
-    print(f"Appended new data point to ADH Instance")
+    print("Appended new data point to ADH Instance")
 
 
 def append_data_point_json(
@@ -287,7 +288,7 @@ def append_data_point_json(
 
     # Assemble the data point string.
     # Example: "0.0 0.0 21.0 1110.0 0.0 500.3 55.372 <!-- mn, alt, throttle, gross_thrust, ram_drag, fuel_flow, nox_rate-->"
-    values_str = " ".join("{:.4f}".format(v) for v in data_values)
+    values_str = " ".join(f"{v:.4f}" for v in data_values)
     comment_str = " <!-- " + ", ".join(ordered_keys) + " -->"
     full_value_str = values_str + comment_str
 
@@ -295,7 +296,7 @@ def append_data_point_json(
 
     # If the JSON file exists, load it; otherwise, create a new JSON structure.
     if os.path.exists(json_filepath):
-        with open(json_filepath, "r") as f:
+        with open(json_filepath) as f:
             json_data = json.load(f)
     else:
         units_list = []

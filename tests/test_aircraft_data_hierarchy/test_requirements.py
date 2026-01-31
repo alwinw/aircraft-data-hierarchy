@@ -1,7 +1,8 @@
 import unittest
-from typing import List, Dict
+
 from pydantic import ValidationError
-from aircraft_data_hierarchy.common_base_model import Metadata, CommonBaseModel
+
+from aircraft_data_hierarchy.common_base_model import Metadata
 from aircraft_data_hierarchy.requirements import (
     Requirement,
     Requirements,

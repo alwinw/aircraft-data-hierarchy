@@ -13,7 +13,7 @@ We welcome contributions! Here is a brief guide on the process:
 
 ## Cloning the Aircraft Data Hierarchy Repository
 
-The sections [Setting Up The Python Environment](#setting-up-the-python-environment), [Building The Aircraft Data Hierarchy Package](#building-the-aircraft-data-hierarchy-package), and [Testing](#testing) assume you have a local copy of the Aircraft Data Hierarchy repository. Begin by cloning the latest version of the package: 
+The sections [Setting Up The Python Environment](#setting-up-the-python-environment), [Building The Aircraft Data Hierarchy Package](#building-the-aircraft-data-hierarchy-package), and [Testing](#testing) assume you have a local copy of the Aircraft Data Hierarchy repository. Begin by cloning the latest version of the package:
 
 ```shell
 git clone https://github.com/Boeing/aircraft-data-hierarchy
@@ -33,7 +33,7 @@ To ensure a clean and isolated environment for running the Aircraft Data Hierarc
 conda create -n your-environment-name
 ```
 
-Replacing `your-environment-name` with the desired name for your environment. 
+Replacing `your-environment-name` with the desired name for your environment.
 
 ### 3. Activate the new environment:
 
@@ -112,7 +112,7 @@ Test dependencies are specified in the [pyproject.yml](pyproject.toml) file.
 ```shell
 pip install .[test]
 ```
- 
+
 ### 3. Run tests
 
 ```shell
@@ -124,4 +124,3 @@ This command will automatically discover and run all the tests in the project di
 ### 4. Review the test results
 
 The pytest framework will provide detailed information about the tests that passed or failed. If the Aircraft Data Hierarchy package was installed correctly and everything works, you should see all tests pass.
-

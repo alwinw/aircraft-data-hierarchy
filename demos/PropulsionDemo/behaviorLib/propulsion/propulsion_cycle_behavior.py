@@ -1,7 +1,9 @@
 from typing import List, Optional
+
 from pydantic import Field, field_validator
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel
+
 from aircraft_data_hierarchy.behavior import Behavior, DAVEfunc
+from aircraft_data_hierarchy.common_base_model import CommonBaseModel
 from aircraft_data_hierarchy.work_breakdown_structure.propulsion.propulsion_cycle import (
     PropulsionCycle,
 )
@@ -75,21 +77,21 @@ class Compressor(EngineElementBehavior):
     pr_des : Optional[float]
         Design condition pressure ratio
     eff_des : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
     statics: Optional[bool] = Field(
         None, description="If true calculate static properties"
     )
     s_pr: Optional[float] = Field(None, description="Design pressure ratio")
-    s_eff: Optional[float] = Field(None, description="Design efficeincy")
+    s_eff: Optional[float] = Field(None, description="Design efficiency")
     s_Wc: Optional[float] = Field(None, description="Design air mass flow rate")
     mn: Optional[dict] = Field(None, description="Off-design Mach number")
     area: Optional[dict] = Field(
         None, description="Off-design frontal area of component"
     )
     PR: Optional[dict] = Field(None, description="Off-design pressure ratio")
-    eff_poly: Optional[dict] = Field(None, description="Off-design efficeincy")
+    eff_poly: Optional[dict] = Field(None, description="Off-design efficiency")
     Wc: Optional[dict] = Field(None, description="Off-design air mass flow rate")
     Nc: Optional[dict] = Field(None, description="Off-design Nc")
     pwr: Optional[dict] = Field(None, description="Off-design power")
@@ -195,21 +197,21 @@ class Turbine(EngineElementBehavior):
     pr_des : Optional[float]
         Design condition pressure ratio
     effDes : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
     statics: Optional[bool] = Field(
         None, description="If true calculate static properties"
     )
     s_pr: Optional[float] = Field(None, description="Design pressure ratio")
-    s_eff: Optional[float] = Field(None, description="Design efficeincy")
+    s_eff: Optional[float] = Field(None, description="Design efficiency")
     s_Wc: Optional[float] = Field(None, description="Design air mass flow rate")
     mn: Optional[dict] = Field(None, description="Off-design Mach number")
     area: Optional[dict] = Field(
         None, description="Off-design frontal area of component"
     )
     PR: Optional[dict] = Field(None, description="Off-design pressure ratio")
-    eff_poly: Optional[dict] = Field(None, description="Off-design efficeincy")
+    eff_poly: Optional[dict] = Field(None, description="Off-design efficiency")
     Wc: Optional[dict] = Field(None, description="Off-design air mass flow rate")
     Np: Optional[dict] = Field(None, description="Off-design Np")
     pwr: Optional[dict] = Field(None, description="Off-design power")
@@ -367,7 +369,7 @@ class OffDesignPoint(CommonBaseModel):
     )
     throttle_mode: str = Field(
         "T4",
-        description="What quanity should be used to throttle engine for off-design cases.",
+        description="What quantity should be used to throttle engine for off-design cases.",
     )
 
     @field_validator("throttle_mode")

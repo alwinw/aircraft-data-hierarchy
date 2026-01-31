@@ -1,21 +1,22 @@
 import unittest
+
 from pydantic import ValidationError
-from typing import List
+
 from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
-    CrossSection,
-    Body,
-    Point,
-    Polyline,
-    Mesh,
     Airfoil,
-    Spline,
-    LiftingSurface,
-    Loft,
-    String,
+    Body,
     Boolean,
+    CrossSection,
     Float,
     Integer,
+    LiftingSurface,
+    Loft,
+    Mesh,
     Metadata,
+    Point,
+    Polyline,
+    Spline,
+    String,
 )
 
 

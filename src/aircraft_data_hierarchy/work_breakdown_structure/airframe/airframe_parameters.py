@@ -1,13 +1,15 @@
-from typing import List, Optional
-from pydantic import BaseModel, Field, field_validator, model_validator
 from enum import Enum
+from typing import List, Optional
 
-# Assuming CommonBaseModel and Spline are defined elsewhere
-from ...common_base_model import CommonBaseModel, Metadata
+from pydantic import Field, field_validator, model_validator
+
 from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
     Body,
     Spline,
 )
+
+# Assuming CommonBaseModel and Spline are defined elsewhere
+from ...common_base_model import CommonBaseModel
 
 # ToDo: This entire set of classes needs to be refactored because:
 # 1. many parameters belong in other MSoSA branches like Behavior
@@ -59,7 +61,7 @@ class FlightConditions(CommonBaseModel):
         velocities (List[Optional[float]]): Ascending order of Freestream Velocities.
         qty_alphas (Optional[int]): Number of angles-of-attack.
         alphas (List[Optional[float]]): Ascending order of angles-of-attack.
-        reynolds_indicies (List[Optional[float]]): Reynolds number per unit length at Freestream conditions.
+        reynolds_indices (List[Optional[float]]): Reynolds number per unit length at Freestream conditions.
         qty_altitudes (Optional[int]): Number of altitudes.
         altitudes (List[Optional[float]]): Geometric Altitudes.
         static_pressures (List[Optional[float]]): Freestream static pressure.
@@ -91,7 +93,7 @@ class FlightConditions(CommonBaseModel):
     alphas: List[Optional[float]] = Field(
         default_factory=list, description="Ascending order of angles-of-attack"
     )
-    reynolds_indicies: List[Optional[float]] = Field(
+    reynolds_indices: List[Optional[float]] = Field(
         default_factory=list,
         description="Reynolds number per unit length at Freestream conditions",
     )
@@ -128,7 +130,7 @@ class FlightConditions(CommonBaseModel):
         "machs",
         "velocities",
         "alphas",
-        "reynolds_indicies",
+        "reynolds_indices",
         "altitudes",
         "static_pressures",
         "static_temperatures",
@@ -1090,7 +1092,7 @@ class HypersonicFlapControl(CommonBaseModel):
             values.data["qty_deflections"] if "qty_deflections" in values.data else None
         )
         if qty_deflections is not None and len(v) != qty_deflections:
-            raise ValueError(f"Length of deflections must match qty_deflections")
+            raise ValueError("Length of deflections must match qty_deflections")
         return v
 
     model_config = {

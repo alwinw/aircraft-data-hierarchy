@@ -1,7 +1,7 @@
-from enum import Enum
-from math import sqrt
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field, field_validator
+from typing import Dict, List, Optional
+
+from pydantic import Field, field_validator
+
 from .common_base_model import CommonBaseModel, Metadata
 
 
@@ -82,7 +82,7 @@ class Requirement(CommonBaseModel):
             ValueError: If the input value is empty or consists only of whitespace.
         """
         if not value.strip():
-            raise ValueError(f"The field cannot be empty or just whitespace.")
+            raise ValueError("The field cannot be empty or just whitespace.")
         return value
 
 

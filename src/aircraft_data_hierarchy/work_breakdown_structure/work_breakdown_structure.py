@@ -1,6 +1,8 @@
-from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Optional
-from ..common_base_model import CommonBaseModel, Metadata
+
+from pydantic import ConfigDict, Field, field_validator
+
+from ..common_base_model import CommonBaseModel
 from .airframe.airframe import Component
 from .propulsion.propulsion import Propulsion
 
