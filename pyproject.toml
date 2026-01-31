@@ -94,3 +94,13 @@ extend-select = [
 
 [tool.ruff.format]
 docstring-code-format = true
+
+[tool.pyright]
+include = ["src", "tests"]
+reportMissingImports = "none"
+
+[tool.ty.src]
+include = ["src", "tests"]
+
+[tool.ty.rules]
+invalid-argument-type = "ignore"
