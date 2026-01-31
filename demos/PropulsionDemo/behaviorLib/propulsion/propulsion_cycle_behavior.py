@@ -1,8 +1,12 @@
 from typing import List, Optional
+
 from pydantic import Field, field_validator
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel
+
 from aircraft_data_hierarchy.behavior import Behavior, DAVEfunc
-from aircraft_data_hierarchy.work_breakdown_structure.propulsion.propulsion_cycle import PropulsionCycle
+from aircraft_data_hierarchy.common_base_model import CommonBaseModel
+from aircraft_data_hierarchy.work_breakdown_structure.propulsion.propulsion_cycle import (
+    PropulsionCycle,
+)
 
 
 class EngineElementBehavior(Behavior):
@@ -15,7 +19,9 @@ class EngineElementBehavior(Behavior):
     """
 
     name: str = Field(..., description="The name of the engine element.")
-    options: Optional[dict] = Field(None, description="The options associated with the engine element.")
+    options: Optional[dict] = Field(
+        None, description="The options associated with the engine element."
+    )
 
 
 class Bleed(EngineElementBehavior):
@@ -31,7 +37,9 @@ class Bleed(EngineElementBehavior):
     """
 
     area: Optional[dict] = Field(None, description="Off-design frontal areas.")
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
 
 
 class Inlet(EngineElementBehavior):
@@ -47,7 +55,9 @@ class Inlet(EngineElementBehavior):
     """
 
     area: Optional[dict] = Field(None, description="Off-design frontal area")
-    F_ram_off_design: Optional[dict] = Field(None, description="Calculated ram drag at off-design conditions")
+    F_ram_off_design: Optional[dict] = Field(
+        None, description="Calculated ram drag at off-design conditions"
+    )
 
 
 class Compressor(EngineElementBehavior):
@@ -67,17 +77,21 @@ class Compressor(EngineElementBehavior):
     pr_des : Optional[float]
         Design condition pressure ratio
     eff_des : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     s_pr: Optional[float] = Field(None, description="Design pressure ratio")
-    s_eff: Optional[float] = Field(None, description="Design efficeincy")
+    s_eff: Optional[float] = Field(None, description="Design efficiency")
     s_Wc: Optional[float] = Field(None, description="Design air mass flow rate")
     mn: Optional[dict] = Field(None, description="Off-design Mach number")
-    area: Optional[dict] = Field(None, description="Off-design frontal area of component")
+    area: Optional[dict] = Field(
+        None, description="Off-design frontal area of component"
+    )
     PR: Optional[dict] = Field(None, description="Off-design pressure ratio")
-    eff_poly: Optional[dict] = Field(None, description="Off-design efficeincy")
+    eff_poly: Optional[dict] = Field(None, description="Off-design efficiency")
     Wc: Optional[dict] = Field(None, description="Off-design air mass flow rate")
     Nc: Optional[dict] = Field(None, description="Off-design Nc")
     pwr: Optional[dict] = Field(None, description="Off-design power")
@@ -102,10 +116,18 @@ class Splitter(EngineElementBehavior):
     """
 
     bpr: Optional[List[float]] = Field(None, description="Off-design Bypass ratio")
-    mn1: Optional[List[float]] = Field(None, description="Off-design Mach number for the first flow path")
-    mn2: Optional[List[float]] = Field(None, description="Off-design Mach number for the second flow path")
-    area1: Optional[List[float]] = Field(None, description="Off-design Frontal area for the first flow path")
-    area2: Optional[List[float]] = Field(None, description="Off-design Frontal area for the second flow path")
+    mn1: Optional[List[float]] = Field(
+        None, description="Off-design Mach number for the first flow path"
+    )
+    mn2: Optional[List[float]] = Field(
+        None, description="Off-design Mach number for the second flow path"
+    )
+    area1: Optional[List[float]] = Field(
+        None, description="Off-design Frontal area for the first flow path"
+    )
+    area2: Optional[List[float]] = Field(
+        None, description="Off-design Frontal area for the second flow path"
+    )
 
 
 class Duct(EngineElementBehavior):
@@ -123,9 +145,12 @@ class Duct(EngineElementBehavior):
     s_dPqP: Optional[float] = Field(None, description="Design pressure loss")
     dPqP: Optional[dict] = Field(None, description="Off-design design pressure loss")
     Q_dot: Optional[dict] = Field(
-        None, description="Off-design heat flow rate into (positive) or out of (negative) the air"
+        None,
+        description="Off-design heat flow rate into (positive) or out of (negative) the air",
     )
-    area: Optional[dict] = Field(None, description="Off-design frontal area of component")
+    area: Optional[dict] = Field(
+        None, description="Off-design frontal area of component"
+    )
     mn: Optional[dict] = Field(None, description="Off-design mach number")
 
 
@@ -143,12 +168,16 @@ class Combustor(EngineElementBehavior):
         Pressure drop ratio.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     mn: Optional[dict] = Field(None, description="Off-design mach number")
     dp_qp: Optional[dict] = Field(None, description="Off-design Pressure drop ratio")
     FAR: Optional[dict] = Field(None, description="Off-design fuel-air ratio")
     Wfuel: Optional[dict] = Field(None, description="Off-design fuel injection rate")
-    area: Optional[dict] = Field(None, description="Off-design frontal area of component")
+    area: Optional[dict] = Field(
+        None, description="Off-design frontal area of component"
+    )
 
 
 class Turbine(EngineElementBehavior):
@@ -168,17 +197,21 @@ class Turbine(EngineElementBehavior):
     pr_des : Optional[float]
         Design condition pressure ratio
     effDes : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     s_pr: Optional[float] = Field(None, description="Design pressure ratio")
-    s_eff: Optional[float] = Field(None, description="Design efficeincy")
+    s_eff: Optional[float] = Field(None, description="Design efficiency")
     s_Wc: Optional[float] = Field(None, description="Design air mass flow rate")
     mn: Optional[dict] = Field(None, description="Off-design Mach number")
-    area: Optional[dict] = Field(None, description="Off-design frontal area of component")
+    area: Optional[dict] = Field(
+        None, description="Off-design frontal area of component"
+    )
     PR: Optional[dict] = Field(None, description="Off-design pressure ratio")
-    eff_poly: Optional[dict] = Field(None, description="Off-design efficeincy")
+    eff_poly: Optional[dict] = Field(None, description="Off-design efficiency")
     Wc: Optional[dict] = Field(None, description="Off-design air mass flow rate")
     Np: Optional[dict] = Field(None, description="Off-design Np")
     pwr: Optional[dict] = Field(None, description="Off-design power")
@@ -199,9 +232,13 @@ class Nozzle(EngineElementBehavior):
         Discharge coefficient.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     mn: Optional[dict] = Field(None, description="Off-design mach number")
-    area: Optional[dict] = Field(None, description="Off-design frontal area of component")
+    area: Optional[dict] = Field(
+        None, description="Off-design frontal area of component"
+    )
 
 
 class Performance(Behavior):
@@ -231,17 +268,29 @@ class Performance(Behavior):
     """
 
     name: Optional[str] = Field(None, description="Name of the performance component")
-    pt2_source: Optional[str] = Field(None, description="Name of component to get Pt2 from")
+    pt2_source: Optional[str] = Field(
+        None, description="Name of component to get Pt2 from"
+    )
     pt2: Optional[float] = Field(None, description="Total pressure at station 2")
-    pt3_source: Optional[str] = Field(None, description="Name of component to get Pt3 from")
+    pt3_source: Optional[str] = Field(
+        None, description="Name of component to get Pt3 from"
+    )
     pt3: Optional[float] = Field(None, description="Total pressure at station 3")
-    wfuel_0_source: Optional[str] = Field(None, description="Name of component to get wfuel from")
+    wfuel_0_source: Optional[str] = Field(
+        None, description="Name of component to get wfuel from"
+    )
     wfuel_0: Optional[float] = Field(None, description="Fuel flow rate")
-    ram_drag_source: Optional[str] = Field(None, description="Name of component to get ram drag from")
+    ram_drag_source: Optional[str] = Field(
+        None, description="Name of component to get ram drag from"
+    )
     ram_drag: Optional[float] = Field(None, description="Ram drag")
-    fg_0_source: Optional[str] = Field(None, description="Name of core nozzle component to get fg_0 from")
+    fg_0_source: Optional[str] = Field(
+        None, description="Name of core nozzle component to get fg_0 from"
+    )
     fg_0: Optional[float] = Field(None, description="Gross thrust from core nozzle")
-    fg_1_source: Optional[str] = Field(None, description="Name of bypass nozzle component to get fg_1 from")
+    fg_1_source: Optional[str] = Field(
+        None, description="Name of bypass nozzle component to get fg_1 from"
+    )
     fg_1: Optional[float] = Field(None, description="Gross thrust from bypass nozzle")
     fn: Optional[float] = Field(None, description="Net thrust")
     opr: Optional[float] = Field(None, description="Overall pressure ratio")
@@ -267,7 +316,9 @@ class FlightConditions(CommonBaseModel):
     name: str = Field(..., description="The name of the flight condition.")
     mn: Optional[List[float]] = Field(None, description="Mach number")
     alt: Optional[List[float]] = Field(None, description="Altitude in feet")
-    d_ts: Optional[float] = Field(None, description="Temperature deviation in degrees Rankine")
+    d_ts: Optional[float] = Field(
+        None, description="Temperature deviation in degrees Rankine"
+    )
     W: Optional[List[float]] = Field(None, description="Air mass flow rate")
 
 
@@ -289,11 +340,15 @@ class PropulsionCycleBehavior(Behavior):
 
     name: str = Field(..., description="The name of the engine cycle analysis.")
     design: bool = Field(..., description="Whether the engine cycle is in design mode.")
-    flight_conditions_design: Optional[FlightConditions] = Field(None, description="Design flight conditions.")
+    flight_conditions_design: Optional[FlightConditions] = Field(
+        None, description="Design flight conditions."
+    )
     performance_components: Optional[List[Performance]] = Field(
         None, description="The list of the performance components for the cycle."
     )
-    engine_decks: Optional[List[DAVEfunc]] = Field(None, description="The engine deck in DaveML ungridded data table format.")
+    engine_decks: Optional[List[DAVEfunc]] = Field(
+        None, description="The engine deck in DaveML ungridded data table format."
+    )
 
 
 class OffDesignPoint(CommonBaseModel):
@@ -306,9 +361,16 @@ class OffDesignPoint(CommonBaseModel):
     """
 
     name: str = Field(..., description="The name of the off-design point.")
-    flight_conditions_od: Optional[FlightConditions] = Field(None, description="Off-design flight conditions.")
-    PC: Optional[List[float]] = Field(None, description="List of off-design throttle percentage.")
-    throttle_mode: str = Field("T4", description="What quanity should be used to throttle engine for off-design cases.")
+    flight_conditions_od: Optional[FlightConditions] = Field(
+        None, description="Off-design flight conditions."
+    )
+    PC: Optional[List[float]] = Field(
+        None, description="List of off-design throttle percentage."
+    )
+    throttle_mode: str = Field(
+        "T4",
+        description="What quantity should be used to throttle engine for off-design cases.",
+    )
 
     @field_validator("throttle_mode")
     def validate_throttle_mode(cls, v):
@@ -330,9 +392,15 @@ class MultiPointCycle(CommonBaseModel):
         seq_points (List[str], optional): The sequence of points in the multi-point cycle analysis.
     """
 
-    design_point: PropulsionCycle = Field(..., description="The design point engine cycle.")
-    od_points: List[OffDesignPoint] = Field(..., description="The list of off-design points.")
-    global_des_od_connections: Optional[dict] = Field(None, description="The global design-to-off-design connections.")
+    design_point: PropulsionCycle = Field(
+        ..., description="The design point engine cycle."
+    )
+    od_points: List[OffDesignPoint] = Field(
+        ..., description="The list of off-design points."
+    )
+    global_des_od_connections: Optional[dict] = Field(
+        None, description="The global design-to-off-design connections."
+    )
     design_constants: Optional[dict] = Field(
         None, description="The design constants for the multi-point cycle analysis."
     )

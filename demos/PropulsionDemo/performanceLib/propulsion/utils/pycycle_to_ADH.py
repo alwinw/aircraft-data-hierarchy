@@ -1,9 +1,18 @@
 import json
 import os
-from aircraft_data_hierarchy.behavior import DAVEfunc, UngriddedTableDef, DataPoint, IndependentVarRef, DependentVarRef, Function, FileHeader
+
+from aircraft_data_hierarchy.behavior import (
+    DataPoint,
+    DAVEfunc,
+    DependentVarRef,
+    FileHeader,
+    Function,
+    IndependentVarRef,
+    UngriddedTableDef,
+)
 
 
-def normalize_string(s,notLowerCase=False):
+def normalize_string(s, notLowerCase=False):
     """
     Normalize a string by stripping whitespace, replacing spaces with underscores,
     and converting to lowercase.
@@ -13,24 +22,39 @@ def normalize_string(s,notLowerCase=False):
     else:
         return s.strip().replace(" ", "_").lower()
 
+
 def get_unit(prob, prom_key):
     """
     Searches the OpenMDAO model metadata for the variable corresponding to prom_key and
     returns its units. If not found, returns 'unitless'.
     """
     io_metadata = prob.model.get_io_metadata()
-    norm_prom = normalize_string(prom_key,notLowerCase=True)
+    norm_prom = normalize_string(prom_key, notLowerCase=True)
     for meta_key, meta in io_metadata.items():
-        if norm_prom in normalize_string(meta_key,notLowerCase=True):
+        if norm_prom in normalize_string(meta_key, notLowerCase=True):
             return meta.get("units", "unitless")
     return "unitless"
 
 
-def initialize_engine_deck_ADH(prob, ADHInstance, deck_name = "Engine Deck", promoted_names=None, ordered_keys=["mn", "alt", "throttle", "gross_thrust", "ram_drag", "fuel_flow", "nox_rate"]):
+def initialize_engine_deck_ADH(
+    prob,
+    ADHInstance,
+    deck_name="Engine Deck",
+    promoted_names=None,
+    ordered_keys=[
+        "mn",
+        "alt",
+        "throttle",
+        "gross_thrust",
+        "ram_drag",
+        "fuel_flow",
+        "nox_rate",
+    ],
+):
     """
-    Initializes a new engine deck in the ADH propulsion behavior branch in DaveML format. 
+    Initializes a new engine deck in the ADH propulsion behavior branch in DaveML format.
     The function appends a new deck if there are existing decks and returns the index associated with the added deck.
-    The function intializes the DaveML structure, independent variables, dependent variables, and the units.
+    The function initializes the DaveML structure, independent variables, dependent variables, and the units.
 
     The canonical order (and comment order) is:
          "mn, alt, throttle, gross_thrust, ram_drag, fuel_flow, nox_rate"
@@ -43,20 +67,32 @@ def initialize_engine_deck_ADH(prob, ADHInstance, deck_name = "Engine Deck", pro
             Default values (adjust these as needed) are used if not provided.
     """
 
-    #Add Engine Deck to ADH
+    # Add Engine Deck to ADH
     if ADHInstance.behavior.engine_decks == None:
         ADHInstance.behavior.engine_decks = []
-        ADHInstance.behavior.engine_decks.append(DAVEfunc(function=[Function(name=f"{deck_name} Header")],ungridded_table_def=[UngriddedTableDef(name=f"{deck_name} Data")]))
+        ADHInstance.behavior.engine_decks.append(
+            DAVEfunc(
+                function=[Function(name=f"{deck_name} Header")],
+                ungridded_table_def=[UngriddedTableDef(name=f"{deck_name} Data")],
+            )
+        )
     else:
-        ADHInstance.behavior.engine_decks.append(DAVEfunc(function=[Function(name=f"{deck_name} Header")],ungridded_table_def=[UngriddedTableDef(name=f"{deck_name} Data")]))
+        ADHInstance.behavior.engine_decks.append(
+            DAVEfunc(
+                function=[Function(name=f"{deck_name} Header")],
+                ungridded_table_def=[UngriddedTableDef(name=f"{deck_name} Data")],
+            )
+        )
 
     # The engine deck's index -accounts for multiple engine decks in the same ADH
     deck_index = len(ADHInstance.behavior.engine_decks) - 1
 
-    ADHInstance.behavior.engine_decks[deck_index].file_header = FileHeader(name=deck_name)
-    
+    ADHInstance.behavior.engine_decks[deck_index].file_header = FileHeader(
+        name=deck_name
+    )
+
     function = ADHInstance.behavior.engine_decks[deck_index].function[0]
-    engine_data = ADHInstance.behavior.engine_decks[deck_index].ungridded_table_def[0] 
+    engine_data = ADHInstance.behavior.engine_decks[deck_index].ungridded_table_def[0]
 
     independent_vars = []
     dependent_vars = []
@@ -72,19 +108,19 @@ def initialize_engine_deck_ADH(prob, ADHInstance, deck_name = "Engine Deck", pro
     # Some keys like alt and temp require the absolute names
     if promoted_names is None:
         promoted_names = {
-        "mn": "OD_part_pwr.fc.MN",
-        "alt": "OD_part_pwr.fc.ambient.readAtmTable.alt",
-        "throttle": "OD_part_pwr.PC",
-        "gross_thrust": "OD_part_pwr.perf.Fg",
-        "net_thrust": "OD_part_pwr.perf.Fn",
-        "ram_drag": "OD_part_pwr.perf.ram_drag",
-        "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
-        "temp": "OD_full_pwr.balance.rhs:FAR",
-        "shaft_power": "OD_part_pwr.lp_shaft.HPX"
-        # PyCycle doesn't return nox rate 
-    }
+            "mn": "OD_part_pwr.fc.MN",
+            "alt": "OD_part_pwr.fc.ambient.readAtmTable.alt",
+            "throttle": "OD_part_pwr.PC",
+            "gross_thrust": "OD_part_pwr.perf.Fg",
+            "net_thrust": "OD_part_pwr.perf.Fn",
+            "ram_drag": "OD_part_pwr.perf.ram_drag",
+            "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
+            "temp": "OD_full_pwr.balance.rhs:FAR",
+            "shaft_power": "OD_part_pwr.lp_shaft.HPX",
+            # PyCycle doesn't return nox rate
+        }
 
-    #Units 
+    # Units
     units_list = []
     for key in ordered_keys:
         prom_key = promoted_names.get(key)
@@ -99,8 +135,20 @@ def initialize_engine_deck_ADH(prob, ADHInstance, deck_name = "Engine Deck", pro
     return deck_index
 
 
-
-def append_data_point_ADH(prob, engine_data, promoted_names=None, ordered_keys=["mn", "alt", "throttle", "gross_thrust", "ram_drag", "fuel_flow", "nox_rate"]):
+def append_data_point_ADH(
+    prob,
+    engine_data,
+    promoted_names=None,
+    ordered_keys=[
+        "mn",
+        "alt",
+        "throttle",
+        "gross_thrust",
+        "ram_drag",
+        "fuel_flow",
+        "nox_rate",
+    ],
+):
     """
     Retrieves key variables from an OpenMDAO problem instance using prob.get_val and appends
     a new data point to the ungridded_table_def from an ADH instance.
@@ -118,17 +166,17 @@ def append_data_point_ADH(prob, engine_data, promoted_names=None, ordered_keys=[
     # Some keys like alt and temp require the absolute names
     if promoted_names is None:
         promoted_names = {
-        "mn": "OD_part_pwr.fc.MN",
-        "alt": "OD_part_pwr.fc.ambient.readAtmTable.alt",
-        "throttle": "OD_part_pwr.PC",
-        "gross_thrust": "OD_part_pwr.perf.Fg",
-        "net_thrust": "OD_part_pwr.perf.Fn",
-        "ram_drag": "OD_part_pwr.perf.ram_drag",
-        "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
-        "temp": "OD_full_pwr.balance.rhs:FAR",
-        "shaft_power": "OD_part_pwr.lp_shaft.HPX"
-        # PyCycle doesn't return nox rate 
-    }
+            "mn": "OD_part_pwr.fc.MN",
+            "alt": "OD_part_pwr.fc.ambient.readAtmTable.alt",
+            "throttle": "OD_part_pwr.PC",
+            "gross_thrust": "OD_part_pwr.perf.Fg",
+            "net_thrust": "OD_part_pwr.perf.Fn",
+            "ram_drag": "OD_part_pwr.perf.ram_drag",
+            "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
+            "temp": "OD_full_pwr.balance.rhs:FAR",
+            "shaft_power": "OD_part_pwr.lp_shaft.HPX",
+            # PyCycle doesn't return nox rate
+        }
 
     # Retrieve values from OpenMDAO using prob.get_val.
     data_values = []
@@ -141,12 +189,14 @@ def append_data_point_ADH(prob, engine_data, promoted_names=None, ordered_keys=[
         try:
             val_float = float(val)
         except Exception as e:
-            raise ValueError(f"Error converting value for '{key}' from promoted '{prom_key}' to float: {val}. Error: {e}")
+            raise ValueError(
+                f"Error converting value for '{key}' from promoted '{prom_key}' to float: {val}. Error: {e}"
+            )
         data_values.append(val_float)
 
     # Assemble the data point string.
     # Example: "0.0 0.0 21.0 1110.0 0.0 500.3 55.372 <!-- mn, alt, throttle, gross_thrust, ram_drag, fuel_flow, nox_rate-->"
-    values_str = " ".join('{:.4f}'.format(v) for v in data_values)
+    values_str = " ".join(f"{v:.4f}" for v in data_values)
     comment_str = " <!-- " + ", ".join(ordered_keys) + " -->"
     full_value_str = values_str + comment_str
 
@@ -157,11 +207,24 @@ def append_data_point_ADH(prob, engine_data, promoted_names=None, ordered_keys=[
         engine_data.data_point.append(DataPoint(value=full_value_str))
     else:
         engine_data.data_point.append(DataPoint(value=full_value_str))
-    
-    print(f"Appended new data point to ADH Instance")
+
+    print("Appended new data point to ADH Instance")
 
 
-def append_data_point_json(prob, json_filepath, promoted_names=None, ordered_keys=["mn", "alt", "throttle", "gross_thrust", "ram_drag", "fuel_flow", "nox_rate"]):
+def append_data_point_json(
+    prob,
+    json_filepath,
+    promoted_names=None,
+    ordered_keys=[
+        "mn",
+        "alt",
+        "throttle",
+        "gross_thrust",
+        "ram_drag",
+        "fuel_flow",
+        "nox_rate",
+    ],
+):
     """
     Retrieves key variables from an OpenMDAO problem instance using prob.get_val and appends
     a new data point to a JSON file in the ungridded_table_def format.
@@ -180,30 +243,32 @@ def append_data_point_json(prob, json_filepath, promoted_names=None, ordered_key
     dependent_vars = []
     for alias in ordered_keys:
         if alias in ["mn", "alt", "throttle", "hybrid_throttle"]:
-            independent_vars.append({
-                "var_id": alias,
-                "min": None,
-                "max": None,
-                "extrapolate": None,
-                "interpolate": None
-            })
+            independent_vars.append(
+                {
+                    "var_id": alias,
+                    "min": None,
+                    "max": None,
+                    "extrapolate": None,
+                    "interpolate": None,
+                }
+            )
         else:
             dependent_vars.append({"var_id": alias})
 
     # Some keys like alt and temp require the absolute names
     if promoted_names is None:
         promoted_names = {
-        "mn": "OD_part_pwr.fc.MN",
-        "alt": "OD_part_pwr.fc.ambient.readAtmTable.alt",
-        "throttle": "OD_part_pwr.PC",
-        "gross_thrust": "OD_part_pwr.perf.Fg",
-        "net_thrust": "OD_part_pwr.perf.Fn",
-        "ram_drag": "OD_part_pwr.perf.ram_drag",
-        "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
-        "temp": "OD_full_pwr.balance.rhs:FAR",
-        "shaft_power": "OD_part_pwr.lp_shaft.HPX"
-        # PyCycle doesn't return nox rate 
-    }
+            "mn": "OD_part_pwr.fc.MN",
+            "alt": "OD_part_pwr.fc.ambient.readAtmTable.alt",
+            "throttle": "OD_part_pwr.PC",
+            "gross_thrust": "OD_part_pwr.perf.Fg",
+            "net_thrust": "OD_part_pwr.perf.Fn",
+            "ram_drag": "OD_part_pwr.perf.ram_drag",
+            "fuel_flow": "OD_part_pwr.perf.Wfuel_0",
+            "temp": "OD_full_pwr.balance.rhs:FAR",
+            "shaft_power": "OD_part_pwr.lp_shaft.HPX",
+            # PyCycle doesn't return nox rate
+        }
 
     # Retrieve values from OpenMDAO using prob.get_val.
     data_values = []
@@ -216,23 +281,22 @@ def append_data_point_json(prob, json_filepath, promoted_names=None, ordered_key
         try:
             val_float = float(val)
         except Exception as e:
-            raise ValueError(f"Error converting value for '{key}' from promoted '{prom_key}' to float: {val}. Error: {e}")
+            raise ValueError(
+                f"Error converting value for '{key}' from promoted '{prom_key}' to float: {val}. Error: {e}"
+            )
         data_values.append(val_float)
 
     # Assemble the data point string.
     # Example: "0.0 0.0 21.0 1110.0 0.0 500.3 55.372 <!-- mn, alt, throttle, gross_thrust, ram_drag, fuel_flow, nox_rate-->"
-    values_str = " ".join('{:.4f}'.format(v) for v in data_values)
+    values_str = " ".join(f"{v:.4f}" for v in data_values)
     comment_str = " <!-- " + ", ".join(ordered_keys) + " -->"
     full_value_str = values_str + comment_str
 
-    new_data_point = {
-        "mod_id": None,
-        "value": full_value_str
-    }
+    new_data_point = {"mod_id": None, "value": full_value_str}
 
     # If the JSON file exists, load it; otherwise, create a new JSON structure.
     if os.path.exists(json_filepath):
-        with open(json_filepath, "r") as f:
+        with open(json_filepath) as f:
             json_data = json.load(f)
     else:
         units_list = []
@@ -255,7 +319,7 @@ def append_data_point_json(prob, json_filepath, promoted_names=None, ordered_key
                 "provenance": None,
                 "provenance_ref": None,
                 "uncertainty": None,
-                "data_point": []
+                "data_point": [],
             },
             "function": [
                 {
@@ -267,10 +331,10 @@ def append_data_point_json(prob, json_filepath, promoted_names=None, ordered_key
                     "dependent_var_pts": None,
                     "independent_var_ref": independent_vars,
                     "dependent_var_ref": dependent_vars,
-                    "function_defn": None
+                    "function_defn": None,
                 }
             ],
-            "check_data": None
+            "check_data": None,
         }
 
     # Append the new data point.

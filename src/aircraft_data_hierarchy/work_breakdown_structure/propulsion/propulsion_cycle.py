@@ -1,5 +1,7 @@
 from typing import List, Optional
-from pydantic import Field, field_validator, InstanceOf, SerializeAsAny
+
+from pydantic import Field, InstanceOf, SerializeAsAny, field_validator
+
 from ...common_base_model import CommonBaseModel
 
 
@@ -14,41 +16,68 @@ class EngineElement(CommonBaseModel):
 
     name: str = Field(..., description="The name of the engine element.")
     type: str = Field(..., description="The type of engine element this is.")
-    options: Optional[dict] = Field(None, description="The options associated with the engine element.")
+    options: Optional[dict] = Field(
+        None, description="The options associated with the engine element."
+    )
 
     # NOTE: Temp fix to known pydanticV2 error
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     mn: Optional[float] = Field(None, description="On-design Mach number")
     ram_recovery: Optional[float] = Field(None, description="Ram recovery factor")
-    area: Optional[float] = Field(None, description="On-design frontal area of component")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component"
+    )
 
     map_data: Optional[str] = Field(None, description="Map data for the compressor")
-    map_extrap: Optional[bool] = Field(None, description="Flag to indicate if map extrapolation is used")
-    map_interp_method: Optional[str] = Field(None, description="Method to use for map interpolation.")
-    bleed_names: Optional[List[str]] = Field(None, description="Names of the bleed ports")
+    map_extrap: Optional[bool] = Field(
+        None, description="Flag to indicate if map extrapolation is used"
+    )
+    map_interp_method: Optional[str] = Field(
+        None, description="Method to use for map interpolation."
+    )
+    bleed_names: Optional[List[str]] = Field(
+        None, description="Names of the bleed ports"
+    )
     pr_des: Optional[float] = Field(None, description="On-design pressure ratio(Input)")
-    eff_des: Optional[float] = Field(None, description="On-design efficeincy(Input)")
+    eff_des: Optional[float] = Field(None, description="On-design efficiency(Input)")
     mn: Optional[float] = Field(None, description="On-design mach number(Input)")
     s_PR: Optional[float] = Field(None, description="On-design pressure ratio(Output)")
     s_eff: Optional[float] = Field(None, description="On-design efficiency(Output)")
-    s_Wc: Optional[float] = Field(None, description="On-design air mass flow rate(Output)")
+    s_Wc: Optional[float] = Field(
+        None, description="On-design air mass flow rate(Output)"
+    )
     s_Nc: Optional[float] = Field(None, description="On-design Nc(Output)")
-    area: Optional[float] = Field(None, description="On-design frontal area of component(Output)")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component(Output)"
+    )
     frac_W: Optional[List[float]] = Field(
-        None, description="Fraction of incoming flow to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
     frac_P: Optional[List[float]] = Field(
-        None, description="Fraction of incoming pressure to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
     frac_work: Optional[List[float]] = Field(
-        None, description="Fraction of work to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of work to bleed off(associated with each bleed connection)",
     )
 
     bpr: Optional[float] = Field(None, description="Bypass ratio")
-    mn1: Optional[float] = Field(None, description="On-design mach number for the first flow path(Input)")
-    mn2: Optional[float] = Field(None, description="On-design mach number for the second flow path(Input)")
-    area1: Optional[float] = Field(None, description="On-design frontal area for the first flow path(Output)")
-    area2: Optional[float] = Field(None, description="On-design frontal area for the second flow path(Output)")
+    mn1: Optional[float] = Field(
+        None, description="On-design mach number for the first flow path(Input)"
+    )
+    mn2: Optional[float] = Field(
+        None, description="On-design mach number for the second flow path(Input)"
+    )
+    area1: Optional[float] = Field(
+        None, description="On-design frontal area for the first flow path(Output)"
+    )
+    area2: Optional[float] = Field(
+        None, description="On-design frontal area for the second flow path(Output)"
+    )
 
     fuel_type: Optional[str] = Field(None, description="Type of fuel used")
     mn: Optional[float] = Field(None, description="On-design mach number")
@@ -67,7 +96,8 @@ class EngineElement(CommonBaseModel):
 
     dPqP: Optional[float] = Field(None, description="On-design pressure drop ratio")
     Q_dot: Optional[float] = Field(
-        None, description="On-design heat flow rate into (positive) or out of (negative) the air"
+        None,
+        description="On-design heat flow rate into (positive) or out of (negative) the air",
     )
 
     @field_validator("fuel_type")
@@ -76,7 +106,8 @@ class EngineElement(CommonBaseModel):
         if v not in allowed_types:
             raise ValueError(f"Fuel type must be one of {allowed_types}")
         return v
-    
+
+
 class Inlet(EngineElement):
     """
     Inlet conditions for the engine.
@@ -91,10 +122,14 @@ class Inlet(EngineElement):
         On-design frontal area.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     mn: Optional[float] = Field(None, description="On-design Mach number")
     ram_recovery: Optional[float] = Field(None, description="Ram recovery factor")
-    area: Optional[float] = Field(None, description="On-design frontal area of component")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component"
+    )
 
 
 class Compressor(EngineElement):
@@ -114,30 +149,45 @@ class Compressor(EngineElement):
     pr_des : Optional[float]
         Design condition pressure ratio
     eff_des : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     map_data: Optional[str] = Field(None, description="Map data for the compressor")
-    map_extrap: Optional[bool] = Field(None, description="Flag to indicate if map extrapolation is used")
-    map_interp_method: Optional[str] = Field(None, description="Method to use for map interpolation.")
-    bleed_names: Optional[List[str]] = Field(None, description="Names of the bleed ports")
+    map_extrap: Optional[bool] = Field(
+        None, description="Flag to indicate if map extrapolation is used"
+    )
+    map_interp_method: Optional[str] = Field(
+        None, description="Method to use for map interpolation."
+    )
+    bleed_names: Optional[List[str]] = Field(
+        None, description="Names of the bleed ports"
+    )
     pr_des: Optional[float] = Field(None, description="On-design pressure ratio(Input)")
-    eff_des: Optional[float] = Field(None, description="On-design efficeincy(Input)")
+    eff_des: Optional[float] = Field(None, description="On-design efficiency(Input)")
     mn: Optional[float] = Field(None, description="On-design mach number(Input)")
     s_PR: Optional[float] = Field(None, description="On-design pressure ratio(Output)")
     s_eff: Optional[float] = Field(None, description="On-design efficiency(Output)")
-    s_Wc: Optional[float] = Field(None, description="On-design air mass flow rate(Output)")
+    s_Wc: Optional[float] = Field(
+        None, description="On-design air mass flow rate(Output)"
+    )
     s_Nc: Optional[float] = Field(None, description="On-design Nc(Output)")
-    area: Optional[float] = Field(None, description="On-design frontal area of component(Output)")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component(Output)"
+    )
     frac_W: Optional[List[float]] = Field(
-        None, description="Fraction of incoming flow to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
     frac_P: Optional[List[float]] = Field(
-        None, description="Fraction of incoming pressure to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
     frac_work: Optional[List[float]] = Field(
-        None, description="Fraction of work to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of work to bleed off(associated with each bleed connection)",
     )
 
 
@@ -158,30 +208,45 @@ class Turbine(EngineElement):
     pr_des : Optional[float]
         Design condition pressure ratio
     effDes : Optional[float]
-        Design condition efficeincy
+        Design condition efficiency
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     map_data: Optional[str] = Field(None, description="Map data for the compressor")
-    map_extrap: Optional[bool] = Field(None, description="Flag to indicate if map extrapolation is used")
-    map_interp_method: Optional[str] = Field(None, description="Method to use for map interpolation.")
-    bleed_names: Optional[List[str]] = Field(None, description="Names of the bleed ports")
+    map_extrap: Optional[bool] = Field(
+        None, description="Flag to indicate if map extrapolation is used"
+    )
+    map_interp_method: Optional[str] = Field(
+        None, description="Method to use for map interpolation."
+    )
+    bleed_names: Optional[List[str]] = Field(
+        None, description="Names of the bleed ports"
+    )
     pr_des: Optional[float] = Field(None, description="On-design pressure ratio(Input)")
-    eff_des: Optional[float] = Field(None, description="On-design efficeincy(Input)")
+    eff_des: Optional[float] = Field(None, description="On-design efficiency(Input)")
     mn: Optional[float] = Field(None, description="On-design mach number(Input)")
     s_PR: Optional[float] = Field(None, description="On-design pressure ratio(Output)")
     s_eff: Optional[float] = Field(None, description="On-design efficiency(Output)")
-    s_Wc: Optional[float] = Field(None, description="On-design air mass flow rate(Output)")
+    s_Wc: Optional[float] = Field(
+        None, description="On-design air mass flow rate(Output)"
+    )
     s_Nc: Optional[float] = Field(None, description="On-design Nc(Output)")
-    area: Optional[float] = Field(None, description="On-design frontal area of component(Output)")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component(Output)"
+    )
     frac_W: Optional[List[float]] = Field(
-        None, description="Fraction of incoming flow to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
     frac_P: Optional[List[float]] = Field(
-        None, description="Fraction of incoming pressure to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
     frac_work: Optional[List[float]] = Field(
-        None, description="Fraction of work to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of work to bleed off(associated with each bleed connection)",
     )
 
 
@@ -203,12 +268,22 @@ class Splitter(EngineElement):
         Area for the second flow path.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     bpr: Optional[float] = Field(None, description="Bypass ratio")
-    mn1: Optional[float] = Field(None, description="On-design mach number for the first flow path(Input)")
-    mn2: Optional[float] = Field(None, description="On-design mach number for the second flow path(Input)")
-    area1: Optional[float] = Field(None, description="On-design frontal area for the first flow path(Output)")
-    area2: Optional[float] = Field(None, description="On-design frontal area for the second flow path(Output)")
+    mn1: Optional[float] = Field(
+        None, description="On-design mach number for the first flow path(Input)"
+    )
+    mn2: Optional[float] = Field(
+        None, description="On-design mach number for the second flow path(Input)"
+    )
+    area1: Optional[float] = Field(
+        None, description="On-design frontal area for the first flow path(Output)"
+    )
+    area2: Optional[float] = Field(
+        None, description="On-design frontal area for the second flow path(Output)"
+    )
 
 
 class Duct(EngineElement):
@@ -223,13 +298,18 @@ class Duct(EngineElement):
         Pressure drop ratio.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     mn: Optional[float] = Field(None, description="On-design mach number")
     dPqP: Optional[float] = Field(None, description="On-design pressure drop ratio")
     Q_dot: Optional[float] = Field(
-        None, description="On-design heat flow rate into (positive) or out of (negative) the air"
+        None,
+        description="On-design heat flow rate into (positive) or out of (negative) the air",
     )
-    area: Optional[float] = Field(None, description="On-design frontal area of component")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component"
+    )
 
 
 class Bleed(EngineElement):
@@ -244,16 +324,23 @@ class Bleed(EngineElement):
         If true calculate static properties
     """
 
-    bleed_names: Optional[List[str]] = Field(None, description="Names of the bleed connections associated")
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    bleed_names: Optional[List[str]] = Field(
+        None, description="Names of the bleed connections associated"
+    )
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     frac_W: Optional[List[float]] = Field(
-        None, description="Fraction of incoming flow to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
     frac_P: Optional[List[float]] = Field(
-        None, description="Fraction of incoming pressure to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
     frac_work: Optional[List[float]] = Field(
-        None, description="Fraction of work to bleed off(associated with each bleed connection)"
+        None,
+        description="Fraction of work to bleed off(associated with each bleed connection)",
     )
     mn: Optional[float] = Field(None, description="On-design mach number.")
 
@@ -272,13 +359,17 @@ class Combustor(EngineElement):
         Pressure drop ratio.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     fuel_type: Optional[str] = Field(None, description="Type of fuel used")
     mn: Optional[float] = Field(None, description="On-design mach number")
     dp_qp: Optional[float] = Field(None, description="On-design pressure drop ratio")
     FAR: Optional[float] = Field(None, description="On-design fuel-air ratio")
     Wfuel: Optional[float] = Field(None, description="On-design fuel injection rate")
-    area: Optional[float] = Field(None, description="On design frontal area of component(Output)")
+    area: Optional[float] = Field(
+        None, description="On design frontal area of component(Output)"
+    )
 
     @field_validator("fuel_type")
     def validate_fuel_type(cls, v):
@@ -302,12 +393,16 @@ class Nozzle(EngineElement):
         Discharge coefficient.
     """
 
-    statics: Optional[bool] = Field(None, description="If true calculate static properties")
+    statics: Optional[bool] = Field(
+        None, description="If true calculate static properties"
+    )
     mn: Optional[float] = Field(None, description="On-design mach number")
     nozz_type: Optional[str] = Field(None, description="Type of nozzle")
     loss_coef: Optional[str] = Field(None, description="Loss coefficient")
     cv: Optional[float] = Field(None, description="Discharge coefficient")
-    area: Optional[float] = Field(None, description="On-design frontal area of component(Output)")
+    area: Optional[float] = Field(
+        None, description="On-design frontal area of component(Output)"
+    )
 
 
 class Shaft(EngineElement):
@@ -345,6 +440,12 @@ class PropulsionCycle(CommonBaseModel):
     """
 
     name: str = Field(..., description="The name of the engine cycle.")
-    elements: List[SerializeAsAny[InstanceOf[EngineElement]]] = Field(..., description="The list of engine elements in the engine cycle.")
-    global_connections: Optional[List[str]] = Field(None, description="The global connections in the engine cycle.")
-    flow_connections: Optional[List[List[str]]] = Field(None, description="The flow connections in the engine cycle.")
+    elements: List[SerializeAsAny[InstanceOf[EngineElement]]] = Field(
+        ..., description="The list of engine elements in the engine cycle."
+    )
+    global_connections: Optional[List[str]] = Field(
+        None, description="The global connections in the engine cycle."
+    )
+    flow_connections: Optional[List[List[str]]] = Field(
+        None, description="The flow connections in the engine cycle."
+    )

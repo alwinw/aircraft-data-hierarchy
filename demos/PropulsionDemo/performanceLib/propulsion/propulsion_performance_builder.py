@@ -1,39 +1,15 @@
-import numpy as np
-from pydantic.v1 import utils
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel, Metadata
-from aircraft_data_hierarchy.behavior import Behavior, DAVEfunc, FileHeader, Author
-from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
-    Propulsion,
-    PropulsionCycle,
-    Inlet,
-    Compressor,
-    Splitter,
-    Duct,
-    Compressor,
-    Turbine,
-    Bleed,
-    Nozzle,
-    Shaft,
-    Combustor,
-)
 from behaviorLib.propulsion.propulsion_cycle_behavior import (
-    PropulsionCycleBehavior,
-    Performance,
-    FlightConditions,
     MultiPointCycle,
-    OffDesignPoint,
-)
-from performanceLib.propulsion.propulsion_cycle_performance import (
-    PropulsionCyclePerformance,
+    Performance,
 )
 from performanceLib.propulsion.builders.hbtf_builder import HBTFBuilder, MPhbtfBuilder
-import openmdao.api as om
+from pydantic.v1 import utils
 
 
 class PropulsionPerformanceBuilder:
     """A builder class intended to take an ADH instance from pydantic as input and then automatically run an analysis or optimization using the desired tool of choice.
-    This parent class contains all the necessary input processing funciton from the ADH. The goal is for input from the ADH to be processed into python dictionaries as an
-    intermediate step. This parent class contains the input function necessary to retreive ADH data from pydantic and return them as dictionaries so they can prepared for input into the desired tools.
+    This parent class contains all the necessary input processing function from the ADH. The goal is for input from the ADH to be processed into python dictionaries as an
+    intermediate step. This parent class contains the input function necessary to retrieve ADH data from pydantic and return them as dictionaries so they can prepared for input into the desired tools.
     For example pyCycle has a python based interface while NPSS requires an input files. Using dictionaries as an intermediary between the tools and the ADH makes
     adapting a new tool for use with the AHD much easier.
     """
@@ -43,7 +19,7 @@ class PropulsionPerformanceBuilder:
     def __init__(self, ADHInstance):
         self.ADHInstance = ADHInstance
 
-    """ ADH INPUT: A set of helper functions that retreive ADH data from pydantic and return them as dictionaries. """
+    """ ADH INPUT: A set of helper functions that retrieve ADH data from pydantic and return them as dictionaries. """
 
     def getODPoints(self):
         cycle = self.ADHInstance.cycle
@@ -89,7 +65,12 @@ class PropulsionPerformanceBuilder:
     def getDesFlightConds(self):
         flightconditions = []
         des_fc = self.ADHInstance.behavior.flight_conditions_design
-        flightConds = {"name": des_fc.name, "mn": des_fc.mn, "alt": des_fc.alt, "d_ts": des_fc.d_ts}
+        flightConds = {
+            "name": des_fc.name,
+            "mn": des_fc.mn,
+            "alt": des_fc.alt,
+            "d_ts": des_fc.d_ts,
+        }
         flightconditions.append(flightConds)
         return flightconditions
 
@@ -103,7 +84,7 @@ class PropulsionPerformanceBuilder:
         engineElements = cycle.elements
         inlets = []
         for element in engineElements:
-            #if utils.lenient_isinstance(element, Inlet):
+            # if utils.lenient_isinstance(element, Inlet):
             if element.type == "inlet":
                 inletData = {
                     "name": element.name,
@@ -124,7 +105,7 @@ class PropulsionPerformanceBuilder:
         splitters = []
         for element in engineElements:
             if element.type == "splitter":
-            #if utils.lenient_isinstance(element, Splitter):
+                # if utils.lenient_isinstance(element, Splitter):
                 splitterData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -146,7 +127,7 @@ class PropulsionPerformanceBuilder:
         ducts = []
         for element in engineElements:
             if element.type == "duct":
-            #if utils.lenient_isinstance(element, Duct):
+                # if utils.lenient_isinstance(element, Duct):
                 ductData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -167,7 +148,7 @@ class PropulsionPerformanceBuilder:
         compressors = []
         for element in engineElements:
             if element.type == "comp":
-            #if utils.lenient_isinstance(element, Compressor):
+                # if utils.lenient_isinstance(element, Compressor):
                 compData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -195,7 +176,7 @@ class PropulsionPerformanceBuilder:
         combustors = []
         for element in engineElements:
             if element.type == "comb":
-            #if utils.lenient_isinstance(element, Combustor):
+                # if utils.lenient_isinstance(element, Combustor):
                 combData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -217,7 +198,7 @@ class PropulsionPerformanceBuilder:
         turbines = []
         for element in engineElements:
             if element.type == "turb":
-            #if utils.lenient_isinstance(element, Turbine):
+                # if utils.lenient_isinstance(element, Turbine):
                 turbData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -245,7 +226,7 @@ class PropulsionPerformanceBuilder:
         nozzles = []
         for element in engineElements:
             if element.type == "nozz":
-            #if utils.lenient_isinstance(element, Nozzle):
+                # if utils.lenient_isinstance(element, Nozzle):
                 nozzData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -267,7 +248,7 @@ class PropulsionPerformanceBuilder:
         shafts = []
         for element in engineElements:
             if element.type == "shaft":
-            #if utils.lenient_isinstance(element, Shaft):
+                # if utils.lenient_isinstance(element, Shaft):
                 shaftData = {
                     "name": element.name,
                     "num_ports": element.num_ports,
@@ -287,7 +268,7 @@ class PropulsionPerformanceBuilder:
         bleeds = []
         for element in engineElements:
             if element.type == "bleed":
-            #if utils.lenient_isinstance(element, Bleed):
+                # if utils.lenient_isinstance(element, Bleed):
                 bleedData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -356,7 +337,7 @@ class PropulsionPerformanceBuilder:
 
     def getOutput(self):
         """
-        Reserved for ouput processing and tools execution in child classes
+        Reserved for output processing and tools execution in child classes
         """
         pass
 
@@ -395,5 +376,3 @@ class pyCycleBuilder(PropulsionPerformanceBuilder):
 class NPSSBuilder(PropulsionPerformanceBuilder):
     def __init__(self, ADHInstance):
         raise Exception("NPSS Builder not implemented!")
-
-

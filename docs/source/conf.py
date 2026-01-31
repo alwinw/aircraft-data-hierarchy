@@ -3,11 +3,12 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-import os, sys
+import os
+import sys
 from datetime import date
 
 # -- Project Path -----------------------------------------------------
-sys.path.insert(0, os.path.abspath('../../src'))
+sys.path.insert(0, os.path.abspath("../../src"))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -27,7 +28,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.mathjax",
     "autodocsumm",
-	"myst_nb",
+    "myst_nb",
 ]
 
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#
@@ -63,7 +64,7 @@ autodoc_default_options = {
     "members": True,
     "special-members": True,
     "show-inheritance": True,
-    "exclude-members": "__weakref__, model_config, __pydantic_fields_set__, __pydantic_extra__, __pydantic_private__, __class_vars__, __private_attributes__, __pydantic_complete__, __pydantic_computed_fields__, __pydantic_core_schema__, __pydantic_custom_init__, __pydantic_decorators__, __pydantic_fields__, __pydantic_generic_metadata__, __pydantic_parent_namespace__, __pydantic_post_init__, __pydantic_serializer__, __pydantic_validator__, __signature__"
+    "exclude-members": "__weakref__, model_config, __pydantic_fields_set__, __pydantic_extra__, __pydantic_private__, __class_vars__, __private_attributes__, __pydantic_complete__, __pydantic_computed_fields__, __pydantic_core_schema__, __pydantic_custom_init__, __pydantic_decorators__, __pydantic_fields__, __pydantic_generic_metadata__, __pydantic_parent_namespace__, __pydantic_post_init__, __pydantic_serializer__, __pydantic_validator__, __signature__",
 }
 
 # hide module names
@@ -77,12 +78,12 @@ html_static_path = ["_static"]
 # Options for RTD theme
 # https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html
 html_theme_options = {
-    'prev_next_buttons_location': 'None',
-    'navigation_depth': 7, # Controls SideBar Expand/Close Levels
-    'collapse_navigation': False,
-    'sticky_navigation': True,
+    "prev_next_buttons_location": "None",
+    "navigation_depth": 7,  # Controls SideBar Expand/Close Levels
+    "collapse_navigation": False,
+    "sticky_navigation": True,
 }
 
 html_css_files = [
-    'custom.css',
+    "custom.css",
 ]

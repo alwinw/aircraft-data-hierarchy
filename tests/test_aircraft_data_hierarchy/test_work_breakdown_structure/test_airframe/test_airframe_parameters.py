@@ -1,31 +1,43 @@
 import unittest
+
 from pydantic import ValidationError
-from typing import List, Optional
-from enum import Enum
+
+from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
+    Point,
+    Spline,
+)
 
 # Import the models from the provided code
 from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_parameters import (
-    ReferenceData, FlightConditions, ConfigurationLayout, Airfoil,
-    PlanformType, LiftingSurface, TwinVerticalTail,
-    GroundEffectsDefinition, FlapType, NoseType, BlowingType, SymmetricFlap,
-    ControlType, AsymmetricControl, BodyShape,
-    TailShape, Body, LowAspectRatioWingBody, TransverseJetControl,
-    HypersonicFlapControl, EngineType, PropellerPowerProperties, JetEngineType,
-    JetPowerProperties, AerodynamicsData
+    AerodynamicsData,
+    Airfoil,
+    AsymmetricControl,
+    BlowingType,
+    Body,
+    BodyShape,
+    ConfigurationLayout,
+    ControlType,
+    FlapType,
+    FlightConditions,
+    GroundEffectsDefinition,
+    HypersonicFlapControl,
+    JetPowerProperties,
+    LiftingSurface,
+    LowAspectRatioWingBody,
+    NoseType,
+    PlanformType,
+    PropellerPowerProperties,
+    ReferenceData,
+    SymmetricFlap,
+    TransverseJetControl,
+    TwinVerticalTail,
 )
 
-from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import Point, Spline
 
 class TestPydanticModels(unittest.TestCase):
-
     def test_reference_data(self):
         # Test valid data
-        data = {
-            "RougHgt": 0.01,
-            "Sref": 100.0,
-            "Cbar": 10.0,
-            "BLref": 5.0
-        }
+        data = {"RougHgt": 0.01, "Sref": 100.0, "Cbar": 10.0, "BLref": 5.0}
         model = ReferenceData(**data)
         self.assertEqual(model.roughness, 0.01)
         self.assertEqual(model.reference_area, 100.0)
@@ -46,7 +58,7 @@ class TestPydanticModels(unittest.TestCase):
             "velocities": [300.0, 400.0],
             "qty_alphas": 2,
             "alphas": [5.0, 10.0],
-            "reynolds_indicies": [1e6, 2e6],
+            "reynolds_indices": [1e6, 2e6],
             "qty_altitudes": 2,
             "altitudes": [10000.0, 20000.0],
             "static_pressures": [101325.0, 90000.0],
@@ -56,7 +68,7 @@ class TestPydanticModels(unittest.TestCase):
             "hypersonic_flag": True,
             "transition_flag": True,
             "weight": 50000.0,
-            "flight_path_angle": 1.0
+            "flight_path_angle": 1.0,
         }
         model = FlightConditions(**data)
         self.assertEqual(model.loop_control, 2)
@@ -65,7 +77,7 @@ class TestPydanticModels(unittest.TestCase):
         self.assertEqual(model.velocities, [300.0, 400.0])
         self.assertEqual(model.qty_alphas, 2)
         self.assertEqual(model.alphas, [5.0, 10.0])
-        self.assertEqual(model.reynolds_indicies, [1e6, 2e6])
+        self.assertEqual(model.reynolds_indices, [1e6, 2e6])
         self.assertEqual(model.qty_altitudes, 2)
         self.assertEqual(model.altitudes, [10000.0, 20000.0])
         self.assertEqual(model.static_pressures, [101325.0, 90000.0])
@@ -108,7 +120,7 @@ class TestPydanticModels(unittest.TestCase):
             "fin_apex_waterline": 20.0,
             "fin_cant": 6.0,
             "fin_offset": 3.0,
-            "model_scale": 1.0
+            "model_scale": 1.0,
         }
         model = ConfigurationLayout(**data)
         self.assertEqual(model.center_of_gravity_station, 10.0)
@@ -148,12 +160,10 @@ class TestPydanticModels(unittest.TestCase):
             Point(x=0.1, y=0.1, z=0.1),
             Point(x=0.5, y=0.5, z=0.5),
             Point(x=0.8, y=0.8, z=0.8),
-            Point(x=1.0, y=1.0, z=1.0)
+            Point(x=1.0, y=1.0, z=1.0),
         ]
         spline = Spline(points=points)
-        data = {
-            "spline": spline
-        }
+        data = {"spline": spline}
         model = Airfoil(**data)
         self.assertEqual(model.spline, spline)
 
@@ -190,7 +200,7 @@ class TestPydanticModels(unittest.TestCase):
             "outboard_LE_droop": 0.02,
             "outboard_ZoCmax": 0.03,
             "outboard_XoC_for_ZoCmax": 0.04,
-            "outboard_TE_droop": 0.05
+            "outboard_TE_droop": 0.05,
         }
         model = Airfoil(**data)
         self.assertEqual(model.input_type, 1)
@@ -225,8 +235,6 @@ class TestPydanticModels(unittest.TestCase):
         # with self.assertRaises(ValidationError):
         #     Airfoil(**data)
 
-
-
     def test_lifting_surface_parameters(self):
         # Test valid data
         data = {
@@ -248,7 +256,7 @@ class TestPydanticModels(unittest.TestCase):
             "distance_between_CG_and_centroid": 14.0,
             "vertical_panel_exposed_root_chord": 15.0,
             "vertical_panel_not_influenced_by_wing": 16.0,
-            "horizontal_panel_exposed_root_chord": 17.0
+            "horizontal_panel_exposed_root_chord": 17.0,
         }
         model = LiftingSurface(**data)
         self.assertEqual(model.tip_chord, 1.0)
@@ -286,7 +294,7 @@ class TestPydanticModels(unittest.TestCase):
             "planform_area": 1.0,
             "closure_angle": 0.8,
             "lateral_arm": 0.2,
-            "vertical_arm": 0.1
+            "vertical_arm": 0.1,
         }
         model = TwinVerticalTail(**data)
         self.assertEqual(model.span_above, 1.5)
@@ -305,10 +313,7 @@ class TestPydanticModels(unittest.TestCase):
 
     def test_ground_effects_definition(self):
         # Test valid data
-        data = {
-            "qty_heights": 5,
-            "heights": [100.0, 200.0, 300.0, 400.0, 500.0]
-        }
+        data = {"qty_heights": 5, "heights": [100.0, 200.0, 300.0, 400.0, 500.0]}
         model = GroundEffectsDefinition(**data)
         self.assertEqual(model.qty_heights, 5)
         self.assertEqual(model.heights, [100.0, 200.0, 300.0, 400.0, 500.0])
@@ -319,10 +324,7 @@ class TestPydanticModels(unittest.TestCase):
             GroundEffectsDefinition(**data)
 
         # Test mismatched qty_heights
-        data = {
-            "qty_heights": 4,
-            "heights": [100.0, 200.0, 300.0, 400.0, 500.0]
-        }
+        data = {"qty_heights": 4, "heights": [100.0, 200.0, 300.0, 400.0, 500.0]}
         with self.assertRaises(ValidationError):
             GroundEffectsDefinition(**data)
 
@@ -346,7 +348,7 @@ class TestPydanticModels(unittest.TestCase):
             "EBF_jet_deflection_angles": [1.5, 1.6],
             "jet_efflux": 1.7,
             "flap_Lift_increment": [1.8, 1.9],
-            "flap_Pitch_increment": [2.0, 2.1]
+            "flap_Pitch_increment": [2.0, 2.1],
         }
         model = SymmetricFlap(**data)
         self.assertEqual(model.flap_type, FlapType.PLAIN)
@@ -387,7 +389,7 @@ class TestPydanticModels(unittest.TestCase):
             "deflector_height_chord_ratio": [0.05, 0.06],
             "spoiler_height_ratio": [0.07, 0.08],
             "spoiler_chord_ratio": [0.09, 0.1],
-            "hingeline_chord_ratio": 0.11
+            "hingeline_chord_ratio": 0.11,
         }
         model = AsymmetricControl(**data)
         self.assertEqual(model.control_type, ControlType.AILERON)
@@ -428,7 +430,7 @@ class TestPydanticModels(unittest.TestCase):
             "nose_length": 16.0,
             "aftbody_length": 17.0,
             "nose_bluntness": 18.0,
-            "area_rule": 1
+            "area_rule": 1,
         }
         model = Body(**data)
         self.assertEqual(model.qty_cross_sections, 3)
@@ -473,7 +475,7 @@ class TestPydanticModels(unittest.TestCase):
             "total_side_area": 1.6,
             "nose_side_area": 1.7,
             "distance_to_side_centroid": 1.8,
-            "distance_to_planform_centroid": 1.9
+            "distance_to_planform_centroid": 1.9,
         }
         model = LowAspectRatioWingBody(**data)
         self.assertEqual(model.body_centroid_height, 0.0)
@@ -517,7 +519,7 @@ class TestPydanticModels(unittest.TestCase):
             "nozzle_inclination": 15.0,
             "propellant_specific_heat": 1.4,
             "nozzle_discharge_coefficient": 0.98,
-            "nozzle_distance_from_leading_edge": 2.0
+            "nozzle_distance_from_leading_edge": 2.0,
         }
         model = TransverseJetControl(**data)
         self.assertEqual(model.qty_time, 3)
@@ -547,7 +549,7 @@ class TestPydanticModels(unittest.TestCase):
             "control_chord_ratio": 0.02,
             "qty_deflections": 2,
             "deflections": [0.1, 0.2],
-            "boundary_layer_state": [True, False]
+            "boundary_layer_state": [True, False],
         }
         model = HypersonicFlapControl(**data)
         self.assertEqual(model.altitude, 10.0)
@@ -578,7 +580,7 @@ class TestPydanticModels(unittest.TestCase):
             "hub_waterline": 1.0,
             "blade_chord_ratio": [0.1, 0.2, 0.3],
             "blade_angle": [15.0, 20.0, 25.0],
-            "normal_force_factor": 1.2
+            "normal_force_factor": 1.2,
         }
         model = PropellerPowerProperties(**data)
         self.assertEqual(model.thrust_incidence_angle, 5.0)
@@ -617,7 +619,7 @@ class TestPydanticModels(unittest.TestCase):
             "exhaust_static_temperature": 1500.0,
             "exhaust_total_pressure": 101325.0,
             "ambient_temperature": 288.15,
-            "ambient_static_pressure": 101325.0
+            "ambient_static_pressure": 101325.0,
         }
         model = JetPowerProperties(**data)
         self.assertEqual(model.qty_engines, 2)
@@ -701,7 +703,7 @@ class TestPydanticModels(unittest.TestCase):
             "CMWB": [0.01, 0.02, 0.03],
             "DEODA": [0.1, 0.2, 0.3],
             "EPSLON": [0.1, 0.2, 0.3],
-            "QHOQINF": [0.1, 0.2, 0.3]
+            "QHOQINF": [0.1, 0.2, 0.3],
         }
         model = AerodynamicsData(**data)
         self.assertEqual(model.CLalpha_body, [0.1, 0.2, 0.3])
@@ -768,5 +770,6 @@ class TestPydanticModels(unittest.TestCase):
         with self.assertRaises(ValidationError):
             AerodynamicsData(**data)
 
-if __name__ == '__main__':
-    unittest.main(argv=[''], exit=False)
+
+if __name__ == "__main__":
+    unittest.main(argv=[""], exit=False)

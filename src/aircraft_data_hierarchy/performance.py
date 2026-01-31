@@ -1,9 +1,13 @@
 from __future__ import annotations
-from datetime import datetime
-from typing import List, Optional, Any
-from pydantic import BaseModel, Field, field_validator, ConfigDict
-from .common_base_model import CommonBaseModel, Metadata
+
 import uuid
+from datetime import datetime
+from typing import Any, List, Optional
+
+from pydantic import ConfigDict, Field, field_validator
+
+from .common_base_model import CommonBaseModel, Metadata
+
 
 class DataExchange(CommonBaseModel):
     """
@@ -14,11 +18,19 @@ class DataExchange(CommonBaseModel):
         inputs (Optional[List[Any]]): The list of input variables.
         outputs (Optional[List[Any]]): The list of output variables.
     """
-    model_identifier: Optional[str] = Field(None, description="The identifier of the model.")
-    inputs: Optional[List[Any]] = Field(default_factory=list, description="The list of input variables.")
-    outputs: Optional[List[Any]] = Field(default_factory=list, description="The list of output variables.")
+
+    model_identifier: Optional[str] = Field(
+        None, description="The identifier of the model."
+    )
+    inputs: Optional[List[Any]] = Field(
+        default_factory=list, description="The list of input variables."
+    )
+    outputs: Optional[List[Any]] = Field(
+        default_factory=list, description="The list of output variables."
+    )
 
     model_config = ConfigDict(protected_namespaces=(), arbitrary_types_allowed=True)
+
 
 class ModelDescription(CommonBaseModel):
     """
@@ -37,12 +49,23 @@ class ModelDescription(CommonBaseModel):
         version (Optional[str]): The version of the model.
         description (Optional[str]): A description of the model.
     """
-    specification_version: Optional[str] = Field(None, description="The specification version.")
+
+    specification_version: Optional[str] = Field(
+        None, description="The specification version."
+    )
     model_name: Optional[str] = Field(None, description="The name of the model.")
-    guid: Optional[str] = Field(None, description="The globally unique identifier of the model.")
-    generation_tool: Optional[str] = Field(None, description="The tool used to generate the model.")
-    generation_date_and_time: Optional[datetime] = Field(None, description="The date and time when the model was generated.")
-    data_exchange: Optional[DataExchange] = Field(None, description="The data exchange information.")
+    guid: Optional[str] = Field(
+        None, description="The globally unique identifier of the model."
+    )
+    generation_tool: Optional[str] = Field(
+        None, description="The tool used to generate the model."
+    )
+    generation_date_and_time: Optional[datetime] = Field(
+        None, description="The date and time when the model was generated."
+    )
+    data_exchange: Optional[DataExchange] = Field(
+        None, description="The data exchange information."
+    )
     license: Optional[str] = Field(None, description="The license of the model.")
     copyright: Optional[str] = Field(None, description="The copyright information.")
     author: Optional[str] = Field(None, description="The author of the model.")
@@ -51,21 +74,22 @@ class ModelDescription(CommonBaseModel):
 
     model_config = ConfigDict(protected_namespaces=(), arbitrary_types_allowed=True)
 
-    @field_validator('specification_version')
+    @field_validator("specification_version")
     def validate_specification_version(cls, v):
-        if v and v != '2.0':
-            raise ValueError('Invalid specification version. Must be 2.0')
+        if v and v != "2.0":
+            raise ValueError("Invalid specification version. Must be 2.0")
         return v
 
-    @field_validator('guid')
+    @field_validator("guid")
     def validate_guid(cls, v):
         if v:
             try:
                 uuid_obj = uuid.UUID(v, version=4)
                 return str(uuid_obj)
             except ValueError:
-                raise ValueError('Invalid GUID format. Must be a valid UUID version 4')
+                raise ValueError("Invalid GUID format. Must be a valid UUID version 4")
         return v
+
 
 class Discipline(CommonBaseModel):
     """
@@ -79,10 +103,18 @@ class Discipline(CommonBaseModel):
         tools (Optional[List[ModelDescription]]): A list of tools and models associated with the discipline, detailing the available resources for conducting analyses or simulations.
         metadata (Optional[Metadata]): Additional metadata providing further context or details about the discipline and its associated resources.
     """
+
     name: Optional[str] = Field(None, description="The name of the discipline.")
-    description: Optional[str] = Field(None, description="A brief description of the discipline and its scope.")
-    tools: Optional[List[ModelDescription]] = Field(default_factory=list, description="A list of tools and models associated with the discipline.")
-    metadata: Optional[Metadata] = Field(None, description="Additional metadata for the discipline.")
+    description: Optional[str] = Field(
+        None, description="A brief description of the discipline and its scope."
+    )
+    tools: Optional[List[ModelDescription]] = Field(
+        default_factory=list,
+        description="A list of tools and models associated with the discipline.",
+    )
+    metadata: Optional[Metadata] = Field(
+        None, description="Additional metadata for the discipline."
+    )
 
     @field_validator("name", mode="before")
     def validate_name(cls, value: str) -> str:
@@ -104,7 +136,9 @@ class Discipline(CommonBaseModel):
             if not value.strip():
                 raise ValueError("Discipline name cannot be empty.")
             if not all(c.isalnum() or c.isspace() or c == "_" for c in value):
-                raise ValueError("Discipline name can only contain alphanumeric characters, underscores, and spaces.")
+                raise ValueError(
+                    "Discipline name can only contain alphanumeric characters, underscores, and spaces."
+                )
         return value
 
     def add_tool(self, tool: ModelDescription) -> None:

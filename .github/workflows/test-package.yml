@@ -3,7 +3,7 @@ name: Test Package
 on:
   push:
     branches:
-      - '*'  # Trigger on push to any branch
+      - "*" # Trigger on push to any branch
   pull_request:
     branches:
       - main
@@ -13,31 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
+          python-version: "3.11"
 
-      - name: Install build dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install build
-          
-      - name: Build the package
-        run: |
-          python -m build
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.11"
 
-      - name: Install the package
+      - name: Install the project
         run: |
-          python -m pip install dist/*.whl
- 
-      - name: Install test dependencies
-        run: |
-          python -m pip install .[test]
-          
+          uv sync --locked --all-extras --group test
+
       - name: Run tests
         run: |
-          pytest
+          uv run pytest

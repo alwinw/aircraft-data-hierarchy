@@ -1,13 +1,19 @@
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
 
 class NodeNotFoundError(Exception):
     """Exception raised when a node is not found in the ADH."""
+
     pass
+
 
 class PathAlreadyExistsError(Exception):
     """Exception raised when a path already exists in the ADH."""
+
     pass
+
 
 class CommonBaseModel(BaseModel):
     """
@@ -49,7 +55,9 @@ class CommonBaseModel(BaseModel):
         if isinstance(value, str):
             stripped_value = value.strip()
             if not stripped_value:
-                raise ValueError(f"Field '{info.field_name}' cannot be empty after trimming.")
+                raise ValueError(
+                    f"Field '{info.field_name}' cannot be empty after trimming."
+                )
             return stripped_value
         return value
 
@@ -69,7 +77,9 @@ class CommonBaseModel(BaseModel):
             raise TypeError("The provided data must be a dictionary.")
 
         if self.get_node(path) is not None:
-            raise PathAlreadyExistsError(f"A node already exists at the specified path: {path}")
+            raise PathAlreadyExistsError(
+                f"A node already exists at the specified path: {path}"
+            )
 
         path_components = path.split(".")
         current_node = self.adh_root
@@ -111,10 +121,16 @@ class CommonBaseModel(BaseModel):
         Returns:
             List[Dict[str, Any]]: A list of nodes (as dictionaries) that match the filter criteria.
         """
+
         def match_node(node: Dict[str, Any], criteria: Dict[str, Any]) -> bool:
             return all(node.get(key) == value for key, value in criteria.items())
 
-        def search_recursive(current_node: Dict[str, Any], criteria: Dict[str, Any], path: str, results: List[Dict[str, Any]]) -> None:
+        def search_recursive(
+            current_node: Dict[str, Any],
+            criteria: Dict[str, Any],
+            path: str,
+            results: List[Dict[str, Any]],
+        ) -> None:
             if match_node(current_node, criteria):
                 result = current_node.copy()
                 result["_path"] = path
@@ -147,11 +163,15 @@ class CommonBaseModel(BaseModel):
 
         for component in path_components[:-1]:
             if component not in current_node:
-                raise NodeNotFoundError(f"The specified path doesn't exist in the ADH: {path}")
+                raise NodeNotFoundError(
+                    f"The specified path doesn't exist in the ADH: {path}"
+                )
             current_node = current_node[component]
 
         if path_components[-1] not in current_node:
-            raise NodeNotFoundError(f"The specified path doesn't exist in the ADH: {path}")
+            raise NodeNotFoundError(
+                f"The specified path doesn't exist in the ADH: {path}"
+            )
 
         current_node[path_components[-1]] = data
 
@@ -169,9 +189,13 @@ class CommonBaseModel(BaseModel):
         """
         source_node = self.get_node(source_path)
         if source_node is None:
-            raise NodeNotFoundError(f"The source path doesn't exist in the ADH: {source_path}")
+            raise NodeNotFoundError(
+                f"The source path doesn't exist in the ADH: {source_path}"
+            )
         if self.get_node(target_path) is not None:
-            raise PathAlreadyExistsError(f"The target path already exists in the ADH: {target_path}")
+            raise PathAlreadyExistsError(
+                f"The target path already exists in the ADH: {target_path}"
+            )
 
         self.create_node(target_path, source_node)
         self.delete_node(source_path)
@@ -191,11 +215,15 @@ class CommonBaseModel(BaseModel):
 
         for component in path_components[:-1]:
             if component not in current_node:
-                raise NodeNotFoundError(f"The specified path doesn't exist in the ADH: {path}")
+                raise NodeNotFoundError(
+                    f"The specified path doesn't exist in the ADH: {path}"
+                )
             current_node = current_node[component]
 
         if path_components[-1] not in current_node:
-            raise NodeNotFoundError(f"The specified path doesn't exist in the ADH: {path}")
+            raise NodeNotFoundError(
+                f"The specified path doesn't exist in the ADH: {path}"
+            )
 
         del current_node[path_components[-1]]
 
@@ -214,9 +242,13 @@ class CommonBaseModel(BaseModel):
         target_node = self.get_node(target_path)
 
         if source_node is None:
-            raise NodeNotFoundError(f"The source path doesn't exist in the ADH: {source_path}")
+            raise NodeNotFoundError(
+                f"The source path doesn't exist in the ADH: {source_path}"
+            )
         if target_node is None:
-            raise NodeNotFoundError(f"The target path doesn't exist in the ADH: {target_path}")
+            raise NodeNotFoundError(
+                f"The target path doesn't exist in the ADH: {target_path}"
+            )
 
         def merge_dicts(target, source):
             for key, value in source.items():
@@ -242,9 +274,13 @@ class CommonBaseModel(BaseModel):
         """
         source_node = self.get_node(source_path)
         if source_node is None:
-            raise NodeNotFoundError(f"The source path doesn't exist in the ADH: {source_path}")
+            raise NodeNotFoundError(
+                f"The source path doesn't exist in the ADH: {source_path}"
+            )
         if self.get_node(target_path) is not None:
-            raise PathAlreadyExistsError(f"The target path already exists in the ADH: {target_path}")
+            raise PathAlreadyExistsError(
+                f"The target path already exists in the ADH: {target_path}"
+            )
 
         def deep_copy(node):
             if isinstance(node, dict):
@@ -269,9 +305,13 @@ class CommonBaseModel(BaseModel):
         target_node = self.get_node(target_path)
 
         if source_node is None:
-            raise NodeNotFoundError(f"The source path doesn't exist in the ADH: {source_path}")
+            raise NodeNotFoundError(
+                f"The source path doesn't exist in the ADH: {source_path}"
+            )
         if target_node is None:
-            raise NodeNotFoundError(f"The target path doesn't exist in the ADH: {target_path}")
+            raise NodeNotFoundError(
+                f"The target path doesn't exist in the ADH: {target_path}"
+            )
 
         self.aliases[source_path] = target_path
 
@@ -286,7 +326,9 @@ class CommonBaseModel(BaseModel):
             NodeNotFoundError: If the specified path is not linked to any other node.
         """
         if source_path not in self.aliases:
-            raise NodeNotFoundError(f"The specified path is not linked to any other node: {source_path}")
+            raise NodeNotFoundError(
+                f"The specified path is not linked to any other node: {source_path}"
+            )
 
         del self.aliases[source_path]
 
@@ -307,20 +349,26 @@ class Metadata(CommonBaseModel):
     key: str
     value: Any
     units: Optional[str] = Field(None, description="The units of measure for the data")
-    uncertainty: Optional[Any] = Field(None, description="The uncertainty associated with the data")
-    lower_bounds: Optional[Union[int, float]] = Field(None, description="The lower bounds of the data")
-    upper_bounds: Optional[Union[int, float]] = Field(None, description="The upper bounds of the data")
+    uncertainty: Optional[Any] = Field(
+        None, description="The uncertainty associated with the data"
+    )
+    lower_bounds: Optional[Union[int, float]] = Field(
+        None, description="The lower bounds of the data"
+    )
+    upper_bounds: Optional[Union[int, float]] = Field(
+        None, description="The upper bounds of the data"
+    )
 
-    class Config:
-        """Pydantic configuration for the Metadata model."""
-        validate_assignment = True
-        arbitrary_types_allowed = True
-        extra = "forbid"
-        str_min_length = 1
-        str_max_length = 255
-        str_strip_whitespace = True
+    model_config = ConfigDict(
+        validate_assignment=True,
+        arbitrary_types_allowed=True,
+        extra="forbid",
+        str_min_length=1,
+        str_max_length=255,
+        str_strip_whitespace=True,
+    )
 
-    @field_validator('key')
+    @field_validator("key")
     def key_must_be_non_empty(cls, key: str) -> str:
         """
         Ensure the key is non-empty and within specified length limits.
