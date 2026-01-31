@@ -29,10 +29,10 @@ class String(CommonBaseModel):
 
     value: str = Field(..., description="The actual string value.", min_length=1)
     default: Optional[str] = Field(
-        None, description="A default value for the variable, if any."
+        default=None, description="A default value for the variable, if any."
     )
     metadata: Optional[Metadata] = Field(
-        None,
+        default=None,
         description="Additional metadata providing further context or details about the variable.",
     )
 
@@ -74,13 +74,13 @@ class Boolean(CommonBaseModel):
         description="Units of the variable, typically 'unitless' for boolean types.",
     )
     description: Optional[str] = Field(
-        None, description="A brief description of the variable."
+        default=None, description="A brief description of the variable."
     )
     default: Optional[bool] = Field(
-        None, description="Default boolean value of the variable, if any."
+        default=None, description="Default boolean value of the variable, if any."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the variable."
+        default=None, description="Additional metadata for the variable."
     )
 
     @field_validator("default", mode="before")
@@ -127,13 +127,14 @@ class Float(CommonBaseModel):
     value: float = Field(..., description="The actual floating-point value.")
     units: str = Field(default="unitless", description="Units of the variable.")
     description: Optional[str] = Field(
-        None, description="A brief description of the variable."
+        default=None, description="A brief description of the variable."
     )
     default: Optional[float] = Field(
-        None, description="Default floating-point value of the variable, if any."
+        default=None,
+        description="Default floating-point value of the variable, if any.",
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the variable."
+        default=None, description="Additional metadata for the variable."
     )
 
     @field_validator("default", mode="before")
@@ -177,13 +178,13 @@ class Integer(CommonBaseModel):
     value: int = Field(..., description="The actual integer value.")
     units: str = Field(default="unitless", description="Units of the variable.")
     description: Optional[str] = Field(
-        None, description="A brief description of the variable."
+        default=None, description="A brief description of the variable."
     )
     default: Optional[int] = Field(
-        None, description="Default integer value of the variable, if any."
+        default=None, description="Default integer value of the variable, if any."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the variable."
+        default=None, description="Additional metadata for the variable."
     )
 
     @field_validator("default", mode="before")
@@ -284,7 +285,7 @@ class Polyline(CommonBaseModel):
         ..., description="A series of 3D points defining the polyline."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the polyline."
+        default=None, description="Additional metadata for the polyline."
     )
 
     @field_validator("points", mode="before")
@@ -442,7 +443,7 @@ class Mesh(CommonBaseModel):
         ..., description="A collection of polylines defining the mesh."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the mesh."
+        default=None, description="Additional metadata for the mesh."
     )
 
     @field_validator("polylines", mode="before")
@@ -588,7 +589,7 @@ class Loft(CommonBaseModel):
         100, description="The number of sample points to generate along each spline."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the loft."
+        default=None, description="Additional metadata for the loft."
     )
 
     @field_validator("splines", mode="before")
@@ -710,7 +711,7 @@ class Airfoil(CommonBaseModel):
     """
 
     spline: Optional[Spline] = Field(
-        None,
+        default=None,
         description="A spline defining the contour of the airfoil section.",
     )
 
@@ -755,14 +756,14 @@ class ReferenceAxis(CommonBaseModel):
         ..., description="A series of 3D points defining the reference axis."
     )
     description: Optional[str] = Field(
-        None, description="A brief description of the reference axis."
+        default=None, description="A brief description of the reference axis."
     )
     metadata: Metadata = Field(
         default_factory=Metadata,
         description="Additional metadata for the reference axis.",
     )
     relative_to: Optional[str] = Field(
-        None,
+        default=None,
         description="The name of another reference axis to which this axis is relative.",
     )
 
@@ -847,11 +848,11 @@ class LiftingSurface(CommonBaseModel):
     """
 
     leading_edge_spline: Optional[Spline] = Field(
-        None,
+        default=None,
         description="Spline defining the leading edge of the lifting surface.",
     )
     trailing_edge_spline: Optional[Spline] = Field(
-        None,
+        default=None,
         description="Spline defining the trailing edge of the lifting surface.",
     )
     airfoil_sections: List[Airfoil] = Field(
@@ -900,10 +901,12 @@ class CrossSection(CommonBaseModel):
         description="Normalized station of the cross-section along the body's length.",
     )
     upper_curve: Optional[Spline] = Field(
-        None, description="Spline defining the upper curve of the cross-section."
+        default=None,
+        description="Spline defining the upper curve of the cross-section.",
     )
     lower_curve: Optional[Spline] = Field(
-        None, description="Spline defining the lower curve of the cross-section."
+        default=None,
+        description="Spline defining the lower curve of the cross-section.",
     )
 
     @model_validator(mode="before")
@@ -944,7 +947,7 @@ class Body(CommonBaseModel):
     """
 
     reference_axis: Optional[Spline] = Field(
-        None,
+        default=None,
         description="Spline defining the reference axis of the body.",
     )
     cross_sections: List[CrossSection] = Field(
@@ -974,11 +977,11 @@ class Body(CommonBaseModel):
 
 
 class Geometry(CommonBaseModel):
-    point: Optional[Point]
-    polyline: Optional[Polyline]
-    spline: Optional[Spline]
-    cross_section: Optional[CrossSection]
-    reference_axis: Optional[ReferenceAxis]
-    airfoil: Optional[Airfoil]
-    lifting_surface: Optional[LiftingSurface]
-    body: Optional[Body]
+    point: Optional[Point] = None
+    polyline: Optional[Polyline] = None
+    spline: Optional[Spline] = None
+    cross_section: Optional[CrossSection] = None
+    reference_axis: Optional[ReferenceAxis] = None
+    airfoil: Optional[Airfoil] = None
+    lifting_surface: Optional[LiftingSurface] = None
+    body: Optional[Body] = None

@@ -166,7 +166,7 @@ class PowerRequirements(BaseModel):
 
     voltage: float = Field(..., gt=0)
     current: float = Field(..., gt=0)
-    frequency: Optional[float] = Field(None, gt=0)
+    frequency: Optional[float] = Field(default=None, gt=0)
     power_type: str = Field(..., min_length=1, max_length=20)
     peak_power: float = Field(..., gt=0)
     average_power: float = Field(..., gt=0)

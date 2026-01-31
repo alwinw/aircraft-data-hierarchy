@@ -22,20 +22,23 @@ from ...common_base_model import CommonBaseModel
 
 class ReferenceData(CommonBaseModel):
     roughness: Optional[float] = Field(
-        None,
+        default=None,
         alias="RougHgt",
         ge=0.0,
         le=0.02,
         description="Equivalent Sand Surface roughness height",
     )
     reference_area: Optional[float] = Field(
-        None, alias="Sref", gt=0.0, description="Reference area (ft^2)"
+        default=None, alias="Sref", gt=0.0, description="Reference area (ft^2)"
     )
     reference_length: Optional[float] = Field(
-        None, alias="Cbar", gt=0.0, description="Longitudinal reference length (ft)"
+        default=None,
+        alias="Cbar",
+        gt=0.0,
+        description="Longitudinal reference length (ft)",
     )
     lateral_reference: Optional[float] = Field(
-        None, alias="BLref", gt=0.0, description="Lateral reference length (ft)"
+        default=None, alias="BLref", gt=0.0, description="Lateral reference length (ft)"
     )
 
     @field_validator("roughness")
@@ -80,7 +83,9 @@ class FlightConditions(CommonBaseModel):
         lt=4,
         description="Loop Control: 1 - Altitude and Mach, 2 - Mach Only, 3 - Altitude Only",
     )
-    qty_machs: Optional[int] = Field(None, ge=0, description="Number of Mach numbers")
+    qty_machs: Optional[int] = Field(
+        default=None, ge=0, description="Number of Mach numbers"
+    )
     machs: List[Optional[float]] = Field(
         default_factory=list, description="Ascending order of Freestream Mach numbers"
     )
@@ -88,7 +93,7 @@ class FlightConditions(CommonBaseModel):
         default_factory=list, description="Ascending order of Freestream Velocities"
     )
     qty_alphas: Optional[int] = Field(
-        None, ge=0, description="Number of angles-of-attack"
+        default=None, ge=0, description="Number of angles-of-attack"
     )
     alphas: List[Optional[float]] = Field(
         default_factory=list, description="Ascending order of angles-of-attack"
@@ -97,7 +102,9 @@ class FlightConditions(CommonBaseModel):
         default_factory=list,
         description="Reynolds number per unit length at Freestream conditions",
     )
-    qty_altitudes: Optional[int] = Field(None, ge=0, description="Number of altitudes")
+    qty_altitudes: Optional[int] = Field(
+        default=None, ge=0, description="Number of altitudes"
+    )
     altitudes: List[Optional[float]] = Field(
         default_factory=list, description="Geometric Altitudes"
     )
@@ -121,9 +128,9 @@ class FlightConditions(CommonBaseModel):
         False,
         description="Transition flag: 0 - None, 1 - Transition Strips or Full Flight",
     )
-    weight: Optional[float] = Field(None, ge=0, description="Aircraft Weight")
+    weight: Optional[float] = Field(default=None, ge=0, description="Aircraft Weight")
     flight_path_angle: Optional[float] = Field(
-        None, gt=0, lt=2, description="Flight path Angle"
+        default=None, gt=0, lt=2, description="Flight path Angle"
     )
 
     @field_validator(
@@ -184,73 +191,79 @@ class FlightConditions(CommonBaseModel):
 
 class ConfigurationLayout(CommonBaseModel):
     center_of_gravity_station: Optional[float] = Field(
-        None, description="Airplane Center-of-Gravity station - in"
+        default=None, description="Airplane Center-of-Gravity station - in"
     )
     center_of_gravity_waterline: Optional[float] = Field(
-        None, description="Airplane Center-of-Gravity waterline - in"
+        default=None, description="Airplane Center-of-Gravity waterline - in"
     )
     canard_apex_station: Optional[float] = Field(
-        None, ge=0, description="Longitudinal station of the canard apex"
+        default=None, ge=0, description="Longitudinal station of the canard apex"
     )
     canard_apex_waterline: Optional[float] = Field(
-        None, description="Vertical waterline of the canard apex"
+        default=None, description="Vertical waterline of the canard apex"
     )
     canard_hinge_station: Optional[float] = Field(
-        None, description="Station of canard hinge axis"
+        default=None, description="Station of canard hinge axis"
     )
     canard_angle_of_incidence: Optional[float] = Field(
-        None, description="Angle of incidence of canard"
+        default=None, description="Angle of incidence of canard"
     )
     wing_apex_station: Optional[float] = Field(
-        None, ge=0, description="Longitudinal location of the wing apex"
+        default=None, ge=0, description="Longitudinal location of the wing apex"
     )
     wing_apex_waterline: Optional[float] = Field(
-        None, description="Vertical location of the wing apex"
+        default=None, description="Vertical location of the wing apex"
     )
     wing_hinge_station: Optional[float] = Field(
-        None, description="Station of wing hinge axis"
+        default=None, description="Station of wing hinge axis"
     )
     wing_angle_of_incidence: Optional[float] = Field(
-        None, description="Angle of incidence of the wing"
+        default=None, description="Angle of incidence of the wing"
     )
     horizontal_apex_station: Optional[float] = Field(
-        None, ge=0, description="Longitudinal location of the horizontal tail apex"
+        default=None,
+        ge=0,
+        description="Longitudinal location of the horizontal tail apex",
     )
     horizontal_apex_waterline: Optional[float] = Field(
-        None, description="Vertical location of the horizontal tail apex"
+        default=None, description="Vertical location of the horizontal tail apex"
     )
     horizontal_hinge_station: Optional[float] = Field(
-        None, description="Station of horizontal hinge axis"
+        default=None, description="Station of horizontal hinge axis"
     )
     horizontal_angle_of_incidence: Optional[float] = Field(
-        None, description="Angle of incidence of the horizontal tail"
+        default=None, description="Angle of incidence of the horizontal tail"
     )
     vertical_apex_station: Optional[float] = Field(
-        None, ge=0, description="Longitudinal location of the vertical tail apex"
+        default=None,
+        ge=0,
+        description="Longitudinal location of the vertical tail apex",
     )
     vertical_apex_waterline: Optional[float] = Field(
-        None, description="Vertical location of the vertical tail apex"
+        default=None, description="Vertical location of the vertical tail apex"
     )
     vertical_cant: Optional[float] = Field(
-        None, description="Cant angle of the vertical tail"
+        default=None, description="Cant angle of the vertical tail"
     )
     vertical_offset: Optional[float] = Field(
-        None, description="Lateral location of the vertical tail"
+        default=None, description="Lateral location of the vertical tail"
     )
     vertical_above: Optional[bool] = Field(
         True,
         description="Flag indicating if the vertical tail is above (true) or below (false) reference plane",
     )
     fin_apex_station: Optional[float] = Field(
-        None, ge=0, description="Longitudinal location of the ventral fin apex"
+        default=None, ge=0, description="Longitudinal location of the ventral fin apex"
     )
     fin_apex_waterline: Optional[float] = Field(
-        None, description="Vertical location of the ventral fin apex"
+        default=None, description="Vertical location of the ventral fin apex"
     )
-    fin_cant: Optional[float] = Field(None, description="Cant angle of the fin")
-    fin_offset: Optional[float] = Field(None, description="Lateral location of the fin")
+    fin_cant: Optional[float] = Field(default=None, description="Cant angle of the fin")
+    fin_offset: Optional[float] = Field(
+        default=None, description="Lateral location of the fin"
+    )
     model_scale: Optional[float] = Field(
-        None, gt=0, description="Scale factor for model"
+        default=None, gt=0, description="Scale factor for model"
     )
 
     @field_validator(
@@ -287,7 +300,7 @@ class ConfigurationLayout(CommonBaseModel):
 
 class Airfoil(CommonBaseModel):
     spline: Optional[Spline] = Field(
-        None,
+        default=None,
         description="A spline defining the contour of the airfoil section.",
     )
 
@@ -300,11 +313,13 @@ class Airfoil(CommonBaseModel):
         return value
 
     input_type: Optional[int] = Field(
-        None,
+        default=None,
         ge=0,
         description="Input Type: 1 - Upper and Lower, 2 - Camber and Thickness",
     )
-    qty_coordinates: Optional[int] = Field(None, ge=0, description="Number of points")
+    qty_coordinates: Optional[int] = Field(
+        default=None, ge=0, description="Number of points"
+    )
     x_coordinates: List[Optional[float]] = Field(
         default_factory=list, description="X-coordinates"
     )
@@ -321,60 +336,66 @@ class Airfoil(CommonBaseModel):
         default_factory=list, description="Thickness distribution"
     )
     inboard_rLEoC: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Leading edge radius"
+        default=None, ge=0, description="Inboard Airfoil Leading edge radius"
     )
     inboard_ToCmax: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Maximum Thickness-to-chord ratio"
+        default=None,
+        ge=0,
+        description="Inboard Airfoil Maximum Thickness-to-chord ratio",
     )
     inboard_XoC_for_ToCmax: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Chordwise fraction of ToCmax"
+        default=None, ge=0, description="Inboard Airfoil Chordwise fraction of ToCmax"
     )
     inboard_closure_angle: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Trailing Edge Closure angle"
+        default=None, ge=0, description="Inboard Airfoil Trailing Edge Closure angle"
     )
     inboard_TE_ToC: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Trailing Edge Thickness-to-chord ratio"
+        default=None,
+        ge=0,
+        description="Inboard Airfoil Trailing Edge Thickness-to-chord ratio",
     )
     inboard_LE_droop: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Leading Edge droop angle"
+        default=None, ge=0, description="Inboard Airfoil Leading Edge droop angle"
     )
     inboard_ZoCmax: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Maximum Camber-to-chord ratio"
+        default=None, ge=0, description="Inboard Airfoil Maximum Camber-to-chord ratio"
     )
     inboard_XoC_for_ZoCmax: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Chordwise fraction of ZoCmax"
+        default=None, ge=0, description="Inboard Airfoil Chordwise fraction of ZoCmax"
     )
     inboard_TE_droop: Optional[float] = Field(
-        None, ge=0, description="Inboard Airfoil Trailing Edge droop angle"
+        default=None, ge=0, description="Inboard Airfoil Trailing Edge droop angle"
     )
     outboard_rLEoC: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Leading edge radius"
+        default=None, ge=0, description="Outboard Airfoil Leading edge radius"
     )
     outboard_ToCmax: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Maximum Thickness-to-chord ratio"
+        default=None,
+        ge=0,
+        description="Outboard Airfoil Maximum Thickness-to-chord ratio",
     )
     outboard_XoC_for_ToCmax: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Chordwise fraction of ToCmax"
+        default=None, ge=0, description="Outboard Airfoil Chordwise fraction of ToCmax"
     )
     outboard_closure_angle: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Trailing Edge Closure angle"
+        default=None, ge=0, description="Outboard Airfoil Trailing Edge Closure angle"
     )
     outboard_TE_ToC: Optional[float] = Field(
-        None,
+        default=None,
         ge=0,
         description="Outboard Airfoil Trailing Edge Thickness-to-chord ratio",
     )
     outboard_LE_droop: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Leading Edge droop angle"
+        default=None, ge=0, description="Outboard Airfoil Leading Edge droop angle"
     )
     outboard_ZoCmax: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Maximum Camber-to-chord ratio"
+        default=None, ge=0, description="Outboard Airfoil Maximum Camber-to-chord ratio"
     )
     outboard_XoC_for_ZoCmax: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Chordwise fraction of ZoCmax"
+        default=None, ge=0, description="Outboard Airfoil Chordwise fraction of ZoCmax"
     )
     outboard_TE_droop: Optional[float] = Field(
-        None, ge=0, description="Outboard Airfoil Trailing Edge droop angle"
+        default=None, ge=0, description="Outboard Airfoil Trailing Edge droop angle"
     )
 
 
@@ -385,25 +406,25 @@ class PlanformType(Enum):
 
 
 class LiftingSurface(CommonBaseModel):
-    tip_chord: Optional[float] = Field(None, ge=0, description="Tip chord")
+    tip_chord: Optional[float] = Field(default=None, ge=0, description="Tip chord")
     outboard_panel_semi_span: Optional[float] = Field(
-        None, ge=0, description="Outboard panel semi-span"
+        default=None, ge=0, description="Outboard panel semi-span"
     )
     exposed_panel_semi_span: Optional[float] = Field(
-        None, ge=0, description="Exposed panel semi-span from side-of-body"
+        default=None, ge=0, description="Exposed panel semi-span from side-of-body"
     )
     total_panel_semi_span: Optional[float] = Field(
-        None, ge=0, description="Theoretical panel semi-span from centerline"
+        default=None, ge=0, description="Theoretical panel semi-span from centerline"
     )
     breakpoint_chord: Optional[float] = Field(
-        None, ge=0, description="Chord at break point"
+        default=None, ge=0, description="Chord at break point"
     )
-    root_chord: Optional[float] = Field(None, ge=0, description="Root chord")
+    root_chord: Optional[float] = Field(default=None, ge=0, description="Root chord")
     inboard_panel_sweep: Optional[float] = Field(
-        None, description="Inboard panel sweep angle"
+        default=None, description="Inboard panel sweep angle"
     )
     outboard_panel_sweep: Optional[float] = Field(
-        None, description="Outboard panel sweep angle"
+        default=None, description="Outboard panel sweep angle"
     )
     reference_chord_fraction: Optional[float] = Field(
         0.25,
@@ -412,41 +433,44 @@ class LiftingSurface(CommonBaseModel):
         description="Reference chord fraction for inboard and outboard sweep angles",
     )
     twist_angle: Optional[float] = Field(
-        None, description="Twist angle, negative leading edge rotated down"
+        default=None, description="Twist angle, negative leading edge rotated down"
     )
     inboard_panel_dihedral: Optional[float] = Field(
-        None, description="Inboard panel dihedral angle"
+        default=None, description="Inboard panel dihedral angle"
     )
     outboard_panel_dihedral: Optional[float] = Field(
-        None, description="Outboard panel dihedral angle"
+        default=None, description="Outboard panel dihedral angle"
     )
     planform_type: Optional[PlanformType] = Field(
-        None,
+        default=None,
         description="Planform type: 1.0 Straight tapered, 2.0 - Double Delta, 3.0 - Cranked",
     )
     shock_impengement_area: Optional[float] = Field(
-        None,
+        default=None,
         ge=0,
         description="Fuselage portion covered by shock zone emanating from root of horizontal",
     )
     extended_shock_impengement_area: Optional[float] = Field(
-        None,
+        default=None,
         ge=0,
         description="Extended Fuselage portion covered by shock zone emanating from root of horizontal",
     )
     distance_between_CG_and_centroid: Optional[float] = Field(
-        None, description="Longitudinal Distance between CG and centroid of stabilizer"
+        default=None,
+        description="Longitudinal Distance between CG and centroid of stabilizer",
     )
     vertical_panel_exposed_root_chord: Optional[float] = Field(
-        None, ge=0, description="Exposed Vertical Panel Area of Wing exposed root chord"
+        default=None,
+        ge=0,
+        description="Exposed Vertical Panel Area of Wing exposed root chord",
     )
     vertical_panel_not_influenced_by_wing: Optional[float] = Field(
-        None,
+        default=None,
         ge=0,
         description="Exposed Vertical Panel Area not influenced by Wing or Horizontal",
     )
     horizontal_panel_exposed_root_chord: Optional[float] = Field(
-        None,
+        default=None,
         ge=0,
         description="Exposed Vertical Panel Area of Horizontal exposed root chord",
     )
@@ -479,24 +503,26 @@ class LiftingSurface(CommonBaseModel):
 
 class TwinVerticalTail(CommonBaseModel):
     span_above: Optional[float] = Field(
-        None, description="Vertical Panel Span above lifting surface"
+        default=None, description="Vertical Panel Span above lifting surface"
     )
-    total_span: Optional[float] = Field(None, description="Vertical Panel Span")
-    body_depth: Optional[float] = Field(None, description="Fuselage depth at MAC/4")
+    total_span: Optional[float] = Field(default=None, description="Vertical Panel Span")
+    body_depth: Optional[float] = Field(
+        default=None, description="Fuselage depth at MAC/4"
+    )
     separation: Optional[float] = Field(
-        None, description="Distance between Vertical tails"
+        default=None, description="Distance between Vertical tails"
     )
     planform_area: Optional[float] = Field(
-        None, description="Planform Area of one vertical tail"
+        default=None, description="Planform Area of one vertical tail"
     )
     closure_angle: Optional[float] = Field(
-        None, description="Trailing Edge Closure Angle of Vertical tail"
+        default=None, description="Trailing Edge Closure Angle of Vertical tail"
     )
     lateral_arm: Optional[float] = Field(
-        None, description="Vertical Tail lateral arm aft of CG"
+        default=None, description="Vertical Tail lateral arm aft of CG"
     )
     vertical_arm: Optional[float] = Field(
-        None, description="Vertical Tail Moment Arm above CG"
+        default=None, description="Vertical Tail Moment Arm above CG"
     )
 
     @field_validator(
@@ -535,7 +561,9 @@ class GroundEffectsDefinition(CommonBaseModel):
     heights: List[Optional[float]] = Field(
         default_factory=list, description="Ground heights"
     )
-    qty_heights: Optional[int] = Field(None, description="Number of grid heights")
+    qty_heights: Optional[int] = Field(
+        default=None, description="Number of grid heights"
+    )
 
     @field_validator("heights", mode="before")
     def check_grdht_values(cls, v):
@@ -595,24 +623,24 @@ class BlowingType(Enum):
 
 class SymmetricFlap(CommonBaseModel):
     flap_type: Optional[FlapType] = Field(
-        None,
+        default=None,
         description="Flap type: 1 - Plain, 2 - Single, 3 - Fowler, 4 - Double, 0 - Triple, 5 - Split, 6 - LE_Flap, 7 - LE_Slats, 8 - Krueger",
     )
     nose_type: Optional[NoseType] = Field(
-        None, description="Nose type: 1 - Round, 2 - Elliptic, 3 - Sharp"
+        default=None, description="Nose type: 1 - Round, 2 - Elliptic, 3 - Sharp"
     )
     blowing_type: Optional[BlowingType] = Field(
-        None,
+        default=None,
         description="Blowing type: 0 - None, 1 - Pure, 2 - IBF, 3 - EBF, 4 - Mech Jet",
     )
     balance_chord_ratio: Optional[float] = Field(
-        None, description="Average balance chord ratio"
+        default=None, description="Average balance chord ratio"
     )
     hinge_thickness_to_chord_ratio: Optional[float] = Field(
-        None, description="Average thickness-to-Chord ratio at hinge line"
+        default=None, description="Average thickness-to-Chord ratio at hinge line"
     )
     qty_deflections: Optional[int] = Field(
-        None, description="Number of deflection angles"
+        default=None, description="Number of deflection angles"
     )
     deflections: List[Optional[float]] = Field(
         default_factory=list, description="Leading edge deflections"
@@ -641,7 +669,9 @@ class SymmetricFlap(CommonBaseModel):
     EBF_jet_deflection_angles: List[Optional[float]] = Field(
         default_factory=list, description="EBF Jet deflection angles"
     )
-    jet_efflux: Optional[float] = Field(None, description="2D jet efflux coefficient")
+    jet_efflux: Optional[float] = Field(
+        default=None, description="2D jet efflux coefficient"
+    )
     flap_Lift_increment: List[Optional[float]] = Field(
         default_factory=list,
         description="Lift Coefficient increment due to flap deflection",
@@ -695,21 +725,23 @@ class ControlType(Enum):
 
 class AsymmetricControl(CommonBaseModel):
     control_type: Optional[ControlType] = Field(
-        None,
+        default=None,
         description="Control type identifier: 1 - FLAP, 2 - PLUG, 3 - SLOT, 4 - AILERON, 5 - STABILIZER",
     )
     qty_deflections: Optional[int] = Field(
-        None, description="Number of control deflections"
+        default=None, description="Number of control deflections"
     )
     inboard_aileron_chord_ratio: Optional[float] = Field(
-        None, description="Inboard aileron chord ratio"
+        default=None, description="Inboard aileron chord ratio"
     )
     outboard_aileron_chord_ratio: Optional[float] = Field(
-        None, description="Outboard aileron chord ratio"
+        default=None, description="Outboard aileron chord ratio"
     )
-    inboard_span_ratio: Optional[float] = Field(None, description="Inboard span ratio")
+    inboard_span_ratio: Optional[float] = Field(
+        default=None, description="Inboard span ratio"
+    )
     outboard_span_ratio: Optional[float] = Field(
-        None, description="Outboard span ratio"
+        default=None, description="Outboard span ratio"
     )
     left_deflection: List[Optional[float]] = Field(
         default_factory=list, description="Left side deflection angles"
@@ -727,7 +759,7 @@ class AsymmetricControl(CommonBaseModel):
         default_factory=list, description="Spoiler chord ratio"
     )
     hingeline_chord_ratio: Optional[float] = Field(
-        None, description="Hingeline chord ratio"
+        default=None, description="Hingeline chord ratio"
     )
 
     @field_validator(
@@ -804,7 +836,7 @@ class Body(CommonBaseModel):
     """
 
     qty_cross_sections: Optional[int] = Field(
-        None, ge=1, description="Number of cross-sections"
+        default=None, ge=1, description="Number of cross-sections"
     )
     stations: List[Optional[float]] = Field(
         default_factory=list, description="Axial stations"
@@ -825,18 +857,20 @@ class Body(CommonBaseModel):
         default_factory=list, description="Keel Line height at stations"
     )
     nose_type: Optional[BodyShape] = Field(
-        None, description="Type of nose geometry: 1 - Conical, 2 - Ogive"
+        default=None, description="Type of nose geometry: 1 - Conical, 2 - Ogive"
     )
     aftbody_type: Optional[BodyShape] = Field(
-        None, description="Type of aftbody geometry: 1 - Conical, 2 - Ogive"
+        default=None, description="Type of aftbody geometry: 1 - Conical, 2 - Ogive"
     )
-    nose_length: Optional[float] = Field(None, ge=0, description="Nose length")
-    aftbody_length: Optional[float] = Field(None, ge=0, description="Afterbody length")
+    nose_length: Optional[float] = Field(default=None, ge=0, description="Nose length")
+    aftbody_length: Optional[float] = Field(
+        default=None, ge=0, description="Afterbody length"
+    )
     nose_bluntness: Optional[float] = Field(
-        None, ge=0, description="Diameter of nose bluntness"
+        default=None, ge=0, description="Diameter of nose bluntness"
     )
     area_rule: Optional[int] = Field(
-        None,
+        default=None,
         ge=0,
         description="Area Ruling: 1 - Straight Wing, None, 2 - Swept Wing, None, 3 - area ruled",
     )
@@ -898,50 +932,66 @@ class Body(CommonBaseModel):
 
 class LowAspectRatioWingBody(CommonBaseModel):
     body_centroid_height: Optional[float] = Field(
-        None, description="Height of Base Area Centroid above reference plane"
+        default=None, description="Height of Base Area Centroid above reference plane"
     )
-    reference_area: Optional[float] = Field(None, description="Planform Reference area")
-    sharpness: Optional[float] = Field(None, description="Sharp Leading Edge Parameter")
+    reference_area: Optional[float] = Field(
+        default=None, description="Planform Reference area"
+    )
+    sharpness: Optional[float] = Field(
+        default=None, description="Sharp Leading Edge Parameter"
+    )
     frontal_area: Optional[float] = Field(
-        None, description="Projected Frontal Area at zero normal force."
+        default=None, description="Projected Frontal Area at zero normal force."
     )
     aspect_ratio: Optional[float] = Field(
-        None, description="Round leading edge parameter"
+        default=None, description="Round leading edge parameter"
     )
     effective_radius: Optional[float] = Field(
-        None, description="Parameter related to leading edge"
+        default=None, description="Parameter related to leading edge"
     )
     lower_surface_angle: Optional[float] = Field(
-        None, description="Lower surface angle of round leading edge wing"
+        default=None, description="Lower surface angle of round leading edge wing"
     )
-    reference_length: Optional[float] = Field(None, description="Length parameter")
+    reference_length: Optional[float] = Field(
+        default=None, description="Length parameter"
+    )
     wetted_area: Optional[float] = Field(
-        None, description="Wetted area excluding base area"
+        default=None, description="Wetted area excluding base area"
     )
-    base_perimeter: Optional[float] = Field(None, description="Perimeter of base")
-    base_area: Optional[float] = Field(None, description="Base area")
-    base_max_height: Optional[float] = Field(None, description="Maximum height of base")
-    base_max_span: Optional[float] = Field(None, description="Maximum span of base")
+    base_perimeter: Optional[float] = Field(
+        default=None, description="Perimeter of base"
+    )
+    base_area: Optional[float] = Field(default=None, description="Base area")
+    base_max_height: Optional[float] = Field(
+        default=None, description="Maximum height of base"
+    )
+    base_max_span: Optional[float] = Field(
+        default=None, description="Maximum span of base"
+    )
     base_aft_of_lifting_surface: Optional[bool] = Field(
-        None,
+        default=None,
         description="True - Portions of base aft of lifting surface, False - Entire base is aft of lifting surface",
     )
     center_of_gravity_station: Optional[float] = Field(
-        None, description="Center of gravity along X-axis"
+        default=None, description="Center of gravity along X-axis"
     )
-    semi_apex_angle: Optional[float] = Field(None, description="Wing semi-apex angle")
+    semi_apex_angle: Optional[float] = Field(
+        default=None, description="Wing semi-apex angle"
+    )
     rounded_nose_flag: Optional[bool] = Field(
-        None, description="True - Rounded nose, False - Sharp Nose"
+        default=None, description="True - Rounded nose, False - Sharp Nose"
     )
-    total_side_area: Optional[float] = Field(None, description="Total Side area")
+    total_side_area: Optional[float] = Field(
+        default=None, description="Total Side area"
+    )
     nose_side_area: Optional[float] = Field(
-        None, description="Side area forward of 20% body length"
+        default=None, description="Side area forward of 20% body length"
     )
     distance_to_side_centroid: Optional[float] = Field(
-        None, description="Axial distance from nose to side area centroid"
+        default=None, description="Axial distance from nose to side area centroid"
     )
     distance_to_planform_centroid: Optional[float] = Field(
-        None, description="Axial distance from nose to planform area centroid"
+        default=None, description="Axial distance from nose to planform area centroid"
     )
 
     @field_validator(
@@ -1001,7 +1051,9 @@ class LowAspectRatioWingBody(CommonBaseModel):
 
 
 class TransverseJetControl(CommonBaseModel):
-    qty_time: Optional[int] = Field(None, description="Number of time history values")
+    qty_time: Optional[int] = Field(
+        default=None, description="Number of time history values"
+    )
     time: List[Optional[float]] = Field(default_factory=list, description="Time values")
     control_force: List[Optional[float]] = Field(
         default_factory=list, description="Control force required to trim"
@@ -1014,26 +1066,26 @@ class TransverseJetControl(CommonBaseModel):
         description="Boundary Layer at Jet: True - Laminar, False - Turbulent",
     )
     nozzle_exit_mach_number: Optional[float] = Field(
-        None, description="Nozzle Exit Mach Number"
+        default=None, description="Nozzle Exit Mach Number"
     )
     jet_vacuum_specific_impulse: Optional[float] = Field(
-        None, description="Jet vacuum specific impulse"
+        default=None, description="Jet vacuum specific impulse"
     )
     nozzle_span: Optional[float] = Field(
-        None, description="Span of nozzle normal to flow"
+        default=None, description="Span of nozzle normal to flow"
     )
     nozzle_inclination: Optional[float] = Field(
-        None,
+        default=None,
         description="Nozzle centerline axis inclination relative to surface normal",
     )
     propellant_specific_heat: Optional[float] = Field(
-        None, description="Specific heat ratio of propellant"
+        default=None, description="Specific heat ratio of propellant"
     )
     nozzle_discharge_coefficient: Optional[float] = Field(
-        None, description="Nozzle Discharge coefficient"
+        default=None, description="Nozzle Discharge coefficient"
     )
     nozzle_distance_from_leading_edge: Optional[float] = Field(
-        None, description="Nozzle distance from plate leading edge"
+        default=None, description="Nozzle distance from plate leading edge"
     )
 
     @field_validator("time", "control_force", "altitudes", mode="before")
@@ -1065,18 +1117,20 @@ class TransverseJetControl(CommonBaseModel):
 
 
 class HypersonicFlapControl(CommonBaseModel):
-    altitude: Optional[float] = Field(None, description="Altitude")
+    altitude: Optional[float] = Field(default=None, description="Altitude")
     hingeline_chord_ratio: Optional[float] = Field(
-        None, description="Distance from leading edge to hingeline to chord ratio"
+        default=None,
+        description="Distance from leading edge to hingeline to chord ratio",
     )
     wall_to_freestream_temperature_ratio: Optional[float] = Field(
-        None, description="Wall temperature to free stream static temperature ratio"
+        default=None,
+        description="Wall temperature to free stream static temperature ratio",
     )
     control_chord_ratio: Optional[float] = Field(
-        None, description="Control surface chord length"
+        default=None, description="Control surface chord length"
     )
     qty_deflections: Optional[int] = Field(
-        None, description="Number of flap deflection values"
+        default=None, description="Number of flap deflection values"
     )
     deflections: List[Optional[float]] = Field(
         default_factory=list, description="Control deflection angles"
@@ -1120,33 +1174,36 @@ class EngineType(Enum):
 
 class PropellerPowerProperties(CommonBaseModel):
     thrust_incidence_angle: Optional[float] = Field(
-        None, ge=0, description="Angle of incidence of the Engine thrust axis"
+        default=None, ge=0, description="Angle of incidence of the Engine thrust axis"
     )
     qty_engines: Optional[int] = Field(
-        None, ge=0, description="Number of engines (specific to propellers)."
+        default=None, ge=0, description="Number of engines (specific to propellers)."
     )
     qty_blades: Optional[int] = Field(
-        None, ge=0, description="Number of blades per engine."
+        default=None, ge=0, description="Number of blades per engine."
     )
     counter_rotating: Optional[bool] = Field(
-        None, description="True - Counter Rotating, False - Non-Counter Rotating"
+        default=None,
+        description="True - Counter Rotating, False - Non-Counter Rotating",
     )
-    prop_radius: Optional[float] = Field(None, ge=0, description="Propeller radius.")
+    prop_radius: Optional[float] = Field(
+        default=None, ge=0, description="Propeller radius."
+    )
     rotation_direction: Optional[bool] = Field(
-        None,
+        default=None,
         description="Propeller rotation direction 1 - Clockwise, 2 - Counter-clockwise",
     )
     thrust_coefficient: Optional[float] = Field(
-        None, ge=0, description="Thrust coefficient of propeller."
+        default=None, ge=0, description="Thrust coefficient of propeller."
     )
     hub_buttline: Optional[float] = Field(
-        None, description="Lateral buttline of propeller"
+        default=None, description="Lateral buttline of propeller"
     )
     hub_station: Optional[float] = Field(
-        None, description="Axial station of propeller."
+        default=None, description="Axial station of propeller."
     )
     hub_waterline: Optional[float] = Field(
-        None, description="Vertical waterline of propeller."
+        default=None, description="Vertical waterline of propeller."
     )
     blade_chord_ratio: List[Optional[float]] = Field(
         default_factory=list, description="Blade chord ratio vs fraction of radius"
@@ -1155,7 +1212,7 @@ class PropellerPowerProperties(CommonBaseModel):
         default_factory=list, description="Blade angle vs fraction of radius"
     )
     normal_force_factor: Optional[float] = Field(
-        None, ge=0, description="Empirical Normal Force Factor"
+        default=None, ge=0, description="Empirical Normal Force Factor"
     )
 
     @field_validator(
@@ -1198,46 +1255,50 @@ class JetEngineType(Enum):
 
 
 class JetPowerProperties(CommonBaseModel):
-    qty_engines: Optional[int] = Field(None, ge=0, description="Number of jet engines.")
+    qty_engines: Optional[int] = Field(
+        default=None, ge=0, description="Number of jet engines."
+    )
     centerline_buttline: Optional[float] = Field(
-        None, description="Lateral buttline of jet engine centerline."
+        default=None, description="Lateral buttline of jet engine centerline."
     )
     thrust_incidence_angle: Optional[float] = Field(
-        None, ge=0, description="Angle-of-Incidence of Engine thrust line"
+        default=None, ge=0, description="Angle-of-Incidence of Engine thrust line"
     )
     thrust_coefficient: Optional[float] = Field(
-        None, ge=0, description="Thrust coefficient for jet engine."
+        default=None, ge=0, description="Thrust coefficient for jet engine."
     )
-    inlet_area: Optional[float] = Field(None, ge=0, description="Jet inlet area.")
+    inlet_area: Optional[float] = Field(
+        default=None, ge=0, description="Jet inlet area."
+    )
     inlet_station: Optional[float] = Field(
-        None, description="Axial station of Jet Engine Inlet"
+        default=None, description="Axial station of Jet Engine Inlet"
     )
     exhaust_diameter: Optional[float] = Field(
-        None, ge=0, description="Jet engine exhaust diameter."
+        default=None, ge=0, description="Jet engine exhaust diameter."
     )
     exhaust_station: Optional[float] = Field(
-        None, description="Axial station of jet engine exhaust."
+        default=None, description="Axial station of jet engine exhaust."
     )
     exhaust_waterline: Optional[float] = Field(
-        None, description="Vertical waterline of jet engine exhaust."
+        default=None, description="Vertical waterline of jet engine exhaust."
     )
     exhaust_exit_angle: Optional[float] = Field(
-        None, description="Jet exhaust angle with respect to the freestream."
+        default=None, description="Jet exhaust angle with respect to the freestream."
     )
     exhaust_exit_velocity: Optional[float] = Field(
-        None, ge=0, description="Jet exhaust velocity."
+        default=None, ge=0, description="Jet exhaust velocity."
     )
     exhaust_static_temperature: Optional[float] = Field(
-        None, description="Jet exhaust static temperature."
+        default=None, description="Jet exhaust static temperature."
     )
     exhaust_total_pressure: Optional[float] = Field(
-        None, ge=0, description="Jet Exhaust Total Pressure"
+        default=None, ge=0, description="Jet Exhaust Total Pressure"
     )
     ambient_temperature: Optional[float] = Field(
-        None, description="Ambient temperature"
+        default=None, description="Ambient temperature"
     )
     ambient_static_pressure: Optional[float] = Field(
-        None, description="Ambient static pressure."
+        default=None, description="Ambient static pressure."
     )
 
     @field_validator(
@@ -1305,15 +1366,18 @@ class AerodynamicsData(CommonBaseModel):
 
     # Canard
     ALPOC: Optional[float] = Field(
-        None, description="Canard Zero Lift Angle-of-Attack, deg"
+        default=None, description="Canard Zero Lift Angle-of-Attack, deg"
     )
     ALPLC: Optional[float] = Field(
-        None, description="Canard Angle-of-Attack where lift becomes non-linear, deg"
+        default=None,
+        description="Canard Angle-of-Attack where lift becomes non-linear, deg",
     )
     ACLMC: Optional[float] = Field(
-        None, description="Canard Angle-of-Attack for Maximum Lift, deg"
+        default=None, description="Canard Angle-of-Attack for Maximum Lift, deg"
     )
-    CLMC: Optional[float] = Field(None, description="Canard Maximum Lift Coefficient")
+    CLMC: Optional[float] = Field(
+        default=None, description="Canard Maximum Lift Coefficient"
+    )
     CLAC: List[Optional[float]] = Field(
         default_factory=list,
         description="Canard lift curve slope coefficient vs Angle-of-Attack, per deg",
@@ -1335,15 +1399,18 @@ class AerodynamicsData(CommonBaseModel):
 
     # Wing
     ALPOW: Optional[float] = Field(
-        None, description="Wing Zero Lift Angle-of-Attack, deg"
+        default=None, description="Wing Zero Lift Angle-of-Attack, deg"
     )
     ALPLW: Optional[float] = Field(
-        None, description="Wing Angle-of-Attack where lift becomes non-linear, deg"
+        default=None,
+        description="Wing Angle-of-Attack where lift becomes non-linear, deg",
     )
     ACLMW: Optional[float] = Field(
-        None, description="Wing Angle-of-Attack for Maximum Lift, deg"
+        default=None, description="Wing Angle-of-Attack for Maximum Lift, deg"
     )
-    CLMW: Optional[float] = Field(None, description="Wing Maximum Lift Coefficient")
+    CLMW: Optional[float] = Field(
+        default=None, description="Wing Maximum Lift Coefficient"
+    )
     CLAW: List[Optional[float]] = Field(
         default_factory=list,
         description="Wing lift curve slope coefficient vs Angle-of-Attack, per deg",
@@ -1365,17 +1432,17 @@ class AerodynamicsData(CommonBaseModel):
 
     # Horizontal Tail
     ALPOH: Optional[float] = Field(
-        None, description="Horizontal Tail Zero Lift Angle-of-Attack"
+        default=None, description="Horizontal Tail Zero Lift Angle-of-Attack"
     )
     ALPLH: Optional[float] = Field(
-        None,
+        default=None,
         description="Horizontal Angle-of-Attack where lift becomes non-linear, deg",
     )
     ACLMH: Optional[float] = Field(
-        None, description="Horizontal Angle-of-Attack for Maximum Lift, deg"
+        default=None, description="Horizontal Angle-of-Attack for Maximum Lift, deg"
     )
     CLMH: Optional[float] = Field(
-        None, description="Horizontal Maximum Lift Coefficient"
+        default=None, description="Horizontal Maximum Lift Coefficient"
     )
     CLAH: List[Optional[float]] = Field(
         default_factory=list,
@@ -1400,15 +1467,18 @@ class AerodynamicsData(CommonBaseModel):
 
     # Vertical Tail
     ALPOV: Optional[float] = Field(
-        None, description="Vertical Tail Zero Lift Angle-of-Attack"
+        default=None, description="Vertical Tail Zero Lift Angle-of-Attack"
     )
     ALPLV: Optional[float] = Field(
-        None, description="Vertical Angle-of-Attack where lift becomes non-linear, deg"
+        default=None,
+        description="Vertical Angle-of-Attack where lift becomes non-linear, deg",
     )
     ACLMV: Optional[float] = Field(
-        None, description="Vertical Angle-of-Attack for Maximum Lift, deg"
+        default=None, description="Vertical Angle-of-Attack for Maximum Lift, deg"
     )
-    CLMV: Optional[float] = Field(None, description="Vertical Maximum Lift Coefficient")
+    CLMV: Optional[float] = Field(
+        default=None, description="Vertical Maximum Lift Coefficient"
+    )
     CLAV: List[Optional[float]] = Field(
         default_factory=list,
         description="Vertical lift curve slope coefficient vs Angle-of-Attack, per deg",
@@ -1431,15 +1501,18 @@ class AerodynamicsData(CommonBaseModel):
 
     # Fin
     ALPOF: Optional[float] = Field(
-        None, description="Fin Tail Zero Lift Angle-of-Attack"
+        default=None, description="Fin Tail Zero Lift Angle-of-Attack"
     )
     ALPLF: Optional[float] = Field(
-        None, description="Fin Angle-of-Attack where lift becomes non-linear, deg"
+        default=None,
+        description="Fin Angle-of-Attack where lift becomes non-linear, deg",
     )
     ACLMF: Optional[float] = Field(
-        None, description="Fin Angle-of-Attack for Maximum Lift, deg"
+        default=None, description="Fin Angle-of-Attack for Maximum Lift, deg"
     )
-    CLMF: Optional[float] = Field(None, description="Fin Maximum Lift Coefficient")
+    CLMF: Optional[float] = Field(
+        default=None, description="Fin Maximum Lift Coefficient"
+    )
     CLAF: List[Optional[float]] = Field(
         default_factory=list,
         description="Fin lift curve slope coefficient vs Angle-of-Attack, per deg",
@@ -1626,46 +1699,48 @@ class AerodynamicsData(CommonBaseModel):
 
 class Parameters(CommonBaseModel):
     reference_data: Optional[ReferenceData] = Field(
-        None, description="Reference data for the component."
+        default=None, description="Reference data for the component."
     )
     flight_conditions: Optional[FlightConditions] = Field(
-        None, description="Flight conditions for the component."
+        default=None, description="Flight conditions for the component."
     )
     configuration_layout: Optional[ConfigurationLayout] = Field(
-        None, description="Configuration layout for the component."
+        default=None, description="Configuration layout for the component."
     )
-    airfoil: Optional[Airfoil] = Field(None, description="Parameters of the airfoil.")
+    airfoil: Optional[Airfoil] = Field(
+        default=None, description="Parameters of the airfoil."
+    )
     lifting_surface: Optional[LiftingSurface] = Field(
-        None, description="Parameters of the lifting surface."
+        default=None, description="Parameters of the lifting surface."
     )
     twin_vertical_tail: Optional[TwinVerticalTail] = Field(
-        None, description="Parameters of the twin vertical tail."
+        default=None, description="Parameters of the twin vertical tail."
     )
     ground_effects_definition: Optional[GroundEffectsDefinition] = Field(
-        None, description="Ground effects definition."
+        default=None, description="Ground effects definition."
     )
     symmetric_flap: Optional[SymmetricFlap] = Field(
-        None, description="Geometry of symmetric flaps."
+        default=None, description="Geometry of symmetric flaps."
     )
     asymmetric_control: Optional[AsymmetricControl] = Field(
-        None, description="Geometry of asymmetric controls."
+        default=None, description="Geometry of asymmetric controls."
     )
-    body: Optional[Body] = Field(None, description="Parameters of the body.")
+    body: Optional[Body] = Field(default=None, description="Parameters of the body.")
     low_aspect_ratio_wing_body: Optional[LowAspectRatioWingBody] = Field(
-        None, description="Parameters of the low aspect ratio wing body."
+        default=None, description="Parameters of the low aspect ratio wing body."
     )
     transverse_jet_control: Optional[TransverseJetControl] = Field(
-        None, description="Parameters of the transverse jet control."
+        default=None, description="Parameters of the transverse jet control."
     )
     hypersonic_flap_control: Optional[HypersonicFlapControl] = Field(
-        None, description="Parameters of the hypersonic flap control."
+        default=None, description="Parameters of the hypersonic flap control."
     )
     propeller_power_properties: Optional[PropellerPowerProperties] = Field(
-        None, description="Properties of the propeller power."
+        default=None, description="Properties of the propeller power."
     )
     jet_power_properties: Optional[JetPowerProperties] = Field(
-        None, description="Properties of the jet power."
+        default=None, description="Properties of the jet power."
     )
     aerodynamics_data: Optional[AerodynamicsData] = Field(
-        None, description="Aerodynamics data for the component."
+        default=None, description="Aerodynamics data for the component."
     )

@@ -29,9 +29,9 @@ class System(CommonBaseModel):
         ValueError: If any string field is empty, ensuring all systems have meaningful identifiers and descriptions.
     """
 
-    name: Optional[str] = Field(None, description="The name of the system.")
+    name: Optional[str] = Field(default=None, description="The name of the system.")
     description: Optional[str] = Field(
-        None, description="A brief description of the system."
+        default=None, description="A brief description of the system."
     )
     parameters: Optional[Dict[str, Any]] = Field(
         default=None, description="Parameters of the system."
@@ -40,7 +40,7 @@ class System(CommonBaseModel):
         default=None, description="Flow diagram of the system."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the system."
+        default=None, description="Additional metadata for the system."
     )
     subsystems: Optional[List[System]] = Field(
         default=None, description="Sub-systems within this system."

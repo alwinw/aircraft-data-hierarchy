@@ -29,9 +29,9 @@ class Equipment(CommonBaseModel):
         ValueError: If any string field is empty, ensuring all equipment has meaningful identifiers and descriptions.
     """
 
-    name: Optional[str] = Field(None, description="The name of the equipment.")
+    name: Optional[str] = Field(default=None, description="The name of the equipment.")
     description: Optional[str] = Field(
-        None, description="A brief description of the equipment."
+        default=None, description="A brief description of the equipment."
     )
     geometry: Optional[Dict[str, Any]] = Field(
         default=None, description="Geometry of the equipment."
@@ -40,7 +40,7 @@ class Equipment(CommonBaseModel):
         default=None, description="Parameters of the equipment."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the equipment."
+        default=None, description="Additional metadata for the equipment."
     )
     subequipment: Optional[List[Equipment]] = Field(
         default=None, description="Sub-equipment within this equipment."

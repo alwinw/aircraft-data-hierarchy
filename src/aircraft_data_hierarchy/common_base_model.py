@@ -347,16 +347,18 @@ class Metadata(CommonBaseModel):
     """
 
     key: str
-    value: Any
-    units: Optional[str] = Field(None, description="The units of measure for the data")
+    value: Any = None
+    units: Optional[str] = Field(
+        default=None, description="The units of measure for the data"
+    )
     uncertainty: Optional[Any] = Field(
-        None, description="The uncertainty associated with the data"
+        default=None, description="The uncertainty associated with the data"
     )
     lower_bounds: Optional[Union[int, float]] = Field(
-        None, description="The lower bounds of the data"
+        default=None, description="The lower bounds of the data"
     )
     upper_bounds: Optional[Union[int, float]] = Field(
-        None, description="The upper bounds of the data"
+        default=None, description="The upper bounds of the data"
     )
 
     model_config = ConfigDict(

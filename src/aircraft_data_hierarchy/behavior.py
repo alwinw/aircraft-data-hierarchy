@@ -64,17 +64,21 @@ class Author(CommonBaseModel):
         contact_info (Optional[List[ContactInfo]]): Additional contact information for the author.
     """
 
-    name: Optional[str] = Field(None, description="The name of the author")
+    name: Optional[str] = Field(default=None, description="The name of the author")
     org: Optional[str] = Field(
-        None, description="The organization the author belongs to"
+        default=None, description="The organization the author belongs to"
     )
-    xns: Optional[str] = Field(None, description="The XNS identifier for the author")
-    email: Optional[str] = Field(None, description="The email address of the author")
+    xns: Optional[str] = Field(
+        default=None, description="The XNS identifier for the author"
+    )
+    email: Optional[str] = Field(
+        default=None, description="The email address of the author"
+    )
     address: Optional[List[str]] = Field(
-        None, description="The physical address of the author"
+        default=None, description="The physical address of the author"
     )
     contact_info: Optional[List[ContactInfo]] = Field(
-        None, description="Additional contact information for the author"
+        default=None, description="Additional contact information for the author"
     )
 
 
@@ -88,12 +92,14 @@ class ContactInfo(CommonBaseModel):
         contact_location (Optional[ContactLocation]): The location associated with the contact information.
     """
 
-    value: Optional[str] = Field(None, description="The contact information value")
+    value: Optional[str] = Field(
+        default=None, description="The contact information value"
+    )
     contact_info_type: Optional[ContactInfoType] = Field(
-        None, description="The type of contact information"
+        default=None, description="The type of contact information"
     )
     contact_location: Optional[ContactLocation] = Field(
-        None, description="The location associated with the contact information"
+        default=None, description="The location associated with the contact information"
     )
 
 
@@ -105,8 +111,8 @@ class CreationDate(CommonBaseModel):
         date (Optional[date]): The creation date in ISO 8601 format (YYYY-MM-DD).
     """
 
-    # date: Optional[date] = Field(None, description="The creation date in ISO 8601 format (YYYY-MM-DD)")
-    date: Optional[date]
+    # date: Optional[date] = Field(default=None, description="The creation date in ISO 8601 format (YYYY-MM-DD)")
+    date: Optional[date] = None
 
 
 class FileVersion(CommonBaseModel):
@@ -117,7 +123,7 @@ class FileVersion(CommonBaseModel):
         value (Optional[str]): The version string.
     """
 
-    value: Optional[str] = Field(None, description="The version string")
+    value: Optional[str] = Field(default=None, description="The version string")
 
 
 class Description(CommonBaseModel):
@@ -128,7 +134,7 @@ class Description(CommonBaseModel):
         value (Optional[str]): The description text.
     """
 
-    value: Optional[str] = Field(None, description="The description text")
+    value: Optional[str] = Field(default=None, description="The description text")
 
 
 class Reference(CommonBaseModel):
@@ -147,25 +153,27 @@ class Reference(CommonBaseModel):
     """
 
     ref_id: Optional[str] = Field(
-        None, description="The unique identifier for this reference"
+        default=None, description="The unique identifier for this reference"
     )
     author: Optional[str] = Field(
-        None, description="The author of the referenced document"
+        default=None, description="The author of the referenced document"
     )
     title: Optional[str] = Field(
-        None, description="The title of the referenced document"
+        default=None, description="The title of the referenced document"
     )
     classification: Optional[str] = Field(
-        None, description="The classification of the referenced document"
+        default=None, description="The classification of the referenced document"
     )
     accession: Optional[str] = Field(
-        None, description="The accession number of the referenced document"
+        default=None, description="The accession number of the referenced document"
     )
-    # date: Optional[date] = Field(None, description="The publication date of the referenced document")
-    date: Optional[date]
-    href: Optional[str] = Field(None, description="The URL of the referenced document")
+    # date: Optional[date] = Field(default=None, description="The publication date of the referenced document")
+    date: Optional[date] = None
+    href: Optional[str] = Field(
+        default=None, description="The URL of the referenced document"
+    )
     description: Optional[Description] = Field(
-        None, description="A description of the referenced document"
+        default=None, description="A description of the referenced document"
     )
 
 
@@ -183,21 +191,21 @@ class ModificationRecord(CommonBaseModel):
     """
 
     mod_id: Optional[str] = Field(
-        None, description="The unique identifier for this modification record"
+        default=None, description="The unique identifier for this modification record"
     )
-    # date: Optional[date] = Field(None, description="The date of the modification")
-    date: Optional[date]
+    # date: Optional[date] = Field(default=None, description="The date of the modification")
+    date: Optional[date] = None
     ref_id: Optional[str] = Field(
-        None, description="The reference ID associated with this modification"
+        default=None, description="The reference ID associated with this modification"
     )
     author: Optional[List[Author]] = Field(
-        None, description="The authors of the modification"
+        default=None, description="The authors of the modification"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the modification"
+        default=None, description="A description of the modification"
     )
     extra_doc_ref: Optional[List[ExtraDocRef]] = Field(
-        None, description="Additional document references"
+        default=None, description="Additional document references"
     )
 
 
@@ -210,7 +218,7 @@ class ExtraDocRef(CommonBaseModel):
     """
 
     ref_id: Optional[str] = Field(
-        None, description="The reference ID of the additional document"
+        default=None, description="The reference ID of the additional document"
     )
 
 
@@ -228,22 +236,22 @@ class Provenance(CommonBaseModel):
     """
 
     prov_id: Optional[str] = Field(
-        None, description="The unique identifier for this provenance record"
+        default=None, description="The unique identifier for this provenance record"
     )
     author: Optional[List[Author]] = Field(
-        None, description="The authors associated with this provenance"
+        default=None, description="The authors associated with this provenance"
     )
     creation_date: Optional[CreationDate] = Field(
-        None, description="The creation date of the associated element"
+        default=None, description="The creation date of the associated element"
     )
     document_ref: Optional[List[DocumentRef]] = Field(
-        None, description="References to related documents"
+        default=None, description="References to related documents"
     )
     modification_ref: Optional[List[ModificationRef]] = Field(
-        None, description="References to related modifications"
+        default=None, description="References to related modifications"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the provenance"
+        default=None, description="A description of the provenance"
     )
 
 
@@ -256,7 +264,7 @@ class ProvenanceRef(CommonBaseModel):
     """
 
     prov_id: Optional[str] = Field(
-        None, description="The ID of the referenced provenance record"
+        default=None, description="The ID of the referenced provenance record"
     )
 
 
@@ -269,8 +277,12 @@ class DocumentRef(CommonBaseModel):
         ref_id (Optional[str]): The reference ID of the document.
     """
 
-    doc_id: Optional[str] = Field(None, description="The ID of the referenced document")
-    ref_id: Optional[str] = Field(None, description="The reference ID of the document")
+    doc_id: Optional[str] = Field(
+        default=None, description="The ID of the referenced document"
+    )
+    ref_id: Optional[str] = Field(
+        default=None, description="The reference ID of the document"
+    )
 
 
 class ModificationRef(CommonBaseModel):
@@ -282,7 +294,7 @@ class ModificationRef(CommonBaseModel):
     """
 
     mod_id: Optional[str] = Field(
-        None, description="The ID of the referenced modification record"
+        default=None, description="The ID of the referenced modification record"
     )
 
 
@@ -295,7 +307,7 @@ class Calculation(CommonBaseModel):
     """
 
     math: Optional[str] = Field(
-        None, description="The MathML content markup describing the calculation"
+        default=None, description="The MathML content markup describing the calculation"
     )
 
 
@@ -310,13 +322,13 @@ class Uncertainty(CommonBaseModel):
     """
 
     effect: Optional[UncertaintyEffect] = Field(
-        None, description="The effect of the uncertainty"
+        default=None, description="The effect of the uncertainty"
     )
     normal_pdf: Optional[NormalPDF] = Field(
-        None, description="The normal probability distribution function"
+        default=None, description="The normal probability distribution function"
     )
     uniform_pdf: Optional[UniformPDF] = Field(
-        None, description="The uniform probability distribution function"
+        default=None, description="The uniform probability distribution function"
     )
 
     @field_validator("normal_pdf", "uniform_pdf")
@@ -342,16 +354,16 @@ class NormalPDF(CommonBaseModel):
     """
 
     num_sigmas: Optional[float] = Field(
-        None, description="The number of standard deviations"
+        default=None, description="The number of standard deviations"
     )
     bounds: Optional[List[Bounds]] = Field(
-        None, description="The bounds of the distribution"
+        default=None, description="The bounds of the distribution"
     )
     correlates_with: Optional[List[CorrelatesWith]] = Field(
-        None, description="Correlations with other variables"
+        default=None, description="Correlations with other variables"
     )
     correlation: Optional[List[Correlation]] = Field(
-        None, description="Correlation coefficients"
+        default=None, description="Correlation coefficients"
     )
 
 
@@ -364,7 +376,7 @@ class UniformPDF(CommonBaseModel):
     """
 
     bounds: Optional[List[Bounds]] = Field(
-        None, min_length=1, description="The bounds of the distribution"
+        default=None, min_length=1, description="The bounds of the distribution"
     )
 
 
@@ -377,7 +389,7 @@ class Bounds(CommonBaseModel):
     """
 
     value: Optional[Union[str, DataTable, VariableDef, VariableRef]] = Field(
-        None, description="The bound value or reference"
+        default=None, description="The bound value or reference"
     )
 
 
@@ -389,7 +401,9 @@ class CorrelatesWith(CommonBaseModel):
         var_id (Optional[str]): The ID of the correlated variable.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the correlated variable")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the correlated variable"
+    )
 
 
 class Correlation(CommonBaseModel):
@@ -401,8 +415,12 @@ class Correlation(CommonBaseModel):
         corr_coef (Optional[float]): The correlation coefficient.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the correlated variable")
-    corr_coef: Optional[float] = Field(None, description="The correlation coefficient")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the correlated variable"
+    )
+    corr_coef: Optional[float] = Field(
+        default=None, description="The correlation coefficient"
+    )
 
 
 class VariableDef(CommonBaseModel):
@@ -434,67 +452,68 @@ class VariableDef(CommonBaseModel):
         uncertainty (Optional[Uncertainty]): The uncertainty associated with the variable.
     """
 
-    name: Optional[str] = Field(None, description="The name of the variable")
+    name: Optional[str] = Field(default=None, description="The name of the variable")
     var_id: Optional[str] = Field(
-        None, description="The unique identifier for this variable"
+        default=None, description="The unique identifier for this variable"
     )
     units: Optional[str] = Field(
-        None, description="The units of measure for the variable"
+        default=None, description="The units of measure for the variable"
     )
     axis_system: Optional[str] = Field(
-        None, description="The axis system for the variable"
+        default=None, description="The axis system for the variable"
     )
     sign: Optional[str] = Field(
-        None, description="The sign convention for the variable"
+        default=None, description="The sign convention for the variable"
     )
-    alias: Optional[str] = Field(None, description="An alias for the variable")
+    alias: Optional[str] = Field(default=None, description="An alias for the variable")
     symbol: Optional[str] = Field(
-        None, description="A symbol representing the variable"
+        default=None, description="A symbol representing the variable"
     )
     initial_value: Optional[float] = Field(
-        None, description="The initial value of the variable"
+        default=None, description="The initial value of the variable"
     )
     min_value: Optional[float] = Field(
-        None, description="The minimum allowed value of the variable"
+        default=None, description="The minimum allowed value of the variable"
     )
     max_value: Optional[float] = Field(
-        None, description="The maximum allowed value of the variable"
+        default=None, description="The maximum allowed value of the variable"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the variable"
+        default=None, description="A description of the variable"
     )
     provenance: Optional[Provenance] = Field(
-        None, description="The provenance of the variable"
+        default=None, description="The provenance of the variable"
     )
     provenance_ref: Optional[ProvenanceRef] = Field(
-        None, description="A reference to the provenance of the variable"
+        default=None, description="A reference to the provenance of the variable"
     )
     calculation: Optional[Calculation] = Field(
-        None, description="The calculation for deriving the variable's value"
+        default=None, description="The calculation for deriving the variable's value"
     )
     is_input: Optional[bool] = Field(
-        None, description="Indicates if the variable is an input"
+        default=None, description="Indicates if the variable is an input"
     )
     is_control: Optional[bool] = Field(
-        None, description="Indicates if the variable is a control parameter"
+        default=None, description="Indicates if the variable is a control parameter"
     )
     is_disturbance: Optional[bool] = Field(
-        None, description="Indicates if the variable is a disturbance input"
+        default=None, description="Indicates if the variable is a disturbance input"
     )
     is_state: Optional[bool] = Field(
-        None, description="Indicates if the variable is a state variable"
+        default=None, description="Indicates if the variable is a state variable"
     )
     is_state_deriv: Optional[bool] = Field(
-        None, description="Indicates if the variable is a state derivative"
+        default=None, description="Indicates if the variable is a state derivative"
     )
     is_output: Optional[bool] = Field(
-        None, description="Indicates if the variable is an output"
+        default=None, description="Indicates if the variable is an output"
     )
     is_std_aiaa: Optional[bool] = Field(
-        None, description="Indicates if the variable is a standard AIAA variable"
+        default=None,
+        description="Indicates if the variable is a standard AIAA variable",
     )
     uncertainty: Optional[Uncertainty] = Field(
-        None, description="The uncertainty associated with the variable"
+        default=None, description="The uncertainty associated with the variable"
     )
 
 
@@ -506,7 +525,9 @@ class VariableRef(CommonBaseModel):
         var_id (Optional[str]): The ID of the referenced variable.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the referenced variable")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the referenced variable"
+    )
 
 
 class BreakpointDef(CommonBaseModel):
@@ -521,17 +542,19 @@ class BreakpointDef(CommonBaseModel):
         bp_vals (Optional[str]): The breakpoint values.
     """
 
-    name: Optional[str] = Field(None, description="The name of the breakpoint set")
+    name: Optional[str] = Field(
+        default=None, description="The name of the breakpoint set"
+    )
     bp_id: Optional[str] = Field(
-        None, description="The unique identifier for this breakpoint set"
+        default=None, description="The unique identifier for this breakpoint set"
     )
     units: Optional[str] = Field(
-        None, description="The units of measure for the breakpoints"
+        default=None, description="The units of measure for the breakpoints"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the breakpoint set"
+        default=None, description="A description of the breakpoint set"
     )
-    bp_vals: Optional[str] = Field(None, description="The breakpoint values")
+    bp_vals: Optional[str] = Field(default=None, description="The breakpoint values")
 
 
 class GriddedTableDef(CommonBaseModel):
@@ -550,30 +573,32 @@ class GriddedTableDef(CommonBaseModel):
         data_table (Optional[DataTable]): The actual data of the gridded table.
     """
 
-    name: Optional[str] = Field(None, description="The name of the gridded table")
+    name: Optional[str] = Field(
+        default=None, description="The name of the gridded table"
+    )
     gt_id: Optional[str] = Field(
-        None, description="The unique identifier for this gridded table"
+        default=None, description="The unique identifier for this gridded table"
     )
     units: Optional[str] = Field(
-        None, description="The units of measure for the table values"
+        default=None, description="The units of measure for the table values"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the gridded table"
+        default=None, description="A description of the gridded table"
     )
     provenance: Optional[Provenance] = Field(
-        None, description="The provenance of the gridded table"
+        default=None, description="The provenance of the gridded table"
     )
     provenance_ref: Optional[ProvenanceRef] = Field(
-        None, description="A reference to the provenance of the gridded table"
+        default=None, description="A reference to the provenance of the gridded table"
     )
     breakpoint_refs: Optional[List[BpRef]] = Field(
-        None, description="References to the breakpoint sets used in this table"
+        default=None, description="References to the breakpoint sets used in this table"
     )
     uncertainty: Optional[Uncertainty] = Field(
-        None, description="The uncertainty associated with the table values"
+        default=None, description="The uncertainty associated with the table values"
     )
     data_table: Optional[DataTable] = Field(
-        None, description="The actual data of the gridded table"
+        default=None, description="The actual data of the gridded table"
     )
 
 
@@ -592,27 +617,29 @@ class UngriddedTableDef(CommonBaseModel):
         data_point (Optional[List[DataPoint]]): The data points of the ungridded table.
     """
 
-    name: Optional[str] = Field(None, description="The name of the ungridded table")
+    name: Optional[str] = Field(
+        default=None, description="The name of the ungridded table"
+    )
     ut_id: Optional[str] = Field(
-        None, description="The unique identifier for this ungridded table"
+        default=None, description="The unique identifier for this ungridded table"
     )
     units: Optional[str] = Field(
-        None, description="The units of measure for the table values"
+        default=None, description="The units of measure for the table values"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the ungridded table"
+        default=None, description="A description of the ungridded table"
     )
     provenance: Optional[Provenance] = Field(
-        None, description="The provenance of the ungridded table"
+        default=None, description="The provenance of the ungridded table"
     )
     provenance_ref: Optional[ProvenanceRef] = Field(
-        None, description="A reference to the provenance of the ungridded table"
+        default=None, description="A reference to the provenance of the ungridded table"
     )
     uncertainty: Optional[Uncertainty] = Field(
-        None, description="The uncertainty associated with the table values"
+        default=None, description="The uncertainty associated with the table values"
     )
     data_point: Optional[List[DataPoint]] = Field(
-        None, description="The data points of the ungridded table"
+        default=None, description="The data points of the ungridded table"
     )
 
 
@@ -632,30 +659,32 @@ class Function(CommonBaseModel):
         function_defn (Optional[FunctionDefn]): The function definition for complex functions.
     """
 
-    name: Optional[str] = Field(None, description="The name of the function")
+    name: Optional[str] = Field(default=None, description="The name of the function")
     description: Optional[Description] = Field(
-        None, description="A description of the function"
+        default=None, description="A description of the function"
     )
     provenance: Optional[Provenance] = Field(
-        None, description="The provenance of the function"
+        default=None, description="The provenance of the function"
     )
     provenance_ref: Optional[ProvenanceRef] = Field(
-        None, description="A reference to the provenance of the function"
+        default=None, description="A reference to the provenance of the function"
     )
     independent_var_pts: Optional[List[IndependentVarPts]] = Field(
-        None, description="The independent variable points for simple functions"
+        default=None, description="The independent variable points for simple functions"
     )
     dependent_var_pts: Optional[DependentVarPts] = Field(
-        None, description="The dependent variable points for simple functions"
+        default=None, description="The dependent variable points for simple functions"
     )
     independent_var_ref: Optional[List[IndependentVarRef]] = Field(
-        None, description="References to independent variables for complex functions"
+        default=None,
+        description="References to independent variables for complex functions",
     )
     dependent_var_ref: Optional[List[DependentVarRef]] = Field(
-        None, description="Reference to the dependent variable for complex functions"
+        default=None,
+        description="Reference to the dependent variable for complex functions",
     )
     function_defn: Optional[FunctionDefn] = Field(
-        None, description="The function definition for complex functions"
+        default=None, description="The function definition for complex functions"
     )
 
     @field_validator("dependent_var_pts", "dependent_var_ref", "function_defn")
@@ -673,8 +702,8 @@ class Function(CommonBaseModel):
 """class Function(BaseModel):
     name: str
     description: Optional[str] = None
-    simple_representation: Union[DependentVarRef, None] = Field(None, alias="dependent_var_ref")
-    complex_representation: Union[FunctionDefn, None] = Field(None, alias="function_defn")
+    simple_representation: Union[DependentVarRef, None] = Field(default=None, alias="dependent_var_ref")
+    complex_representation: Union[FunctionDefn, None] = Field(default=None, alias="function_defn")
 
     @field_validator("simple_representation", "complex_representation")
     def check_representation(cls, v, values):
@@ -698,24 +727,26 @@ class IndependentVarPts(CommonBaseModel):
         value (Optional[str]): The values of the independent variable points.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the referenced variable")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the referenced variable"
+    )
     name: Optional[str] = Field(
-        None, description="The name of the independent variable"
+        default=None, description="The name of the independent variable"
     )
     units: Optional[str] = Field(
-        None, description="The units of the independent variable"
+        default=None, description="The units of the independent variable"
     )
     sign: Optional[str] = Field(
-        None, description="The sign convention for the independent variable"
+        default=None, description="The sign convention for the independent variable"
     )
     extrapolate: Optional[ExtrapolateEnum] = Field(
-        None, description="The extrapolation method"
+        default=None, description="The extrapolation method"
     )
     interpolate: Optional[InterpolateEnum] = Field(
-        None, description="The interpolation method"
+        default=None, description="The interpolation method"
     )
     value: Optional[str] = Field(
-        None, description="The values of the independent variable points"
+        default=None, description="The values of the independent variable points"
     )
 
 
@@ -731,16 +762,20 @@ class DependentVarPts(CommonBaseModel):
         value (Optional[str]): The values of the dependent variable points.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the referenced variable")
-    name: Optional[str] = Field(None, description="The name of the dependent variable")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the referenced variable"
+    )
+    name: Optional[str] = Field(
+        default=None, description="The name of the dependent variable"
+    )
     units: Optional[str] = Field(
-        None, description="The units of the dependent variable"
+        default=None, description="The units of the dependent variable"
     )
     sign: Optional[str] = Field(
-        None, description="The sign convention for the dependent variable"
+        default=None, description="The sign convention for the dependent variable"
     )
     value: Optional[str] = Field(
-        None, description="The values of the dependent variable points"
+        default=None, description="The values of the dependent variable points"
     )
 
 
@@ -756,18 +791,20 @@ class IndependentVarRef(CommonBaseModel):
         interpolate (Optional[InterpolateEnum]): The interpolation method.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the referenced variable")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the referenced variable"
+    )
     min: Optional[float] = Field(
-        None, description="The minimum value of the independent variable"
+        default=None, description="The minimum value of the independent variable"
     )
     max: Optional[float] = Field(
-        None, description="The maximum value of the independent variable"
+        default=None, description="The maximum value of the independent variable"
     )
     extrapolate: Optional[ExtrapolateEnum] = Field(
-        None, description="The extrapolation method"
+        default=None, description="The extrapolation method"
     )
     interpolate: Optional[InterpolateEnum] = Field(
-        None, description="The interpolation method"
+        default=None, description="The interpolation method"
     )
 
 
@@ -779,7 +816,9 @@ class DependentVarRef(CommonBaseModel):
         var_id (Optional[str]): The ID of the referenced variable.
     """
 
-    var_id: Optional[str] = Field(None, description="The ID of the referenced variable")
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the referenced variable"
+    )
 
 
 class FunctionDefn(CommonBaseModel):
@@ -796,22 +835,26 @@ class FunctionDefn(CommonBaseModel):
         ungridded_table (Optional[UngriddedTable]): An ungridded table.
     """
 
-    name: Optional[str] = Field(None, description="The name of the function definition")
+    name: Optional[str] = Field(
+        default=None, description="The name of the function definition"
+    )
     gridded_table_ref: Optional[GriddedTableRef] = Field(
-        None, description="A reference to a gridded table"
+        default=None, description="A reference to a gridded table"
     )
     gridded_table_def: Optional[GriddedTableDef] = Field(
-        None, description="A gridded table definition"
+        default=None, description="A gridded table definition"
     )
-    gridded_table: Optional[GriddedTable] = Field(None, description="A gridded table")
+    gridded_table: Optional[GriddedTable] = Field(
+        default=None, description="A gridded table"
+    )
     ungridded_table_ref: Optional[UngriddedTableRef] = Field(
-        None, description="A reference to an ungridded table"
+        default=None, description="A reference to an ungridded table"
     )
     ungridded_table_def: Optional[UngriddedTableDef] = Field(
-        None, description="An ungridded table definition"
+        default=None, description="An ungridded table definition"
     )
     ungridded_table: Optional[UngriddedTable] = Field(
-        None, description="An ungridded table"
+        default=None, description="An ungridded table"
     )
 
     @field_validator(
@@ -848,7 +891,7 @@ class GriddedTableRef(CommonBaseModel):
     """
 
     gt_id: Optional[str] = Field(
-        None, description="The ID of the referenced gridded table"
+        default=None, description="The ID of the referenced gridded table"
     )
 
 
@@ -863,15 +906,17 @@ class GriddedTable(CommonBaseModel):
         data_table (Optional[DataTable]): The actual data of the gridded table.
     """
 
-    name: Optional[str] = Field(None, description="The name of the gridded table")
+    name: Optional[str] = Field(
+        default=None, description="The name of the gridded table"
+    )
     breakpoint_refs: Optional[List[BpRef]] = Field(
-        None, description="References to the breakpoint sets used in this table"
+        default=None, description="References to the breakpoint sets used in this table"
     )
     confidence_bound: Optional[ConfidenceBound] = Field(
-        None, description="The confidence bound for the table data"
+        default=None, description="The confidence bound for the table data"
     )
     data_table: Optional[DataTable] = Field(
-        None, description="The actual data of the gridded table"
+        default=None, description="The actual data of the gridded table"
     )
 
 
@@ -884,7 +929,7 @@ class UngriddedTableRef(CommonBaseModel):
     """
 
     ut_id: Optional[str] = Field(
-        None, description="The ID of the referenced ungridded table"
+        default=None, description="The ID of the referenced ungridded table"
     )
 
 
@@ -898,12 +943,14 @@ class UngriddedTable(CommonBaseModel):
         data_point (Optional[List[DataPoint]]): The data points of the ungridded table.
     """
 
-    name: Optional[str] = Field(None, description="The name of the ungridded table")
+    name: Optional[str] = Field(
+        default=None, description="The name of the ungridded table"
+    )
     confidence_bound: Optional[ConfidenceBound] = Field(
-        None, description="The confidence bound for the table data"
+        default=None, description="The confidence bound for the table data"
     )
     data_point: Optional[List[DataPoint]] = Field(
-        None, description="The data points of the ungridded table"
+        default=None, description="The data points of the ungridded table"
     )
 
 
@@ -916,7 +963,7 @@ class BpRef(CommonBaseModel):
     """
 
     bp_id: Optional[str] = Field(
-        None, description="The ID of the referenced breakpoint set"
+        default=None, description="The ID of the referenced breakpoint set"
     )
 
 
@@ -929,7 +976,7 @@ class ConfidenceBound(CommonBaseModel):
     """
 
     value: Optional[float] = Field(
-        None, description="The value of the confidence bound"
+        default=None, description="The value of the confidence bound"
     )
 
 
@@ -942,7 +989,7 @@ class DataTable(CommonBaseModel):
     """
 
     value: Optional[str] = Field(
-        None,
+        default=None,
         description="The table data as a string of comma- or whitespace-separated values",
     )
 
@@ -957,9 +1004,12 @@ class DataPoint(CommonBaseModel):
     """
 
     mod_id: Optional[str] = Field(
-        None, description="The ID of the modification record for this data point"
+        default=None,
+        description="The ID of the modification record for this data point",
     )
-    value: Optional[str] = Field(None, description="The values of the data point")
+    value: Optional[str] = Field(
+        default=None, description="The values of the data point"
+    )
 
 
 class CheckData(CommonBaseModel):
@@ -973,13 +1023,13 @@ class CheckData(CommonBaseModel):
     """
 
     provenance: Optional[Provenance] = Field(
-        None, description="The provenance of the check data"
+        default=None, description="The provenance of the check data"
     )
     provenance_ref: Optional[ProvenanceRef] = Field(
-        None, description="A reference to the provenance of the check data"
+        default=None, description="A reference to the provenance of the check data"
     )
     static_shot: Optional[List[StaticShot]] = Field(
-        None, description="Static check cases"
+        default=None, description="Static check cases"
     )
 
 
@@ -998,27 +1048,27 @@ class StaticShot(CommonBaseModel):
         check_outputs (Optional[CheckOutputs]): The expected output values for this check case.
     """
 
-    name: Optional[str] = Field(None, description="The name of the static shot")
+    name: Optional[str] = Field(default=None, description="The name of the static shot")
     ref_id: Optional[str] = Field(
-        None, description="The reference ID for this static shot"
+        default=None, description="The reference ID for this static shot"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the static shot"
+        default=None, description="A description of the static shot"
     )
     provenance: Optional[Provenance] = Field(
-        None, description="The provenance of the static shot"
+        default=None, description="The provenance of the static shot"
     )
     provenance_ref: Optional[ProvenanceRef] = Field(
-        None, description="A reference to the provenance of the static shot"
+        default=None, description="A reference to the provenance of the static shot"
     )
     check_inputs: Optional[CheckInputs] = Field(
-        None, description="The input values for this check case"
+        default=None, description="The input values for this check case"
     )
     internal_values: Optional[InternalValues] = Field(
-        None, description="The internal variable values for this check case"
+        default=None, description="The internal variable values for this check case"
     )
     check_outputs: Optional[CheckOutputs] = Field(
-        None, description="The expected output values for this check case"
+        default=None, description="The expected output values for this check case"
     )
 
 
@@ -1031,7 +1081,7 @@ class CheckInputs(CommonBaseModel):
     """
 
     signal: Optional[List[Signal]] = Field(
-        None, description="The input signals for this check case"
+        default=None, description="The input signals for this check case"
     )
 
 
@@ -1044,7 +1094,7 @@ class InternalValues(CommonBaseModel):
     """
 
     signal: Optional[List[Signal]] = Field(
-        None, description="The internal signals for this check case"
+        default=None, description="The internal signals for this check case"
     )
 
 
@@ -1057,7 +1107,7 @@ class CheckOutputs(CommonBaseModel):
     """
 
     signal: Optional[List[Signal]] = Field(
-        None, description="The output signals for this check case"
+        default=None, description="The output signals for this check case"
     )
 
 
@@ -1073,14 +1123,20 @@ class Signal(CommonBaseModel):
         tol (Optional[str]): The tolerance for this signal's value.
     """
 
-    signal_name: Optional[str] = Field(None, description="The name of the signal")
-    signal_units: Optional[str] = Field(None, description="The units of the signal")
-    var_id: Optional[str] = Field(
-        None, description="The ID of the variable associated with this signal"
+    signal_name: Optional[str] = Field(
+        default=None, description="The name of the signal"
     )
-    signal_value: Optional[str] = Field(None, description="The value of the signal")
+    signal_units: Optional[str] = Field(
+        default=None, description="The units of the signal"
+    )
+    var_id: Optional[str] = Field(
+        default=None, description="The ID of the variable associated with this signal"
+    )
+    signal_value: Optional[str] = Field(
+        default=None, description="The value of the signal"
+    )
     tol: Optional[str] = Field(
-        None, description="The tolerance for this signal's value"
+        default=None, description="The tolerance for this signal's value"
     )
 
 
@@ -1099,25 +1155,25 @@ class DAVEfunc(CommonBaseModel):
     """
 
     file_header: Optional[FileHeader] = Field(
-        None, description="The header information for the DAVE-ML document"
+        default=None, description="The header information for the DAVE-ML document"
     )
     variable_def: Optional[List[VariableDef]] = Field(
-        None, description="The variable definitions in the document"
+        default=None, description="The variable definitions in the document"
     )
     breakpoint_def: Optional[List[BreakpointDef]] = Field(
-        None, description="The breakpoint set definitions in the document"
+        default=None, description="The breakpoint set definitions in the document"
     )
     gridded_table_def: Optional[List[GriddedTableDef]] = Field(
-        None, description="The gridded table definitions in the document"
+        default=None, description="The gridded table definitions in the document"
     )
     ungridded_table_def: Optional[List[UngriddedTableDef]] = Field(
-        None, description="The ungridded table definitions in the document"
+        default=None, description="The ungridded table definitions in the document"
     )
     function: Optional[List[Function]] = Field(
-        None, description="The function definitions in the document"
+        default=None, description="The function definitions in the document"
     )
     check_data: Optional[CheckData] = Field(
-        None, description="The check data for model verification"
+        default=None, description="The check data for model verification"
     )
 
 
@@ -1136,27 +1192,29 @@ class FileHeader(CommonBaseModel):
         provenance (Optional[List[Provenance]]): Provenance information for the document.
     """
 
-    name: Optional[str] = Field(None, description="The name of the DAVE-ML document")
+    name: Optional[str] = Field(
+        default=None, description="The name of the DAVE-ML document"
+    )
     author: Optional[List[Author]] = Field(
-        None, description="The authors of the document"
+        default=None, description="The authors of the document"
     )
     creation_date: Optional[CreationDate] = Field(
-        None, description="The creation date of the document"
+        default=None, description="The creation date of the document"
     )
     file_version: Optional[FileVersion] = Field(
-        None, description="The version of the document"
+        default=None, description="The version of the document"
     )
     description: Optional[Description] = Field(
-        None, description="A description of the document"
+        default=None, description="A description of the document"
     )
     reference: Optional[List[Reference]] = Field(
-        None, description="References to external documents"
+        default=None, description="References to external documents"
     )
     modification_record: Optional[List[ModificationRecord]] = Field(
-        None, description="Records of modifications to the document"
+        default=None, description="Records of modifications to the document"
     )
     provenance: Optional[List[Provenance]] = Field(
-        None, description="Provenance information for the document"
+        default=None, description="Provenance information for the document"
     )
 
 
@@ -1199,20 +1257,21 @@ class Activity(CommonBaseModel):
     """
 
     name: Optional[str] = Field(
-        None, description="A unique name identifying the activity."
+        default=None, description="A unique name identifying the activity."
     )
     description: Optional[str] = Field(
-        None,
+        default=None,
         description="A brief description of the activity's purpose and objectives.",
     )
     state: Optional[ActivityState] = Field(
-        None, description="The current state of the activity."
+        default=None, description="The current state of the activity."
     )
     dependencies: Optional[List[str]] = Field(
-        None, description="List of activity names that this activity depends on."
+        default=None,
+        description="List of activity names that this activity depends on.",
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the activity."
+        default=None, description="Additional metadata for the activity."
     )
 
     @field_validator("name", "description")
@@ -1253,16 +1312,17 @@ class Behavior(CommonBaseModel):
     """
 
     name: Optional[str] = Field(
-        None, description="A unique name identifying the behavior."
+        default=None, description="A unique name identifying the behavior."
     )
     description: Optional[str] = Field(
-        None, description="A brief description of the behavior."
+        default=None, description="A brief description of the behavior."
     )
     sequence: Optional[List[Activity]] = Field(
-        None, description="A sequence of activities that define the behavior."
+        default=None, description="A sequence of activities that define the behavior."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata providing context about the behavior."
+        default=None,
+        description="Additional metadata providing context about the behavior.",
     )
 
     @field_validator("name", "description", mode="before")
@@ -1311,5 +1371,5 @@ class Metadata(CommonBaseModel):
         value (Optional[str]): The value of the metadata.
     """
 
-    key: Optional[str] = Field(None, description="The key of the metadata")
-    value: Optional[str] = Field(None, description="The value of the metadata")
+    key: Optional[str] = Field(default=None, description="The key of the metadata")
+    value: Optional[str] = Field(default=None, description="The value of the metadata")

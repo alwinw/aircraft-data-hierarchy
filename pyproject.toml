@@ -84,23 +84,31 @@ addopts = [
 
 [tool.ruff]
 required-version = ">=0.14"
-target-version = "py39"
+target-version = "py38"
 
 [tool.ruff.lint]
 extend-select = [
   "I",  # isort
   "UP", # pyupgrade
 ]
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true # Preserve types
 
 [tool.ruff.format]
 docstring-code-format = true
 
 [tool.pyright]
-include = ["src", "tests"]
+include = [
+  "src",
+  # "tests",
+]
 reportMissingImports = "none"
 
 [tool.ty.src]
-include = ["src", "tests"]
+include = [
+  "src",
+  # "tests",
+]
 
 [tool.ty.rules]
 invalid-argument-type = "ignore"

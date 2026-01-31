@@ -33,7 +33,7 @@ class Requirement(CommonBaseModel):
         ..., description="A detailed description of the requirement."
     )
     category: Optional[str] = Field(
-        None, description="The category of the requirement."
+        default=None, description="The category of the requirement."
     )
     priority: str = Field(..., description="The priority level of the requirement.")
     verification_method: str = Field(
@@ -41,22 +41,24 @@ class Requirement(CommonBaseModel):
     )
     status: str = Field(..., description="The current status of the requirement.")
     source: Optional[str] = Field(
-        None, description="The source or origin of the requirement."
+        default=None, description="The source or origin of the requirement."
     )
     target_component: Optional[str] = Field(
-        None, description="The component or system to which the requirement applies."
+        default=None,
+        description="The component or system to which the requirement applies.",
     )
     acceptance_criteria: str = Field(
         ..., description="The criteria for the requirement to be considered satisfied."
     )
     risk: Optional[str] = Field(
-        None, description="Potential risks associated with the requirement."
+        default=None, description="Potential risks associated with the requirement."
     )
     verification_evidence: Optional[str] = Field(
-        None, description="Evidence demonstrating the verification of the requirement."
+        default=None,
+        description="Evidence demonstrating the verification of the requirement.",
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata about the requirement."
+        default=None, description="Additional metadata about the requirement."
     )
 
     @field_validator(
@@ -113,7 +115,7 @@ class Requirements(CommonBaseModel):
         description="Dictionary mapping requirement categories to requirement lists.",
     )
     metadata: Optional[Metadata] = Field(
-        None,
+        default=None,
         description="Additional metadata for the requirements.",
     )
 

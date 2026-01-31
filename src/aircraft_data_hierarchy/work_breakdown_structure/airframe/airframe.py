@@ -31,9 +31,9 @@ class Component(CommonBaseModel):
         ValueError: If any string field is empty, ensuring all components have meaningful identifiers and descriptions.
     """
 
-    name: Optional[str] = Field(None, description="The name of the component.")
+    name: Optional[str] = Field(default=None, description="The name of the component.")
     description: Optional[str] = Field(
-        None, description="A brief description of the component."
+        default=None, description="A brief description of the component."
     )
     geometry: Optional[Geometry] = Field(
         default=None, description="Geometry of the component."
@@ -42,7 +42,7 @@ class Component(CommonBaseModel):
         default=None, description="Parameters of the component."
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the component."
+        default=None, description="Additional metadata for the component."
     )
     subcomponents: Optional[List[Component]] = Field(
         default=None, description="Sub-components within this component."

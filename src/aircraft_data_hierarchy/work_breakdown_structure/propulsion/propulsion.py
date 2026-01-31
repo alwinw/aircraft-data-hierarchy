@@ -28,9 +28,11 @@ class Propulsion(CommonBaseModel):
         ValueError: If any string field is empty, ensuring all components have meaningful identifiers and descriptions.
     """
 
-    name: Optional[str] = Field(None, description="The name of the propulsion system.")
+    name: Optional[str] = Field(
+        default=None, description="The name of the propulsion system."
+    )
     description: Optional[str] = Field(
-        None, description="A brief description of the propulsion system."
+        default=None, description="A brief description of the propulsion system."
     )
     geometry: Optional[Dict[str, Any]] = Field(
         default=None, description="Geometry of the propulsion system."
