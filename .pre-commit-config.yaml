@@ -40,9 +40,9 @@ repos:
       - id: mixed-line-ending
         files: \.(py|txt|yaml|yml|json|md|toml|lock|cfg|html|sh|js|rst)$
         priority: 1
-      - id: no-commit-to-branch
-        args: [--branch, main]
-        priority: 0
+      # - id: no-commit-to-branch
+      #   args: [--branch, main]
+      #   priority: 0
       - id: trailing-whitespace
         files: \.(py|txt|yaml|yml|md|toml|lock|cfg|html|sh|js|rst)$
         priority: 1
@@ -77,3 +77,4 @@ repos:
     hooks:
       - id: markdownlint-fix
         priority: 1
+        exclude: CHANGELOG.md

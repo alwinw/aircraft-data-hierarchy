@@ -1,3 +1,21 @@
+## v0.2.0 (2026-02-01)
+
+Initial community version release
+
+### Fix
+
+- **common_base_model**: initialise dict() by default instead of letting it be None
+- **pydanticv2**: use ValidationInfo instead of Field
+- **pydanticv2**: make optional fields not required
+- **prek**: apply ruff, typos and whitespace fixes
+- **docs**: remove mkdocs setup in favour of sphinx
+- **pydantic**: depreciation warning on class-based config replaced by class attribute `model_config`
+- **pydantic**: depreciation warning on _items replaced by_length
+
+### Refactor
+
+- **tests**: use pytest instead of unittest
+
 ## v0.1.0 (2025-08-06)
 
 Initial release for `NASA/CR-20250007045`

@@ -1,6 +1,6 @@
 [project]
 name = "aircraft_data_hierarchy"
-version = "0.1.0"
+version = "0.2.0"
 description = "The Aircraft Data Hierarchy (ADH) is a modern data definition standard for the aerospace vehicle design studies. The ADH enables engineers to exchange information (i.e. geometry, disciplinary tool inputs/outputs, requirements, etc.) between tools using a common data structure and a schema that can be validated."
 readme = "README.md"
 license = "Apache-2.0"
@@ -75,6 +75,22 @@ Repository = "https://github.com/Boeing/aircraft-data-hierarchy"
 Documentation = "https://boeing.github.io/aircraft-data-hierarchy/"
 Releases = "https://github.com/Boeing/aircraft-data-hierarchy/releases"
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "uv"
+version_scheme = "semver"
+tag_format = "v$version"
+update_changelog_on_bump = false
+changelog_incremental = true
+use_shortcuts = true
+
+[tool.pyright]
+include = [
+  "src",
+  # "tests",
+]
+reportMissingImports = "none"
+
 [tool.pytest.ini_options]
 testpaths = "tests"
 addopts = [
@@ -86,7 +102,8 @@ addopts = [
 [tool.ruff]
 required-version = ">=0.14"
 target-version = "py38"
-
+[tool.ruff.format]
+docstring-code-format = true
 [tool.ruff.lint]
 extend-select = [
   "I",  # isort
@@ -95,21 +112,10 @@ extend-select = [
 [tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true # Preserve types
 
-[tool.ruff.format]
-docstring-code-format = true
-
-[tool.pyright]
-include = [
-  "src",
-  # "tests",
-]
-reportMissingImports = "none"
-
+[tool.ty.rules]
+invalid-argument-type = "ignore"
 [tool.ty.src]
 include = [
   "src",
   # "tests",
 ]
-
-[tool.ty.rules]
-invalid-argument-type = "ignore"
