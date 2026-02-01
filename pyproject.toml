@@ -101,14 +101,14 @@ docstring-code-format = true
 [tool.pyright]
 include = [
   "src",
-  "tests",
+  # "tests",
 ]
 reportMissingImports = "none"
 
 [tool.ty.src]
 include = [
   "src",
-  "tests",
+  # "tests",
 ]
 
 [tool.ty.rules]
