@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from pydantic import Field, field_validator
+from pydantic import Field, ValidationInfo, field_validator
 
 from .common_base_model import CommonBaseModel, Metadata
 
@@ -120,12 +120,12 @@ class Requirements(CommonBaseModel):
     )
 
     @field_validator("name", "description")
-    def validate_non_empty(cls, value: str, field: Field) -> str:
+    def validate_non_empty(cls, value: str, info: ValidationInfo) -> str:
         """Validate that the name and description fields are not empty.
 
         Args:
             value: The value of the field being validated.
-            field: The metadata of the field being validated.
+            info: Validation context information for the field being validated.
 
         Raises:
             ValueError: If the field value is empty or just whitespace.
@@ -135,7 +135,7 @@ class Requirements(CommonBaseModel):
         """
         if not value.strip():
             raise ValueError(
-                f"The '{field.name}' field cannot be empty or just whitespace."
+                f"The '{info.field_name}' field cannot be empty or just whitespace."
             )
         return value
 

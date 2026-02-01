@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from math import isfinite as math_isfinite
 from math import sqrt
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from pydantic import (
     BaseModel,
     Field,
+    ValidationInfo,
     field_validator,
     model_validator,
 )
@@ -84,12 +85,14 @@ class Boolean(CommonBaseModel):
     )
 
     @field_validator("default", mode="before")
-    def validate_default(cls, value: Optional[bool], values: dict) -> Optional[bool]:
+    def validate_default(
+        cls, value: Optional[bool], info: ValidationInfo
+    ) -> Optional[bool]:
         """Validate and convert the default value to a boolean if it's provided as a string.
 
         Args:
             value: The default value being validated.
-            values: The dictionary containing the field values.
+            info: Validation context information for the field being validated.
 
         Returns:
             The validated default value.
@@ -138,12 +141,14 @@ class Float(CommonBaseModel):
     )
 
     @field_validator("default", mode="before")
-    def validate_default(cls, value: Optional[float], values: dict) -> Optional[float]:
+    def validate_default(
+        cls, value: Optional[float], info: ValidationInfo
+    ) -> Optional[float]:
         """Validate and convert the default value to a float if it's provided as a string.
 
         Args:
             value: The default value being validated.
-            values: The dictionary containing the field values.
+            info: Validation context information for the field being validated.
 
         Returns:
             The validated default value.
@@ -188,12 +193,14 @@ class Integer(CommonBaseModel):
     )
 
     @field_validator("default", mode="before")
-    def validate_default(cls, value: Optional[int], values: dict) -> Optional[int]:
+    def validate_default(
+        cls, value: Optional[int], info: ValidationInfo
+    ) -> Optional[int]:
         """Validate and convert the default value to an integer if it's provided as a string.
 
         Args:
             value: The default value being validated.
-            values: The dictionary containing the field values.
+            info: Validation context information for the field being validated.
 
         Returns:
             The validated default value.
@@ -387,12 +394,12 @@ class Spline(BaseModel):
     )
 
     @field_validator("points", mode="before")
-    def validate_points(cls, value: List[Point], values: dict) -> List[Point]:
+    def validate_points(cls, value: List[Point], info: ValidationInfo) -> List[Point]:
         """Validate that the list of points is sufficient to define a spline of the specified degree.
 
         Args:
             value: The list of control points.
-            values: A dictionary of field names to their validated values.
+            info: Validation context information for the field being validated.
 
         Returns:
             The validated list of control points.
@@ -400,9 +407,14 @@ class Spline(BaseModel):
         Raises:
             ValueError: If the number of points is less than the required for the spline's degree.
         """
-        degree = (
-            values.degree if hasattr(values, "degree") else 3
-        )  # Default to cubic if degree is not yet validated
+        # Default to cubic if degree is not yet validated
+        degree_value = 3
+        if info.data and "degree" in info.data:
+            degree_value = info.data.get("degree", 3)
+        try:
+            degree = int(degree_value) if degree_value is not None else 3
+        except (TypeError, ValueError):
+            degree = 3
         if len(value) < degree + 1:
             raise ValueError(
                 f"At least {degree + 1} points are required to define a spline of degree {degree}."
@@ -758,13 +770,13 @@ class ReferenceAxis(CommonBaseModel):
     description: Optional[str] = Field(
         default=None, description="A brief description of the reference axis."
     )
-    metadata: Metadata = Field(
-        default_factory=Metadata,
+    metadata: Optional[Metadata] = Field(
+        default=None,
         description="Additional metadata for the reference axis.",
     )
-    relative_to: Optional[str] = Field(
+    relative_to: Optional[Union[ReferenceAxis, str]] = Field(
         default=None,
-        description="The name of another reference axis to which this axis is relative.",
+        description="The name or instance of another reference axis to which this axis is relative.",
     )
 
     # Class-level dictionary to map names to ReferenceAxis instances
@@ -788,7 +800,8 @@ class ReferenceAxis(CommonBaseModel):
         return value
 
     @model_validator(mode="before")
-    def validate_and_register(cls, values: dict) -> dict:
+    @classmethod
+    def validate_and_register(cls, values: Dict[str, Any]) -> Dict[str, Any]:
         """Ensure that the name is unique and register the instance.
 
         Args:
@@ -806,11 +819,11 @@ class ReferenceAxis(CommonBaseModel):
         return values
 
     @model_validator(mode="after")
-    def resolve_relative_to(cls, values: dict) -> dict:
+    def resolve_relative_to(self) -> ReferenceAxis:
         """Resolve the 'relative_to' name to a ReferenceAxis instance.
 
         Args:
-            values: The dictionary of field values.
+            self: The validated ReferenceAxis instance.
 
         Returns:
             The validated dictionary of field values.
@@ -818,15 +831,16 @@ class ReferenceAxis(CommonBaseModel):
         Raises:
             ValueError: If the 'relative_to' name does not exist.
         """
-        relative_to_name = values.get("relative_to")
-        if relative_to_name:
-            relative_to_axis = cls._registry.get(relative_to_name)
+        if self.relative_to:
+            if isinstance(self.relative_to, ReferenceAxis):
+                return self
+            relative_to_axis = self._registry.get(str(self.relative_to))
             if not relative_to_axis:
                 raise ValueError(
-                    f"ReferenceAxis with name '{relative_to_name}' does not exist."
+                    f"ReferenceAxis with name '{self.relative_to}' does not exist."
                 )
-            values["relative_to"] = relative_to_axis
-        return values
+            self.relative_to = relative_to_axis
+        return self
 
     def __init__(self, **data: Any):
         super().__init__(**data)

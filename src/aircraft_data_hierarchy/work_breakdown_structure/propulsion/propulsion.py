@@ -39,7 +39,7 @@ class Propulsion(CommonBaseModel):
     )
     # TODO: Get MultiPointCycle imported behaviorLib Demo
     # cycle: Union[PropulsionCycle, MultiPointCycle] = Field(default=None, description="Cycle of the propulsion system.")
-    cycle: PropulsionCycle = Field(
+    cycle: Optional[PropulsionCycle] = Field(
         default=None, description="Cycle of the propulsion system."
     )
     parameters: Optional[Dict[str, Any]] = Field(

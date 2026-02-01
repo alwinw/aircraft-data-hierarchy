@@ -158,4 +158,6 @@ class Discipline(CommonBaseModel):
         Args:
             tool: The tool or model to be added.
         """
+        if self.tools is None:
+            self.tools = []
         self.tools.append(tool)
