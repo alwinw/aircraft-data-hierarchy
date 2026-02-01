@@ -20,7 +20,7 @@ class DataExchange(CommonBaseModel):
     """
 
     model_identifier: Optional[str] = Field(
-        None, description="The identifier of the model."
+        default=None, description="The identifier of the model."
     )
     inputs: Optional[List[Any]] = Field(
         default_factory=list, description="The list of input variables."
@@ -51,26 +51,36 @@ class ModelDescription(CommonBaseModel):
     """
 
     specification_version: Optional[str] = Field(
-        None, description="The specification version."
+        default=None, description="The specification version."
     )
-    model_name: Optional[str] = Field(None, description="The name of the model.")
+    model_name: Optional[str] = Field(
+        default=None, description="The name of the model."
+    )
     guid: Optional[str] = Field(
-        None, description="The globally unique identifier of the model."
+        default=None, description="The globally unique identifier of the model."
     )
     generation_tool: Optional[str] = Field(
-        None, description="The tool used to generate the model."
+        default=None, description="The tool used to generate the model."
     )
     generation_date_and_time: Optional[datetime] = Field(
-        None, description="The date and time when the model was generated."
+        default=None, description="The date and time when the model was generated."
     )
     data_exchange: Optional[DataExchange] = Field(
-        None, description="The data exchange information."
+        default=None, description="The data exchange information."
     )
-    license: Optional[str] = Field(None, description="The license of the model.")
-    copyright: Optional[str] = Field(None, description="The copyright information.")
-    author: Optional[str] = Field(None, description="The author of the model.")
-    version: Optional[str] = Field(None, description="The version of the model.")
-    description: Optional[str] = Field(None, description="A description of the model.")
+    license: Optional[str] = Field(
+        default=None, description="The license of the model."
+    )
+    copyright: Optional[str] = Field(
+        default=None, description="The copyright information."
+    )
+    author: Optional[str] = Field(default=None, description="The author of the model.")
+    version: Optional[str] = Field(
+        default=None, description="The version of the model."
+    )
+    description: Optional[str] = Field(
+        default=None, description="A description of the model."
+    )
 
     model_config = ConfigDict(protected_namespaces=(), arbitrary_types_allowed=True)
 
@@ -104,16 +114,16 @@ class Discipline(CommonBaseModel):
         metadata (Optional[Metadata]): Additional metadata providing further context or details about the discipline and its associated resources.
     """
 
-    name: Optional[str] = Field(None, description="The name of the discipline.")
+    name: Optional[str] = Field(default=None, description="The name of the discipline.")
     description: Optional[str] = Field(
-        None, description="A brief description of the discipline and its scope."
+        default=None, description="A brief description of the discipline and its scope."
     )
     tools: Optional[List[ModelDescription]] = Field(
         default_factory=list,
         description="A list of tools and models associated with the discipline.",
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata for the discipline."
+        default=None, description="Additional metadata for the discipline."
     )
 
     @field_validator("name", mode="before")
@@ -148,4 +158,6 @@ class Discipline(CommonBaseModel):
         Args:
             tool: The tool or model to be added.
         """
+        if self.tools is None:
+            self.tools = []
         self.tools.append(tool)

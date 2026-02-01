@@ -1,5 +1,4 @@
-import unittest
-
+import pytest
 from pydantic import ValidationError
 
 from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
@@ -34,20 +33,20 @@ from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_paramete
 )
 
 
-class TestPydanticModels(unittest.TestCase):
+class TestPydanticModels:
     def test_reference_data(self):
         # Test valid data
         data = {"RougHgt": 0.01, "Sref": 100.0, "Cbar": 10.0, "BLref": 5.0}
         model = ReferenceData(**data)
-        self.assertEqual(model.roughness, 0.01)
-        self.assertEqual(model.reference_area, 100.0)
-        self.assertEqual(model.reference_length, 10.0)
-        self.assertEqual(model.lateral_reference, 5.0)
+        assert model.roughness == 0.01
+        assert model.reference_area == 100.0
+        assert model.reference_length == 10.0
+        assert model.lateral_reference == 5.0
 
         # Test invalid roughness
         data["RougHgt"] = 0.03
-        with self.assertRaises(ValidationError):
-            ReferenceData(**data)
+        with pytest.raises(ValidationError):
+            ReferenceData(**data)  # pyright: ignore[reportArgumentType]
 
     def test_flight_conditions(self):
         # Test valid data
@@ -71,27 +70,27 @@ class TestPydanticModels(unittest.TestCase):
             "flight_path_angle": 1.0,
         }
         model = FlightConditions(**data)
-        self.assertEqual(model.loop_control, 2)
-        self.assertEqual(model.qty_machs, 2)
-        self.assertEqual(model.machs, [0.5, 0.8])
-        self.assertEqual(model.velocities, [300.0, 400.0])
-        self.assertEqual(model.qty_alphas, 2)
-        self.assertEqual(model.alphas, [5.0, 10.0])
-        self.assertEqual(model.reynolds_indices, [1e6, 2e6])
-        self.assertEqual(model.qty_altitudes, 2)
-        self.assertEqual(model.altitudes, [10000.0, 20000.0])
-        self.assertEqual(model.static_pressures, [101325.0, 90000.0])
-        self.assertEqual(model.static_temperatures, [288.15, 273.15])
-        self.assertEqual(model.transonic_mach, 0.7)
-        self.assertEqual(model.supersonic_mach, 1.2)
-        self.assertTrue(model.hypersonic_flag)
-        self.assertTrue(model.transition_flag)
-        self.assertEqual(model.weight, 50000.0)
-        self.assertEqual(model.flight_path_angle, 1.0)
+        assert model.loop_control == 2
+        assert model.qty_machs == 2
+        assert model.machs == [0.5, 0.8]
+        assert model.velocities == [300.0, 400.0]
+        assert model.qty_alphas == 2
+        assert model.alphas == [5.0, 10.0]
+        assert model.reynolds_indices == [1e6, 2e6]
+        assert model.qty_altitudes == 2
+        assert model.altitudes == [10000.0, 20000.0]
+        assert model.static_pressures == [101325.0, 90000.0]
+        assert model.static_temperatures == [288.15, 273.15]
+        assert model.transonic_mach == 0.7
+        assert model.supersonic_mach == 1.2
+        assert model.hypersonic_flag is True
+        assert model.transition_flag is True
+        assert model.weight == 50000.0
+        assert model.flight_path_angle == 1.0
 
         # Test invalid machs
         data["machs"] = [-0.5, 0.8]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             FlightConditions(**data)
 
     def test_configuration_layout(self):
@@ -123,34 +122,34 @@ class TestPydanticModels(unittest.TestCase):
             "model_scale": 1.0,
         }
         model = ConfigurationLayout(**data)
-        self.assertEqual(model.center_of_gravity_station, 10.0)
-        self.assertEqual(model.center_of_gravity_waterline, 5.0)
-        self.assertEqual(model.canard_apex_station, 15.0)
-        self.assertEqual(model.canard_apex_waterline, 7.0)
-        self.assertEqual(model.canard_hinge_station, 20.0)
-        self.assertEqual(model.canard_angle_of_incidence, 2.0)
-        self.assertEqual(model.wing_apex_station, 25.0)
-        self.assertEqual(model.wing_apex_waterline, 10.0)
-        self.assertEqual(model.wing_hinge_station, 30.0)
-        self.assertEqual(model.wing_angle_of_incidence, 3.0)
-        self.assertEqual(model.horizontal_apex_station, 35.0)
-        self.assertEqual(model.horizontal_apex_waterline, 12.0)
-        self.assertEqual(model.horizontal_hinge_station, 40.0)
-        self.assertEqual(model.horizontal_angle_of_incidence, 4.0)
-        self.assertEqual(model.vertical_apex_station, 45.0)
-        self.assertEqual(model.vertical_apex_waterline, 15.0)
-        self.assertEqual(model.vertical_cant, 5.0)
-        self.assertEqual(model.vertical_offset, 2.0)
-        self.assertTrue(model.vertical_above)
-        self.assertEqual(model.fin_apex_station, 50.0)
-        self.assertEqual(model.fin_apex_waterline, 20.0)
-        self.assertEqual(model.fin_cant, 6.0)
-        self.assertEqual(model.fin_offset, 3.0)
-        self.assertEqual(model.model_scale, 1.0)
+        assert model.center_of_gravity_station == 10.0
+        assert model.center_of_gravity_waterline == 5.0
+        assert model.canard_apex_station == 15.0
+        assert model.canard_apex_waterline == 7.0
+        assert model.canard_hinge_station == 20.0
+        assert model.canard_angle_of_incidence == 2.0
+        assert model.wing_apex_station == 25.0
+        assert model.wing_apex_waterline == 10.0
+        assert model.wing_hinge_station == 30.0
+        assert model.wing_angle_of_incidence == 3.0
+        assert model.horizontal_apex_station == 35.0
+        assert model.horizontal_apex_waterline == 12.0
+        assert model.horizontal_hinge_station == 40.0
+        assert model.horizontal_angle_of_incidence == 4.0
+        assert model.vertical_apex_station == 45.0
+        assert model.vertical_apex_waterline == 15.0
+        assert model.vertical_cant == 5.0
+        assert model.vertical_offset == 2.0
+        assert model.vertical_above is True
+        assert model.fin_apex_station == 50.0
+        assert model.fin_apex_waterline == 20.0
+        assert model.fin_cant == 6.0
+        assert model.fin_offset == 3.0
+        assert model.model_scale == 1.0
 
         # Test invalid canard_apex_station
         data["canard_apex_station"] = -15.0
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             ConfigurationLayout(**data)
 
     def test_airfoil_geometry(self):
@@ -165,7 +164,7 @@ class TestPydanticModels(unittest.TestCase):
         spline = Spline(points=points)
         data = {"spline": spline}
         model = Airfoil(**data)
-        self.assertEqual(model.spline, spline)
+        assert model.spline == spline
 
         # NOTE: Data is optional
         # # Test missing spline
@@ -203,31 +202,31 @@ class TestPydanticModels(unittest.TestCase):
             "outboard_TE_droop": 0.05,
         }
         model = Airfoil(**data)
-        self.assertEqual(model.input_type, 1)
-        self.assertEqual(model.qty_coordinates, 3)
-        self.assertEqual(model.x_coordinates, [0.0, 0.5, 1.0])
-        self.assertEqual(model.z_upper, [0.1, 0.2, 0.3])
-        self.assertEqual(model.z_lower, [0.0, -0.1, -0.2])
-        self.assertEqual(model.camber_line, [0.05, 0.1, 0.15])
-        self.assertEqual(model.thickness_profile, [0.1, 0.2, 0.3])
-        self.assertEqual(model.inboard_rLEoC, 0.01)
-        self.assertEqual(model.inboard_ToCmax, 0.1)
-        self.assertEqual(model.inboard_XoC_for_ToCmax, 0.2)
-        self.assertEqual(model.inboard_closure_angle, 0.3)
-        self.assertEqual(model.inboard_TE_ToC, 0.01)
-        self.assertEqual(model.inboard_LE_droop, 0.02)
-        self.assertEqual(model.inboard_ZoCmax, 0.03)
-        self.assertEqual(model.inboard_XoC_for_ZoCmax, 0.04)
-        self.assertEqual(model.inboard_TE_droop, 0.05)
-        self.assertEqual(model.outboard_rLEoC, 0.01)
-        self.assertEqual(model.outboard_ToCmax, 0.1)
-        self.assertEqual(model.outboard_XoC_for_ToCmax, 0.2)
-        self.assertEqual(model.outboard_closure_angle, 0.3)
-        self.assertEqual(model.outboard_TE_ToC, 0.01)
-        self.assertEqual(model.outboard_LE_droop, 0.02)
-        self.assertEqual(model.outboard_ZoCmax, 0.03)
-        self.assertEqual(model.outboard_XoC_for_ZoCmax, 0.04)
-        self.assertEqual(model.outboard_TE_droop, 0.05)
+        assert model.input_type == 1
+        assert model.qty_coordinates == 3
+        assert model.x_coordinates == [0.0, 0.5, 1.0]
+        assert model.z_upper == [0.1, 0.2, 0.3]
+        assert model.z_lower == [0.0, -0.1, -0.2]
+        assert model.camber_line == [0.05, 0.1, 0.15]
+        assert model.thickness_profile == [0.1, 0.2, 0.3]
+        assert model.inboard_rLEoC == 0.01
+        assert model.inboard_ToCmax == 0.1
+        assert model.inboard_XoC_for_ToCmax == 0.2
+        assert model.inboard_closure_angle == 0.3
+        assert model.inboard_TE_ToC == 0.01
+        assert model.inboard_LE_droop == 0.02
+        assert model.inboard_ZoCmax == 0.03
+        assert model.inboard_XoC_for_ZoCmax == 0.04
+        assert model.inboard_TE_droop == 0.05
+        assert model.outboard_rLEoC == 0.01
+        assert model.outboard_ToCmax == 0.1
+        assert model.outboard_XoC_for_ToCmax == 0.2
+        assert model.outboard_closure_angle == 0.3
+        assert model.outboard_TE_ToC == 0.01
+        assert model.outboard_LE_droop == 0.02
+        assert model.outboard_ZoCmax == 0.03
+        assert model.outboard_XoC_for_ZoCmax == 0.04
+        assert model.outboard_TE_droop == 0.05
 
         # TODO Need to validate coordinates first
         # # Test invalid x_coordinates
@@ -259,29 +258,29 @@ class TestPydanticModels(unittest.TestCase):
             "horizontal_panel_exposed_root_chord": 17.0,
         }
         model = LiftingSurface(**data)
-        self.assertEqual(model.tip_chord, 1.0)
-        self.assertEqual(model.outboard_panel_semi_span, 2.0)
-        self.assertEqual(model.exposed_panel_semi_span, 3.0)
-        self.assertEqual(model.total_panel_semi_span, 4.0)
-        self.assertEqual(model.breakpoint_chord, 5.0)
-        self.assertEqual(model.root_chord, 6.0)
-        self.assertEqual(model.inboard_panel_sweep, 7.0)
-        self.assertEqual(model.outboard_panel_sweep, 8.0)
-        self.assertEqual(model.reference_chord_fraction, 0.25)
-        self.assertEqual(model.twist_angle, 9.0)
-        self.assertEqual(model.inboard_panel_dihedral, 10.0)
-        self.assertEqual(model.outboard_panel_dihedral, 11.0)
-        self.assertEqual(model.planform_type, PlanformType.RECTANGULAR)
-        self.assertEqual(model.shock_impengement_area, 12.0)
-        self.assertEqual(model.extended_shock_impengement_area, 13.0)
-        self.assertEqual(model.distance_between_CG_and_centroid, 14.0)
-        self.assertEqual(model.vertical_panel_exposed_root_chord, 15.0)
-        self.assertEqual(model.vertical_panel_not_influenced_by_wing, 16.0)
-        self.assertEqual(model.horizontal_panel_exposed_root_chord, 17.0)
+        assert model.tip_chord == 1.0
+        assert model.outboard_panel_semi_span == 2.0
+        assert model.exposed_panel_semi_span == 3.0
+        assert model.total_panel_semi_span == 4.0
+        assert model.breakpoint_chord == 5.0
+        assert model.root_chord == 6.0
+        assert model.inboard_panel_sweep == 7.0
+        assert model.outboard_panel_sweep == 8.0
+        assert model.reference_chord_fraction == 0.25
+        assert model.twist_angle == 9.0
+        assert model.inboard_panel_dihedral == 10.0
+        assert model.outboard_panel_dihedral == 11.0
+        assert model.planform_type == PlanformType.RECTANGULAR
+        assert model.shock_impengement_area == 12.0
+        assert model.extended_shock_impengement_area == 13.0
+        assert model.distance_between_CG_and_centroid == 14.0
+        assert model.vertical_panel_exposed_root_chord == 15.0
+        assert model.vertical_panel_not_influenced_by_wing == 16.0
+        assert model.horizontal_panel_exposed_root_chord == 17.0
 
         # Test invalid reference_chord_fraction
         data["reference_chord_fraction"] = 1.5
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             LiftingSurface(**data)
 
     def test_twin_vertical_tail(self):
@@ -297,35 +296,35 @@ class TestPydanticModels(unittest.TestCase):
             "vertical_arm": 0.1,
         }
         model = TwinVerticalTail(**data)
-        self.assertEqual(model.span_above, 1.5)
-        self.assertEqual(model.total_span, 0.5)
-        self.assertEqual(model.body_depth, 2.0)
-        self.assertEqual(model.separation, 0.3)
-        self.assertEqual(model.planform_area, 1.0)
-        self.assertEqual(model.closure_angle, 0.8)
-        self.assertEqual(model.lateral_arm, 0.2)
-        self.assertEqual(model.vertical_arm, 0.1)
+        assert model.span_above == 1.5
+        assert model.total_span == 0.5
+        assert model.body_depth == 2.0
+        assert model.separation == 0.3
+        assert model.planform_area == 1.0
+        assert model.closure_angle == 0.8
+        assert model.lateral_arm == 0.2
+        assert model.vertical_arm == 0.1
 
         # Test invalid span_above
         data["span_above"] = -1.5
-        with self.assertRaises(ValidationError):
-            TwinVerticalTail(**data)
+        with pytest.raises(ValidationError):
+            TwinVerticalTail(**data)  # pyright: ignore[reportArgumentType]
 
     def test_ground_effects_definition(self):
         # Test valid data
         data = {"qty_heights": 5, "heights": [100.0, 200.0, 300.0, 400.0, 500.0]}
         model = GroundEffectsDefinition(**data)
-        self.assertEqual(model.qty_heights, 5)
-        self.assertEqual(model.heights, [100.0, 200.0, 300.0, 400.0, 500.0])
+        assert model.qty_heights == 5
+        assert model.heights == [100.0, 200.0, 300.0, 400.0, 500.0]
 
         # Test invalid heights
         data["heights"] = [-100.0, 200.0, 300.0, 400.0, 500.0]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             GroundEffectsDefinition(**data)
 
         # Test mismatched qty_heights
         data = {"qty_heights": 4, "heights": [100.0, 200.0, 300.0, 400.0, 500.0]}
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             GroundEffectsDefinition(**data)
 
     def test_symmetric_flap_geometry(self):
@@ -351,28 +350,28 @@ class TestPydanticModels(unittest.TestCase):
             "flap_Pitch_increment": [2.0, 2.1],
         }
         model = SymmetricFlap(**data)
-        self.assertEqual(model.flap_type, FlapType.PLAIN)
-        self.assertEqual(model.nose_type, NoseType.ROUND)
-        self.assertEqual(model.blowing_type, BlowingType.NONE)
-        self.assertEqual(model.balance_chord_ratio, 0.1)
-        self.assertEqual(model.hinge_thickness_to_chord_ratio, 0.2)
-        self.assertEqual(model.qty_deflections, 2)
-        self.assertEqual(model.deflections, [10.0, 20.0])
-        self.assertEqual(model.inboard_chord_ratio, [0.1, 0.2])
-        self.assertEqual(model.outboard_chord_ratio, [0.3, 0.4])
-        self.assertEqual(model.inboard_span_ratio, [0.5, 0.6])
-        self.assertEqual(model.outboard_span_ratio, [0.7, 0.8])
-        self.assertEqual(model.inboard_fowler_action, [0.9, 1.0])
-        self.assertEqual(model.outboard_fowler_action, [1.1, 1.2])
-        self.assertEqual(model.jet_deflection, [1.3, 1.4])
-        self.assertEqual(model.EBF_jet_deflection_angles, [1.5, 1.6])
-        self.assertEqual(model.jet_efflux, 1.7)
-        self.assertEqual(model.flap_Lift_increment, [1.8, 1.9])
-        self.assertEqual(model.flap_Pitch_increment, [2.0, 2.1])
+        assert model.flap_type == FlapType.PLAIN
+        assert model.nose_type == NoseType.ROUND
+        assert model.blowing_type == BlowingType.NONE
+        assert model.balance_chord_ratio == 0.1
+        assert model.hinge_thickness_to_chord_ratio == 0.2
+        assert model.qty_deflections == 2
+        assert model.deflections == [10.0, 20.0]
+        assert model.inboard_chord_ratio == [0.1, 0.2]
+        assert model.outboard_chord_ratio == [0.3, 0.4]
+        assert model.inboard_span_ratio == [0.5, 0.6]
+        assert model.outboard_span_ratio == [0.7, 0.8]
+        assert model.inboard_fowler_action == [0.9, 1.0]
+        assert model.outboard_fowler_action == [1.1, 1.2]
+        assert model.jet_deflection == [1.3, 1.4]
+        assert model.EBF_jet_deflection_angles == [1.5, 1.6]
+        assert model.jet_efflux == 1.7
+        assert model.flap_Lift_increment == [1.8, 1.9]
+        assert model.flap_Pitch_increment == [2.0, 2.1]
 
         # Test invalid balance_chord_ratio
         data["balance_chord_ratio"] = -0.1
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             SymmetricFlap(**data)
 
     def test_asymmetric_control_geometry(self):
@@ -392,27 +391,27 @@ class TestPydanticModels(unittest.TestCase):
             "hingeline_chord_ratio": 0.11,
         }
         model = AsymmetricControl(**data)
-        self.assertEqual(model.control_type, ControlType.AILERON)
-        self.assertEqual(model.qty_deflections, 2)
-        self.assertEqual(model.inboard_aileron_chord_ratio, 0.1)
-        self.assertEqual(model.outboard_aileron_chord_ratio, 0.2)
-        self.assertEqual(model.inboard_span_ratio, 0.3)
-        self.assertEqual(model.outboard_span_ratio, 0.4)
-        self.assertEqual(model.left_deflection, [10.0, 20.0])
-        self.assertEqual(model.right_deflection, [15.0, 25.0])
-        self.assertEqual(model.deflector_height_chord_ratio, [0.05, 0.06])
-        self.assertEqual(model.spoiler_height_ratio, [0.07, 0.08])
-        self.assertEqual(model.spoiler_chord_ratio, [0.09, 0.1])
-        self.assertEqual(model.hingeline_chord_ratio, 0.11)
+        assert model.control_type == ControlType.AILERON
+        assert model.qty_deflections == 2
+        assert model.inboard_aileron_chord_ratio == 0.1
+        assert model.outboard_aileron_chord_ratio == 0.2
+        assert model.inboard_span_ratio == 0.3
+        assert model.outboard_span_ratio == 0.4
+        assert model.left_deflection == [10.0, 20.0]
+        assert model.right_deflection == [15.0, 25.0]
+        assert model.deflector_height_chord_ratio == [0.05, 0.06]
+        assert model.spoiler_height_ratio == [0.07, 0.08]
+        assert model.spoiler_chord_ratio == [0.09, 0.1]
+        assert model.hingeline_chord_ratio == 0.11
 
         # Test invalid inboard_aileron_chord_ratio
         data["inboard_aileron_chord_ratio"] = -0.1
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             AsymmetricControl(**data)
 
         # Test mismatched deflection lengths
         data["left_deflection"] = [10.0]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             AsymmetricControl(**data)
 
     def test_body_parameters(self):
@@ -433,23 +432,23 @@ class TestPydanticModels(unittest.TestCase):
             "area_rule": 1,
         }
         model = Body(**data)
-        self.assertEqual(model.qty_cross_sections, 3)
-        self.assertEqual(model.stations, [0.1, 0.5, 0.9])
-        self.assertEqual(model.cross_sectional_areas, [1.0, 2.0, 3.0])
-        self.assertEqual(model.cross_sectional_perimeters, [4.0, 5.0, 6.0])
-        self.assertEqual(model.max_halfbredth, [7.0, 8.0, 9.0])
-        self.assertEqual(model.crown_line, [10.0, 11.0, 12.0])
-        self.assertEqual(model.keel_line, [13.0, 14.0, 15.0])
-        self.assertEqual(model.nose_type, BodyShape.CONICAL)
-        self.assertEqual(model.aftbody_type, BodyShape.OGIVE)
-        self.assertEqual(model.nose_length, 16.0)
-        self.assertEqual(model.aftbody_length, 17.0)
-        self.assertEqual(model.nose_bluntness, 18.0)
-        self.assertEqual(model.area_rule, 1)
+        assert model.qty_cross_sections == 3
+        assert model.stations == [0.1, 0.5, 0.9]
+        assert model.cross_sectional_areas == [1.0, 2.0, 3.0]
+        assert model.cross_sectional_perimeters == [4.0, 5.0, 6.0]
+        assert model.max_halfbredth == [7.0, 8.0, 9.0]
+        assert model.crown_line == [10.0, 11.0, 12.0]
+        assert model.keel_line == [13.0, 14.0, 15.0]
+        assert model.nose_type == BodyShape.CONICAL
+        assert model.aftbody_type == BodyShape.OGIVE
+        assert model.nose_length == 16.0
+        assert model.aftbody_length == 17.0
+        assert model.nose_bluntness == 18.0
+        assert model.area_rule == 1
 
         # Test invalid stations
         data["stations"] = [-0.1, 0.5, 0.9]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Body(**data)
 
     def test_low_aspect_ratio_wing_body(self):
@@ -478,31 +477,31 @@ class TestPydanticModels(unittest.TestCase):
             "distance_to_planform_centroid": 1.9,
         }
         model = LowAspectRatioWingBody(**data)
-        self.assertEqual(model.body_centroid_height, 0.0)
-        self.assertEqual(model.reference_area, 1.2)
-        self.assertEqual(model.sharpness, 0.01)
-        self.assertEqual(model.frontal_area, 0.3)
-        self.assertEqual(model.aspect_ratio, 0.5)
-        self.assertEqual(model.effective_radius, 0.6)
-        self.assertEqual(model.lower_surface_angle, 0.7)
-        self.assertEqual(model.reference_length, 0.8)
-        self.assertEqual(model.wetted_area, 0.9)
-        self.assertEqual(model.base_perimeter, 1.0)
-        self.assertEqual(model.base_area, 1.1)
-        self.assertEqual(model.base_max_height, 1.2)
-        self.assertEqual(model.base_max_span, 1.3)
-        self.assertTrue(model.base_aft_of_lifting_surface)
-        self.assertEqual(model.center_of_gravity_station, 1.4)
-        self.assertEqual(model.semi_apex_angle, 1.5)
-        self.assertFalse(model.rounded_nose_flag)
-        self.assertEqual(model.total_side_area, 1.6)
-        self.assertEqual(model.nose_side_area, 1.7)
-        self.assertEqual(model.distance_to_side_centroid, 1.8)
-        self.assertEqual(model.distance_to_planform_centroid, 1.9)
+        assert model.body_centroid_height == 0.0
+        assert model.reference_area == 1.2
+        assert model.sharpness == 0.01
+        assert model.frontal_area == 0.3
+        assert model.aspect_ratio == 0.5
+        assert model.effective_radius == 0.6
+        assert model.lower_surface_angle == 0.7
+        assert model.reference_length == 0.8
+        assert model.wetted_area == 0.9
+        assert model.base_perimeter == 1.0
+        assert model.base_area == 1.1
+        assert model.base_max_height == 1.2
+        assert model.base_max_span == 1.3
+        assert model.base_aft_of_lifting_surface is True
+        assert model.center_of_gravity_station == 1.4
+        assert model.semi_apex_angle == 1.5
+        assert model.rounded_nose_flag is False
+        assert model.total_side_area == 1.6
+        assert model.nose_side_area == 1.7
+        assert model.distance_to_side_centroid == 1.8
+        assert model.distance_to_planform_centroid == 1.9
 
         # Test invalid body_centroid_height
         data["body_centroid_height"] = -0.1
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             LowAspectRatioWingBody(**data)
 
     def test_transverse_jet_control(self):
@@ -522,22 +521,22 @@ class TestPydanticModels(unittest.TestCase):
             "nozzle_distance_from_leading_edge": 2.0,
         }
         model = TransverseJetControl(**data)
-        self.assertEqual(model.qty_time, 3)
-        self.assertEqual(model.time, [0.1, 0.2, 0.3])
-        self.assertEqual(model.control_force, [1.0, 1.1, 1.2])
-        self.assertEqual(model.altitudes, [5.0, 5.1, 5.2])
-        self.assertEqual(model.boundary_layer_state, [True, False, True])
-        self.assertEqual(model.nozzle_exit_mach_number, 0.8)
-        self.assertEqual(model.jet_vacuum_specific_impulse, 300.0)
-        self.assertEqual(model.nozzle_span, 0.5)
-        self.assertEqual(model.nozzle_inclination, 15.0)
-        self.assertEqual(model.propellant_specific_heat, 1.4)
-        self.assertEqual(model.nozzle_discharge_coefficient, 0.98)
-        self.assertEqual(model.nozzle_distance_from_leading_edge, 2.0)
+        assert model.qty_time == 3
+        assert model.time == [0.1, 0.2, 0.3]
+        assert model.control_force == [1.0, 1.1, 1.2]
+        assert model.altitudes == [5.0, 5.1, 5.2]
+        assert model.boundary_layer_state == [True, False, True]
+        assert model.nozzle_exit_mach_number == 0.8
+        assert model.jet_vacuum_specific_impulse == 300.0
+        assert model.nozzle_span == 0.5
+        assert model.nozzle_inclination == 15.0
+        assert model.propellant_specific_heat == 1.4
+        assert model.nozzle_discharge_coefficient == 0.98
+        assert model.nozzle_distance_from_leading_edge == 2.0
 
         # Test invalid time length
         data["time"] = [0.1, 0.2]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             TransverseJetControl(**data)
 
     def test_hypersonic_flap_control(self):
@@ -552,17 +551,17 @@ class TestPydanticModels(unittest.TestCase):
             "boundary_layer_state": [True, False],
         }
         model = HypersonicFlapControl(**data)
-        self.assertEqual(model.altitude, 10.0)
-        self.assertEqual(model.hingeline_chord_ratio, 0.5)
-        self.assertEqual(model.wall_to_freestream_temperature_ratio, 1.0)
-        self.assertEqual(model.control_chord_ratio, 0.02)
-        self.assertEqual(model.qty_deflections, 2)
-        self.assertEqual(model.deflections, [0.1, 0.2])
-        self.assertEqual(model.boundary_layer_state, [True, False])
+        assert model.altitude == 10.0
+        assert model.hingeline_chord_ratio == 0.5
+        assert model.wall_to_freestream_temperature_ratio == 1.0
+        assert model.control_chord_ratio == 0.02
+        assert model.qty_deflections == 2
+        assert model.deflections == [0.1, 0.2]
+        assert model.boundary_layer_state == [True, False]
 
         # Test invalid deflections length
         data["deflections"] = [0.1]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             HypersonicFlapControl(**data)
 
     def test_propeller_power_properties(self):
@@ -583,23 +582,23 @@ class TestPydanticModels(unittest.TestCase):
             "normal_force_factor": 1.2,
         }
         model = PropellerPowerProperties(**data)
-        self.assertEqual(model.thrust_incidence_angle, 5.0)
-        self.assertEqual(model.qty_engines, 2)
-        self.assertEqual(model.qty_blades, 4)
-        self.assertTrue(model.counter_rotating)
-        self.assertEqual(model.prop_radius, 1.5)
-        self.assertTrue(model.rotation_direction)
-        self.assertEqual(model.thrust_coefficient, 0.8)
-        self.assertEqual(model.hub_buttline, 0.5)
-        self.assertEqual(model.hub_station, 2.0)
-        self.assertEqual(model.hub_waterline, 1.0)
-        self.assertEqual(model.blade_chord_ratio, [0.1, 0.2, 0.3])
-        self.assertEqual(model.blade_angle, [15.0, 20.0, 25.0])
-        self.assertEqual(model.normal_force_factor, 1.2)
+        assert model.thrust_incidence_angle == 5.0
+        assert model.qty_engines == 2
+        assert model.qty_blades == 4
+        assert model.counter_rotating is True
+        assert model.prop_radius == 1.5
+        assert model.rotation_direction is True
+        assert model.thrust_coefficient == 0.8
+        assert model.hub_buttline == 0.5
+        assert model.hub_station == 2.0
+        assert model.hub_waterline == 1.0
+        assert model.blade_chord_ratio == [0.1, 0.2, 0.3]
+        assert model.blade_angle == [15.0, 20.0, 25.0]
+        assert model.normal_force_factor == 1.2
 
         # Test invalid thrust_incidence_angle
         data["thrust_incidence_angle"] = -5.0
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             PropellerPowerProperties(**data)
 
     def test_jet_power_properties(self):
@@ -622,25 +621,25 @@ class TestPydanticModels(unittest.TestCase):
             "ambient_static_pressure": 101325.0,
         }
         model = JetPowerProperties(**data)
-        self.assertEqual(model.qty_engines, 2)
-        self.assertEqual(model.centerline_buttline, 0.5)
-        self.assertEqual(model.thrust_incidence_angle, 5.0)
-        self.assertEqual(model.thrust_coefficient, 0.8)
-        self.assertEqual(model.inlet_area, 1.2)
-        self.assertEqual(model.inlet_station, 2.0)
-        self.assertEqual(model.exhaust_diameter, 0.6)
-        self.assertEqual(model.exhaust_station, 3.0)
-        self.assertEqual(model.exhaust_waterline, 1.0)
-        self.assertEqual(model.exhaust_exit_angle, 15.0)
-        self.assertEqual(model.exhaust_exit_velocity, 300.0)
-        self.assertEqual(model.exhaust_static_temperature, 1500.0)
-        self.assertEqual(model.exhaust_total_pressure, 101325.0)
-        self.assertEqual(model.ambient_temperature, 288.15)
-        self.assertEqual(model.ambient_static_pressure, 101325.0)
+        assert model.qty_engines == 2
+        assert model.centerline_buttline == 0.5
+        assert model.thrust_incidence_angle == 5.0
+        assert model.thrust_coefficient == 0.8
+        assert model.inlet_area == 1.2
+        assert model.inlet_station == 2.0
+        assert model.exhaust_diameter == 0.6
+        assert model.exhaust_station == 3.0
+        assert model.exhaust_waterline == 1.0
+        assert model.exhaust_exit_angle == 15.0
+        assert model.exhaust_exit_velocity == 300.0
+        assert model.exhaust_static_temperature == 1500.0
+        assert model.exhaust_total_pressure == 101325.0
+        assert model.ambient_temperature == 288.15
+        assert model.ambient_static_pressure == 101325.0
 
         # Test invalid thrust_incidence_angle
         data["thrust_incidence_angle"] = -5.0
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             JetPowerProperties(**data)
 
     def test_aerodynamics_data(self):
@@ -706,70 +705,66 @@ class TestPydanticModels(unittest.TestCase):
             "QHOQINF": [0.1, 0.2, 0.3],
         }
         model = AerodynamicsData(**data)
-        self.assertEqual(model.CLalpha_body, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMalpha_body, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CD_body, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CL_body, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CM_body, [0.01, 0.02, 0.03])
-        self.assertEqual(model.ALPOC, 0.5)
-        self.assertEqual(model.ALPLC, 1.0)
-        self.assertEqual(model.ACLMC, 1.5)
-        self.assertEqual(model.CLMC, 0.8)
-        self.assertEqual(model.CLAC, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMAC, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CDC, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CLC, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMC, [0.01, 0.02, 0.03])
-        self.assertEqual(model.ALPOW, 0.5)
-        self.assertEqual(model.ALPLW, 1.0)
-        self.assertEqual(model.ACLMW, 1.5)
-        self.assertEqual(model.CLMW, 0.8)
-        self.assertEqual(model.CLAW, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMAW, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CDW, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CLW, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMW, [0.01, 0.02, 0.03])
-        self.assertEqual(model.ALPOH, 0.5)
-        self.assertEqual(model.ALPLH, 1.0)
-        self.assertEqual(model.ACLMH, 1.5)
-        self.assertEqual(model.CLMH, 0.8)
-        self.assertEqual(model.CLAH, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMAH, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CDH, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CLH, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMH, [0.01, 0.02, 0.03])
-        self.assertEqual(model.ALPOV, 0.5)
-        self.assertEqual(model.ALPLV, 1.0)
-        self.assertEqual(model.ACLMV, 1.5)
-        self.assertEqual(model.CLMV, 0.8)
-        self.assertEqual(model.CLAV, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMAV, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CDV, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CLV, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMV, [0.01, 0.02, 0.03])
-        self.assertEqual(model.ALPOF, 0.5)
-        self.assertEqual(model.ALPLF, 1.0)
-        self.assertEqual(model.ACLMF, 1.5)
-        self.assertEqual(model.CLMF, 0.8)
-        self.assertEqual(model.CLAF, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMAF, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CDF, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CLF, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMF, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CLAWB, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMAWB, [0.01, 0.02, 0.03])
-        self.assertEqual(model.CDWB, [0.001, 0.002, 0.003])
-        self.assertEqual(model.CLWB, [0.1, 0.2, 0.3])
-        self.assertEqual(model.CMWB, [0.01, 0.02, 0.03])
-        self.assertEqual(model.DEODA, [0.1, 0.2, 0.3])
-        self.assertEqual(model.EPSLON, [0.1, 0.2, 0.3])
-        self.assertEqual(model.QHOQINF, [0.1, 0.2, 0.3])
+        assert model.CLalpha_body == [0.1, 0.2, 0.3]
+        assert model.CMalpha_body == [0.01, 0.02, 0.03]
+        assert model.CD_body == [0.001, 0.002, 0.003]
+        assert model.CL_body == [0.1, 0.2, 0.3]
+        assert model.CM_body == [0.01, 0.02, 0.03]
+        assert model.ALPOC == 0.5
+        assert model.ALPLC == 1.0
+        assert model.ACLMC == 1.5
+        assert model.CLMC == 0.8
+        assert model.CLAC == [0.1, 0.2, 0.3]
+        assert model.CMAC == [0.01, 0.02, 0.03]
+        assert model.CDC == [0.001, 0.002, 0.003]
+        assert model.CLC == [0.1, 0.2, 0.3]
+        assert model.CMC == [0.01, 0.02, 0.03]
+        assert model.ALPOW == 0.5
+        assert model.ALPLW == 1.0
+        assert model.ACLMW == 1.5
+        assert model.CLMW == 0.8
+        assert model.CLAW == [0.1, 0.2, 0.3]
+        assert model.CMAW == [0.01, 0.02, 0.03]
+        assert model.CDW == [0.001, 0.002, 0.003]
+        assert model.CLW == [0.1, 0.2, 0.3]
+        assert model.CMW == [0.01, 0.02, 0.03]
+        assert model.ALPOH == 0.5
+        assert model.ALPLH == 1.0
+        assert model.ACLMH == 1.5
+        assert model.CLMH == 0.8
+        assert model.CLAH == [0.1, 0.2, 0.3]
+        assert model.CMAH == [0.01, 0.02, 0.03]
+        assert model.CDH == [0.001, 0.002, 0.003]
+        assert model.CLH == [0.1, 0.2, 0.3]
+        assert model.CMH == [0.01, 0.02, 0.03]
+        assert model.ALPOV == 0.5
+        assert model.ALPLV == 1.0
+        assert model.ACLMV == 1.5
+        assert model.CLMV == 0.8
+        assert model.CLAV == [0.1, 0.2, 0.3]
+        assert model.CMAV == [0.01, 0.02, 0.03]
+        assert model.CDV == [0.001, 0.002, 0.003]
+        assert model.CLV == [0.1, 0.2, 0.3]
+        assert model.CMV == [0.01, 0.02, 0.03]
+        assert model.ALPOF == 0.5
+        assert model.ALPLF == 1.0
+        assert model.ACLMF == 1.5
+        assert model.CLMF == 0.8
+        assert model.CLAF == [0.1, 0.2, 0.3]
+        assert model.CMAF == [0.01, 0.02, 0.03]
+        assert model.CDF == [0.001, 0.002, 0.003]
+        assert model.CLF == [0.1, 0.2, 0.3]
+        assert model.CMF == [0.01, 0.02, 0.03]
+        assert model.CLAWB == [0.1, 0.2, 0.3]
+        assert model.CMAWB == [0.01, 0.02, 0.03]
+        assert model.CDWB == [0.001, 0.002, 0.003]
+        assert model.CLWB == [0.1, 0.2, 0.3]
+        assert model.CMWB == [0.01, 0.02, 0.03]
+        assert model.DEODA == [0.1, 0.2, 0.3]
+        assert model.EPSLON == [0.1, 0.2, 0.3]
+        assert model.QHOQINF == [0.1, 0.2, 0.3]
 
         # Test invalid CLalpha_body
         data["CLalpha_body"] = [-0.1, 0.2, 0.3]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             AerodynamicsData(**data)
-
-
-if __name__ == "__main__":
-    unittest.main(argv=[""], exit=False)

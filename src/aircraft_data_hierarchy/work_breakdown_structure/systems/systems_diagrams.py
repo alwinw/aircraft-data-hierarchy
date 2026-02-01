@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Tuple
 
 import graphviz
-from IPython.display import HTML, Image, display
+from IPython.core.display import HTML, Image
+from IPython.display import display
 from tabulate import tabulate
 
-from .systems import System
+from .systems_parameters import System
 
 
 def create_system_diagram(system: System) -> graphviz.Digraph:
@@ -32,7 +33,7 @@ def create_system_diagram(system: System) -> graphviz.Digraph:
     return dot
 
 
-def create_system_attribute_tables(system: System) -> List[str]:
+def create_system_attribute_tables(system: System) -> List[Tuple[str, str]]:
     tables = []
 
     # Physical Characteristics

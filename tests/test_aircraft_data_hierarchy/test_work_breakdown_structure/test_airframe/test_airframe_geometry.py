@@ -1,5 +1,4 @@
-import unittest
-
+import pytest
 from pydantic import ValidationError
 
 from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
@@ -20,7 +19,7 @@ from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry
 )
 
 
-class TestPydanticModels(unittest.TestCase):
+class TestPydanticModels:
     def test_cross_section(self):
         # Test valid data
         points = [
@@ -34,14 +33,14 @@ class TestPydanticModels(unittest.TestCase):
         lower_curve = Spline(points=points)
         data = {"station": 0.5, "upper_curve": upper_curve, "lower_curve": lower_curve}
         model = CrossSection(**data)
-        self.assertEqual(model.station, 0.5)
-        self.assertEqual(model.upper_curve, upper_curve)
-        self.assertEqual(model.lower_curve, lower_curve)
+        assert model.station == 0.5
+        assert model.upper_curve == upper_curve
+        assert model.lower_curve == lower_curve
 
         # Test missing both curves
         data = {"station": 0.5}
-        with self.assertRaises(ValidationError):
-            CrossSection(**data)
+        with pytest.raises(ValidationError):
+            CrossSection(**data)  # pyright: ignore[reportArgumentType]
 
     def test_body_geometry(self):
         # Test valid data
@@ -56,12 +55,12 @@ class TestPydanticModels(unittest.TestCase):
         cross_section = CrossSection(station=0.5, upper_curve=Spline(points=points))
         data = {"reference_axis": reference_axis, "cross_sections": [cross_section]}
         model = Body(**data)
-        self.assertEqual(model.reference_axis, reference_axis)
-        self.assertEqual(model.cross_sections, [cross_section])
+        assert model.reference_axis == reference_axis
+        assert model.cross_sections == [cross_section]
 
         # Test missing cross_sections
         data["cross_sections"] = []
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Body(**data)
 
     def test_lifting_surface_geometry(self):
@@ -82,39 +81,39 @@ class TestPydanticModels(unittest.TestCase):
             "airfoil_sections": [airfoil_section],
         }
         model = LiftingSurface(**data)
-        self.assertEqual(model.leading_edge_spline, leading_edge_spline)
-        self.assertEqual(model.trailing_edge_spline, trailing_edge_spline)
-        self.assertEqual(model.airfoil_sections, [airfoil_section])
+        assert model.leading_edge_spline == leading_edge_spline
+        assert model.trailing_edge_spline == trailing_edge_spline
+        assert model.airfoil_sections == [airfoil_section]
 
         # Test missing airfoil_sections
         data["airfoil_sections"] = []
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             LiftingSurface(**data)
 
 
-class TestPoint(unittest.TestCase):
+class TestPoint:
     def test_point_creation(self):
         point = Point(x=1.0, y=2.0, z=3.0)
-        self.assertEqual(point.x, 1.0)
-        self.assertEqual(point.y, 2.0)
-        self.assertEqual(point.z, 3.0)
+        assert point.x == 1.0
+        assert point.y == 2.0
+        assert point.z == 3.0
 
     def test_point_distance(self):
         point1 = Point(x=0.0, y=0.0, z=0.0)
         point2 = Point(x=1.0, y=1.0, z=1.0)
-        self.assertAlmostEqual(point1.distance_to(point2), 1.732, places=3)
+        assert point1.distance_to(point2) == pytest.approx(1.732, abs=1e-3)
 
 
-class TestPolyline(unittest.TestCase):
+class TestPolyline:
     def test_polyline_creation(self):
         points = [Point(x=0.0, y=0.0, z=0.0), Point(x=1.0, y=1.0, z=1.0)]
         polyline = Polyline(points=points)
-        self.assertEqual(len(polyline.points), 2)
+        assert len(polyline.points) == 2
 
     def test_polyline_length(self):
         points = [Point(x=0.0, y=0.0, z=0.0), Point(x=1.0, y=1.0, z=1.0)]
         polyline = Polyline(points=points)
-        self.assertAlmostEqual(polyline.length(), 1.732, places=3)
+        assert polyline.length() == pytest.approx(1.732, abs=1e-3)
 
     def test_polyline_simplify(self):
         points = [
@@ -124,15 +123,15 @@ class TestPolyline(unittest.TestCase):
         ]
         polyline = Polyline(points=points)
         simplified_polyline = polyline.simplify(tolerance=0.1)
-        self.assertEqual(len(simplified_polyline.points), 2)
+        assert len(simplified_polyline.points) == 2
 
 
-class TestMesh(unittest.TestCase):
+class TestMesh:
     def test_mesh_creation(self):
         points = [Point(x=0.0, y=0.0, z=0.0), Point(x=1.0, y=1.0, z=1.0)]
         polyline = Polyline(points=points)
         mesh = Mesh(polylines=[polyline])
-        self.assertEqual(len(mesh.polylines), 1)
+        assert len(mesh.polylines) == 1
 
     # TODO: Fix Issue with unexpected is_manifold() results
     # def test_mesh_is_manifold(self):
@@ -155,10 +154,10 @@ class TestMesh(unittest.TestCase):
         ]
         polyline = Polyline(points=points)
         mesh = Mesh(polylines=[polyline])
-        self.assertAlmostEqual(mesh.calculate_volume(), 0.0, places=3)
+        assert mesh.calculate_volume() == pytest.approx(0.0, abs=1e-3)
 
 
-class TestSpline(unittest.TestCase):
+class TestSpline:
     def test_spline_creation(self):
         points = [
             Point(x=0.0, y=0.0, z=0.0),
@@ -167,16 +166,16 @@ class TestSpline(unittest.TestCase):
             Point(x=3.0, y=3.0, z=3.0),
         ]
         spline = Spline(points=points, degree=3)
-        self.assertEqual(len(spline.points), 4)
-        self.assertEqual(spline.degree, 3)
+        assert len(spline.points) == 4
+        assert spline.degree == 3
 
     def test_spline_validation(self):
         points = [Point(x=0.0, y=0.0, z=0.0)]
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Spline(points=points, degree=3)
 
 
-class TestLoft(unittest.TestCase):
+class TestLoft:
     def test_loft_creation(self):
         points1 = [
             Point(x=0.0, y=0.0, z=0.0),
@@ -193,8 +192,8 @@ class TestLoft(unittest.TestCase):
         spline1 = Spline(points=points1, degree=4)
         spline2 = Spline(points=points2, degree=4)
         loft = Loft(splines=[spline1, spline2], num_samples=10)
-        self.assertEqual(len(loft.splines), 2)
-        self.assertEqual(loft.num_samples, 10)
+        assert len(loft.splines) == 2
+        assert loft.num_samples == 10
 
     def test_loft_calculate_surface(self):
         points1 = [
@@ -213,56 +212,52 @@ class TestLoft(unittest.TestCase):
         spline2 = Spline(points=points2, degree=4)
         loft = Loft(splines=[spline1, spline2], num_samples=10)
         surface = loft.calculate_surface()
-        self.assertEqual(len(surface), 40)  # 2 splines * 10 samples
+        assert len(surface) == 40  # 2 splines * 10 samples
 
 
-class TestString(unittest.TestCase):
+class TestString:
     def test_string_creation(self):
         metadata = Metadata(key="example_key", value="example_value")
         string = String(value="test", default="default", metadata=metadata)
-        self.assertEqual(string.value, "test")
-        self.assertEqual(string.default, "default")
+        assert string.value == "test"
+        assert string.default == "default"
 
     def test_string_validation(self):
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             String(value="")
 
 
-class TestBoolean(unittest.TestCase):
+class TestBoolean:
     def test_boolean_creation(self):
         metadata = Metadata(key="example_key", value="example_value")
         boolean = Boolean(value=True, default=False, metadata=metadata)
-        self.assertTrue(boolean.value)
-        self.assertFalse(boolean.default)
+        assert boolean.value is True
+        assert boolean.default is False
 
     def test_boolean_validation(self):
-        with self.assertRaises(ValidationError):
-            Boolean(value="not a boolean")
+        with pytest.raises(ValidationError):
+            Boolean(value="not a boolean")  # pyright: ignore[reportArgumentType]
 
 
-class TestFloat(unittest.TestCase):
+class TestFloat:
     def test_float_creation(self):
         metadata = Metadata(key="example_key", value="example_value")
         float_var = Float(value=1.23, default=0.0, metadata=metadata)
-        self.assertAlmostEqual(float_var.value, 1.23)
-        self.assertAlmostEqual(float_var.default, 0.0)
+        assert float_var.value == pytest.approx(1.23)
+        assert float_var.default == pytest.approx(0.0)
 
     def test_float_validation(self):
-        with self.assertRaises(ValidationError):
-            Float(value="not a float")
+        with pytest.raises(ValidationError):
+            Float(value="not a float")  # pyright: ignore[reportArgumentType]
 
 
-class TestInteger(unittest.TestCase):
+class TestInteger:
     def test_integer_creation(self):
         metadata = Metadata(key="example_key", value="example_value")
         integer = Integer(value=123, default=0, metadata=metadata)
-        self.assertEqual(integer.value, 123)
-        self.assertEqual(integer.default, 0)
+        assert integer.value == 123
+        assert integer.default == 0
 
     def test_integer_validation(self):
-        with self.assertRaises(ValidationError):
-            Integer(value="not an integer")
-
-
-if __name__ == "__main__":
-    unittest.main(argv=["first-arg-is-ignored"], exit=False)
+        with pytest.raises(ValidationError):
+            Integer(value="not an integer")  # pyright: ignore[reportArgumentType]

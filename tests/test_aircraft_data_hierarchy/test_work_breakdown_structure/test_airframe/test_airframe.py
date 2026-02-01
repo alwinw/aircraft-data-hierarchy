@@ -1,5 +1,4 @@
-import unittest
-
+import pytest
 from pydantic import ValidationError
 
 from aircraft_data_hierarchy.behavior import Behavior
@@ -9,7 +8,7 @@ from aircraft_data_hierarchy.requirements import Requirement
 from aircraft_data_hierarchy.work_breakdown_structure.airframe import Component
 
 
-class TestComponent(unittest.TestCase):
+class TestComponent:
     """Unit tests for the Component class."""
 
     def test_component_creation(self):
@@ -37,36 +36,39 @@ class TestComponent(unittest.TestCase):
             ],
             behavior=[Behavior(name="Behavior1", description="Behavior description")],
         )
-        self.assertEqual(component.name, "Engine")
-        self.assertEqual(component.description, "Main engine component")
-        self.assertEqual(component.metadata, metadata)
-        self.assertEqual(len(component.requirements), 1)
-        self.assertEqual(component.subcomponents, [])
-        self.assertEqual(len(component.performance), 1)
-        self.assertEqual(len(component.behavior), 1)
+        assert component.name == "Engine"
+        assert component.description == "Main engine component"
+        assert component.metadata == metadata
+        assert component.requirements is not None
+        assert len(component.requirements) == 1
+        assert component.subcomponents == []
+        assert component.performance is not None
+        assert len(component.performance) == 1
+        assert component.behavior is not None
+        assert len(component.behavior) == 1
 
     def test_default_values(self):
         """
         Test that default values are set correctly.
         """
         component = Component()
-        self.assertIsNone(component.name)
-        self.assertIsNone(component.description)
-        self.assertIsNone(component.requirements)
-        self.assertIsNone(component.subcomponents)
-        self.assertIsNone(component.geometry)
-        self.assertIsNone(component.parameters)
-        self.assertIsNone(component.metadata)
-        self.assertIsNone(component.performance)
-        self.assertIsNone(component.behavior)
+        assert component.name is None
+        assert component.description is None
+        assert component.requirements is None
+        assert component.subcomponents is None
+        assert component.geometry is None
+        assert component.parameters is None
+        assert component.metadata is None
+        assert component.performance is None
+        assert component.behavior is None
 
     def test_non_empty_validation(self):
         """
         Test that name and description fields must not be empty or whitespace only.
         """
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Component(name=" ", description="Valid description")
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Component(name="Valid name", description=" ")
 
     def test_optional_fields(self):
@@ -74,15 +76,15 @@ class TestComponent(unittest.TestCase):
         Test that optional fields can be omitted.
         """
         component = Component(name="Engine", description="Main engine component")
-        self.assertEqual(component.name, "Engine")
-        self.assertEqual(component.description, "Main engine component")
-        self.assertIsNone(component.requirements)
-        self.assertIsNone(component.subcomponents)
-        self.assertIsNone(component.geometry)
-        self.assertIsNone(component.parameters)
-        self.assertIsNone(component.metadata)
-        self.assertIsNone(component.performance)
-        self.assertIsNone(component.behavior)
+        assert component.name == "Engine"
+        assert component.description == "Main engine component"
+        assert component.requirements is None
+        assert component.subcomponents is None
+        assert component.geometry is None
+        assert component.parameters is None
+        assert component.metadata is None
+        assert component.performance is None
+        assert component.behavior is None
 
     def test_recursive_subcomponents(self):
         """
@@ -94,10 +96,7 @@ class TestComponent(unittest.TestCase):
             description="Main engine component",
             subcomponents=[subcomponent],
         )
-        self.assertEqual(len(component.subcomponents), 1)
-        self.assertEqual(component.subcomponents[0].name, "SubEngine")
-        self.assertEqual(component.subcomponents[0].description, "Sub engine component")
-
-
-if __name__ == "__main__":
-    unittest.main(argv=[""], exit=False)
+        assert component.subcomponents is not None
+        assert len(component.subcomponents) == 1
+        assert component.subcomponents[0].name == "SubEngine"
+        assert component.subcomponents[0].description == "Sub engine component"

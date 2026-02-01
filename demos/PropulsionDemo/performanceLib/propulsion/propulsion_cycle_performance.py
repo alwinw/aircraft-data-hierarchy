@@ -22,14 +22,14 @@ class PropulsionCyclePerformance(ModelDescription):
         "TABULAR", description="The thermodynamic method used in the engine cycle."
     )
     thermo_data: Optional[str] = Field(
-        None, description="The thermodynamic data used in the engine cycle."
+        default=None, description="The thermodynamic data used in the engine cycle."
     )
     throttle_mode: str = Field(
         "T4",
         description="What quantity should be used to throttle engine for off-design cases.",
     )
     solver_settings: Optional[dict] = Field(
-        None, description="The solver settings for the engine cycle."
+        default=None, description="The solver settings for the engine cycle."
     )
 
     @field_validator("thermo_method")

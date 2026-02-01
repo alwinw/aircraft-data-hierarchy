@@ -1,5 +1,4 @@
-import unittest
-
+import pytest
 from pydantic import ValidationError
 
 from aircraft_data_hierarchy.common_base_model import Metadata
@@ -9,7 +8,7 @@ from aircraft_data_hierarchy.requirements import (
 )  # Replace 'your_module' with the actual module name
 
 
-class TestRequirement(unittest.TestCase):
+class TestRequirement:
     def test_valid_requirement(self):
         """Test creating a valid Requirement instance."""
         metadata = Metadata(key="example_key", value="example_value")
@@ -27,22 +26,22 @@ class TestRequirement(unittest.TestCase):
             verification_evidence="Test report",
             metadata=metadata,
         )
-        self.assertEqual(req.name, "REQ-001")
-        self.assertEqual(req.description, "This is a test requirement.")
-        self.assertEqual(req.category, "performance")
-        self.assertEqual(req.priority, "high")
-        self.assertEqual(req.verification_method, "test")
-        self.assertEqual(req.status, "open")
-        self.assertEqual(req.source, "customer")
-        self.assertEqual(req.target_component, "component-1")
-        self.assertEqual(req.acceptance_criteria, "Must pass all tests.")
-        self.assertEqual(req.risk, "Low risk")
-        self.assertEqual(req.verification_evidence, "Test report")
-        self.assertIsInstance(req.metadata, Metadata)
+        assert req.name == "REQ-001"
+        assert req.description == "This is a test requirement."
+        assert req.category == "performance"
+        assert req.priority == "high"
+        assert req.verification_method == "test"
+        assert req.status == "open"
+        assert req.source == "customer"
+        assert req.target_component == "component-1"
+        assert req.acceptance_criteria == "Must pass all tests."
+        assert req.risk == "Low risk"
+        assert req.verification_evidence == "Test report"
+        assert isinstance(req.metadata, Metadata)
 
     def test_invalid_requirement_empty_fields(self):
         """Test creating a Requirement instance with empty critical fields."""
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Requirement(
                 name="",
                 description="",
@@ -62,16 +61,16 @@ class TestRequirement(unittest.TestCase):
             status="in progress",
             acceptance_criteria="Must meet analysis criteria.",
         )
-        self.assertIsNone(req.category)
-        self.assertIsNone(req.source)
-        self.assertIsNone(req.target_component)
-        self.assertIsNone(req.risk)
-        self.assertIsNone(req.verification_evidence)
-        self.assertIsNone(req.metadata)
+        assert req.category is None
+        assert req.source is None
+        assert req.target_component is None
+        assert req.risk is None
+        assert req.verification_evidence is None
+        assert req.metadata is None
 
 
-class TestRequirements(unittest.TestCase):
-    def setUp(self):
+class TestRequirements:
+    def setup_method(self):
         """Set up a Requirements instance for testing."""
         metadata = Metadata(key="example_key", value="example_value")
         self.requirements = Requirements(
@@ -91,9 +90,9 @@ class TestRequirements(unittest.TestCase):
             acceptance_criteria="Must pass inspection.",
         )
         self.requirements.add_requirement(req, "safety")
-        self.assertIn("safety", self.requirements.requirements)
-        self.assertEqual(len(self.requirements.requirements["safety"]), 1)
-        self.assertEqual(self.requirements.requirements["safety"][0].name, "REQ-003")
+        assert "safety" in self.requirements.requirements
+        assert len(self.requirements.requirements["safety"]) == 1
+        assert self.requirements.requirements["safety"][0].name == "REQ-003"
 
     def test_remove_requirement(self):
         """Test removing a requirement from a category."""
@@ -107,13 +106,13 @@ class TestRequirements(unittest.TestCase):
         )
         self.requirements.add_requirement(req, "performance")
         self.requirements.remove_requirement("REQ-004", "performance")
-        self.assertNotIn(
-            "REQ-004", [r.name for r in self.requirements.requirements["performance"]]
-        )
+        assert "REQ-004" not in [
+            r.name for r in self.requirements.requirements["performance"]
+        ]
 
     def test_remove_nonexistent_requirement(self):
         """Test removing a non-existent requirement."""
-        with self.assertRaises(ValueError):
+        with pytest.raises(ValueError):
             self.requirements.remove_requirement("REQ-999", "performance")
 
     def test_get_requirements_by_category(self):
@@ -137,15 +136,11 @@ class TestRequirements(unittest.TestCase):
         self.requirements.add_requirement(req1, "design")
         self.requirements.add_requirement(req2, "design")
         design_reqs = self.requirements.get_requirements_by_category("design")
-        self.assertEqual(len(design_reqs), 2)
-        self.assertEqual(design_reqs[0].name, "REQ-005")
-        self.assertEqual(design_reqs[1].name, "REQ-006")
+        assert len(design_reqs) == 2
+        assert design_reqs[0].name == "REQ-005"
+        assert design_reqs[1].name == "REQ-006"
 
     def test_get_requirements_by_nonexistent_category(self):
         """Test retrieving requirements from a non-existent category."""
-        with self.assertRaises(ValueError):
+        with pytest.raises(ValueError):
             self.requirements.get_requirements_by_category("nonexistent")
-
-
-if __name__ == "__main__":
-    unittest.main(argv=["first-arg-is-ignored"], exit=False)

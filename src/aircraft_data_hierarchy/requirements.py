@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from pydantic import Field, field_validator
+from pydantic import Field, ValidationInfo, field_validator
 
 from .common_base_model import CommonBaseModel, Metadata
 
@@ -33,7 +33,7 @@ class Requirement(CommonBaseModel):
         ..., description="A detailed description of the requirement."
     )
     category: Optional[str] = Field(
-        None, description="The category of the requirement."
+        default=None, description="The category of the requirement."
     )
     priority: str = Field(..., description="The priority level of the requirement.")
     verification_method: str = Field(
@@ -41,22 +41,24 @@ class Requirement(CommonBaseModel):
     )
     status: str = Field(..., description="The current status of the requirement.")
     source: Optional[str] = Field(
-        None, description="The source or origin of the requirement."
+        default=None, description="The source or origin of the requirement."
     )
     target_component: Optional[str] = Field(
-        None, description="The component or system to which the requirement applies."
+        default=None,
+        description="The component or system to which the requirement applies.",
     )
     acceptance_criteria: str = Field(
         ..., description="The criteria for the requirement to be considered satisfied."
     )
     risk: Optional[str] = Field(
-        None, description="Potential risks associated with the requirement."
+        default=None, description="Potential risks associated with the requirement."
     )
     verification_evidence: Optional[str] = Field(
-        None, description="Evidence demonstrating the verification of the requirement."
+        default=None,
+        description="Evidence demonstrating the verification of the requirement.",
     )
     metadata: Optional[Metadata] = Field(
-        None, description="Additional metadata about the requirement."
+        default=None, description="Additional metadata about the requirement."
     )
 
     @field_validator(
@@ -113,17 +115,17 @@ class Requirements(CommonBaseModel):
         description="Dictionary mapping requirement categories to requirement lists.",
     )
     metadata: Optional[Metadata] = Field(
-        None,
+        default=None,
         description="Additional metadata for the requirements.",
     )
 
     @field_validator("name", "description")
-    def validate_non_empty(cls, value: str, field: Field) -> str:
+    def validate_non_empty(cls, value: str, info: ValidationInfo) -> str:
         """Validate that the name and description fields are not empty.
 
         Args:
             value: The value of the field being validated.
-            field: The metadata of the field being validated.
+            info: Validation context information for the field being validated.
 
         Raises:
             ValueError: If the field value is empty or just whitespace.
@@ -133,7 +135,7 @@ class Requirements(CommonBaseModel):
         """
         if not value.strip():
             raise ValueError(
-                f"The '{field.name}' field cannot be empty or just whitespace."
+                f"The '{info.field_name}' field cannot be empty or just whitespace."
             )
         return value
 

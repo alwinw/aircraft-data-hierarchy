@@ -1,7 +1,7 @@
-import unittest
 import uuid
 from datetime import datetime
 
+import pytest
 from pydantic import ValidationError
 
 from aircraft_data_hierarchy.common_base_model import Metadata
@@ -11,25 +11,23 @@ from aircraft_data_hierarchy.performance import (
     ModelDescription,
 )
 
-# Assuming the classes DataExchange, ModelDescription, and Discipline are already defined as provided
 
-
-class TestModels(unittest.TestCase):
+class TestModels:
     def test_data_exchange_creation(self):
         data_exchange = DataExchange(
             model_identifier="model_123",
             inputs=["input1", "input2"],
             outputs=["output1"],
         )
-        self.assertEqual(data_exchange.model_identifier, "model_123")
-        self.assertEqual(data_exchange.inputs, ["input1", "input2"])
-        self.assertEqual(data_exchange.outputs, ["output1"])
+        assert data_exchange.model_identifier == "model_123"
+        assert data_exchange.inputs == ["input1", "input2"]
+        assert data_exchange.outputs == ["output1"]
 
     def test_data_exchange_optional_fields(self):
         data_exchange = DataExchange()
-        self.assertIsNone(data_exchange.model_identifier)
-        self.assertEqual(data_exchange.inputs, [])
-        self.assertEqual(data_exchange.outputs, [])
+        assert data_exchange.model_identifier is None
+        assert data_exchange.inputs == []
+        assert data_exchange.outputs == []
 
     def test_model_description_creation(self):
         data_exchange = DataExchange(
@@ -50,30 +48,30 @@ class TestModels(unittest.TestCase):
             version="1.0",
             description="A test model",
         )
-        self.assertEqual(model_description.specification_version, "2.0")
-        self.assertEqual(model_description.model_name, "Test Model")
-        self.assertEqual(model_description.data_exchange, data_exchange)
+        assert model_description.specification_version == "2.0"
+        assert model_description.model_name == "Test Model"
+        assert model_description.data_exchange == data_exchange
 
     def test_model_description_optional_fields(self):
         model_description = ModelDescription()
-        self.assertIsNone(model_description.specification_version)
-        self.assertIsNone(model_description.model_name)
-        self.assertIsNone(model_description.guid)
-        self.assertIsNone(model_description.generation_tool)
-        self.assertIsNone(model_description.generation_date_and_time)
-        self.assertIsNone(model_description.data_exchange)
-        self.assertIsNone(model_description.license)
-        self.assertIsNone(model_description.copyright)
-        self.assertIsNone(model_description.author)
-        self.assertIsNone(model_description.version)
-        self.assertIsNone(model_description.description)
+        assert model_description.specification_version is None
+        assert model_description.model_name is None
+        assert model_description.guid is None
+        assert model_description.generation_tool is None
+        assert model_description.generation_date_and_time is None
+        assert model_description.data_exchange is None
+        assert model_description.license is None
+        assert model_description.copyright is None
+        assert model_description.author is None
+        assert model_description.version is None
+        assert model_description.description is None
 
     def test_model_description_invalid_specification_version(self):
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             ModelDescription(specification_version="1.0")
 
     def test_model_description_invalid_guid(self):
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             ModelDescription(guid="invalid-guid")
 
     def test_discipline_creation(self):
@@ -84,21 +82,21 @@ class TestModels(unittest.TestCase):
             tools=[],
             metadata=metadata,
         )
-        self.assertEqual(discipline.name, "Aerodynamics")
-        self.assertEqual(discipline.description, "Study of the motion of air")
-        self.assertEqual(discipline.tools, [])
-        self.assertEqual(discipline.metadata, metadata)
+        assert discipline.name == "Aerodynamics"
+        assert discipline.description == "Study of the motion of air"
+        assert discipline.tools == []
+        assert discipline.metadata == metadata
 
     def test_discipline_optional_fields(self):
         metadata = Metadata(key="example_key", value="example_value")
         discipline = Discipline(metadata=metadata)
-        self.assertIsNone(discipline.name)
-        self.assertIsNone(discipline.description)
-        self.assertEqual(discipline.tools, [])
-        self.assertIsNotNone(discipline.metadata)
+        assert discipline.name is None
+        assert discipline.description is None
+        assert discipline.tools == []
+        assert discipline.metadata is not None
 
     def test_discipline_invalid_name(self):
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             Discipline(
                 name="Invalid Name!",
                 metadata=Metadata(key="example_key", value="example_value"),
@@ -131,9 +129,6 @@ class TestModels(unittest.TestCase):
             description="A test model",
         )
         discipline.add_tool(model_description)
-        self.assertEqual(len(discipline.tools), 1)
-        self.assertEqual(discipline.tools[0], model_description)
-
-
-# Run the tests
-unittest.main(argv=[""], verbosity=2, exit=False)
+        assert discipline.tools is not None
+        assert len(discipline.tools) == 1
+        assert discipline.tools[0] == model_description
