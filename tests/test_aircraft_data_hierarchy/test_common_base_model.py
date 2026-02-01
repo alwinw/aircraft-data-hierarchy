@@ -7,7 +7,7 @@ from aircraft_data_hierarchy.common_base_model import (
     Metadata,
     NodeNotFoundError,
     PathAlreadyExistsError,
-)  # Replace 'your_module' with the actual module name
+)
 
 
 class TestCommonBaseModel(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestCommonBaseModel(unittest.TestCase):
 
     def test_create_node_invalid_data(self):
         with self.assertRaises(TypeError):
-            self.model.create_node("root.node1", "invalid_data")
+            self.model.create_node("root.node1", "invalid_data")  # pyright: ignore[reportArgumentType]
 
     def test_get_node(self):
         self.model.create_node("root.node1", {"key": "value"})
@@ -44,7 +44,7 @@ class TestCommonBaseModel(unittest.TestCase):
     def test_update_node_invalid_data(self):
         self.model.create_node("root.node1", {"key": "value"})
         with self.assertRaises(TypeError):
-            self.model.update_node("root.node1", "invalid_data")
+            self.model.update_node("root.node1", "invalid_data")  # pyright: ignore[reportArgumentType]
 
     def test_delete_node(self):
         self.model.create_node("root.node1", {"key": "value"})

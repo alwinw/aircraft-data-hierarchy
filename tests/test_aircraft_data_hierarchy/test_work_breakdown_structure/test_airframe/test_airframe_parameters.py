@@ -47,7 +47,7 @@ class TestPydanticModels(unittest.TestCase):
         # Test invalid roughness
         data["RougHgt"] = 0.03
         with self.assertRaises(ValidationError):
-            ReferenceData(**data)
+            ReferenceData(**data)  # pyright: ignore[reportArgumentType]
 
     def test_flight_conditions(self):
         # Test valid data
@@ -309,7 +309,7 @@ class TestPydanticModels(unittest.TestCase):
         # Test invalid span_above
         data["span_above"] = -1.5
         with self.assertRaises(ValidationError):
-            TwinVerticalTail(**data)
+            TwinVerticalTail(**data)  # pyright: ignore[reportArgumentType]
 
     def test_ground_effects_definition(self):
         # Test valid data

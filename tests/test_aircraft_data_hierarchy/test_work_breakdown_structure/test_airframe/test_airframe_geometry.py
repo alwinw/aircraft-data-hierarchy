@@ -41,7 +41,7 @@ class TestPydanticModels(unittest.TestCase):
         # Test missing both curves
         data = {"station": 0.5}
         with self.assertRaises(ValidationError):
-            CrossSection(**data)
+            CrossSection(**data)  # pyright: ignore[reportArgumentType]
 
     def test_body_geometry(self):
         # Test valid data
@@ -237,7 +237,7 @@ class TestBoolean(unittest.TestCase):
 
     def test_boolean_validation(self):
         with self.assertRaises(ValidationError):
-            Boolean(value="not a boolean")
+            Boolean(value="not a boolean")  # pyright: ignore[reportArgumentType]
 
 
 class TestFloat(unittest.TestCase):
@@ -249,7 +249,7 @@ class TestFloat(unittest.TestCase):
 
     def test_float_validation(self):
         with self.assertRaises(ValidationError):
-            Float(value="not a float")
+            Float(value="not a float")  # pyright: ignore[reportArgumentType]
 
 
 class TestInteger(unittest.TestCase):
@@ -261,7 +261,7 @@ class TestInteger(unittest.TestCase):
 
     def test_integer_validation(self):
         with self.assertRaises(ValidationError):
-            Integer(value="not an integer")
+            Integer(value="not an integer")  # pyright: ignore[reportArgumentType]
 
 
 if __name__ == "__main__":

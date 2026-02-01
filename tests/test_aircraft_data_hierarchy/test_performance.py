@@ -11,8 +11,6 @@ from aircraft_data_hierarchy.performance import (
     ModelDescription,
 )
 
-# Assuming the classes DataExchange, ModelDescription, and Discipline are already defined as provided
-
 
 class TestModels(unittest.TestCase):
     def test_data_exchange_creation(self):
@@ -131,6 +129,7 @@ class TestModels(unittest.TestCase):
             description="A test model",
         )
         discipline.add_tool(model_description)
+        assert discipline.tools is not None
         self.assertEqual(len(discipline.tools), 1)
         self.assertEqual(discipline.tools[0], model_description)
 

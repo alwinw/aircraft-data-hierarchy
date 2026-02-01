@@ -40,9 +40,12 @@ class TestComponent(unittest.TestCase):
         self.assertEqual(component.name, "Engine")
         self.assertEqual(component.description, "Main engine component")
         self.assertEqual(component.metadata, metadata)
+        assert component.requirements is not None
         self.assertEqual(len(component.requirements), 1)
         self.assertEqual(component.subcomponents, [])
+        assert component.performance is not None
         self.assertEqual(len(component.performance), 1)
+        assert component.behavior is not None
         self.assertEqual(len(component.behavior), 1)
 
     def test_default_values(self):
@@ -94,6 +97,7 @@ class TestComponent(unittest.TestCase):
             description="Main engine component",
             subcomponents=[subcomponent],
         )
+        assert component.subcomponents is not None
         self.assertEqual(len(component.subcomponents), 1)
         self.assertEqual(component.subcomponents[0].name, "SubEngine")
         self.assertEqual(component.subcomponents[0].description, "Sub engine component")

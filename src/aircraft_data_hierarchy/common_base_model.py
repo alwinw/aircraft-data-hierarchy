@@ -20,14 +20,14 @@ class CommonBaseModel(BaseModel):
     A base model providing common validation logic for all derived models.
 
     Attributes:
-        adh_data (Optional[Dict[str, Any]]): Dictionary for storing additional data.
-        adh_root (Optional[Dict[str, Any]]): Dictionary representing the root of the ADH (Application Data Hierarchy).
-        aliases (Optional[Dict[str, str]]): Dictionary for storing alias to path mappings.
+        adh_data (Dict[str, Any]): Dictionary for storing additional data.
+        adh_root (Dict[str, Any]): Dictionary representing the root of the ADH (Application Data Hierarchy).
+        aliases (Dict[str, str]): Dictionary for storing alias to path mappings.
     """
 
-    adh_data: Optional[Dict[str, Any]] = Field(default_factory=dict)
-    adh_root: Optional[Dict[str, Any]] = Field(default_factory=dict)
-    aliases: Optional[Dict[str, str]] = Field(default_factory=dict)
+    adh_data: Dict[str, Any] = Field(default_factory=dict)
+    adh_root: Dict[str, Any] = Field(default_factory=dict)
+    aliases: Dict[str, str] = Field(default_factory=dict)
 
     model_config = ConfigDict(
         validate_assignment=True,
