@@ -35,10 +35,19 @@ classifiers = [
 ]
 dependencies = [
   "pydantic>=2.0",
-  "graphviz>=0.20",  # for systems diagrams
-  "tabulate>=0.9",   # for systems diagrams
-  "ipython>=8.12.3", # for systems diagrams
 ]
+
+[project.optional-dependencies]
+diagrams = [
+  "graphviz>=0.20",
+  "tabulate>=0.9",
+  "IPython>=8.12.3",
+]
+
+[project.urls]
+Repository = "https://github.com/Boeing/aircraft-data-hierarchy"
+Documentation = "https://boeing.github.io/aircraft-data-hierarchy/"
+Releases = "https://github.com/Boeing/aircraft-data-hierarchy/releases"
 
 [build-system]
 requires = ["hatchling"]
@@ -69,11 +78,6 @@ test = [
   "pytest-cov>=5; python_version < '3.9'",
   "pytest-cov>=7; python_version >= '3.9'",
 ]
-
-[project.urls]
-Repository = "https://github.com/Boeing/aircraft-data-hierarchy"
-Documentation = "https://boeing.github.io/aircraft-data-hierarchy/"
-Releases = "https://github.com/Boeing/aircraft-data-hierarchy/releases"
 
 [tool.commitizen]
 name = "cz_conventional_commits"

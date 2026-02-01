@@ -1,14 +1,19 @@
-from typing import List, Tuple
-
-import graphviz
-from IPython.core.display import HTML, Image
-from IPython.display import display
-from tabulate import tabulate
+from typing import TYPE_CHECKING, List, Tuple
 
 from .systems_parameters import System
 
+if TYPE_CHECKING:
+    import graphviz
+
 
 def create_system_diagram(system: System) -> graphviz.Digraph:
+    try:
+        import graphviz
+    except ImportError as e:
+        raise RuntimeError(
+            "Optional diagrams dependencies not installed. Install with "
+            "'pip install \"aircraft-data-hierarchy[diagrams]\"'"
+        ) from e
     dot = graphviz.Digraph(comment=f"Functional Block Diagram - {system.name}")
     dot.attr(rankdir="LR", size="14,10", ratio="fill")
 
@@ -34,6 +39,13 @@ def create_system_diagram(system: System) -> graphviz.Digraph:
 
 
 def create_system_attribute_tables(system: System) -> List[Tuple[str, str]]:
+    try:
+        from tabulate import tabulate
+    except ImportError as e:
+        raise RuntimeError(
+            "Optional diagrams dependencies not installed. Install with "
+            "'pip install \"aircraft-data-hierarchy[diagrams]\"'"
+        ) from e
     tables = []
 
     # Physical Characteristics
@@ -121,6 +133,15 @@ def create_system_attribute_tables(system: System) -> List[Tuple[str, str]]:
 
 
 def display_system_info(system: System):
+    try:
+        from IPython.core.display import HTML, Image
+        from IPython.display import display
+    except ImportError as e:
+        raise RuntimeError(
+            "Optional diagrams dependencies not installed. Install with "
+            "'pip install \"aircraft-data-hierarchy[diagrams]\"'"
+        ) from e
+
     # Create and display the system diagram
     diagram = create_system_diagram(system)
     diagram.render("system_diagram", format="png", cleanup=True)
