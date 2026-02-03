@@ -642,7 +642,7 @@ class TestPydanticModels:
         with pytest.raises(ValidationError):
             JetPowerProperties(**data)
 
-    def test_aerodynamics_data(self):
+    def test_aerodynamics_data(self):  # noqa: PLR0915
         # Test valid data
         data = {
             "CLalpha_body": [0.1, 0.2, 0.3],

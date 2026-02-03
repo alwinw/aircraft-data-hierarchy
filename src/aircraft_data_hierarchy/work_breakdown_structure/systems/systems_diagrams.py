@@ -3,12 +3,14 @@ from typing import TYPE_CHECKING, List, Tuple
 from .systems_parameters import System
 
 if TYPE_CHECKING:
-    import graphviz
+    from graphviz import Digraph
+else:
+    Digraph = None
 
 
-def create_system_diagram(system: System) -> graphviz.Digraph:
+def create_system_diagram(system: System) -> Digraph:
     try:
-        import graphviz
+        import graphviz  # noqa: PLC0415
     except ImportError as e:
         raise RuntimeError(
             "Optional diagrams dependencies not installed. Install with "
@@ -40,7 +42,7 @@ def create_system_diagram(system: System) -> graphviz.Digraph:
 
 def create_system_attribute_tables(system: System) -> List[Tuple[str, str]]:
     try:
-        from tabulate import tabulate
+        from tabulate import tabulate  # noqa: PLC0415
     except ImportError as e:
         raise RuntimeError(
             "Optional diagrams dependencies not installed. Install with "
@@ -134,8 +136,8 @@ def create_system_attribute_tables(system: System) -> List[Tuple[str, str]]:
 
 def display_system_info(system: System):
     try:
-        from IPython.core.display import HTML, Image
-        from IPython.display import display
+        from IPython.core.display import HTML, Image  # noqa: PLC0415
+        from IPython.display import display  # noqa: PLC0415
     except ImportError as e:
         raise RuntimeError(
             "Optional diagrams dependencies not installed. Install with "

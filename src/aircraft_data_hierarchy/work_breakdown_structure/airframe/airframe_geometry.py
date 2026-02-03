@@ -159,10 +159,10 @@ class Float(CommonBaseModel):
         if isinstance(value, str):
             try:
                 return float(value)
-            except ValueError:
+            except ValueError as e:
                 raise ValueError(
                     f"Invalid string value for a float conversion: {value}"
-                )
+                ) from e
         return value
 
 
@@ -211,10 +211,10 @@ class Integer(CommonBaseModel):
         if isinstance(value, str):
             try:
                 return int(value)
-            except ValueError:
+            except ValueError as e:
                 raise ValueError(
                     f"Invalid string value for an integer conversion: {value}"
-                )
+                ) from e
         return value
 
 
@@ -924,6 +924,7 @@ class CrossSection(CommonBaseModel):
     )
 
     @model_validator(mode="before")
+    @classmethod
     def validate_curves(cls, values: dict) -> dict:
         """
         Validates that at least one of the upper or lower curve splines is provided.

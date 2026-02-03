@@ -689,13 +689,14 @@ class Function(CommonBaseModel):
 
     @field_validator("dependent_var_pts", "dependent_var_ref", "function_defn")
     def validate_function_type(cls, v, info: ValidationInfo):
-        if v is not None:
-            if info.data.get("independent_var_pts") and info.data.get(
-                "independent_var_ref"
-            ):
-                raise ValueError(
-                    "Function can't have both simple and complex representations"
-                )
+        if (
+            v is not None
+            and info.data.get("independent_var_pts")
+            and info.data.get("independent_var_ref")
+        ):
+            raise ValueError(
+                "Function can't have both simple and complex representations"
+            )
         return v
 
 

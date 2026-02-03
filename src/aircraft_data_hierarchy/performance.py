@@ -96,8 +96,10 @@ class ModelDescription(CommonBaseModel):
             try:
                 uuid_obj = uuid.UUID(v, version=4)
                 return str(uuid_obj)
-            except ValueError:
-                raise ValueError("Invalid GUID format. Must be a valid UUID version 4")
+            except ValueError as e:
+                raise ValueError(
+                    "Invalid GUID format. Must be a valid UUID version 4"
+                ) from e
         return v
 
 

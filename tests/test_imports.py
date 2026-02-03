@@ -4,7 +4,7 @@ import pytest
 class TestImports:
     def test_import_aircraft_data_hierarchy(self):
         try:
-            from aircraft_data_hierarchy import (
+            from aircraft_data_hierarchy import (  # noqa: PLC0415
                 Behavior,
                 CommonBaseModel,
                 DataExchange,
@@ -20,7 +20,7 @@ class TestImports:
 
     def test_import_work_breakdown_structure(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure import (
+            from aircraft_data_hierarchy.work_breakdown_structure import (  # noqa: PLC0415
                 AircraftSystem,
                 Equipment,
             )
@@ -35,7 +35,7 @@ class TestImports:
 
     def test_import_work_breakdown_structure_airframe(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure.airframe import (
+            from aircraft_data_hierarchy.work_breakdown_structure.airframe import (  # noqa: PLC0415
                 AerodynamicsData,
                 Component,
                 Loft,
@@ -52,7 +52,7 @@ class TestImports:
 
     def test_import_work_breakdown_structure_propulsion(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
+            from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (  # noqa: PLC0415
                 Propulsion,
                 PropulsionCycle,
                 PropulsionGeometry,
@@ -69,7 +69,7 @@ class TestImports:
 
     def test_import_work_breakdown_structure_systems(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure.systems import (
+            from aircraft_data_hierarchy.work_breakdown_structure.systems import (  # noqa: PLC0415
                 System,
                 SystemAttributes,
                 create_system_diagram,

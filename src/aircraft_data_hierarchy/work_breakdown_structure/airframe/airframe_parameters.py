@@ -162,6 +162,7 @@ class FlightConditions(CommonBaseModel):
         return v
 
     @model_validator(mode="before")
+    @classmethod
     def validate_list_lengths(cls, values):
         """
         Validate that the length of lists matches their corresponding quantity fields.
@@ -901,6 +902,7 @@ class Body(CommonBaseModel):
         return v
 
     @model_validator(mode="before")
+    @classmethod
     def validate_list_length(cls, values):
         """
         Validate that the length of lists matches the number of cross-sections.
@@ -1089,7 +1091,7 @@ class TransverseJetControl(CommonBaseModel):
 
     @field_validator("time", "control_force", "altitudes", mode="before")
     def lists_must_match_qty_time(cls, v, values):
-        qty_time = values.data["qty_time"] if "qty_time" in values.data else None
+        qty_time = values.data.get("qty_time", None)
         print("qty_time: ", qty_time)
         if qty_time is not None and len(v) != qty_time:
             raise ValueError(f"Length of {values.field_name} must match qty_time")
@@ -1141,9 +1143,7 @@ class HypersonicFlapControl(CommonBaseModel):
 
     @field_validator("deflections", mode="before")
     def check_deflections_length(cls, v, values):
-        qty_deflections = (
-            values.data["qty_deflections"] if "qty_deflections" in values.data else None
-        )
+        qty_deflections = values.data.get("qty_deflections", None)
         if qty_deflections is not None and len(v) != qty_deflections:
             raise ValueError("Length of deflections must match qty_deflections")
         return v
@@ -1565,6 +1565,7 @@ class AerodynamicsData(CommonBaseModel):
     )
 
     @model_validator(mode="before")
+    @classmethod
     def check_list_lengths(cls, values):
         """
         Validates that all lists have the same length to ensure consistency in experimental data points.
@@ -1625,9 +1626,8 @@ class AerodynamicsData(CommonBaseModel):
             for item in v:
                 if item is not None and item < 0:
                     raise ValueError("Coefficient values must be non-negative.")
-        else:
-            if v is not None and v < 0:
-                raise ValueError("Coefficient values must be non-negative.")
+        elif v is not None and v < 0:
+            raise ValueError("Coefficient values must be non-negative.")
         return v
 
     model_config = {
