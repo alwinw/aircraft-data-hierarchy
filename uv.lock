@@ -9,7 +9,7 @@ resolution-markers = [
 ]
 
 [[package]]
-name = "aircraft-data-hierarchy"
+name = "adh"
 version = "0.2.0"
 source = { editable = "." }
 dependencies = [

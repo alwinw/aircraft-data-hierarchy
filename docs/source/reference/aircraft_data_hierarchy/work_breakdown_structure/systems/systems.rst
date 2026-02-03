@@ -1,9 +1,9 @@
-.. currentmodule:: aircraft_data_hierarchy.work_breakdown_structure.systems
+.. currentmodule:: adh.wbs.systems
 
 systems
 ====================
 
-.. automodapi:: aircraft_data_hierarchy.work_breakdown_structure.systems.systems
+.. automodapi:: adh.wbs.systems.systems
   :no-heading:
   :no-inheritance-diagram:
   :skip: Any, BaseModel, Behavior, CommonBaseModel, Discipline, Metadata, Requirement

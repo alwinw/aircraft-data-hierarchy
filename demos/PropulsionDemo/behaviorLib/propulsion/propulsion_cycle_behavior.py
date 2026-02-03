@@ -2,9 +2,9 @@ from typing import List, Optional
 
 from pydantic import Field, field_validator
 
-from aircraft_data_hierarchy.behavior import Behavior, DAVEfunc
-from aircraft_data_hierarchy.common_base_model import CommonBaseModel
-from aircraft_data_hierarchy.work_breakdown_structure.propulsion.propulsion_cycle import (
+from adh.behavior import Behavior, DAVEfunc
+from adh.common_base_model import CommonBaseModel
+from adh.wbs.propulsion.propulsion_cycle import (
     PropulsionCycle,
 )
 

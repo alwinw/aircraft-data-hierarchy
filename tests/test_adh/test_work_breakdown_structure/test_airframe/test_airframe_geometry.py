@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
+from adh.wbs.airframe.airframe_geometry import (
     Airfoil,
     Body,
     Boolean,

@@ -98,7 +98,7 @@ Replace \<version\> with the actual version number of the package wheel file fro
 ### 4. Now You Can Import and Use the Aircraft Data Hierarchy Package in Your Python Code
 
 ```python
-from aircraft_data_hierarchy.common_base_model import Metadata, CommonBaseModel
+from adh.common_base_model import Metadata, CommonBaseModel
 ```
 
 ## Testing

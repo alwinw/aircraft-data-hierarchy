@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from pydantic import Field, field_validator, model_validator
 
-from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
+from adh.wbs.airframe.airframe_geometry import (
     Spline,
 )
 

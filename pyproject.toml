@@ -1,5 +1,5 @@
 [project]
-name = "aircraft_data_hierarchy"
+name = "adh"
 version = "0.2.0"
 description = "The Aircraft Data Hierarchy (ADH) is a modern data definition standard for the aerospace vehicle design studies. The ADH enables engineers to exchange information (i.e. geometry, disciplinary tool inputs/outputs, requirements, etc.) between tools using a common data structure and a schema that can be validated."
 readme = "README.md"
@@ -11,7 +11,7 @@ authors = [
 ]
 requires-python = ">=3.8"
 keywords = [
-  "adh",
+  "ADH",
   "MBSA&E",
   "aerospace data exchange",
 ]
@@ -98,9 +98,9 @@ reportMissingImports = "none"
 [tool.pytest.ini_options]
 testpaths = "tests"
 addopts = [
-  "-v",                                # Increase verbosity
-  "-ra",                               # Extra test summary
-  "--cov=src/aircraft_data_hierarchy", # Coverage
+  "-v",            # Increase verbosity
+  "-ra",           # Extra test summary
+  "--cov=src/adh", # Coverage
 ]
 
 [tool.ruff]
@@ -121,6 +121,7 @@ extend-select = [
   "LOG", # flake8-logging
   # "PT",  # flake8-pytest-style
   "SIM", # flake8-simplify
+  "TID", # flake8-tidy-imports
   "PTH", # flake8-use-pathlib
   "I",   # isort
   "N",   # pep8-naming

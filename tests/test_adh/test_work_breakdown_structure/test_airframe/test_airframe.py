@@ -1,11 +1,11 @@
 import pytest
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.behavior import Behavior
-from aircraft_data_hierarchy.common_base_model import Metadata
-from aircraft_data_hierarchy.performance import Discipline
-from aircraft_data_hierarchy.requirements import Requirement
-from aircraft_data_hierarchy.work_breakdown_structure.airframe import Component
+from adh.behavior import Behavior
+from adh.common_base_model import Metadata
+from adh.performance import Discipline
+from adh.requirements import Requirement
+from adh.wbs.airframe import Component
 
 
 class TestComponent:

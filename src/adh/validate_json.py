@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.work_breakdown_structure.work_breakdown_structure import (
+from adh.wbs.work_breakdown_structure import (
     AircraftSystem,
 )
 

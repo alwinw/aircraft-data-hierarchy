@@ -1,8 +1,8 @@
 import pytest
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.common_base_model import Metadata
-from aircraft_data_hierarchy.requirements import (
+from adh.common_base_model import Metadata
+from adh.requirements import (
     Requirement,
     Requirements,
 )  # Replace 'your_module' with the actual module name

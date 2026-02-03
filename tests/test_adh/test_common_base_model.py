@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.common_base_model import (
+from adh.common_base_model import (
     CommonBaseModel,
     Metadata,
     NodeNotFoundError,

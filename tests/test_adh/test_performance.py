@@ -4,8 +4,8 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.common_base_model import Metadata
-from aircraft_data_hierarchy.performance import (
+from adh.common_base_model import Metadata
+from adh.performance import (
     DataExchange,
     Discipline,
     ModelDescription,

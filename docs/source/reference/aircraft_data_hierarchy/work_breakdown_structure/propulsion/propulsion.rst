@@ -1,9 +1,9 @@
-.. currentmodule:: aircraft_data_hierarchy.work_breakdown_structure.propulsion
+.. currentmodule:: adh.wbs.propulsion
 
 propulsion
 ====================
 
-.. automodapi:: aircraft_data_hierarchy.work_breakdown_structure.propulsion.propulsion
+.. automodapi:: adh.wbs.propulsion.propulsion
   :no-heading:
   :no-inheritance-diagram:
   :skip: Any, BaseModel, Behavior, CommonBaseModel, Discipline, Metadata, Requirement

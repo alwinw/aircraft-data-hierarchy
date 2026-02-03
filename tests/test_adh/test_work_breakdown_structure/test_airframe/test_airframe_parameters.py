@@ -1,13 +1,13 @@
 import pytest
 from pydantic import ValidationError
 
-from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_geometry import (
+from adh.wbs.airframe.airframe_geometry import (
     Point,
     Spline,
 )
 
 # Import the models from the provided code
-from aircraft_data_hierarchy.work_breakdown_structure.airframe.airframe_parameters import (
+from adh.wbs.airframe.airframe_parameters import (
     AerodynamicsData,
     Airfoil,
     AsymmetricControl,
