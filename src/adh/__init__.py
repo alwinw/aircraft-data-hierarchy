@@ -1,7 +1,7 @@
 """A Python module for Aircraft Data Hierarchy"""
 
-from .behavior import *
-from .common_base_model import *
-from .performance import *
-from .requirements import *
-from .wbs import *
+from adh.behavior import *
+from adh.common_base_model import *
+from adh.performance import *
+from adh.requirements import *
+from adh.wbs import *

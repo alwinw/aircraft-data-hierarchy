@@ -2,12 +2,9 @@ from typing import Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from ..common_base_model import CommonBaseModel
-from .airframe.airframe import Component
-from .propulsion.propulsion import Propulsion
-
-# from .systems.systems import system
-# from .equipment import * # Currently a local file
+from adh.common_base_model import CommonBaseModel
+from adh.wbs.airframe.airframe import Component
+from adh.wbs.propulsion.propulsion import Propulsion
 
 """
 Work Breakdown Structure Reference

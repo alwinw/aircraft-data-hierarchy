@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, List, Tuple
 
-from .systems_parameters import System
+from adh.wbs.systems.systems_parameters import System
 
 if TYPE_CHECKING:
     from graphviz import Digraph

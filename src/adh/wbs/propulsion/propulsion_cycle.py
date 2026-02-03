@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from pydantic import Field, InstanceOf, SerializeAsAny, field_validator
 
-from ...common_base_model import CommonBaseModel
+from adh.common_base_model import CommonBaseModel
 
 
 class EngineElement(CommonBaseModel):

@@ -4,9 +4,9 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from ...common_base_model import CommonBaseModel, Metadata
-from ...requirements import Requirement
-from .propulsion_cycle import PropulsionCycle
+from adh.common_base_model import CommonBaseModel, Metadata
+from adh.requirements import Requirement
+from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 
 
 class Propulsion(CommonBaseModel):

@@ -3,12 +3,11 @@ from typing import List, Optional
 
 from pydantic import Field, field_validator, model_validator
 
+# Assuming CommonBaseModel and Spline are defined elsewhere
+from adh.common_base_model import CommonBaseModel
 from adh.wbs.airframe.airframe_geometry import (
     Spline,
 )
-
-# Assuming CommonBaseModel and Spline are defined elsewhere
-from ...common_base_model import CommonBaseModel
 
 # ToDo: This entire set of classes needs to be refactored because:
 # 1. many parameters belong in other MSoSA branches like Behavior

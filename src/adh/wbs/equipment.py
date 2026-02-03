@@ -4,10 +4,10 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from ..behavior import Behavior
-from ..common_base_model import CommonBaseModel, Metadata
-from ..performance import Discipline
-from ..requirements import Requirement
+from adh.behavior import Behavior
+from adh.common_base_model import CommonBaseModel, Metadata
+from adh.performance import Discipline
+from adh.requirements import Requirement
 
 
 class Equipment(CommonBaseModel):

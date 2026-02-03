@@ -6,7 +6,7 @@ from typing import Any, List, Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from .common_base_model import CommonBaseModel, Metadata
+from adh.common_base_model import CommonBaseModel, Metadata
 
 
 class DataExchange(CommonBaseModel):

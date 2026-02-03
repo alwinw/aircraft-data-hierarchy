@@ -12,7 +12,7 @@ from pydantic import (
     model_validator,
 )
 
-from ...common_base_model import CommonBaseModel, Metadata
+from adh.common_base_model import CommonBaseModel, Metadata
 
 
 class String(CommonBaseModel):

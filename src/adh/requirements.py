@@ -2,7 +2,7 @@ from typing import Dict, List, Optional
 
 from pydantic import Field, ValidationInfo, field_validator
 
-from .common_base_model import CommonBaseModel, Metadata
+from adh.common_base_model import CommonBaseModel, Metadata
 
 
 class Requirement(CommonBaseModel):
