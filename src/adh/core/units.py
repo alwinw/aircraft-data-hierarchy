@@ -37,21 +37,32 @@ if TYPE_CHECKING:
     from pydantic import GetCoreSchemaHandler
 
 import pint
-from pint._typing import UnitLike
+from pint._typing import Scalar
 from pint.facets.plain.quantity import PlainQuantity as Quantity
 from pydantic_core import core_schema
 
-__all__ = ("PintQuantity",)
+__all__ = (
+    "get_registry",
+    "PintAnno",
+    "PintQty",
+)
 
 _DEFAULT_UNIT_REGISTRY = pint.UnitRegistry()
 
+PintQty = Union[str, dict[str, Scalar]]
 
-class PintQuantity:
-    """Pydantic Pint Quantity."""
+
+def get_registry() -> pint.UnitRegistry:
+    """Get the shared Pint Unit Registry."""
+    return _DEFAULT_UNIT_REGISTRY
+
+
+class PintAnno:
+    """Pydantic Pint Annotation."""
 
     def __init__(
         self,
-        _arg: UnitLike,
+        _arg: PintQty,
         /,
         *,
         ureg: Optional[pint.UnitRegistry] = None,
@@ -59,7 +70,7 @@ class PintQuantity:
         """Initialise units and dimensions.
 
         Args:
-            _arg (UnitLike):
+            _arg (PintQ):
                 Either the units or dimensions to check the Pydantic field.
                 For example, `"sec"`, `"[length]"`, or `{"[length]": 1, "[time]": -2}`
             ureg (Optional[pint.UnitRegistry]):

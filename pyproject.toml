@@ -97,9 +97,10 @@ reportMissingImports = "none"
 [tool.pytest.ini_options]
 testpaths = "tests"
 addopts = [
-  "-v",            # Increase verbosity
-  "-ra",           # Extra test summary
-  "--cov=src/adh", # Coverage
+  "-v",                       # Increase verbosity
+  "-ra",                      # Extra test summary
+  "--cov=src/adh",            # Package coverage
+  "--cov-report=xml:cov.xml", # Coverage report
 ]
 
 [tool.ruff]
