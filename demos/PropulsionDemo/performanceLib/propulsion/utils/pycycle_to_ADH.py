@@ -1,7 +1,7 @@
 import json
 import os
 
-from aircraft_data_hierarchy.behavior import (
+from adh.behavior import (
     DataPoint,
     DAVEfunc,
     DependentVarRef,

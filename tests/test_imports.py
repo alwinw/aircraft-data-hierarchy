@@ -4,7 +4,7 @@ import pytest
 class TestImports:
     def test_import_aircraft_data_hierarchy(self):
         try:
-            from aircraft_data_hierarchy import (
+            from adh import (  # noqa: PLC0415
                 Behavior,
                 CommonBaseModel,
                 DataExchange,
@@ -16,11 +16,11 @@ class TestImports:
             assert DataExchange is not None
             assert Requirements is not None
         except ImportError as exc:
-            pytest.fail(f"Failed to import from aircraft_data_hierarchy: {exc}")
+            pytest.fail(f"Failed to import from adh: {exc}")
 
     def test_import_work_breakdown_structure(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure import (
+            from adh.wbs import (  # noqa: PLC0415
                 AircraftSystem,
                 Equipment,
             )
@@ -28,14 +28,11 @@ class TestImports:
             assert AircraftSystem is not None
             assert Equipment is not None
         except ImportError as exc:
-            pytest.fail(
-                "Failed to import from aircraft_data_hierarchy.work_breakdown_structure: "
-                f"{exc}"
-            )
+            pytest.fail(f"Failed to import from adh.wbs: {exc}")
 
     def test_import_work_breakdown_structure_airframe(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure.airframe import (
+            from adh.wbs.airframe import (  # noqa: PLC0415
                 AerodynamicsData,
                 Component,
                 Loft,
@@ -45,14 +42,11 @@ class TestImports:
             assert Component is not None
             assert Loft is not None
         except ImportError as exc:
-            pytest.fail(
-                "Failed to import from aircraft_data_hierarchy.work_breakdown_structure.airframe: "
-                f"{exc}"
-            )
+            pytest.fail(f"Failed to import from adh.wbs.airframe: {exc}")
 
     def test_import_work_breakdown_structure_propulsion(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
+            from adh.wbs.propulsion import (  # noqa: PLC0415
                 Propulsion,
                 PropulsionCycle,
                 PropulsionGeometry,
@@ -62,14 +56,11 @@ class TestImports:
             assert PropulsionCycle is not None
             assert PropulsionGeometry is not None
         except ImportError as exc:
-            pytest.fail(
-                "Failed to import from aircraft_data_hierarchy.work_breakdown_structure.propulsion: "
-                f"{exc}"
-            )
+            pytest.fail(f"Failed to import from adh.wbs.propulsion: {exc}")
 
     def test_import_work_breakdown_structure_systems(self):
         try:
-            from aircraft_data_hierarchy.work_breakdown_structure.systems import (
+            from adh.wbs.systems import (  # noqa: PLC0415
                 System,
                 SystemAttributes,
                 create_system_diagram,
@@ -79,7 +70,4 @@ class TestImports:
             assert SystemAttributes is not None
             assert create_system_diagram is not None
         except ImportError as exc:
-            pytest.fail(
-                "Failed to import from aircraft_data_hierarchy.work_breakdown_structure.systems: "
-                f"{exc}"
-            )
+            pytest.fail(f"Failed to import from adh.wbs.systems: {exc}")

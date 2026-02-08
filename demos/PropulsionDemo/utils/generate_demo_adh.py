@@ -1,17 +1,17 @@
-from aircraft_data_hierarchy.behaviorLib.propulsion.propulsion_cycle_behavior import (
+from adh.behaviorLib.propulsion.propulsion_cycle_behavior import (
     FlightConditions,
     MultiPointCycle,
     OffDesignPoint,
     Performance,
     PropulsionCycleBehavior,
 )
-from aircraft_data_hierarchy.performanceLib.propulsion.propulsion_cycle_performance import (
+from adh.performanceLib.propulsion.propulsion_cycle_performance import (
     PropulsionCyclePerformance,
 )
 
-from aircraft_data_hierarchy.behavior import Author, FileHeader
-from aircraft_data_hierarchy.common_base_model import Metadata
-from aircraft_data_hierarchy.work_breakdown_structure.propulsion import (
+from adh.behavior import Author, FileHeader
+from adh.common_base_model import Metadata
+from adh.wbs.propulsion import (
     Bleed,
     Combustor,
     Compressor,

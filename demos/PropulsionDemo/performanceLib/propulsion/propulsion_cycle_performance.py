@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import Field, field_validator
 
-from aircraft_data_hierarchy.performance import ModelDescription
+from adh.performance import ModelDescription
 
 
 class PropulsionCyclePerformance(ModelDescription):

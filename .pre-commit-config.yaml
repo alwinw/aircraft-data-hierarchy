@@ -59,9 +59,15 @@ repos:
       - id: typos
         priority: 0
 
+  - repo: https://github.com/fredrikaverpil/creosote.git
+    rev: v4.2.0
+    hooks:
+      - id: creosote
+        priority: 0
+
   # Priority 1: Formatting (e.g. ruff-format before ruff-check)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.14
+    rev: v0.15.0
     hooks:
       - id: ruff-format
         priority: 1
