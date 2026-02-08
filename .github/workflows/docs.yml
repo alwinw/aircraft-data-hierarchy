@@ -1,19 +1,22 @@
-name: Build and Deploy Documentation
+name: Build and deploy MkDocs site to GitHub Pages
 
 on:
   push:
     branches:
-      - "*" # Trigger on push to any branch
+      - "*"
   pull_request:
     branches:
       - main
 
 jobs:
   build:
+    name: Build documentation
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v6
         with:
@@ -27,17 +30,15 @@ jobs:
         run: |
           uv sync --locked --all-extras --group docs
 
-      - name: Build documentation
-        id: build
+      - name: Build MkDocs site
         run: |
-          cd docs
-          uv run sphinx-build -M html ./source ./_build
+          uv run mkdocs build
 
       - name: Upload documentation
         uses: actions/upload-pages-artifact@v4
         with:
           name: github-pages
-          path: docs/_build/html
+          path: site
 
   deploy:
     needs: build
@@ -51,7 +52,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
