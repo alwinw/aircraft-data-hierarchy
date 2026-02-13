@@ -162,7 +162,7 @@ class FlightConditions(CommonBaseModel):
 
     @model_validator(mode="before")
     @classmethod
-    def validate_list_lengths(cls, values):
+    def validate_list_lengths(cls, values: dict[str, object]) -> dict[str, object]:
         """
         Validate that the length of lists matches their corresponding quantity fields.
 
@@ -902,7 +902,7 @@ class Body(CommonBaseModel):
 
     @model_validator(mode="before")
     @classmethod
-    def validate_list_length(cls, values):
+    def validate_list_length(cls, values: dict[str, object]) -> dict[str, object]:
         """
         Validate that the length of lists matches the number of cross-sections.
 

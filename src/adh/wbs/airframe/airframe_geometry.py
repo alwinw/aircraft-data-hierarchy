@@ -819,7 +819,7 @@ class ReferenceAxis(CommonBaseModel):
         return values
 
     @model_validator(mode="after")
-    def resolve_relative_to(self) -> ReferenceAxis:
+    def resolve_relative_to(self: ReferenceAxis) -> ReferenceAxis:
         """Resolve the 'relative_to' name to a ReferenceAxis instance.
 
         Args:
