@@ -1,7 +1,7 @@
 site_name: "ADH"
 site_description: "Aircraft Data Hierarchy"
-repo_url: "https://github.com/Boeing/aircraft-data-hierarchy"
-repo_name: "Boeing/aircraft-data-hierarchy"
+repo_url: "https://github.com/alwinw/aircraft-data-hierarchy"
+repo_name: "alwinw/aircraft-data-hierarchy"
 watch: [mkdocs.yaml, README.md, src/adh, docs]
 copyright: Copyright &copy; 2024-2026 The Boeing Company.
 
@@ -14,7 +14,7 @@ nav:
   - Home:
       - Overview: index.md
       - License: license.md
-  - API Reference: reference.md
+  - API Reference: reference/
 
 theme:
   name: material
@@ -24,6 +24,9 @@ theme:
 
 plugins:
   - search
+  - gen-files:
+      scripts:
+        - scripts/gen_ref_pages.py
   - mkdocstrings:
       default_handler: python
   - literate-nav:

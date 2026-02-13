@@ -4,7 +4,7 @@ from typing import Annotated, cast
 
 from pydantic import BaseModel
 
-from adh.core.units import PintAnno, PintQty, Quantity, get_registry
+from adh.msosa.units import PintAnno, PintQty, Quantity, get_registry
 
 UREG = get_registry()
 
