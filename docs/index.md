@@ -1,5 +1,13 @@
 # Aircraft Data Hierarchy
 
+<!-- TODO: create logo where the [A] is includes the bottom of the branch. i.e. /\ and |--| -->
+
+```txt
+   [A]
+ ┌──┴──┐
+[D]   [H]
+```
+
 > _A Model-Based Systems Analysis & Engineering (MBSA&E) Framework for Standardised Aerospace Data Exchange_
 
 Based on [NASA/CR-20250007045](https://ntrs.nasa.gov/citations/20250007045)

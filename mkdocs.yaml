@@ -1,9 +1,18 @@
-site_name: "ADH"
-site_description: "Aircraft Data Hierarchy"
-repo_url: "https://github.com/alwinw/aircraft-data-hierarchy"
-repo_name: "alwinw/aircraft-data-hierarchy"
-watch: [mkdocs.yaml, README.md, src/adh, docs]
+# Adapted from
+# - https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+# - https://github.com/mkdocstrings/griffe-pydantic/blob/main/mkdocs.yml
+
+site_name: "Aircraft Data Hierarchy"
+site_url: "https://alwinw.github.io/aircraft-data-hierarchy/"
+site_description: >-
+  Community fork of the Aircraft Data Hierarchy
+site_author: Alwin Wang
 copyright: Copyright &copy; 2024-2026 The Boeing Company.
+
+repo_name: "alwinw/aircraft-data-hierarchy"
+repo_url: "https://github.com/alwinw/aircraft-data-hierarchy"
+
+watch: [mkdocs.yaml, README.md, src/adh, docs]
 
 validation:
   omitted_files: warn
@@ -20,32 +29,73 @@ theme:
   name: material
   features:
     - announce.dismiss
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
     - navigation.expand
-
-plugins:
-  - search
-  - gen-files:
-      scripts:
-        - scripts/gen_ref_pages.py
-  - mkdocstrings:
-      default_handler: python
-  - literate-nav:
-      nav_file: SUMMARY.md
-  - section-index
+    - navigation.instant.preview
+    - navigation.path
+    - navigation.sections
+    - search.highlight
+    - search.suggest
+    - toc.follow
 
 markdown_extensions:
   - admonition
   # - codehilite
+  # - callouts
+  - footnotes
   - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.magiclink
+  - pymdownx.snippets:
+      base_path: [!relative $config_dir]
+      check_paths: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.snippets:
-      base_path: [!relative $config_dir]
-      check_paths: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - footnotes
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: "¤"
+
+plugins:
+  - search
+  - autorefs
+  - gen-files:
+      scripts:
+        - scripts/gen_ref_pages.py
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src, docs/examples]
+          inventories:
+            - https://docs.python.org/3/objects.inv
+            - https://docs.pydantic.dev/latest/objects.inv
+          options:
+            backlinks: tree
+            docstring_options:
+              ignore_init_summary: true
+            docstring_section_style: list
+            extensions:
+              - griffe_pydantic:
+                  schema: true
+            inherited_members: true
+            merge_init_into_class: true
+            separate_signature: true
+            show_root_heading: true
+            show_root_full_path: true
+            show_signature_annotations: true
+            show_source: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            signature_crossrefs: true
+            summary: true
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - section-index

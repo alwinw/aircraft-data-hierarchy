@@ -58,7 +58,8 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 docs = [
-  "griffe-pydantic>=1.1",
+  "griffe-pydantic>=1.1; python_version < '3.10'",
+  "griffe-pydantic>=1.3; python_version >= '3.10'",
   "mkdocs-gen-files>=0.5",
   "mkdocs>=1.6",
   "mkdocs-literate-nav>=0.6",
