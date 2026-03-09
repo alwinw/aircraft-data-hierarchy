@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from adh.behavior import Behavior
-from adh.common_base_model import CommonBaseModel, Metadata
-from adh.performance import Discipline
-from adh.requirements import Requirement
+from adh.msosa.architecture import Architecture, Metadata
+from adh.msosa.behavior import Behavior
+from adh.msosa.performance import Discipline
+from adh.msosa.requirements import Requirement
 
 
-class Equipment(CommonBaseModel):
+class Equipment(Architecture):
     """
     Represents miscellaneous equipment onboard an aircraft required for it's operational use.
 
@@ -33,25 +33,25 @@ class Equipment(CommonBaseModel):
     description: Optional[str] = Field(
         default=None, description="A brief description of the equipment."
     )
-    geometry: Optional[Dict[str, Any]] = Field(
+    geometry: Optional[dict[str, Any]] = Field(
         default=None, description="Geometry of the equipment."
     )
-    parameters: Optional[Dict[str, Any]] = Field(
+    parameters: Optional[dict[str, Any]] = Field(
         default=None, description="Parameters of the equipment."
     )
     metadata: Optional[Metadata] = Field(
         default=None, description="Additional metadata for the equipment."
     )
-    subequipment: Optional[List[Equipment]] = Field(
+    subequipment: Optional[list[Equipment]] = Field(
         default=None, description="Sub-equipment within this equipment."
     )
-    requirements: Optional[List[Requirement]] = Field(
+    requirements: Optional[list[Requirement]] = Field(
         default=None, description="Specific requirements for the equipment."
     )
-    performance: Optional[List[Discipline]] = Field(
+    performance: Optional[list[Discipline]] = Field(
         default=None, description="List of disciplines analyzing the equipment."
     )
-    behavior: Optional[List[Behavior]] = Field(
+    behavior: Optional[list[Behavior]] = Field(
         default=None, description="Specific behaviors for the equipment."
     )
 

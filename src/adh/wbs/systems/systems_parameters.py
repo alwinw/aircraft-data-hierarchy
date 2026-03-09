@@ -6,7 +6,7 @@ including functional blocks, data signals, physical characteristics, and system 
 """
 
 from enum import Enum
-from typing import Dict, List, Literal, Optional, Tuple
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -43,8 +43,8 @@ class FunctionalBlock(BaseModel):
     block_id: str = Field(..., min_length=1, max_length=50)
     name: str = Field(..., min_length=1, max_length=100)
     description: str = Field(..., min_length=1, max_length=500)
-    inputs: List[str] = Field(default_factory=list)
-    outputs: List[str] = Field(default_factory=list)
+    inputs: list[str] = Field(default_factory=list)
+    outputs: list[str] = Field(default_factory=list)
 
 
 class DataSignal(BaseModel):
@@ -80,13 +80,13 @@ class PhysicalCharacteristics(BaseModel):
     """
 
     weight: float = Field(..., gt=0)
-    dimensions: Dict[str, float] = Field(..., min_length=3, max_length=3)
+    dimensions: dict[str, float] = Field(..., min_length=3, max_length=3)
     volume: float = Field(..., gt=0)
-    center_of_gravity: Dict[str, float] = Field(..., min_length=3, max_length=3)
+    center_of_gravity: dict[str, float] = Field(..., min_length=3, max_length=3)
 
     @field_validator("dimensions")
     @classmethod
-    def validate_dimensions(cls, v: Dict[str, float]) -> Dict[str, float]:
+    def validate_dimensions(cls, v: dict[str, float]) -> dict[str, float]:
         """Validate that dimensions include length, width, and height."""
         if set(v.keys()) != {"length", "width", "height"}:
             raise ValueError("Dimensions must include 'length', 'width', and 'height'")
@@ -94,7 +94,7 @@ class PhysicalCharacteristics(BaseModel):
 
     @field_validator("center_of_gravity")
     @classmethod
-    def validate_cog(cls, v: Dict[str, float]) -> Dict[str, float]:
+    def validate_cog(cls, v: dict[str, float]) -> dict[str, float]:
         """Validate that center of gravity includes x, y, and z coordinates."""
         if set(v.keys()) != {"x", "y", "z"}:
             raise ValueError(
@@ -121,13 +121,13 @@ class FluidFlowCharacteristics(BaseModel):
     flow_rate: float = Field(..., gt=0)
     max_pressure: float = Field(..., gt=0)
     min_pressure: float = Field(..., ge=0)
-    temperature_range: Tuple[float, float] = Field(..., min_length=2, max_length=2)
+    temperature_range: tuple[float, float] = Field(..., min_length=2, max_length=2)
     viscosity: float = Field(..., gt=0)
     density: float = Field(..., gt=0)
 
     @field_validator("temperature_range")
     @classmethod
-    def validate_temperature_range(cls, v: Tuple[float, float]) -> Tuple[float, float]:
+    def validate_temperature_range(cls, v: tuple[float, float]) -> tuple[float, float]:
         """Validate that the minimum temperature is less than the maximum temperature."""
         if v[0] >= v[1]:
             raise ValueError(
@@ -185,8 +185,8 @@ class SystemAttributes(BaseModel):
         fluid_flow (Optional[FluidFlowCharacteristics]): Fluid flow characteristics, if applicable.
     """
 
-    functional_blocks: List[FunctionalBlock]
-    data_signals: List[DataSignal]
+    functional_blocks: list[FunctionalBlock]
+    data_signals: list[DataSignal]
     physical_characteristics: PhysicalCharacteristics
     cooling_requirements: CoolingRequirements
     power_requirements: PowerRequirements
@@ -211,7 +211,7 @@ class System(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     type: Literal["System"] = "System"
     attributes: SystemAttributes
-    components: List[str] = Field(..., min_length=1)
+    components: list[str] = Field(..., min_length=1)
 
     @field_validator("type")
     @classmethod

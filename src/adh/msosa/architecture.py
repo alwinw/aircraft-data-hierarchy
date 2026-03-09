@@ -14,9 +14,9 @@ The architecture parent nodes in the [ADH][1] are aligned with
 from __future__ import annotations
 
 import re
-from typing import Optional
+from typing import Any, Optional, Union
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 _WBS_PATTERN = re.compile(r"^\d+(\.\d+)*$")
 
@@ -38,3 +38,27 @@ class Architecture(BaseModel):
                 f"Invalid WBS number '{value}': must match pattern \\d+(\\.\\d+)*"
             )
         return value
+
+
+class Metadata(BaseModel):
+    """Key-value metadata for annotating architecture nodes."""
+
+    key: str
+    value: Any = None
+    units: Optional[str] = Field(default=None, description="Units of measure")
+    uncertainty: Optional[Any] = Field(default=None, description="Uncertainty value")
+    lower_bounds: Optional[Union[int, float]] = Field(
+        default=None, description="Lower bound"
+    )
+    upper_bounds: Optional[Union[int, float]] = Field(
+        default=None, description="Upper bound"
+    )
+
+    model_config = ConfigDict(
+        validate_assignment=True,
+        arbitrary_types_allowed=True,
+        extra="forbid",
+        str_min_length=1,
+        str_max_length=255,
+        str_strip_whitespace=True,
+    )

@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from adh.behavior import Behavior
-from adh.common_base_model import CommonBaseModel, Metadata
-from adh.performance import Discipline
-from adh.requirements import Requirement
+from adh.msosa.architecture import Architecture, Metadata
+from adh.msosa.behavior import Behavior
+from adh.msosa.performance import Discipline
+from adh.msosa.requirements import Requirement
 
 
-class System(CommonBaseModel):
+class System(Architecture):
     """
     Represents a system within aircraft systems, detailing its specifications, functionalities, and interrelations.
 
@@ -33,25 +33,25 @@ class System(CommonBaseModel):
     description: Optional[str] = Field(
         default=None, description="A brief description of the system."
     )
-    parameters: Optional[Dict[str, Any]] = Field(
+    parameters: Optional[dict[str, Any]] = Field(
         default=None, description="Parameters of the system."
     )
-    diagram: Optional[Dict[str, Any]] = Field(
+    diagram: Optional[dict[str, Any]] = Field(
         default=None, description="Flow diagram of the system."
     )
     metadata: Optional[Metadata] = Field(
         default=None, description="Additional metadata for the system."
     )
-    subsystems: Optional[List[System]] = Field(
+    subsystems: Optional[list[System]] = Field(
         default=None, description="Sub-systems within this system."
     )
-    requirements: Optional[List[Requirement]] = Field(
+    requirements: Optional[list[Requirement]] = Field(
         default=None, description="Specific requirements for the system."
     )
-    performance: Optional[List[Discipline]] = Field(
+    performance: Optional[list[Discipline]] = Field(
         default=None, description="List of disciplines analyzing the system."
     )
-    behavior: Optional[List[Behavior]] = Field(
+    behavior: Optional[list[Behavior]] = Field(
         default=None, description="Specific behaviors for the system."
     )
 

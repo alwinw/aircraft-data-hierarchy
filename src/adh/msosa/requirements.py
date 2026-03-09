@@ -42,7 +42,7 @@ class ReqsCategories(str, Enum):
     constraints = "constraints"
     """Restricts the design space, including physical (SWaP), material, or architectural limits."""
 
-    regulatory_compliance = "regularity and compliance"
+    regulatory_compliance = "regulatory and compliance"
     """Mandates adherence to laws, industry standards, safety codes, and legal policies."""
 
     non_functional = "non-functional"

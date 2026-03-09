@@ -1,15 +1,15 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from adh.common_base_model import CommonBaseModel, Metadata
-from adh.requirements import Requirement
+from adh.msosa.architecture import Architecture, Metadata
+from adh.msosa.requirements import Requirement
 from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 
 
-class Propulsion(CommonBaseModel):
+class Propulsion(Architecture):
     """
     Represents the propulsion system within an air vehicle system, detailing its specifications, functionalities, and interrelations.
 
@@ -34,7 +34,7 @@ class Propulsion(CommonBaseModel):
     description: Optional[str] = Field(
         default=None, description="A brief description of the propulsion system."
     )
-    geometry: Optional[Dict[str, Any]] = Field(
+    geometry: Optional[dict[str, Any]] = Field(
         default=None, description="Geometry of the propulsion system."
     )
     # TODO: Get MultiPointCycle imported behaviorLib Demo
@@ -42,16 +42,16 @@ class Propulsion(CommonBaseModel):
     cycle: Optional[PropulsionCycle] = Field(
         default=None, description="Cycle of the propulsion system."
     )
-    parameters: Optional[Dict[str, Any]] = Field(
+    parameters: Optional[dict[str, Any]] = Field(
         default=None, description="Parameters of the propulsion system."
     )
     metadata: Optional[Metadata] = Field(
         default=None, description="Additional metadata for the propulsion system."
     )
-    subcomponents: Optional[List[Propulsion]] = Field(
+    subcomponents: Optional[list[Propulsion]] = Field(
         default=None, description="Sub-components within the propulsion system."
     )
-    requirements: Optional[List[Requirement]] = Field(
+    requirements: Optional[list[Requirement]] = Field(
         default=None, description="Specific requirements for the propulsion system."
     )
     # TODO: Get MultiPointCycle imported behaviorLib and performanceLib Demo

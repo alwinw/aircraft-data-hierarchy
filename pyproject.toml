@@ -83,7 +83,7 @@ test = [
 
 [tool.creosote]
 exclude-deps = [
-  "pydantic-pint",  # reimplemented locally in adh.geom.units; listed as attribution
+  "pydantic-pint", # reimplemented locally in adh.geom.units; listed as attribution
 ]
 
 [tool.commitizen]
@@ -170,3 +170,6 @@ include = [
   "src",
   # "tests",
 ]
+
+[tool.typos.default.extend-words]
+OT = "OT" # OTE = Operational Test and Evaluation (acronym in WBS class names)

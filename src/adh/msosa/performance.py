@@ -34,7 +34,7 @@ class PerfDisciplines(str, Enum):
     propulsion = "propulsion"
     """Engine performance, thrust, fuel flow, and thermal efficiency."""
 
-    mass_prop = "mass properties"
+    mass_properties = "mass properties"
     """Weight, balance, center of gravity (CG), and moments of inertia."""
 
     aerodynamics = "aerodynamics"
