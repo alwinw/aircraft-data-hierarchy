@@ -14,18 +14,22 @@ from adh.msosa.requirements import (
     RequirementStatus,
     VerificationMethod,
 )
+from adh.msosa.source_info import Author, ExternalReference, SourceInfo
 
 __all__ = [
     "Activity",
     "ActivityState",
     "Architecture",
+    "Author",
     "Behavior",
     "Behaviors",
+    "ExternalReference",
     "Metadata",
     "Priority",
     "ReqsCategories",
     "Requirement",
     "Requirements",
     "RequirementStatus",
+    "SourceInfo",
     "VerificationMethod",
 ]

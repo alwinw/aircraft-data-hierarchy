@@ -10,7 +10,6 @@ function definitions, and verification check data.
 
 from __future__ import annotations
 
-from datetime import date
 from enum import Enum
 from typing import Optional, Union
 
@@ -46,182 +45,10 @@ class UncertaintyEffect(str, Enum):
     ABSOLUTE = "absolute"
 
 
-class ContactInfoType(str, Enum):
-    """Type of contact information."""
-
-    ADDRESS = "address"
-    PHONE = "phone"
-    FAX = "fax"
-    EMAIL = "email"
-    INAME = "iname"
-    WEB = "web"
-
-
-class ContactLocation(str, Enum):
-    """Location context for contact information."""
-
-    PROFESSIONAL = "professional"
-    PERSONAL = "personal"
-    MOBILE = "mobile"
-
-
 class Description(BaseModel):
     """Textual description of an entity."""
 
     value: Optional[str] = Field(default=None, description="The description text")
-
-
-class ContactInfo(BaseModel):
-    """Contact information for an author."""
-
-    value: Optional[str] = Field(
-        default=None, description="The contact information value"
-    )
-    contact_info_type: Optional[ContactInfoType] = Field(
-        default=None, description="The type of contact information"
-    )
-    contact_location: Optional[ContactLocation] = Field(
-        default=None, description="The location associated with the contact information"
-    )
-
-
-class Author(BaseModel):
-    """Author of a DAVE-ML document."""
-
-    name: Optional[str] = Field(default=None, description="The name of the author")
-    org: Optional[str] = Field(
-        default=None, description="The organisation the author belongs to"
-    )
-    xns: Optional[str] = Field(
-        default=None, description="The XNS identifier for the author"
-    )
-    email: Optional[str] = Field(
-        default=None, description="The email address of the author"
-    )
-    address: Optional[list[str]] = Field(
-        default=None, description="The physical address of the author"
-    )
-    contact_info: Optional[list[ContactInfo]] = Field(
-        default=None, description="Additional contact information for the author"
-    )
-
-
-class CreationDate(BaseModel):
-    """Creation date of a DAVE-ML document."""
-
-    date: Optional[date] = None
-
-
-class FileVersion(BaseModel):
-    """Version of a DAVE-ML document."""
-
-    value: Optional[str] = Field(default=None, description="The version string")
-
-
-class Reference(BaseModel):
-    """Reference to an external document."""
-
-    ref_id: Optional[str] = Field(
-        default=None, description="The unique identifier for this reference"
-    )
-    author: Optional[str] = Field(
-        default=None, description="The author of the referenced document"
-    )
-    title: Optional[str] = Field(
-        default=None, description="The title of the referenced document"
-    )
-    classification: Optional[str] = Field(
-        default=None, description="The classification of the referenced document"
-    )
-    accession: Optional[str] = Field(
-        default=None, description="The accession number of the referenced document"
-    )
-    date: Optional[date] = None
-    href: Optional[str] = Field(
-        default=None, description="The URL of the referenced document"
-    )
-    description: Optional[Description] = Field(
-        default=None, description="A description of the referenced document"
-    )
-
-
-class ExtraDocRef(BaseModel):
-    """Additional document reference."""
-
-    ref_id: Optional[str] = Field(
-        default=None, description="The reference ID of the additional document"
-    )
-
-
-class DocumentRef(BaseModel):
-    """Reference to a document."""
-
-    doc_id: Optional[str] = Field(
-        default=None, description="The ID of the referenced document"
-    )
-    ref_id: Optional[str] = Field(
-        default=None, description="The reference ID of the document"
-    )
-
-
-class ModificationRef(BaseModel):
-    """Reference to a modification record."""
-
-    mod_id: Optional[str] = Field(
-        default=None, description="The ID of the referenced modification record"
-    )
-
-
-class ProvenanceRef(BaseModel):
-    """Reference to a provenance record."""
-
-    prov_id: Optional[str] = Field(
-        default=None, description="The ID of the referenced provenance record"
-    )
-
-
-class ModificationRecord(BaseModel):
-    """Modification record for a DAVE-ML document."""
-
-    mod_id: Optional[str] = Field(
-        default=None, description="The unique identifier for this modification record"
-    )
-    date: Optional[date] = None
-    ref_id: Optional[str] = Field(
-        default=None, description="The reference ID associated with this modification"
-    )
-    author: Optional[list[Author]] = Field(
-        default=None, description="The authors of the modification"
-    )
-    description: Optional[Description] = Field(
-        default=None, description="A description of the modification"
-    )
-    extra_doc_ref: Optional[list[ExtraDocRef]] = Field(
-        default=None, description="Additional document references"
-    )
-
-
-class Provenance(BaseModel):
-    """Provenance of a DAVE-ML document or element."""
-
-    prov_id: Optional[str] = Field(
-        default=None, description="The unique identifier for this provenance record"
-    )
-    author: Optional[list[Author]] = Field(
-        default=None, description="The authors associated with this provenance"
-    )
-    creation_date: Optional[CreationDate] = Field(
-        default=None, description="The creation date of the associated element"
-    )
-    document_ref: Optional[list[DocumentRef]] = Field(
-        default=None, description="References to related documents"
-    )
-    modification_ref: Optional[list[ModificationRef]] = Field(
-        default=None, description="References to related modifications"
-    )
-    description: Optional[Description] = Field(
-        default=None, description="A description of the provenance"
-    )
 
 
 class Calculation(BaseModel):
@@ -402,12 +229,6 @@ class VariableDef(BaseModel):
     description: Optional[Description] = Field(
         default=None, description="A description of the variable"
     )
-    provenance: Optional[Provenance] = Field(
-        default=None, description="The provenance of the variable"
-    )
-    provenance_ref: Optional[ProvenanceRef] = Field(
-        default=None, description="A reference to the provenance of the variable"
-    )
     calculation: Optional[Calculation] = Field(
         default=None, description="The calculation for deriving the variable's value"
     )
@@ -453,12 +274,6 @@ class GriddedTableDef(BaseModel):
     description: Optional[Description] = Field(
         default=None, description="A description of the gridded table"
     )
-    provenance: Optional[Provenance] = Field(
-        default=None, description="The provenance of the gridded table"
-    )
-    provenance_ref: Optional[ProvenanceRef] = Field(
-        default=None, description="A reference to the provenance of the gridded table"
-    )
     breakpoint_refs: Optional[list[BpRef]] = Field(
         default=None, description="References to the breakpoint sets used in this table"
     )
@@ -484,12 +299,6 @@ class UngriddedTableDef(BaseModel):
     )
     description: Optional[Description] = Field(
         default=None, description="A description of the ungridded table"
-    )
-    provenance: Optional[Provenance] = Field(
-        default=None, description="The provenance of the ungridded table"
-    )
-    provenance_ref: Optional[ProvenanceRef] = Field(
-        default=None, description="A reference to the provenance of the ungridded table"
     )
     uncertainty: Optional[Uncertainty] = Field(
         default=None, description="The uncertainty associated with the table values"
@@ -678,12 +487,6 @@ class Function(BaseModel):
     description: Optional[Description] = Field(
         default=None, description="A description of the function"
     )
-    provenance: Optional[Provenance] = Field(
-        default=None, description="The provenance of the function"
-    )
-    provenance_ref: Optional[ProvenanceRef] = Field(
-        default=None, description="A reference to the provenance of the function"
-    )
     independent_var_pts: Optional[list[IndependentVarPts]] = Field(
         default=None, description="The independent variable points for simple functions"
     )
@@ -770,12 +573,6 @@ class StaticShot(BaseModel):
     description: Optional[Description] = Field(
         default=None, description="A description of the static shot"
     )
-    provenance: Optional[Provenance] = Field(
-        default=None, description="The provenance of the static shot"
-    )
-    provenance_ref: Optional[ProvenanceRef] = Field(
-        default=None, description="A reference to the provenance of the static shot"
-    )
     check_inputs: Optional[CheckInputs] = Field(
         default=None, description="The input values for this check case"
     )
@@ -790,69 +587,8 @@ class StaticShot(BaseModel):
 class CheckData(BaseModel):
     """Check data for model verification."""
 
-    provenance: Optional[Provenance] = Field(
-        default=None, description="The provenance of the check data"
-    )
-    provenance_ref: Optional[ProvenanceRef] = Field(
-        default=None, description="A reference to the provenance of the check data"
-    )
     static_shot: Optional[list[StaticShot]] = Field(
         default=None, description="Static check cases"
-    )
-
-
-class FileHeader(BaseModel):
-    """Header information for a DAVE-ML document."""
-
-    name: Optional[str] = Field(
-        default=None, description="The name of the DAVE-ML document"
-    )
-    author: Optional[list[Author]] = Field(
-        default=None, description="The authors of the document"
-    )
-    creation_date: Optional[CreationDate] = Field(
-        default=None, description="The creation date of the document"
-    )
-    file_version: Optional[FileVersion] = Field(
-        default=None, description="The version of the document"
-    )
-    description: Optional[Description] = Field(
-        default=None, description="A description of the document"
-    )
-    reference: Optional[list[Reference]] = Field(
-        default=None, description="References to external documents"
-    )
-    modification_record: Optional[list[ModificationRecord]] = Field(
-        default=None, description="Records of modifications to the document"
-    )
-    provenance: Optional[list[Provenance]] = Field(
-        default=None, description="Provenance information for the document"
-    )
-
-
-class DAVEfunc(BaseModel):
-    """Root element of a DAVE-ML document."""
-
-    file_header: Optional[FileHeader] = Field(
-        default=None, description="The header information for the DAVE-ML document"
-    )
-    variable_def: Optional[list[VariableDef]] = Field(
-        default=None, description="The variable definitions in the document"
-    )
-    breakpoint_def: Optional[list[BreakpointDef]] = Field(
-        default=None, description="The breakpoint set definitions in the document"
-    )
-    gridded_table_def: Optional[list[GriddedTableDef]] = Field(
-        default=None, description="The gridded table definitions in the document"
-    )
-    ungridded_table_def: Optional[list[UngriddedTableDef]] = Field(
-        default=None, description="The ungridded table definitions in the document"
-    )
-    function: Optional[list[Function]] = Field(
-        default=None, description="The function definitions in the document"
-    )
-    check_data: Optional[CheckData] = Field(
-        default=None, description="The check data for model verification"
     )
 
 
@@ -880,8 +616,6 @@ class TablesMixin(BaseModel):
 
 
 # Rebuild models with forward references
-Author.model_rebuild()
-Provenance.model_rebuild()
 NormalPDF.model_rebuild()
 UniformPDF.model_rebuild()
 Bounds.model_rebuild()
@@ -894,4 +628,3 @@ GriddedTable.model_rebuild()
 UngriddedTable.model_rebuild()
 CheckData.model_rebuild()
 StaticShot.model_rebuild()
-DAVEfunc.model_rebuild()

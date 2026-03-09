@@ -18,6 +18,8 @@ from typing import Any, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from adh.msosa.source_info import SourceInfo
+
 _WBS_PATTERN = re.compile(r"^\d+(\.\d+)*$")
 
 
@@ -27,6 +29,9 @@ class Architecture(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
     wbs_no: Optional[str] = None
+    source_info: Optional[SourceInfo] = Field(
+        default=None, description="Source and authorship metadata."
+    )
 
     model_config = ConfigDict(extra="allow")
 

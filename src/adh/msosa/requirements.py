@@ -20,6 +20,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from adh.msosa.source_info import SourceInfo
+
 
 class ReqsCategories(str, Enum):
     """
@@ -122,6 +124,9 @@ class Requirement(BaseModel):
     )
     verification_evidence: Optional[str] = Field(
         default=None, description="Evidence or artefacts confirming verification."
+    )
+    source_info: Optional[SourceInfo] = Field(
+        default=None, description="Source and authorship metadata."
     )
 
 

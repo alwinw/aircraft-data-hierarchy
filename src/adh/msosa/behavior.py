@@ -18,6 +18,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator
 
+from adh.msosa.source_info import SourceInfo
 from adh.tabular.tables import TablesMixin
 
 
@@ -80,6 +81,9 @@ class Behavior(TablesMixin):
     )
     sequence: Optional[list[Activity]] = Field(
         default=None, description="A sequence of activities that define the behaviour."
+    )
+    source_info: Optional[SourceInfo] = Field(
+        default=None, description="Source and authorship metadata."
     )
 
     @field_validator("name", "description", mode="before")

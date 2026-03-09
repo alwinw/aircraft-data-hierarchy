@@ -22,6 +22,8 @@ from typing import Any, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
+from adh.msosa.source_info import SourceInfo
+
 
 class PerfDisciplines(str, Enum):
     """
@@ -150,6 +152,9 @@ class Discipline(BaseModel):
     tools: Optional[list[ModelDescription]] = Field(
         default=None,
         description="A list of tools and models associated with the discipline.",
+    )
+    source_info: Optional[SourceInfo] = Field(
+        default=None, description="Source and authorship metadata."
     )
 
     def add_tool(self, tool: ModelDescription) -> None:
