@@ -81,6 +81,11 @@ test = [
   "pytest-cov>=7.0",
 ]
 
+[tool.creosote]
+exclude-deps = [
+  "pydantic-pint",  # reimplemented locally in adh.geom.units; listed as attribution
+]
+
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_provider = "uv"
