@@ -58,7 +58,8 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 docs = [
-  "griffe-pydantic>=1.1",
+  "griffe-pydantic>=1.1; python_version < '3.10'",
+  "griffe-pydantic>=1.3; python_version >= '3.10'",
   "mkdocs-gen-files>=0.5",
   "mkdocs>=1.6",
   "mkdocs-literate-nav>=0.6",
@@ -78,6 +79,11 @@ test = [
   "coverage>=7.10",
   "pytest>=8.4",
   "pytest-cov>=7.0",
+]
+
+[tool.creosote]
+exclude-deps = [
+  "pydantic-pint", # reimplemented locally in adh.geom.units; listed as attribution
 ]
 
 [tool.commitizen]
@@ -164,3 +170,6 @@ include = [
   "src",
   # "tests",
 ]
+
+[tool.typos.default.extend-words]
+OT = "OT" # OTE = Operational Test and Evaluation (acronym in WBS class names)

@@ -1,18 +1,18 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import ConfigDict, Field, field_validator
 
-from adh.behavior import Behavior
-from adh.common_base_model import CommonBaseModel, Metadata
-from adh.performance import Discipline
-from adh.requirements import Requirement
+from adh.msosa.architecture import Architecture, Metadata
+from adh.msosa.behavior import Behavior
+from adh.msosa.performance import Discipline
+from adh.msosa.requirements import Requirement
 from adh.wbs.airframe.airframe_geometry import Geometry
 from adh.wbs.airframe.airframe_parameters import Parameters
 
 
-class Component(CommonBaseModel):
+class Component(Architecture):
     """
     Represents a component within an aircraft's system, detailing its specifications, functionalities, and interrelations.
 
@@ -44,16 +44,16 @@ class Component(CommonBaseModel):
     metadata: Optional[Metadata] = Field(
         default=None, description="Additional metadata for the component."
     )
-    subcomponents: Optional[List[Component]] = Field(
+    subcomponents: Optional[list[Component]] = Field(
         default=None, description="Sub-components within this component."
     )
-    requirements: Optional[List[Requirement]] = Field(
+    requirements: Optional[list[Requirement]] = Field(
         default=None, description="Specific requirements for the component."
     )
-    performance: Optional[List[Discipline]] = Field(
+    performance: Optional[list[Discipline]] = Field(
         default=None, description="List of disciplines analyzing the component."
     )
-    behavior: Optional[List[Behavior]] = Field(
+    behavior: Optional[list[Behavior]] = Field(
         default=None, description="Specific behaviors for the component."
     )
 

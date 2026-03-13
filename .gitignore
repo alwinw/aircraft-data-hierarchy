@@ -5,6 +5,8 @@
 scratch*
 lcov.info
 cov.xml
+AGENTS.md
+PLAN*.md
 
 #---------------------------------------------------------------------------------------
 # Archives.gitignore

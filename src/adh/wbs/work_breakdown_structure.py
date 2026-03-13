@@ -1,11 +1,3 @@
-from typing import Optional
-
-from pydantic import ConfigDict, Field, field_validator
-
-from adh.common_base_model import CommonBaseModel
-from adh.wbs.airframe.airframe import Component
-from adh.wbs.propulsion.propulsion import Propulsion
-
 """
 Work Breakdown Structure Reference
 
@@ -14,3418 +6,1644 @@ Work Breakdown Structure Reference
 
 """
 
+from typing import Optional
 
-class AircraftSystem(CommonBaseModel):
+from pydantic import ConfigDict, Field
+
+from adh.msosa.architecture import Architecture
+from adh.wbs.airframe.airframe import Component
+from adh.wbs.propulsion.propulsion import Propulsion
+
+
+class AircraftSystem(Architecture):
     wbs_no: Optional[str] = Field("1.0")
-
-    @field_validator("wbs_no")
-    def validate_wbs_no(cls, value: str) -> str:
-        if not value.startswith("1.") or len(value) < 3:
-            raise ValueError(f"Invalid WBS number: {value}")
-        return value
 
     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class AircraftSystemIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+    class AircraftSystemIntegrationAssemblyTestAndCheckout(Architecture):
         wbs_no: Optional[str] = Field("1.1")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class AirVehicle(CommonBaseModel):
+    class AirVehicle(Architecture):
         wbs_no: Optional[str] = Field("1.2")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class AirVehicleIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+        class AirVehicleIntegrationAssemblyTestAndCheckout(Architecture):
             wbs_no: Optional[str] = Field("1.2.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Airframe(CommonBaseModel):
+        class Airframe(Architecture):
             wbs_no: Optional[str] = Field("1.2.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AirframeIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+            class AirframeIntegrationAssemblyTestAndCheckout(Architecture):
                 wbs_no: Optional[str] = Field("1.2.2.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Fuselage(CommonBaseModel):
+            class Fuselage(Architecture):
                 wbs_no: Optional[str] = Field("1.2.2.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class BasicStructure(CommonBaseModel):
+                class BasicStructure(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.2.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class Skins(CommonBaseModel):
+                    class Skins(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.1")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Stringers(CommonBaseModel):
+                    class Stringers(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.2")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Frames(CommonBaseModel):
+                    class Frames(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.3")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Clips(CommonBaseModel):
+                    class Clips(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.4")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Beams(CommonBaseModel):
+                    class Beams(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.5")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Floors(CommonBaseModel):
+                    class Floors(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.6")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Bulkheads(CommonBaseModel):
+                    class Bulkheads(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.7")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Longerons(CommonBaseModel):
+                    class Longerons(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.8")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Supports(CommonBaseModel):
+                    class Supports(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.1.9")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                class SecondaryStructure(CommonBaseModel):
+                class SecondaryStructure(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.2.2")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class Enclosures(CommonBaseModel):
+                    class Enclosures(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.1")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Flooring(CommonBaseModel):
+                    class Flooring(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.2")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Partitions(CommonBaseModel):
+                    class Partitions(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.3")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Windows(CommonBaseModel):
+                    class Windows(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.4")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Doors(CommonBaseModel):
+                    class Doors(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.5")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Ramps(CommonBaseModel):
+                    class Ramps(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.6")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Panels(CommonBaseModel):
+                    class Panels(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.7")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Misc(CommonBaseModel):
+                    class Misc(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.2.2.8")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-            class Wing(CommonBaseModel):
+            class Wing(Architecture):
                 wbs_no: Optional[str] = Field("1.2.2.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class BasicStructure(CommonBaseModel):
+                class BasicStructure(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class CenterSection(CommonBaseModel):
+                    class CenterSection(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.3.1.1")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                        class Skins(CommonBaseModel):
+                        class Skins(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.1")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Spars(CommonBaseModel):
+                        class Spars(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.2")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Ribs(CommonBaseModel):
+                        class Ribs(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.3")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Stringers(CommonBaseModel):
+                        class Stringers(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.4")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Clips(CommonBaseModel):
+                        class Clips(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.1.5")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                    class IntermediatePanel(CommonBaseModel):
+                    class IntermediatePanel(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.3.1.2")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                        class Skins(CommonBaseModel):
+                        class Skins(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.1")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Spars(CommonBaseModel):
+                        class Spars(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.2")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Ribs(CommonBaseModel):
+                        class Ribs(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.3")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Stringers(CommonBaseModel):
+                        class Stringers(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.4")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Clips(CommonBaseModel):
+                        class Clips(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.2.5")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                    class OuterPanel(CommonBaseModel):
+                    class OuterPanel(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.3.1.3")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                        class Skins(CommonBaseModel):
+                        class Skins(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.1")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Spars(CommonBaseModel):
+                        class Spars(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.2")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Ribs(CommonBaseModel):
+                        class Ribs(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.3")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Stringers(CommonBaseModel):
+                        class Stringers(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.4")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                        class Clips(CommonBaseModel):
+                        class Clips(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.3.1.3.5")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                class SecondaryStructure(CommonBaseModel):
+                class SecondaryStructure(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.2")
-
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
 
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class AccessPanels(CommonBaseModel):
+                    class AccessPanels(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.3.2.1")
-
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
 
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                class Ailerons(CommonBaseModel):
+                class Ailerons(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.3")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Elevons(CommonBaseModel):
+                class Elevons(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.4")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Spoilers(CommonBaseModel):
+                class Spoilers(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.5")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class TrailingEdgeFlaps(CommonBaseModel):
+                class TrailingEdgeFlaps(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.6")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class LeadingEdgeFlaps(CommonBaseModel):
+                class LeadingEdgeFlaps(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.7")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Slats(CommonBaseModel):
+                class Slats(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.3.8")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Empennage(CommonBaseModel):
+            class Empennage(Architecture):
                 wbs_no: Optional[str] = Field("1.2.2.4")
-
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
 
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Stabilizer(CommonBaseModel):
+                class Stabilizer(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class BasicStructure(CommonBaseModel):
+                    class BasicStructure(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.4.1.1")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                        class CenterSection(CommonBaseModel):
+                        class CenterSection(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.4.1.1.1")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                            class Skins(CommonBaseModel):
+                            class Skins(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.1")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Spars(CommonBaseModel):
+                            class Spars(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.2")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Ribs(CommonBaseModel):
+                            class Ribs(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.3")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Stringers(CommonBaseModel):
+                            class Stringers(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.4")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Clips(CommonBaseModel):
+                            class Clips(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.1.5")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                        class IntermediatePanel(CommonBaseModel):
+                        class IntermediatePanel(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.4.1.1.2")
 
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
-
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                            class Skins(CommonBaseModel):
+                            class Skins(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.1")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Spars(CommonBaseModel):
+                            class Spars(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.2")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Ribs(CommonBaseModel):
+                            class Ribs(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.3")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Stringers(CommonBaseModel):
+                            class Stringers(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.4")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Clips(CommonBaseModel):
+                            class Clips(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.2.5")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                        class OuterPanel(CommonBaseModel):
+                        class OuterPanel(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.4.1.1.3")
-
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
 
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                            class Skins(CommonBaseModel):
+                            class Skins(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.1")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Spars(CommonBaseModel):
+                            class Spars(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.2")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Ribs(CommonBaseModel):
+                            class Ribs(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.3")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Stringers(CommonBaseModel):
+                            class Stringers(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.4")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                            class Clips(CommonBaseModel):
+                            class Clips(Architecture):
                                 wbs_no: Optional[str] = Field("1.2.2.4.1.1.3.5")
 
-                                @field_validator("wbs_no")
-                                def validate_wbs_no(cls, value: str) -> str:
-                                    if not value.startswith("1."):
-                                        raise ValueError(f"Invalid WBS number: {value}")
-                                    return value
-
                                 model_config = ConfigDict(
                                     validate_assignment=True, extra="allow"
                                 )
 
-                    class SecondaryStructure(CommonBaseModel):
+                    class SecondaryStructure(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.4.2")
-
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
 
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                        class AccessPanels(CommonBaseModel):
+                        class AccessPanels(Architecture):
                             wbs_no: Optional[str] = Field("1.2.2.4.2.1")
-
-                            @field_validator("wbs_no")
-                            def validate_wbs_no(cls, value: str) -> str:
-                                if not value.startswith("1."):
-                                    raise ValueError(f"Invalid WBS number: {value}")
-                                return value
 
                             model_config = ConfigDict(
                                 validate_assignment=True, extra="allow"
                             )
 
-                class Ailerons(CommonBaseModel):
+                class Ailerons(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.3")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Elevons(CommonBaseModel):
+                class Elevons(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.4")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Spoilers(CommonBaseModel):
+                class Spoilers(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.5")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class TrailingEdgeFlaps(CommonBaseModel):
+                class TrailingEdgeFlaps(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.6")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class LeadingEdgeFlaps(CommonBaseModel):
+                class LeadingEdgeFlaps(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.7")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Slats(CommonBaseModel):
+                class Slats(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.4.8")
-
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
 
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Nacelle(Component):
                 wbs_no: Optional[str] = Field("1.2.2.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class BasicStructure(CommonBaseModel):
+                class BasicStructure(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.5.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class Skins(CommonBaseModel):
+                    class Skins(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.1")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Stringers(CommonBaseModel):
+                    class Stringers(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.2")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Frames(CommonBaseModel):
+                    class Frames(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.3")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Clips(CommonBaseModel):
+                    class Clips(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.4")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Beams(CommonBaseModel):
+                    class Beams(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.5")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Floors(CommonBaseModel):
+                    class Floors(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.6")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Bulkheads(CommonBaseModel):
+                    class Bulkheads(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.7")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Longerons(CommonBaseModel):
+                    class Longerons(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.8")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Supports(CommonBaseModel):
+                    class Supports(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.1.9")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                class SecondaryStructure(CommonBaseModel):
+                class SecondaryStructure(Architecture):
                     wbs_no: Optional[str] = Field("1.2.2.5.2")
-
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
 
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                    class Enclosures(CommonBaseModel):
+                    class Enclosures(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.1")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Flooring(CommonBaseModel):
+                    class Flooring(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.2")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Partitions(CommonBaseModel):
+                    class Partitions(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.3")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Windows(CommonBaseModel):
+                    class Windows(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.4")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Doors(CommonBaseModel):
+                    class Doors(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.5")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Ramps(CommonBaseModel):
+                    class Ramps(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.6")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Panels(CommonBaseModel):
+                    class Panels(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.7")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-                    class Misc(CommonBaseModel):
+                    class Misc(Architecture):
                         wbs_no: Optional[str] = Field("1.2.2.5.2.8")
 
-                        @field_validator("wbs_no")
-                        def validate_wbs_no(cls, value: str) -> str:
-                            if not value.startswith("1."):
-                                raise ValueError(f"Invalid WBS number: {value}")
-                            return value
-
                         model_config = ConfigDict(
                             validate_assignment=True, extra="allow"
                         )
 
-        class Propulsion(CommonBaseModel):
+        class Propulsion(Architecture):
             wbs_no: Optional[str] = Field("1.2.3")
-
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
 
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
             class Engine(Propulsion):
                 wbs_no: Optional[str] = Field("1.2.3.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class EngineInstallation(CommonBaseModel):
+            class EngineInstallation(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AccessoryGearBoxesAndDrive(CommonBaseModel):
+            class AccessoryGearBoxesAndDrive(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ExhaustSystem(CommonBaseModel):
+            class ExhaustSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class EngineCooling(CommonBaseModel):
+            class EngineCooling(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class WaterInjection(CommonBaseModel):
+            class WaterInjection(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.6")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class EngineControls(CommonBaseModel):
+            class EngineControls(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.7")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class StartingSystem(CommonBaseModel):
+            class StartingSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.8")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class PropellerOrFanInstallation(CommonBaseModel):
+            class PropellerOrFanInstallation(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.9")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class LubricatingSystem(CommonBaseModel):
+            class LubricatingSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.10")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class FuelSystem(CommonBaseModel):
+            class FuelSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.11")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class ProtectedTanks(CommonBaseModel):
+                class ProtectedTanks(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.11.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class UnprotectedTanks(CommonBaseModel):
+                class UnprotectedTanks(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.11.2")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Plumbing(CommonBaseModel):
+                class Plumbing(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.11.3")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Etc(CommonBaseModel):
+                class Etc(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.11.4")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class DriveSystem(CommonBaseModel):
+            class DriveSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.3.12")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class GearBoxes(CommonBaseModel):
+                class GearBoxes(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.12.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class LubSys(CommonBaseModel):
+                class LubSys(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.12.2")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class RtrBrk(CommonBaseModel):
+                class RtrBrk(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.12.3")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class TransmissionDrive(CommonBaseModel):
+                class TransmissionDrive(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.12.4")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class RotorShaft(CommonBaseModel):
+                class RotorShaft(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.12.5")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class GasDrive(CommonBaseModel):
+                class GasDrive(Architecture):
                     wbs_no: Optional[str] = Field("1.2.3.12.6")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class VehicleSubsystems(CommonBaseModel):
+        class VehicleSubsystems(Architecture):
             wbs_no: Optional[str] = Field("1.2.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class VehicleSubsystemIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+            class VehicleSubsystemIntegrationAssemblyTestAndCheckout(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class FlightControlSubsystem(CommonBaseModel):
+            class FlightControlSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class CockpitControls(CommonBaseModel):
+                class CockpitControls(Architecture):
                     wbs_no: Optional[str] = Field("1.2.4.2.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class AutomaticFlightControlSystem(CommonBaseModel):
+                class AutomaticFlightControlSystem(Architecture):
                     wbs_no: Optional[str] = Field("1.2.4.2.2")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class SystemControls(CommonBaseModel):
+                class SystemControls(Architecture):
                     wbs_no: Optional[str] = Field("1.2.4.2.3")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AuxiliaryPowerSubsystem(CommonBaseModel):
+            class AuxiliaryPowerSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class HydraulicSubsystem(CommonBaseModel):
+            class HydraulicSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ElectricalAntiIcingSystem(CommonBaseModel):
+            class ElectricalAntiIcingSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class CrewStationSubsystem(CommonBaseModel):
+            class CrewStationSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.6")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class EnvironmentalControlSubsystem(CommonBaseModel):
+            class EnvironmentalControlSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.7")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class FuelSubsystem(CommonBaseModel):
+            class FuelSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.8")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Instruments(CommonBaseModel):
+            class Instruments(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.9")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class PneumaticSubsystem(CommonBaseModel):
+            class PneumaticSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.10")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AntiIcingSubsystem(CommonBaseModel):
+            class AntiIcingSubsystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.11")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class VehicleSubsystemSoftware(CommonBaseModel):
+            class VehicleSubsystemSoftware(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.12")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherSubsystems(CommonBaseModel):
+            class OtherSubsystems(Architecture):
                 wbs_no: Optional[str] = Field("1.2.4.13")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Avionics(CommonBaseModel):
+        class Avionics(Architecture):
             wbs_no: Optional[str] = Field("1.2.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AvionicsIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+            class AvionicsIntegrationAssemblyTestAndCheckout(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class CommunicationIdentification(CommonBaseModel):
+            class CommunicationIdentification(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class NavigationGuidance(CommonBaseModel):
+            class NavigationGuidance(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class MissionComputerProcessing(CommonBaseModel):
+            class MissionComputerProcessing(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class FireControl(CommonBaseModel):
+            class FireControl(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class DataDisplayAndControls(CommonBaseModel):
+            class DataDisplayAndControls(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.6")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Survivability(CommonBaseModel):
+            class Survivability(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.7")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Reconnaissance(CommonBaseModel):
+            class Reconnaissance(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.8")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ElectronicWarfare(CommonBaseModel):
+            class ElectronicWarfare(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.9")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AutomaticFlightControl(CommonBaseModel):
+            class AutomaticFlightControl(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.10")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class HealthMonitoringSystem(CommonBaseModel):
+            class HealthMonitoringSystem(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.11")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class StoresManagement(CommonBaseModel):
+            class StoresManagement(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.12")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AvionicsSoftwareRelease(CommonBaseModel):
+            class AvionicsSoftwareRelease(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.13")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherAvionicsSubsystems(CommonBaseModel):
+            class OtherAvionicsSubsystems(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.14")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Installation(CommonBaseModel):
+            class Installation(Architecture):
                 wbs_no: Optional[str] = Field("1.2.5.15")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ArmamentWeaponsDelivery(CommonBaseModel):
+        class ArmamentWeaponsDelivery(Architecture):
             wbs_no: Optional[str] = Field("1.2.6")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class AuxiliaryEquipment(CommonBaseModel):
+        class AuxiliaryEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.2.7")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class FurnishingsAndEquipment(CommonBaseModel):
+        class FurnishingsAndEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.2.8")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AccommodationForPersonnel(CommonBaseModel):
+            class AccommodationForPersonnel(Architecture):
                 wbs_no: Optional[str] = Field("1.2.8.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class MiscellaneousEquipment(CommonBaseModel):
+            class MiscellaneousEquipment(Architecture):
                 wbs_no: Optional[str] = Field("1.2.8.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Furnishings(CommonBaseModel):
+            class Furnishings(Architecture):
                 wbs_no: Optional[str] = Field("1.2.8.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class EmergencyEquipment(CommonBaseModel):
+            class EmergencyEquipment(Architecture):
                 wbs_no: Optional[str] = Field("1.2.8.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class AirVehicleSoftwareRelease(CommonBaseModel):
+        class AirVehicleSoftwareRelease(Architecture):
             wbs_no: Optional[str] = Field("1.2.9")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class LoadAndHandlingSystem(CommonBaseModel):
+        class LoadAndHandlingSystem(Architecture):
             wbs_no: Optional[str] = Field("1.2.10")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AircraftHandling(CommonBaseModel):
+            class AircraftHandling(Architecture):
                 wbs_no: Optional[str] = Field("1.2.10.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class LoadHandling(CommonBaseModel):
+            class LoadHandling(Architecture):
                 wbs_no: Optional[str] = Field("1.2.10.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class BallastGroup(CommonBaseModel):
+        class BallastGroup(Architecture):
             wbs_no: Optional[str] = Field("1.2.11")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ManufacturingVariation(CommonBaseModel):
+        class ManufacturingVariation(Architecture):
             wbs_no: Optional[str] = Field("1.2.12")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Contingency(CommonBaseModel):
+        class Contingency(Architecture):
             wbs_no: Optional[str] = Field("1.2.13")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OperatingItems(CommonBaseModel):
+        class OperatingItems(Architecture):
             wbs_no: Optional[str] = Field("1.2.14")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Crew(CommonBaseModel):
+            class Crew(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class UnusableFuel(CommonBaseModel):
+            class UnusableFuel(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class TrappedOil(CommonBaseModel):
+            class TrappedOil(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class EngineOil(CommonBaseModel):
+            class EngineOil(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AuxFuelTanks(CommonBaseModel):
+            class AuxFuelTanks(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class InternalFuelTanks(CommonBaseModel):
+            class InternalFuelTanks(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.6")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ExternalFuelTanks(CommonBaseModel):
+            class ExternalFuelTanks(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.7")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class WaterInjectionFluid(CommonBaseModel):
+            class WaterInjectionFluid(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.8")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Baggage(CommonBaseModel):
+            class Baggage(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.9")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class GunInstallations(CommonBaseModel):
+            class GunInstallations(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.10")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Guns(CommonBaseModel):
+                class Guns(Architecture):
                     wbs_no: Optional[str] = Field("1.2.14.10.1")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-                class Supports(CommonBaseModel):
+                class Supports(Architecture):
                     wbs_no: Optional[str] = Field("1.2.14.10.2")
 
-                    @field_validator("wbs_no")
-                    def validate_wbs_no(cls, value: str) -> str:
-                        if not value.startswith("1."):
-                            raise ValueError(f"Invalid WBS number: {value}")
-                        return value
-
                     model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class WeaponsProvisions(CommonBaseModel):
+            class WeaponsProvisions(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.11")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Chaff(CommonBaseModel):
+            class Chaff(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.12")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Flares(CommonBaseModel):
+            class Flares(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.13")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class SurvivalKits(CommonBaseModel):
+            class SurvivalKits(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.14")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class LifeRafts(CommonBaseModel):
+            class LifeRafts(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.15")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Oxygen(CommonBaseModel):
+            class Oxygen(Architecture):
                 wbs_no: Optional[str] = Field("1.2.14.16")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Passengers(CommonBaseModel):
+        class Passengers(Architecture):
             wbs_no: Optional[str] = Field("1.2.15")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Troops(CommonBaseModel):
+        class Troops(Architecture):
             wbs_no: Optional[str] = Field("1.2.16")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Cargo(CommonBaseModel):
+        class Cargo(Architecture):
             wbs_no: Optional[str] = Field("1.2.17")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Ammunition(CommonBaseModel):
+        class Ammunition(Architecture):
             wbs_no: Optional[str] = Field("1.2.18")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Weapons(CommonBaseModel):
+        class Weapons(Architecture):
             wbs_no: Optional[str] = Field("1.2.19")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class InternalUsableFuel(CommonBaseModel):
+        class InternalUsableFuel(Architecture):
             wbs_no: Optional[str] = Field("1.2.20")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ExternalUsableFuel(CommonBaseModel):
+        class ExternalUsableFuel(Architecture):
             wbs_no: Optional[str] = Field("1.2.21")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OtherAirVehicle(CommonBaseModel):
+        class OtherAirVehicle(Architecture):
             wbs_no: Optional[str] = Field("1.2.22")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class PayloadMissionSystem(CommonBaseModel):
+    class PayloadMissionSystem(Architecture):
         wbs_no: Optional[str] = Field("1.3")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class PayloadIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+        class PayloadIntegrationAssemblyTestAndCheckout(Architecture):
             wbs_no: Optional[str] = Field("1.3.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SurvivabilityPayload(CommonBaseModel):
+        class SurvivabilityPayload(Architecture):
             wbs_no: Optional[str] = Field("1.3.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ReconnaissancePayload(CommonBaseModel):
+        class ReconnaissancePayload(Architecture):
             wbs_no: Optional[str] = Field("1.3.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ElectronicWarfarePayload(CommonBaseModel):
+        class ElectronicWarfarePayload(Architecture):
             wbs_no: Optional[str] = Field("1.3.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ArmamentWeaponsDeliveryPayload(CommonBaseModel):
+        class ArmamentWeaponsDeliveryPayload(Architecture):
             wbs_no: Optional[str] = Field("1.3.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class PayloadSoftwareRelease(CommonBaseModel):
+        class PayloadSoftwareRelease(Architecture):
             wbs_no: Optional[str] = Field("1.3.6")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OtherPayload(CommonBaseModel):
+        class OtherPayload(Architecture):
             wbs_no: Optional[str] = Field("1.3.7")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class GroundHostSegment(CommonBaseModel):
+    class GroundHostSegment(Architecture):
         wbs_no: Optional[str] = Field("1.4")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class GroundSegmentIntegrationAssemblyTestAndCheckout(CommonBaseModel):
+        class GroundSegmentIntegrationAssemblyTestAndCheckout(Architecture):
             wbs_no: Optional[str] = Field("1.4.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class GroundControlSystems(CommonBaseModel):
+        class GroundControlSystems(Architecture):
             wbs_no: Optional[str] = Field("1.4.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class CommandAndControlSubsystem(CommonBaseModel):
+        class CommandAndControlSubsystem(Architecture):
             wbs_no: Optional[str] = Field("1.4.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class LaunchEquipment(CommonBaseModel):
+        class LaunchEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.4.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class RecoveryEquipment(CommonBaseModel):
+        class RecoveryEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.4.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class TransportVehicles(CommonBaseModel):
+        class TransportVehicles(Architecture):
             wbs_no: Optional[str] = Field("1.4.6")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class GroundSegmentSoftwareRelease(CommonBaseModel):
+        class GroundSegmentSoftwareRelease(Architecture):
             wbs_no: Optional[str] = Field("1.4.7")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OtherGroundHostSegment(CommonBaseModel):
+        class OtherGroundHostSegment(Architecture):
             wbs_no: Optional[str] = Field("1.4.8")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class AircraftSystemSoftwareRelease(CommonBaseModel):
+    class AircraftSystemSoftwareRelease(Architecture):
         wbs_no: Optional[str] = Field("1.5")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class SystemsEngineering(CommonBaseModel):
+    class SystemsEngineering(Architecture):
         wbs_no: Optional[str] = Field("1.6")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SoftwareSystemsEngineering(CommonBaseModel):
+        class SoftwareSystemsEngineering(Architecture):
             wbs_no: Optional[str] = Field("1.6.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class IntegratedLogisticsSupportSystemsEngineering(CommonBaseModel):
+        class IntegratedLogisticsSupportSystemsEngineering(Architecture):
             wbs_no: Optional[str] = Field("1.6.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class CybersecuritySystemsEngineering(CommonBaseModel):
+        class CybersecuritySystemsEngineering(Architecture):
             wbs_no: Optional[str] = Field("1.6.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class CoreSystemsEngineering(CommonBaseModel):
+        class CoreSystemsEngineering(Architecture):
             wbs_no: Optional[str] = Field("1.6.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OtherSystemsEngineering(CommonBaseModel):
+        class OtherSystemsEngineering(Architecture):
             wbs_no: Optional[str] = Field("1.6.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class ProgramManagement(CommonBaseModel):
+    class ProgramManagement(Architecture):
         wbs_no: Optional[str] = Field("1.7")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SoftwareProgramManagement(CommonBaseModel):
+        class SoftwareProgramManagement(Architecture):
             wbs_no: Optional[str] = Field("1.7.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class IntegratedLogisticsSupportProgramManagement(CommonBaseModel):
+        class IntegratedLogisticsSupportProgramManagement(Architecture):
             wbs_no: Optional[str] = Field("1.7.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class CybersecurityManagement(CommonBaseModel):
+        class CybersecurityManagement(Architecture):
             wbs_no: Optional[str] = Field("1.7.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class CoreProgramManagement(CommonBaseModel):
+        class CoreProgramManagement(Architecture):
             wbs_no: Optional[str] = Field("1.7.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OtherProgramManagement(CommonBaseModel):
+        class OtherProgramManagement(Architecture):
             wbs_no: Optional[str] = Field("1.7.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class SystemTestAndEvaluation(CommonBaseModel):
+    class SystemTestAndEvaluation(Architecture):
         wbs_no: Optional[str] = Field("1.8")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class DevelopmentalTestAndEvaluation(CommonBaseModel):
+        class DevelopmentalTestAndEvaluation(Architecture):
             wbs_no: Optional[str] = Field("1.8.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class SystemAcceptanceTest(CommonBaseModel):
+            class SystemAcceptanceTest(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class WindTunnelTests(CommonBaseModel):
+            class WindTunnelTests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class StructuralTests(CommonBaseModel):
+            class StructuralTests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class FlightTests(CommonBaseModel):
+            class FlightTests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class GroundTests(CommonBaseModel):
+            class GroundTests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class CybersecurityTestAndEvaluation(CommonBaseModel):
+            class CybersecurityTestAndEvaluation(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.6")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherDTEtests(CommonBaseModel):
+            class OtherDTEtests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.1.7")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class OperationalTestAndEvaluation(CommonBaseModel):
+        class OperationalTestAndEvaluation(Architecture):
             wbs_no: Optional[str] = Field("1.8.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class LimitedUserEvaluation(CommonBaseModel):
+            class LimitedUserEvaluation(Architecture):
                 wbs_no: Optional[str] = Field("1.8.2.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class InteroperabilityTesting(CommonBaseModel):
+            class InteroperabilityTesting(Architecture):
                 wbs_no: Optional[str] = Field("1.8.2.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class FlightTests(CommonBaseModel):
+            class FlightTests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.2.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class GroundTests(CommonBaseModel):
+            class GroundTests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.2.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class CybersecurityTestAndEvaluation(CommonBaseModel):
+            class CybersecurityTestAndEvaluation(Architecture):
                 wbs_no: Optional[str] = Field("1.8.2.5")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherOTEtests(CommonBaseModel):
+            class OtherOTEtests(Architecture):
                 wbs_no: Optional[str] = Field("1.8.2.6")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class LiveFireTestAndEvaluation(CommonBaseModel):
+        class LiveFireTestAndEvaluation(Architecture):
             wbs_no: Optional[str] = Field("1.8.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class MockupsSystemIntegrationLabs(CommonBaseModel):
+        class MockupsSystemIntegrationLabs(Architecture):
             wbs_no: Optional[str] = Field("1.8.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class TestAndEvaluationSupport(CommonBaseModel):
+        class TestAndEvaluationSupport(Architecture):
             wbs_no: Optional[str] = Field("1.8.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class TestFacilities(CommonBaseModel):
+        class TestFacilities(Architecture):
             wbs_no: Optional[str] = Field("1.8.6")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class Training(CommonBaseModel):
+    class Training(Architecture):
         wbs_no: Optional[str] = Field("1.9")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Equipment(CommonBaseModel):
+        class Equipment(Architecture):
             wbs_no: Optional[str] = Field("1.9.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OperatorInstructionalEquipment(CommonBaseModel):
+            class OperatorInstructionalEquipment(Architecture):
                 wbs_no: Optional[str] = Field("1.9.1.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class MaintainerInstructionalEquipment(CommonBaseModel):
+            class MaintainerInstructionalEquipment(Architecture):
                 wbs_no: Optional[str] = Field("1.9.1.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Services(CommonBaseModel):
+        class Services(Architecture):
             wbs_no: Optional[str] = Field("1.9.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OperatorInstructionalServices(CommonBaseModel):
+            class OperatorInstructionalServices(Architecture):
                 wbs_no: Optional[str] = Field("1.9.2.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class MaintainerInstructionalServices(CommonBaseModel):
+            class MaintainerInstructionalServices(Architecture):
                 wbs_no: Optional[str] = Field("1.9.2.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class Facilities(CommonBaseModel):
+        class Facilities(Architecture):
             wbs_no: Optional[str] = Field("1.9.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class TrainingSoftware(CommonBaseModel):
+        class TrainingSoftware(Architecture):
             wbs_no: Optional[str] = Field("1.9.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class Data(CommonBaseModel):
+    class Data(Architecture):
         wbs_no: Optional[str] = Field("1.10")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class DataDeliverables(CommonBaseModel):
+        class DataDeliverables(Architecture):
             wbs_no: Optional[str] = Field("1.10.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class DataRepository(CommonBaseModel):
+        class DataRepository(Architecture):
             wbs_no: Optional[str] = Field("1.10.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class DataRights(CommonBaseModel):
+        class DataRights(Architecture):
             wbs_no: Optional[str] = Field("1.10.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class PeculiarSupportEquipment(CommonBaseModel):
+    class PeculiarSupportEquipment(Architecture):
         wbs_no: Optional[str] = Field("1.11")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class TestAndMeasurementEquipment(CommonBaseModel):
+        class TestAndMeasurementEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.11.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AirframeHullVehicle(CommonBaseModel):
+            class AirframeHullVehicle(Architecture):
                 wbs_no: Optional[str] = Field("1.11.1.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Propulsion(CommonBaseModel):
+            class Propulsion(Architecture):
                 wbs_no: Optional[str] = Field("1.11.1.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ElectronicsAvionics(CommonBaseModel):
+            class ElectronicsAvionics(Architecture):
                 wbs_no: Optional[str] = Field("1.11.1.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherMajorSubsystems(CommonBaseModel):
+            class OtherMajorSubsystems(Architecture):
                 wbs_no: Optional[str] = Field("1.11.1.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SupportAndHandlingEquipment(CommonBaseModel):
+        class SupportAndHandlingEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.11.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AirframeHullVehicle(CommonBaseModel):
+            class AirframeHullVehicle(Architecture):
                 wbs_no: Optional[str] = Field("1.11.2.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Propulsion(CommonBaseModel):
+            class Propulsion(Architecture):
                 wbs_no: Optional[str] = Field("1.11.2.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ElectronicsAvionics(CommonBaseModel):
+            class ElectronicsAvionics(Architecture):
                 wbs_no: Optional[str] = Field("1.11.2.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherMajorSubsystems(CommonBaseModel):
+            class OtherMajorSubsystems(Architecture):
                 wbs_no: Optional[str] = Field("1.11.2.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class CommonSupportEquipment(CommonBaseModel):
+    class CommonSupportEquipment(Architecture):
         wbs_no: Optional[str] = Field("1.12")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class TestAndMeasurementEquipment(CommonBaseModel):
+        class TestAndMeasurementEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.12.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AirframeHullVehicle(CommonBaseModel):
+            class AirframeHullVehicle(Architecture):
                 wbs_no: Optional[str] = Field("1.12.1.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Propulsion(CommonBaseModel):
+            class Propulsion(Architecture):
                 wbs_no: Optional[str] = Field("1.12.1.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ElectronicsAvionics(CommonBaseModel):
+            class ElectronicsAvionics(Architecture):
                 wbs_no: Optional[str] = Field("1.12.1.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherMajorSubsystems(CommonBaseModel):
+            class OtherMajorSubsystems(Architecture):
                 wbs_no: Optional[str] = Field("1.12.1.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SupportAndHandlingEquipment(CommonBaseModel):
+        class SupportAndHandlingEquipment(Architecture):
             wbs_no: Optional[str] = Field("1.12.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class AirframeHullVehicle(CommonBaseModel):
+            class AirframeHullVehicle(Architecture):
                 wbs_no: Optional[str] = Field("1.12.2.1")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class Propulsion(CommonBaseModel):
+            class Propulsion(Architecture):
                 wbs_no: Optional[str] = Field("1.12.2.2")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class ElectronicsAvionics(CommonBaseModel):
+            class ElectronicsAvionics(Architecture):
                 wbs_no: Optional[str] = Field("1.12.2.3")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-            class OtherMajorSubsystems(CommonBaseModel):
+            class OtherMajorSubsystems(Architecture):
                 wbs_no: Optional[str] = Field("1.12.2.4")
 
-                @field_validator("wbs_no")
-                def validate_wbs_no(cls, value: str) -> str:
-                    if not value.startswith("1."):
-                        raise ValueError(f"Invalid WBS number: {value}")
-                    return value
-
                 model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class OperationalSiteActivation(CommonBaseModel):
+    class OperationalSiteActivation(Architecture):
         wbs_no: Optional[str] = Field("1.13")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SystemAssemblyInstallationAndCheckoutOnSite(CommonBaseModel):
+        class SystemAssemblyInstallationAndCheckoutOnSite(Architecture):
             wbs_no: Optional[str] = Field("1.13.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ContractorTechnicalSupport(CommonBaseModel):
+        class ContractorTechnicalSupport(Architecture):
             wbs_no: Optional[str] = Field("1.13.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SiteConstruction(CommonBaseModel):
+        class SiteConstruction(Architecture):
             wbs_no: Optional[str] = Field("1.13.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class SiteShipVehicleConversion(CommonBaseModel):
+        class SiteShipVehicleConversion(Architecture):
             wbs_no: Optional[str] = Field("1.13.4")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class InterimContractorSupport(CommonBaseModel):
+        class InterimContractorSupport(Architecture):
             wbs_no: Optional[str] = Field("1.13.5")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class ContractorLogisticsSupport(CommonBaseModel):
+    class ContractorLogisticsSupport(Architecture):
         wbs_no: Optional[str] = Field("1.14")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class IndustrialFacilities(CommonBaseModel):
+    class IndustrialFacilities(Architecture):
         wbs_no: Optional[str] = Field("1.15")
 
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
-
         model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class ConstructionConversionExpansion(CommonBaseModel):
+        class ConstructionConversionExpansion(Architecture):
             wbs_no: Optional[str] = Field("1.15.1")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class EquipmentAcquisitionOrModernization(CommonBaseModel):
+        class EquipmentAcquisitionOrModernization(Architecture):
             wbs_no: Optional[str] = Field("1.15.2")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-        class IndustrialFacilitiesMaintenance(CommonBaseModel):
+        class IndustrialFacilitiesMaintenance(Architecture):
             wbs_no: Optional[str] = Field("1.15.3")
 
-            @field_validator("wbs_no")
-            def validate_wbs_no(cls, value: str) -> str:
-                if not value.startswith("1."):
-                    raise ValueError(f"Invalid WBS number: {value}")
-                return value
-
             model_config = ConfigDict(validate_assignment=True, extra="allow")
 
-    class InitialSparesAndRepairParts(CommonBaseModel):
+    class InitialSparesAndRepairParts(Architecture):
         wbs_no: Optional[str] = Field("1.16")
-
-        @field_validator("wbs_no")
-        def validate_wbs_no(cls, value: str) -> str:
-            if not value.startswith("1."):
-                raise ValueError(f"Invalid WBS number: {value}")
-            return value
 
         model_config = ConfigDict(validate_assignment=True, extra="allow")

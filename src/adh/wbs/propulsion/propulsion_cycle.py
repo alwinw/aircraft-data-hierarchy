@@ -1,11 +1,11 @@
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import Field, InstanceOf, SerializeAsAny, field_validator
 
-from adh.common_base_model import CommonBaseModel
+from adh.msosa.architecture import Architecture
 
 
-class EngineElement(CommonBaseModel):
+class EngineElement(Architecture):
     """
     Represents an individual element in the engine cycle.
 
@@ -41,7 +41,7 @@ class EngineElement(CommonBaseModel):
     map_interp_method: Optional[str] = Field(
         default=None, description="Method to use for map interpolation."
     )
-    bleed_names: Optional[List[str]] = Field(
+    bleed_names: Optional[list[str]] = Field(
         default=None, description="Names of the bleed ports"
     )
     pr_des: Optional[float] = Field(
@@ -66,15 +66,15 @@ class EngineElement(CommonBaseModel):
     area: Optional[float] = Field(
         default=None, description="On-design frontal area of component(Output)"
     )
-    frac_W: Optional[List[float]] = Field(
+    frac_W: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
-    frac_P: Optional[List[float]] = Field(
+    frac_P: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
-    frac_work: Optional[List[float]] = Field(
+    frac_work: Optional[list[float]] = Field(
         default=None,
         description="Fraction of work to bleed off(associated with each bleed connection)",
     )
@@ -193,7 +193,7 @@ class Compressor(EngineElement):
     map_interp_method: Optional[str] = Field(
         default=None, description="Method to use for map interpolation."
     )
-    bleed_names: Optional[List[str]] = Field(
+    bleed_names: Optional[list[str]] = Field(
         default=None, description="Names of the bleed ports"
     )
     pr_des: Optional[float] = Field(
@@ -218,15 +218,15 @@ class Compressor(EngineElement):
     area: Optional[float] = Field(
         default=None, description="On-design frontal area of component(Output)"
     )
-    frac_W: Optional[List[float]] = Field(
+    frac_W: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
-    frac_P: Optional[List[float]] = Field(
+    frac_P: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
-    frac_work: Optional[List[float]] = Field(
+    frac_work: Optional[list[float]] = Field(
         default=None,
         description="Fraction of work to bleed off(associated with each bleed connection)",
     )
@@ -264,7 +264,7 @@ class Turbine(EngineElement):
     map_interp_method: Optional[str] = Field(
         default=None, description="Method to use for map interpolation."
     )
-    bleed_names: Optional[List[str]] = Field(
+    bleed_names: Optional[list[str]] = Field(
         default=None, description="Names of the bleed ports"
     )
     pr_des: Optional[float] = Field(
@@ -289,15 +289,15 @@ class Turbine(EngineElement):
     area: Optional[float] = Field(
         default=None, description="On-design frontal area of component(Output)"
     )
-    frac_W: Optional[List[float]] = Field(
+    frac_W: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
-    frac_P: Optional[List[float]] = Field(
+    frac_P: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
-    frac_work: Optional[List[float]] = Field(
+    frac_work: Optional[list[float]] = Field(
         default=None,
         description="Fraction of work to bleed off(associated with each bleed connection)",
     )
@@ -382,21 +382,21 @@ class Bleed(EngineElement):
         If true calculate static properties
     """
 
-    bleed_names: Optional[List[str]] = Field(
+    bleed_names: Optional[list[str]] = Field(
         default=None, description="Names of the bleed connections associated"
     )
     statics: Optional[bool] = Field(
         default=None, description="If true calculate static properties"
     )
-    frac_W: Optional[List[float]] = Field(
+    frac_W: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming flow to bleed off(associated with each bleed connection)",
     )
-    frac_P: Optional[List[float]] = Field(
+    frac_P: Optional[list[float]] = Field(
         default=None,
         description="Fraction of incoming pressure to bleed off(associated with each bleed connection)",
     )
-    frac_work: Optional[List[float]] = Field(
+    frac_work: Optional[list[float]] = Field(
         default=None,
         description="Fraction of work to bleed off(associated with each bleed connection)",
     )
@@ -489,7 +489,7 @@ class Shaft(EngineElement):
     HPX: Optional[float] = Field(default=None, description="Horsepower transfer")
 
 
-class PropulsionCycle(CommonBaseModel):
+class PropulsionCycle(Architecture):
     """
     Represents a complete engine cycle.
 
@@ -506,12 +506,12 @@ class PropulsionCycle(CommonBaseModel):
     """
 
     name: str = Field(..., description="The name of the engine cycle.")
-    elements: List[SerializeAsAny[InstanceOf[EngineElement]]] = Field(
+    elements: list[SerializeAsAny[InstanceOf[EngineElement]]] = Field(
         ..., description="The list of engine elements in the engine cycle."
     )
-    global_connections: Optional[List[str]] = Field(
+    global_connections: Optional[list[str]] = Field(
         default=None, description="The global connections in the engine cycle."
     )
-    flow_connections: Optional[List[List[str]]] = Field(
+    flow_connections: Optional[list[list[str]]] = Field(
         default=None, description="The flow connections in the engine cycle."
     )

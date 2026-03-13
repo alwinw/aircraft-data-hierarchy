@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, List, Tuple
+from typing import TYPE_CHECKING
 
 from adh.wbs.systems.systems_parameters import System
 
@@ -40,7 +40,7 @@ def create_system_diagram(system: System) -> Digraph:
     return dot
 
 
-def create_system_attribute_tables(system: System) -> List[Tuple[str, str]]:
+def create_system_attribute_tables(system: System) -> list[tuple[str, str]]:
     try:
         from tabulate import tabulate  # noqa: PLC0415
     except ImportError as e:
