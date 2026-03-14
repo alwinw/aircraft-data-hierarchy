@@ -84,3 +84,13 @@ repos:
       - id: markdownlint-fix
         priority: 1
         exclude: CHANGELOG.md
+
+  - repo: local
+    hooks:
+      - id: gen-wbs-classes
+        name: Check WBS classes are in sync with taxonomy
+        language: python
+        entry: python scripts/gen_wbs_classes.py --check
+        additional_dependencies: ["pyyaml>=6.0"]
+        files: ^(src/adh/wbs/taxonomy/.*\.yaml|src/adh/wbs/_generated\.py)$
+        pass_filenames: false
