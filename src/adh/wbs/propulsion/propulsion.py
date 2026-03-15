@@ -6,7 +6,7 @@ Aligned with MIL-STD-881F Work Breakdown Structure taxonomy.
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 from pydantic import Field
 
@@ -16,6 +16,7 @@ from adh.msosa.performance import Performances
 from adh.msosa.requirements import Requirements
 from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 from adh.wbs.propulsion.propulsion_geometry import PropulsionGeometry
+from adh.wbs.propulsion.propulsion_multipoint import MultiPointCycle
 
 
 class Propulsion(Architecture):
@@ -43,9 +44,7 @@ class Propulsion(Architecture):
     geometry: Optional[PropulsionGeometry] = Field(
         default=None, description="Geometry of the propulsion system."
     )
-    # TODO: Get MultiPointCycle imported behaviorLib Demo
-    # cycle: Union[PropulsionCycle, MultiPointCycle] = Field(default=None, description="Cycle of the propulsion system.")
-    cycle: Optional[PropulsionCycle] = Field(
+    cycle: Optional[Union[MultiPointCycle, PropulsionCycle]] = Field(
         default=None, description="Cycle of the propulsion system."
     )
     parameters: Optional[dict[str, Any]] = Field(
