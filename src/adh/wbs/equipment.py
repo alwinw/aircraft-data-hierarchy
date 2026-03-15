@@ -1,13 +1,19 @@
+"""
+WBS Equipment model.
+
+Aligned with MIL-STD-881F Work Breakdown Structure taxonomy.
+"""
+
 from __future__ import annotations
 
 from typing import Any, Optional
 
-from pydantic import ConfigDict, Field, field_validator
+from pydantic import Field
 
-from adh.msosa.architecture import Architecture, Metadata
-from adh.msosa.behavior import Behavior
-from adh.msosa.performance import Discipline
-from adh.msosa.requirements import Requirement
+from adh.msosa.architecture import Architecture
+from adh.msosa.behavior import Behaviors
+from adh.msosa.performance import Performances
+from adh.msosa.requirements import Requirements
 
 
 class Equipment(Architecture):
@@ -17,16 +23,12 @@ class Equipment(Architecture):
     Attributes:
         name (Optional[str]): The name of the equipment, acting as a unique identifier.
         description (Optional[str]): A brief description of the equipment's purpose and functionality.
-        geometry (Optional[Dict[str, Any]]): Geometric information of the equipment, if applicable.
-        parameters (Optional[Dict[str, Any]]): Operational or physical parameters associated with the equipment.
-        metadata (Optional[Metadata]): Additional metadata providing context or details about the equipment.
-        subequipment (Optional[List[Equipment]]): A list of sub-components, if any, within this equipment.
-        requirements (Optional[List[Requirement]]): Specific requirements associated with this equipment.
-        performance (Optional[List[Discipline]]): List of disciplines analyzing the equipment.
-        behavior (Optional[List[Behavior]]): Specific behaviors for the equipment.
-
-    Raises:
-        ValueError: If any string field is empty, ensuring all equipment has meaningful identifiers and descriptions.
+        geometry (Optional[dict[str, Any]]): Geometric information of the equipment, if applicable.
+        parameters (Optional[dict[str, Any]]): Operational or physical parameters associated with the equipment.
+        subequipment (Optional[list[Equipment]]): A list of sub-components, if any, within this equipment.
+        requirements (Optional[Requirements]): Specific requirements associated with this equipment.
+        performance (Optional[Performances]): Performance disciplines for the equipment.
+        behavior (Optional[Behaviors]): Specific behaviors for the equipment.
     """
 
     name: Optional[str] = Field(default=None, description="The name of the equipment.")
@@ -39,44 +41,18 @@ class Equipment(Architecture):
     parameters: Optional[dict[str, Any]] = Field(
         default=None, description="Parameters of the equipment."
     )
-    metadata: Optional[Metadata] = Field(
-        default=None, description="Additional metadata for the equipment."
-    )
     subequipment: Optional[list[Equipment]] = Field(
         default=None, description="Sub-equipment within this equipment."
     )
-    requirements: Optional[list[Requirement]] = Field(
+    requirements: Optional[Requirements] = Field(
         default=None, description="Specific requirements for the equipment."
     )
-    performance: Optional[list[Discipline]] = Field(
-        default=None, description="List of disciplines analyzing the equipment."
+    performance: Optional[Performances] = Field(
+        default=None, description="Performance disciplines for the equipment."
     )
-    behavior: Optional[list[Behavior]] = Field(
+    behavior: Optional[Behaviors] = Field(
         default=None, description="Specific behaviors for the equipment."
     )
-
-    @field_validator("name", "description", mode="before")
-    @classmethod
-    def validate_non_empty_string(cls, value: Optional[str]) -> Optional[str]:
-        """
-        Validates that the name and description fields are not empty or whitespace only.
-
-        Args:
-            value (Optional[str]): The value to validate.
-
-        Returns:
-            Optional[str]: The validated string value.
-
-        Raises:
-            ValueError: If the input value is empty or consists only of whitespace.
-        """
-        if value is not None and not value.strip():
-            raise ValueError(
-                "Name and description fields must not be empty or whitespace only."
-            )
-        return value
-
-    model_config = ConfigDict(arbitrary_types_allowed=True, from_attributes=True)
 
 
 # Ensure all models are fully defined

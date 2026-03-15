@@ -1,3 +1,8 @@
+# TODO(PLAN_6): This file contains aerodynamic analysis input parameters (PANAIR/APES heritage),
+# not WBS weight parameters. It does not belong in wbs/airframe/. Relocate to adh/aero/ or
+# msosa/performance when integrating PANAIR/APES tool interfaces. Cross-reference: NASA PANAIR,
+# APES (Aircraft Parameter Estimation System). See PLAN_3 SAWE RP A-8 review findings.
+
 from enum import Enum
 from typing import Optional
 
