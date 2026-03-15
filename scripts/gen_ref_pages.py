@@ -24,7 +24,7 @@ def generate_reference_pages():
             parts = parts[:-1]
             doc_path = doc_path.with_name("index.md")
             full_doc_path = full_doc_path.with_name("index.md")
-        elif parts[-1] == "__main__" or parts[-1] == "__version__":
+        elif parts[-1].startswith("_"):
             continue
 
         nav[parts] = doc_path.as_posix()

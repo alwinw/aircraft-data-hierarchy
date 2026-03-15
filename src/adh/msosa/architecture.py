@@ -28,7 +28,7 @@ class Architecture(BaseModel):
 
     name: Optional[str] = None
     description: Optional[str] = None
-    wbs_no: Optional[str] = None
+    wbs_no: str = ""
     source_info: Optional[SourceInfo] = Field(
         default=None, description="Source and authorship metadata."
     )

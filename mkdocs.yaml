@@ -12,7 +12,7 @@ copyright: Copyright &copy; 2024-2026 The Boeing Company.
 repo_name: "alwinw/aircraft-data-hierarchy"
 repo_url: "https://github.com/alwinw/aircraft-data-hierarchy"
 
-watch: [mkdocs.yaml, README.md, src/adh, docs]
+watch: [mkdocs.yaml, README.md, src/adh, scripts/gen_ref_pages.py, docs]
 
 validation:
   omitted_files: warn
