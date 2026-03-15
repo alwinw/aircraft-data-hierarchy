@@ -140,26 +140,49 @@ def _noqa_comment(class_name: str) -> str:
     return "  # noqa: N801" if "_" in class_name else ""
 
 
-def generate_generated_py(entries: list[dict], tree: dict[str, list[dict]]) -> str:
-    """Render _generated.py with typed Optional child fields on parent classes."""
-    header = """\
-# Generated from scripts/taxonomy/ by scripts/gen_wbs_classes.py
+def generate_domain_py(
+    stem: str, entries: list[dict], tree: dict[str, list[dict]]
+) -> str:
+    """Render a self-contained domain file with full class definitions."""
+    yaml_path = f"scripts/taxonomy/{stem}.yaml"
+    domain_entries = [e for e in entries if e["_yaml_stem"] == stem]
+
+    # Collect cross-stem imports needed by parent classes in this stem
+    cross_imports: dict[str, set[str]] = {}
+    for entry in domain_entries:
+        for child in tree.get(entry["wbs_no"], []):
+            if child["_yaml_stem"] != stem:
+                cross_imports.setdefault(child["_yaml_stem"], set()).add(
+                    child["class_name"]
+                )
+
+    lines = f"""# Generated from {yaml_path} by scripts/gen_wbs_classes.py
 # Re-run the generator if taxonomy/*.yaml files change.
-# Hand edits below the generated classes are preserved across --check runs,
-# but will be overwritten if the generator is re-run in write mode.
+# Hand edits to this file are preserved across --check runs,
+# but class definitions, wbs_no defaults, and child fields will be
+# overwritten if the generator is re-run in write mode.
 
 from __future__ import annotations
 
 from typing import Optional
 
 from pydantic import Field
+from adh.msosa.architecture import Architecture""".splitlines()
 
-from adh.msosa.architecture import Architecture
+    if cross_imports:
+        lines.append("")
+        for other_stem in sorted(cross_imports.keys()):
+            class_names = sorted(cross_imports[other_stem])
+            if len(class_names) == 1:
+                lines.append(f"from adh.wbs.{other_stem} import {class_names[0]}")
+            else:
+                names_str = ",\n    ".join(class_names)
+                lines.append(f"from adh.wbs.{other_stem} import (\n    {names_str},\n)")
 
-"""
-    lines = [header]
+    lines.append("")
+    lines.append("")
 
-    for entry in entries:
+    for entry in domain_entries:
         wbs_no = entry["wbs_no"]
         class_name = entry["class_name"]
         name = entry["name"]
@@ -189,7 +212,7 @@ from adh.msosa.architecture import Architecture
         lines.append("")
 
     # model_rebuild() for classes with child fields, deepest first
-    parents_with_children = [entry for entry in entries if tree.get(entry["wbs_no"])]
+    parents_with_children = [e for e in domain_entries if tree.get(e["wbs_no"])]
     parents_with_children.sort(key=lambda e: len(_wbs_parts(e["wbs_no"])), reverse=True)
 
     if parents_with_children:
@@ -198,31 +221,15 @@ from adh.msosa.architecture import Architecture
             lines.append(f"{entry['class_name']}.model_rebuild(){noqa}")
         lines.append("")
 
+    class_names_sorted = sorted(
+        (e["class_name"] for e in domain_entries), key=str.casefold
+    )
+    all_entries_str = '",\n    "'.join(class_names_sorted)
+    lines.append(f'__all__ = [\n    "{all_entries_str}",\n]')
+    lines.append("")
+
     source = "\n".join(lines)
     return source.rstrip("\n") + "\n"
-
-
-def generate_domain_py(stem: str, entries: list[dict]) -> str:
-    """Render a domain file (air_vehicle.py etc.) that re-exports its taxonomy classes."""
-    yaml_path = f"scripts/taxonomy/{stem}.yaml"
-    domain_entries = [e for e in entries if e["_yaml_stem"] == stem]
-    class_names = sorted((e["class_name"] for e in domain_entries), key=str.casefold)
-
-    imports = ",\n    ".join(class_names)
-    all_entries = '",\n    "'.join(class_names)
-
-    return f"""\
-# Generated from {yaml_path} by scripts/gen_wbs_classes.py
-from __future__ import annotations
-
-from adh.wbs._generated import (
-    {imports},
-)
-
-__all__ = [
-    "{all_entries}",
-]
-"""
 
 
 def generate_init_py(entries: list[dict]) -> str:
@@ -263,9 +270,8 @@ def generate_init_py(entries: list[dict]) -> str:
 def generate_all(entries: list[dict], tree: dict[str, list[dict]]) -> dict[str, str]:
     """Return mapping of repo-relative path to file content for all generated files."""
     files: dict[str, str] = {}
-    files["src/adh/wbs/_generated.py"] = generate_generated_py(entries, tree)
     for stem in DOMAIN_STEMS:
-        files[f"src/adh/wbs/{stem}.py"] = generate_domain_py(stem, entries)
+        files[f"src/adh/wbs/{stem}.py"] = generate_domain_py(stem, entries, tree)
     files["src/adh/wbs/__init__.py"] = generate_init_py(entries)
     return files
 
@@ -277,12 +283,12 @@ def write_all(files: dict[str, str], base: Path) -> None:
         print(f"Written: {target}")
 
 
-def _check_generated_py(
-    entries: list[dict], tree: dict[str, list[dict]], content: str
+def _check_domain_py(
+    stem: str, entries: list[dict], tree: dict[str, list[dict]], content: str
 ) -> list[str]:
-    """Return list of missing items in _generated.py."""
+    """Return list of missing items in a domain file."""
     missing = []
-    for entry in entries:
+    for entry in (e for e in entries if e["_yaml_stem"] == stem):
         class_name = entry["class_name"]
         wbs_no = entry["wbs_no"]
         if f"class {class_name}(" not in content:
@@ -293,23 +299,12 @@ def _check_generated_py(
         if child_entries:
             field_map = _deduplicate_field_names(child_entries)
             for child in child_entries:
-                child_class = child["class_name"]
                 field_name = field_map[child["wbs_no"]]
-                snippet = f"    {field_name}: Optional[{child_class}]"
+                # Check for field prefix only: ruff may wrap long lines so the
+                # class name may appear on the next line rather than inline.
+                snippet = f"    {field_name}: Optional["
                 if snippet not in content:
                     missing.append(snippet)
-    return missing
-
-
-def _check_domain_py(stem: str, entries: list[dict], content: str) -> list[str]:
-    """Return list of missing items in a domain re-export file."""
-    missing = []
-    for entry in (e for e in entries if e["_yaml_stem"] == stem):
-        class_name = entry["class_name"]
-        if f"    {class_name}," not in content:
-            missing.append(f"    {class_name},  (import)")
-        if f'    "{class_name}",' not in content:
-            missing.append(f'    "{class_name}",  (__all__)')
     return missing
 
 
@@ -334,13 +329,11 @@ def check_subset(
             all_ok = False
             continue
         content = target.read_text(encoding="utf-8")
-        if rel_path == "src/adh/wbs/_generated.py":
-            missing = _check_generated_py(entries, tree, content)
-        elif rel_path == "src/adh/wbs/__init__.py":
+        if rel_path == "src/adh/wbs/__init__.py":
             missing = _check_init_py(entries, content)
         else:
             stem = Path(rel_path).stem
-            missing = _check_domain_py(stem, entries, content)
+            missing = _check_domain_py(stem, entries, tree, content)
         if missing:
             print(f"OUT OF SYNC: {rel_path}")
             for item in missing:

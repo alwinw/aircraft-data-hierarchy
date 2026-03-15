@@ -92,5 +92,5 @@ repos:
         language: python
         entry: python scripts/gen_wbs_classes.py --check
         additional_dependencies: ["pyyaml>=6.0"]
-        files: ^src/adh/wbs/(_generated\.py|air_vehicle\.py|payload\.py|ground_segment\.py|program_common\.py|__init__\.py)$
+        files: ^src/adh/wbs/(air_vehicle\.py|payload\.py|ground_segment\.py|program_common\.py|__init__\.py)$
         pass_filenames: false
