@@ -1,4 +1,7 @@
-class PropulsionGeometry:
-    @staticmethod
-    def hello_world():
-        print(f"{__name__} {PropulsionGeometry.__name__} hello world")
+from adh.msosa.architecture import Architecture
+
+
+class PropulsionGeometry(Architecture):
+    """Propulsion geometry parameters. Content deferred to PLAN_6 (Fix #5)."""
+
+    pass

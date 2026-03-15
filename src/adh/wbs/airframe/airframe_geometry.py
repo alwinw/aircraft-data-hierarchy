@@ -37,23 +37,6 @@ class String(Architecture):
         description="Additional metadata providing further context or details about the variable.",
     )
 
-    @field_validator("value", mode="before")
-    def validate_value_not_empty(cls, value: str) -> str:
-        """Validate that the string value is not empty or just whitespace.
-
-        Args:
-            value: The string value to validate.
-
-        Returns:
-            The validated string value.
-
-        Raises:
-            ValueError: If the value is empty or just whitespace.
-        """
-        if not value.strip():
-            raise ValueError("String value cannot be empty or just whitespace.")
-        return value
-
 
 class Boolean(Architecture):
     """Represents a boolean data type with enhanced attributes for engineering applications.

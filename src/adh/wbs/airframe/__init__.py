@@ -1,3 +1,100 @@
-from adh.wbs.airframe.airframe import *
-from adh.wbs.airframe.airframe_geometry import *
-from adh.wbs.airframe.airframe_parameters import *
+from adh.wbs.airframe.airframe import Component
+from adh.wbs.airframe.airframe_geometry import (
+    Airfoil as GeometryAirfoil,
+)
+from adh.wbs.airframe.airframe_geometry import (
+    Body as GeometryBody,
+)
+from adh.wbs.airframe.airframe_geometry import (
+    Boolean,
+    CrossSection,
+    Float,
+    Geometry,
+    Integer,
+    Loft,
+    Mesh,
+    Point,
+    Polyline,
+    ReferenceAxis,
+    Spline,
+    String,
+)
+from adh.wbs.airframe.airframe_geometry import (
+    LiftingSurface as GeometryLiftingSurface,
+)
+
+# Note: Airfoil, LiftingSurface, Body from airframe_parameters shadow geometry versions
+# (matching prior star-import behaviour). GeometryAirfoil etc. remain accessible above.
+from adh.wbs.airframe.airframe_parameters import (
+    AerodynamicsData,
+    Airfoil,
+    AsymmetricControl,
+    BlowingType,
+    Body,
+    BodyShape,
+    ConfigurationLayout,
+    ControlType,
+    EngineType,
+    FlapType,
+    FlightConditions,
+    GroundEffectsDefinition,
+    HypersonicFlapControl,
+    JetEngineType,
+    JetPowerProperties,
+    LiftingSurface,
+    LowAspectRatioWingBody,
+    NoseType,
+    Parameters,
+    PlanformType,
+    PropellerPowerProperties,
+    ReferenceData,
+    SymmetricFlap,
+    TailShape,
+    TransverseJetControl,
+    TwinVerticalTail,
+)
+
+__all__ = [
+    "AerodynamicsData",
+    "Airfoil",
+    "AsymmetricControl",
+    "BlowingType",
+    "Body",
+    "BodyShape",
+    "Boolean",
+    "Component",
+    "ConfigurationLayout",
+    "ControlType",
+    "CrossSection",
+    "EngineType",
+    "FlightConditions",
+    "FlapType",
+    "Float",
+    "Geometry",
+    "GeometryAirfoil",
+    "GeometryBody",
+    "GeometryLiftingSurface",
+    "GroundEffectsDefinition",
+    "HypersonicFlapControl",
+    "Integer",
+    "JetEngineType",
+    "JetPowerProperties",
+    "LiftingSurface",
+    "Loft",
+    "LowAspectRatioWingBody",
+    "Mesh",
+    "NoseType",
+    "Parameters",
+    "PlanformType",
+    "Point",
+    "Polyline",
+    "PropellerPowerProperties",
+    "ReferenceAxis",
+    "ReferenceData",
+    "Spline",
+    "String",
+    "SymmetricFlap",
+    "TailShape",
+    "TransverseJetControl",
+    "TwinVerticalTail",
+]

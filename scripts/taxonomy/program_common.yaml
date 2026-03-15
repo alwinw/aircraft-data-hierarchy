@@ -1,0 +1,405 @@
+# MIL-STD-881F Appendix A: Aircraft Systems WBS Taxonomy - Program Common Elements
+# Standard: MIL-STD-881F, dated 13-MAY-2022
+# Verified against: scratch/MIL-STD-881F.md (converted from scratch/MIL-STD-881F.pdf)
+# Relevant section: scratch/MIL-STD-881F.md lines 1601-1949 (Appendix A hierarchy)
+# DO NOT EDIT the taxonomy entries without cross-referencing the standard.
+
+- wbs_no: "1.5"
+  class_name: AircraftSystemSoftwareRelease
+  name: Aircraft System Software Release
+  standard_ref: "MIL-STD-881F A.4.6"
+
+- wbs_no: "1.6"
+  class_name: SystemsEngineering
+  name: Systems Engineering
+  standard_ref: "MIL-STD-881F A.4.7"
+
+- wbs_no: "1.6.1"
+  class_name: SoftwareSystemsEngineering
+  name: Software Systems Engineering
+  standard_ref: "MIL-STD-881F A.4.7.1"
+
+- wbs_no: "1.6.2"
+  class_name: IntegratedLogisticsSupportSystemsEngineering
+  name: Integrated Logistics Support Systems Engineering
+  standard_ref: "MIL-STD-881F A.4.7.2"
+
+- wbs_no: "1.6.3"
+  class_name: CybersecuritySystemsEngineering
+  name: Cybersecurity Systems Engineering
+  standard_ref: "MIL-STD-881F A.4.7.3"
+
+- wbs_no: "1.6.4"
+  class_name: CoreSystemsEngineering
+  name: Core Systems Engineering
+  standard_ref: "MIL-STD-881F A.4.7.4"
+
+- wbs_no: "1.6.5"
+  class_name: OtherSystemsEngineering
+  name: Other Systems Engineering
+  standard_ref: "MIL-STD-881F A.4.7.5"
+
+- wbs_no: "1.7"
+  class_name: ProgramManagement
+  name: Program Management
+  standard_ref: "MIL-STD-881F A.4.8"
+
+- wbs_no: "1.7.1"
+  class_name: SoftwareProgramManagement
+  name: Software Program Management
+  standard_ref: "MIL-STD-881F A.4.8.1"
+
+- wbs_no: "1.7.2"
+  class_name: IntegratedLogisticsSupportProgramManagement
+  name: Integrated Logistics Support Program Management
+  standard_ref: "MIL-STD-881F A.4.8.2"
+
+- wbs_no: "1.7.3"
+  class_name: CybersecurityManagement
+  name: Cybersecurity Management
+  standard_ref: "MIL-STD-881F A.4.8.3"
+
+- wbs_no: "1.7.4"
+  class_name: CoreProgramManagement
+  name: Core Program Management
+  standard_ref: "MIL-STD-881F A.4.8.4"
+
+- wbs_no: "1.7.5"
+  class_name: OtherProgramManagement
+  name: Other Program Management
+  standard_ref: "MIL-STD-881F A.4.8.5"
+
+- wbs_no: "1.8"
+  class_name: SystemTestAndEvaluation
+  name: System Test and Evaluation
+  standard_ref: "MIL-STD-881F A.4.9"
+
+- wbs_no: "1.8.1"
+  class_name: DevelopmentalTestAndEvaluation
+  name: Developmental Test and Evaluation
+  standard_ref: "MIL-STD-881F A.4.9.1"
+
+- wbs_no: "1.8.1.1"
+  class_name: SystemAcceptanceTest
+  name: System Acceptance Test
+  standard_ref: "MIL-STD-881F A.4.9.1.1"
+
+- wbs_no: "1.8.1.2"
+  class_name: WindTunnelTests
+  name: Wind Tunnel Tests
+  standard_ref: "MIL-STD-881F A.4.9.1.2"
+
+- wbs_no: "1.8.1.3"
+  class_name: StructuralTests
+  name: Structural Tests
+  standard_ref: "MIL-STD-881F A.4.9.1.3"
+
+- wbs_no: "1.8.1.4"
+  class_name: DTE_FlightTests
+  name: Flight Tests
+  standard_ref: "MIL-STD-881F A.4.9.1.4"
+
+- wbs_no: "1.8.1.5"
+  class_name: DTE_GroundTests
+  name: Ground Tests
+  standard_ref: "MIL-STD-881F A.4.9.1.5"
+
+- wbs_no: "1.8.1.6"
+  class_name: DTE_CybersecurityTestAndEvaluation
+  name: Cybersecurity Test and Evaluation
+  standard_ref: "MIL-STD-881F A.4.9.1.6"
+
+- wbs_no: "1.8.1.7"
+  class_name: OtherDTETests
+  name: Other DT&E Tests
+  standard_ref: "MIL-STD-881F A.4.9.1.7"
+
+- wbs_no: "1.8.2"
+  class_name: OperationalTestAndEvaluation
+  name: Operational Test and Evaluation
+  standard_ref: "MIL-STD-881F A.4.9.2"
+
+- wbs_no: "1.8.2.1"
+  class_name: LimitedUserEvaluation
+  name: Limited User Evaluation
+  standard_ref: "MIL-STD-881F A.4.9.2.1"
+
+- wbs_no: "1.8.2.2"
+  class_name: InteroperabilityTesting
+  name: Interoperability Testing
+  standard_ref: "MIL-STD-881F A.4.9.2.2"
+
+- wbs_no: "1.8.2.3"
+  class_name: OTE_FlightTests
+  name: Flight Tests
+  standard_ref: "MIL-STD-881F A.4.9.2.3"
+
+- wbs_no: "1.8.2.4"
+  class_name: OTE_GroundTests
+  name: Ground Tests
+  standard_ref: "MIL-STD-881F A.4.9.2.4"
+
+- wbs_no: "1.8.2.5"
+  class_name: OTE_CybersecurityTestAndEvaluation
+  name: Cybersecurity Test and Evaluation
+  standard_ref: "MIL-STD-881F A.4.9.2.5"
+
+- wbs_no: "1.8.2.6"
+  class_name: OtherOTETests
+  name: Other OT&E Tests
+  standard_ref: "MIL-STD-881F A.4.9.2.6"
+
+- wbs_no: "1.8.3"
+  class_name: LiveFireTestAndEvaluation
+  name: Live Fire Test and Evaluation
+  standard_ref: "MIL-STD-881F A.4.9.3"
+
+- wbs_no: "1.8.4"
+  class_name: MockupsSystemIntegrationLabs
+  name: Mock-ups/System Integration Labs
+  standard_ref: "MIL-STD-881F A.4.9.4"
+
+- wbs_no: "1.8.5"
+  class_name: TestAndEvaluationSupport
+  name: Test and Evaluation Support
+  standard_ref: "MIL-STD-881F A.4.9.5"
+
+- wbs_no: "1.8.6"
+  class_name: TestFacilities
+  name: Test Facilities
+  standard_ref: "MIL-STD-881F A.4.9.6"
+
+- wbs_no: "1.9"
+  class_name: Training
+  name: Training
+  standard_ref: "MIL-STD-881F A.4.10"
+
+- wbs_no: "1.9.1"
+  class_name: TrainingEquipment
+  name: Equipment
+  standard_ref: "MIL-STD-881F A.4.10.1"
+
+- wbs_no: "1.9.1.1"
+  class_name: OperatorInstructionalEquipment
+  name: Operator Instructional Equipment
+  standard_ref: "MIL-STD-881F A.4.10.1.1"
+
+- wbs_no: "1.9.1.2"
+  class_name: MaintainerInstructionalEquipment
+  name: Maintainer Instructional Equipment
+  standard_ref: "MIL-STD-881F A.4.10.1.2"
+
+- wbs_no: "1.9.2"
+  class_name: TrainingServices
+  name: Services
+  standard_ref: "MIL-STD-881F A.4.10.2"
+
+- wbs_no: "1.9.2.1"
+  class_name: OperatorInstructionalServices
+  name: Operator Instructional Services
+  standard_ref: "MIL-STD-881F A.4.10.2.1"
+
+- wbs_no: "1.9.2.2"
+  class_name: MaintainerInstructionalServices
+  name: Maintainer Instructional Services
+  standard_ref: "MIL-STD-881F A.4.10.2.2"
+
+- wbs_no: "1.9.3"
+  class_name: TrainingData
+  name: Data
+  standard_ref: "MIL-STD-881F A.4.10.3"
+
+- wbs_no: "1.9.4"
+  class_name: TrainingFacilities
+  name: Facilities
+  standard_ref: "MIL-STD-881F A.4.10.4"
+
+- wbs_no: "1.10"
+  class_name: Data
+  name: Data
+  standard_ref: "MIL-STD-881F A.4.11"
+
+- wbs_no: "1.10.1"
+  class_name: DataDeliverables
+  name: Data Deliverables
+  standard_ref: "MIL-STD-881F A.4.11.1"
+
+- wbs_no: "1.10.2"
+  class_name: DataRepository
+  name: Data Repository
+  standard_ref: "MIL-STD-881F A.4.11.2"
+
+- wbs_no: "1.10.3"
+  class_name: DataRights
+  name: Data Rights
+  standard_ref: "MIL-STD-881F A.4.11.3"
+
+- wbs_no: "1.11"
+  class_name: PeculiarSupportEquipment
+  name: Peculiar Support Equipment
+  standard_ref: "MIL-STD-881F A.4.12"
+
+- wbs_no: "1.11.1"
+  class_name: PSE_TestAndMeasurementEquipment
+  name: Test and Measurement Equipment
+  standard_ref: "MIL-STD-881F A.4.12.1"
+
+- wbs_no: "1.11.1.1"
+  class_name: TIME_AirframeHullVehicle
+  name: Test and Measurement Equipment (Airframe/Hull/Vehicle)
+  standard_ref: "MIL-STD-881F A.4.12.1.1"
+
+- wbs_no: "1.11.1.2"
+  class_name: TIME_Propulsion
+  name: Test and Measurement Equipment (Propulsion)
+  standard_ref: "MIL-STD-881F A.4.12.1.2"
+
+- wbs_no: "1.11.1.3"
+  class_name: TIME_ElectronicsAvionics
+  name: Test and Measurement Equipment (Electronics/Avionics)
+  standard_ref: "MIL-STD-881F A.4.12.1.3"
+
+- wbs_no: "1.11.1.4"
+  class_name: TIME_OtherMajorSubsystems
+  name: Test and Measurement Equipment (Other Major Subsystems)
+  standard_ref: "MIL-STD-881F A.4.12.1.4"
+
+- wbs_no: "1.11.2"
+  class_name: PSE_SupportAndHandlingEquipment
+  name: Support and Handling Equipment
+  standard_ref: "MIL-STD-881F A.4.12.2"
+
+- wbs_no: "1.11.2.1"
+  class_name: SHE_AirframeHullVehicle
+  name: Support and Handling Equipment (Airframe/Hull/Vehicle)
+  standard_ref: "MIL-STD-881F A.4.12.2.1"
+
+- wbs_no: "1.11.2.2"
+  class_name: SHE_Propulsion
+  name: Support and Handling Equipment (Propulsion)
+  standard_ref: "MIL-STD-881F A.4.12.2.2"
+
+- wbs_no: "1.11.2.3"
+  class_name: SHE_ElectronicsAvionics
+  name: Support and Handling Equipment (Electronics/Avionics)
+  standard_ref: "MIL-STD-881F A.4.12.2.3"
+
+- wbs_no: "1.11.2.4"
+  class_name: SHE_OtherMajorSubsystems
+  name: Support and Handling Equipment (Other Major Subsystems)
+  standard_ref: "MIL-STD-881F A.4.12.2.4"
+
+- wbs_no: "1.12"
+  class_name: CommonSupportEquipment
+  name: Common Support Equipment
+  standard_ref: "MIL-STD-881F A.4.13"
+
+- wbs_no: "1.12.1"
+  class_name: CSE_TestAndMeasurementEquipment
+  name: Test and Measurement Equipment
+  standard_ref: "MIL-STD-881F A.4.13.1"
+
+- wbs_no: "1.12.1.1"
+  class_name: CSE_TIME_AirframeHullVehicle
+  name: Test and Measurement Equipment (Airframe/Hull/Vehicle)
+  standard_ref: "MIL-STD-881F A.4.13.1.1"
+
+- wbs_no: "1.12.1.2"
+  class_name: CSE_TIME_Propulsion
+  name: Test and Measurement Equipment (Propulsion)
+  standard_ref: "MIL-STD-881F A.4.13.1.2"
+
+- wbs_no: "1.12.1.3"
+  class_name: CSE_TIME_ElectronicsAvionics
+  name: Test and Measurement Equipment (Electronics/Avionics)
+  standard_ref: "MIL-STD-881F A.4.13.1.3"
+
+- wbs_no: "1.12.1.4"
+  class_name: CSE_TIME_OtherMajorSubsystems
+  name: Test and Measurement Equipment (Other Major Subsystems)
+  standard_ref: "MIL-STD-881F A.4.13.1.4"
+
+- wbs_no: "1.12.2"
+  class_name: CSE_SupportAndHandlingEquipment
+  name: Support and Handling Equipment
+  standard_ref: "MIL-STD-881F A.4.13.2"
+
+- wbs_no: "1.12.2.1"
+  class_name: CSE_SHE_AirframeHullVehicle
+  name: Support and Handling Equipment (Airframe/Hull/Vehicle)
+  standard_ref: "MIL-STD-881F A.4.13.2.1"
+
+- wbs_no: "1.12.2.2"
+  class_name: CSE_SHE_Propulsion
+  name: Support and Handling Equipment (Propulsion)
+  standard_ref: "MIL-STD-881F A.4.13.2.2"
+
+- wbs_no: "1.12.2.3"
+  class_name: CSE_SHE_ElectronicsAvionics
+  name: Support and Handling Equipment (Electronics/Avionics)
+  standard_ref: "MIL-STD-881F A.4.13.2.3"
+
+- wbs_no: "1.12.2.4"
+  class_name: CSE_SHE_OtherMajorSubsystems
+  name: Support and Handling Equipment (Other Major Subsystems)
+  standard_ref: "MIL-STD-881F A.4.13.2.4"
+
+- wbs_no: "1.13"
+  class_name: OperationalSiteActivation
+  name: Operational/Site Activation
+  standard_ref: "MIL-STD-881F A.4.14"
+
+- wbs_no: "1.13.1"
+  class_name: SystemAssemblyInstallationAndCheckoutOnSite
+  name: System Assembly, Installation, and Checkout on Site
+  standard_ref: "MIL-STD-881F A.4.14.1"
+
+- wbs_no: "1.13.2"
+  class_name: ContractorTechnicalSupport
+  name: Contractor Technical Support
+  standard_ref: "MIL-STD-881F A.4.14.2"
+
+- wbs_no: "1.13.3"
+  class_name: SiteConstruction
+  name: Site Construction
+  standard_ref: "MIL-STD-881F A.4.14.3"
+
+- wbs_no: "1.13.4"
+  class_name: SiteShipVehicleConversion
+  name: Site/Ship/Vehicle Conversion
+  standard_ref: "MIL-STD-881F A.4.14.4"
+
+- wbs_no: "1.13.5"
+  class_name: InterimContractorSupport
+  name: Interim Contractor Support
+  standard_ref: "MIL-STD-881F A.4.14.5"
+
+- wbs_no: "1.14"
+  class_name: ContractorLogisticsSupport
+  name: Contractor Logistics Support
+  standard_ref: "MIL-STD-881F A.4.15"
+
+- wbs_no: "1.15"
+  class_name: IndustrialFacilities
+  name: Industrial Facilities
+  standard_ref: "MIL-STD-881F A.4.16"
+
+- wbs_no: "1.15.1"
+  class_name: ConstructionConversionExpansion
+  name: Construction/Conversion/Expansion
+  standard_ref: "MIL-STD-881F A.4.16.1"
+
+- wbs_no: "1.15.2"
+  class_name: EquipmentAcquisitionOrModernization
+  name: Equipment Acquisition or Modernization
+  standard_ref: "MIL-STD-881F A.4.16.2"
+
+- wbs_no: "1.15.3"
+  class_name: MaintenanceIndustrialFacilities
+  name: Maintenance (Industrial Facilities)
+  standard_ref: "MIL-STD-881F A.4.16.3"
+
+- wbs_no: "1.16"
+  class_name: InitialSparesAndRepairParts
+  name: Initial Spares and Repair Parts
+  standard_ref: "MIL-STD-881F A.4.17"

@@ -1,0 +1,50 @@
+# MIL-STD-881F Appendix A: Aircraft Systems WBS Taxonomy - Ground/Host Segment
+# Standard: MIL-STD-881F, dated 13-MAY-2022
+# Verified against: scratch/MIL-STD-881F.md (converted from scratch/MIL-STD-881F.pdf)
+# Relevant section: scratch/MIL-STD-881F.md lines 1601-1949 (Appendix A hierarchy)
+# DO NOT EDIT the taxonomy entries without cross-referencing the standard.
+
+- wbs_no: "1.4"
+  class_name: GroundHostSegment
+  name: Ground/Host Segment
+  standard_ref: "MIL-STD-881F A.4.5"
+
+- wbs_no: "1.4.1"
+  class_name: GroundSegmentIntegrationAssemblyTestAndCheckout
+  name: Ground Segment Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.5.1"
+
+- wbs_no: "1.4.2"
+  class_name: GroundControlSystems
+  name: Ground Control Systems
+  standard_ref: "MIL-STD-881F A.4.5.2"
+
+- wbs_no: "1.4.3"
+  class_name: CommandAndControlSubsystem
+  name: Command and Control Subsystem
+  standard_ref: "MIL-STD-881F A.4.5.3"
+
+- wbs_no: "1.4.4"
+  class_name: LaunchEquipment
+  name: Launch Equipment
+  standard_ref: "MIL-STD-881F A.4.5.4"
+
+- wbs_no: "1.4.5"
+  class_name: RecoveryEquipment
+  name: Recovery Equipment
+  standard_ref: "MIL-STD-881F A.4.5.5"
+
+- wbs_no: "1.4.6"
+  class_name: TransportVehicles
+  name: Transport Vehicles
+  standard_ref: "MIL-STD-881F A.4.5.6"
+
+- wbs_no: "1.4.7"
+  class_name: GroundSegmentSoftwareRelease
+  name: Ground Segment Software Release
+  standard_ref: "MIL-STD-881F A.4.5.7"
+
+- wbs_no: "1.4.8"
+  class_name: OtherGroundHostSegment
+  name: Other Ground/Host Segment
+  standard_ref: "MIL-STD-881F A.4.5.8"

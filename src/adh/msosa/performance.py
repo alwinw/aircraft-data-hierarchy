@@ -167,3 +167,9 @@ class Discipline(BaseModel):
         if self.tools is None:
             self.tools = []
         self.tools.append(tool)
+
+
+class Performances(BaseModel):
+    """Container for a list of performance disciplines."""
+
+    performances: Optional[list[Discipline]] = None

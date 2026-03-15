@@ -28,12 +28,17 @@ class Architecture(BaseModel):
 
     name: Optional[str] = None
     description: Optional[str] = None
-    wbs_no: Optional[str] = None
+    wbs_no: str = ""
     source_info: Optional[SourceInfo] = Field(
         default=None, description="Source and authorship metadata."
     )
 
-    model_config = ConfigDict(extra="allow")
+    model_config = ConfigDict(
+        validate_assignment=True,
+        extra="allow",
+        str_strip_whitespace=True,
+        str_min_length=1,
+    )
 
     @field_validator("wbs_no")
     @classmethod

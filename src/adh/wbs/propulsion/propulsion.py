@@ -1,12 +1,21 @@
+"""
+WBS Propulsion model.
+
+Aligned with MIL-STD-881F Work Breakdown Structure taxonomy.
+"""
+
 from __future__ import annotations
 
 from typing import Any, Optional
 
-from pydantic import ConfigDict, Field, field_validator
+from pydantic import Field
 
-from adh.msosa.architecture import Architecture, Metadata
-from adh.msosa.requirements import Requirement
+from adh.msosa.architecture import Architecture
+from adh.msosa.behavior import Behaviors
+from adh.msosa.performance import Performances
+from adh.msosa.requirements import Requirements
 from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
+from adh.wbs.propulsion.propulsion_geometry import PropulsionGeometry
 
 
 class Propulsion(Architecture):
@@ -16,16 +25,13 @@ class Propulsion(Architecture):
     Attributes:
         name (Optional[str]): The name of the propulsion system, acting as a unique identifier.
         description (Optional[str]): A brief description of the propulsion system purpose and functionality.
-        geometry (Optional[Dict[str, Any]]): Geometric information of the component, if applicable.
-        parameters (Optional[Dict[str, Any]]): Cycle or physical parameters associated with the propulsion system.
-        metadata (Optional[Metadata]): Additional metadata providing context or details about the propulsion system.
-        subcomponents (Optional[List[Propulsion]]): A list of sub-components, if any, within the propulsion system.
-        requirements (Optional[List[Requirement]]): Specific requirements associated with the propulsion system.
-        performance (Optional[List[Discipline]]): List of disciplines analyzing the propulsion system.
-        behavior (Optional[List[Behavior]]): Specific behaviors for the propulsion system.
-
-    Raises:
-        ValueError: If any string field is empty, ensuring all components have meaningful identifiers and descriptions.
+        geometry (Optional[PropulsionGeometry]): Geometric information of the propulsion system, if applicable.
+        cycle (Optional[PropulsionCycle]): Engine cycle of the propulsion system.
+        parameters (Optional[dict[str, Any]]): Cycle or physical parameters associated with the propulsion system.
+        subcomponents (Optional[list[Propulsion]]): A list of sub-components, if any, within the propulsion system.
+        requirements (Optional[Requirements]): Specific requirements associated with the propulsion system.
+        performance (Optional[Performances]): Performance disciplines for the propulsion system.
+        behavior (Optional[Behaviors]): Specific behaviors for the propulsion system.
     """
 
     name: Optional[str] = Field(
@@ -34,7 +40,7 @@ class Propulsion(Architecture):
     description: Optional[str] = Field(
         default=None, description="A brief description of the propulsion system."
     )
-    geometry: Optional[dict[str, Any]] = Field(
+    geometry: Optional[PropulsionGeometry] = Field(
         default=None, description="Geometry of the propulsion system."
     )
     # TODO: Get MultiPointCycle imported behaviorLib Demo
@@ -45,41 +51,18 @@ class Propulsion(Architecture):
     parameters: Optional[dict[str, Any]] = Field(
         default=None, description="Parameters of the propulsion system."
     )
-    metadata: Optional[Metadata] = Field(
-        default=None, description="Additional metadata for the propulsion system."
-    )
     subcomponents: Optional[list[Propulsion]] = Field(
         default=None, description="Sub-components within the propulsion system."
     )
-    requirements: Optional[list[Requirement]] = Field(
+    requirements: Optional[Requirements] = Field(
         default=None, description="Specific requirements for the propulsion system."
     )
-    # TODO: Get MultiPointCycle imported behaviorLib and performanceLib Demo
-    # performance: Optional[PropulsionCyclePerformance] = Field(default=None, description="Propulsion performance data.")
-    # behavior: Optional[PropulsionCycleBehavior] = Field(default=None, description="SpPropulsion behavior data.")
-
-    @field_validator("name", "description", mode="before")
-    @classmethod
-    def validate_non_empty_string(cls, value: Optional[str]) -> Optional[str]:
-        """
-        Validates that the name and description fields are not empty or whitespace only.
-
-        Args:
-            value (Optional[str]): The value to validate.
-
-        Returns:
-            Optional[str]: The validated string value.
-
-        Raises:
-            ValueError: If the input value is empty or consists only of whitespace.
-        """
-        if value is not None and not value.strip():
-            raise ValueError(
-                "Name and description fields must not be empty or whitespace only."
-            )
-        return value
-
-    model_config = ConfigDict(arbitrary_types_allowed=True, from_attributes=True)
+    performance: Optional[Performances] = Field(
+        default=None, description="Performance disciplines for the propulsion system."
+    )
+    behavior: Optional[Behaviors] = Field(
+        default=None, description="Specific behaviors for the propulsion system."
+    )
 
 
 # Ensure all models are fully defined

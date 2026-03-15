@@ -1,0 +1,45 @@
+# MIL-STD-881F Appendix A: Aircraft Systems WBS Taxonomy - Payload/Mission System
+# Standard: MIL-STD-881F, dated 13-MAY-2022
+# Verified against: scratch/MIL-STD-881F.md (converted from scratch/MIL-STD-881F.pdf)
+# Relevant section: scratch/MIL-STD-881F.md lines 1601-1949 (Appendix A hierarchy)
+# DO NOT EDIT the taxonomy entries without cross-referencing the standard.
+
+- wbs_no: "1.3"
+  class_name: PayloadMissionSystem
+  name: Payload/Mission System
+  standard_ref: "MIL-STD-881F A.4.4"
+
+- wbs_no: "1.3.1"
+  class_name: PayloadIntegrationAssemblyTestAndCheckout
+  name: Payload Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.4.1"
+
+- wbs_no: "1.3.2"
+  class_name: SurvivabilityPayload
+  name: Survivability Payload
+  standard_ref: "MIL-STD-881F A.4.4.2"
+
+- wbs_no: "1.3.3"
+  class_name: ReconnaissancePayload
+  name: Reconnaissance Payload
+  standard_ref: "MIL-STD-881F A.4.4.3"
+
+- wbs_no: "1.3.4"
+  class_name: ElectronicWarfarePayload
+  name: Electronic Warfare Payload
+  standard_ref: "MIL-STD-881F A.4.4.4"
+
+- wbs_no: "1.3.5"
+  class_name: ArmamentWeaponsDeliveryPayload
+  name: Armament/Weapons Delivery Payload
+  standard_ref: "MIL-STD-881F A.4.4.5"
+
+- wbs_no: "1.3.6"
+  class_name: PayloadSoftwareRelease
+  name: Payload Software Release
+  standard_ref: "MIL-STD-881F A.4.4.6"
+
+- wbs_no: "1.3.7"
+  class_name: OtherPayload
+  name: Other Payload
+  standard_ref: "MIL-STD-881F A.4.4.7"

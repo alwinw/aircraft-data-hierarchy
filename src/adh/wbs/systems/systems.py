@@ -1,13 +1,19 @@
+"""
+WBS System model.
+
+Aligned with MIL-STD-881F Work Breakdown Structure taxonomy.
+"""
+
 from __future__ import annotations
 
 from typing import Any, Optional
 
-from pydantic import ConfigDict, Field, field_validator
+from pydantic import Field
 
-from adh.msosa.architecture import Architecture, Metadata
-from adh.msosa.behavior import Behavior
-from adh.msosa.performance import Discipline
-from adh.msosa.requirements import Requirement
+from adh.msosa.architecture import Architecture
+from adh.msosa.behavior import Behaviors
+from adh.msosa.performance import Performances
+from adh.msosa.requirements import Requirements
 
 
 class System(Architecture):
@@ -17,16 +23,12 @@ class System(Architecture):
     Attributes:
         name (Optional[str]): The name of the system, acting as a unique identifier.
         description (Optional[str]): A brief description of the system's purpose and functionality.
-        parameters (Optional[Dict[str, Any]]): Operational or physical parameters associated with the system.
-        diagram (Optional[Dict[str, Any]]): Flow diagram of the system.
-        metadata (Optional[Metadata]): Additional metadata providing context or details about the system.
-        subsystems (Optional[List[System]]): A list of sub-systems, if any, within this system.
-        requirements (Optional[List[Requirement]]): Specific requirements associated with this system.
-        performance (Optional[List[Discipline]]): List of disciplines analyzing the system.
-        behavior (Optional[List[Behavior]]): Specific behaviors for the component.
-
-    Raises:
-        ValueError: If any string field is empty, ensuring all systems have meaningful identifiers and descriptions.
+        parameters (Optional[dict[str, Any]]): Operational or physical parameters associated with the system.
+        diagram (Optional[dict[str, Any]]): Flow diagram of the system.
+        subsystems (Optional[list[System]]): A list of sub-systems, if any, within this system.
+        requirements (Optional[Requirements]): Specific requirements associated with this system.
+        performance (Optional[Performances]): Performance disciplines for the system.
+        behavior (Optional[Behaviors]): Specific behaviors for the system.
     """
 
     name: Optional[str] = Field(default=None, description="The name of the system.")
@@ -39,44 +41,18 @@ class System(Architecture):
     diagram: Optional[dict[str, Any]] = Field(
         default=None, description="Flow diagram of the system."
     )
-    metadata: Optional[Metadata] = Field(
-        default=None, description="Additional metadata for the system."
-    )
     subsystems: Optional[list[System]] = Field(
         default=None, description="Sub-systems within this system."
     )
-    requirements: Optional[list[Requirement]] = Field(
+    requirements: Optional[Requirements] = Field(
         default=None, description="Specific requirements for the system."
     )
-    performance: Optional[list[Discipline]] = Field(
-        default=None, description="List of disciplines analyzing the system."
+    performance: Optional[Performances] = Field(
+        default=None, description="Performance disciplines for the system."
     )
-    behavior: Optional[list[Behavior]] = Field(
+    behavior: Optional[Behaviors] = Field(
         default=None, description="Specific behaviors for the system."
     )
-
-    @field_validator("name", "description", mode="before")
-    @classmethod
-    def validate_non_empty_string(cls, value: Optional[str]) -> Optional[str]:
-        """
-        Validates that the name and description fields are not empty or whitespace only.
-
-        Args:
-            value (Optional[str]): The value to validate.
-
-        Returns:
-            Optional[str]: The validated string value.
-
-        Raises:
-            ValueError: If the input value is empty or consists only of whitespace.
-        """
-        if value is not None and not value.strip():
-            raise ValueError(
-                "Name and description fields must not be empty or whitespace only."
-            )
-        return value
-
-    model_config = ConfigDict(arbitrary_types_allowed=True, from_attributes=True)
 
 
 # Ensure all models are fully defined

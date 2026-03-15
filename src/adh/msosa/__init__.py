@@ -6,6 +6,7 @@ MSoSA: Model-Based System-of-Systems Architecture.
 
 from adh.msosa.architecture import Architecture, Metadata
 from adh.msosa.behavior import Activity, ActivityState, Behavior, Behaviors
+from adh.msosa.performance import Discipline, PerfDisciplines, Performances
 from adh.msosa.requirements import (
     Priority,
     ReqsCategories,
@@ -23,8 +24,11 @@ __all__ = [
     "Author",
     "Behavior",
     "Behaviors",
+    "Discipline",
     "ExternalReference",
     "Metadata",
+    "PerfDisciplines",
+    "Performances",
     "Priority",
     "ReqsCategories",
     "Requirement",

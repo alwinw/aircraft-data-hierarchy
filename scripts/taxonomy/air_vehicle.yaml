@@ -1,0 +1,235 @@
+# MIL-STD-881F Appendix A: Aircraft Systems WBS Taxonomy - Air Vehicle
+# Standard: MIL-STD-881F, dated 13-MAY-2022
+# Verified against: scratch/MIL-STD-881F.md (converted from scratch/MIL-STD-881F.pdf)
+# Relevant section: scratch/MIL-STD-881F.md lines 1601-1949 (Appendix A hierarchy)
+# DO NOT EDIT the taxonomy entries without cross-referencing the standard.
+
+- wbs_no: "1.0"
+  class_name: AircraftSystem
+  name: Aircraft System
+  standard_ref: "MIL-STD-881F A.4.1"
+
+- wbs_no: "1.1"
+  class_name: AircraftSystemIntegrationAssemblyTestAndCheckout
+  name: Aircraft System, Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.2"
+
+- wbs_no: "1.2"
+  class_name: AirVehicle
+  name: Air Vehicle
+  standard_ref: "MIL-STD-881F A.4.3"
+
+- wbs_no: "1.2.1"
+  class_name: AirVehicleIntegrationAssemblyTestAndCheckout
+  name: Air Vehicle Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.3.1"
+
+- wbs_no: "1.2.2"
+  class_name: Airframe
+  name: Airframe
+  standard_ref: "MIL-STD-881F A.4.3.2"
+
+- wbs_no: "1.2.2.1"
+  class_name: AirframeIntegrationAssemblyTestAndCheckout
+  name: Airframe Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.3.2.1"
+
+- wbs_no: "1.2.2.2"
+  class_name: Fuselage
+  name: Fuselage
+  standard_ref: "MIL-STD-881F A.4.3.2.2"
+
+- wbs_no: "1.2.2.3"
+  class_name: Wing
+  name: Wing
+  standard_ref: "MIL-STD-881F A.4.3.2.3"
+
+- wbs_no: "1.2.2.4"
+  class_name: Empennage
+  name: Empennage
+  standard_ref: "MIL-STD-881F A.4.3.2.4"
+
+- wbs_no: "1.2.2.5"
+  class_name: Nacelle
+  name: Nacelle
+  standard_ref: "MIL-STD-881F A.4.3.2.5"
+
+- wbs_no: "1.2.2.6"
+  class_name: OtherAirframeComponents
+  name: Other Airframe Components
+  standard_ref: "MIL-STD-881F A.4.3.2.6"
+
+- wbs_no: "1.2.3"
+  class_name: Propulsion
+  name: Propulsion
+  standard_ref: "MIL-STD-881F A.4.3.3"
+
+- wbs_no: "1.2.4"
+  class_name: VehicleSubsystems
+  name: Vehicle Subsystems
+  standard_ref: "MIL-STD-881F A.4.3.4"
+
+- wbs_no: "1.2.4.1"
+  class_name: VehicleSubsystemIntegrationAssemblyTestAndCheckout
+  name: Vehicle Subsystem Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.3.4.1"
+
+- wbs_no: "1.2.4.2"
+  class_name: FlightControlSubsystem
+  name: Flight Control Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.2"
+
+- wbs_no: "1.2.4.3"
+  class_name: AuxiliaryPowerSubsystem
+  name: Auxiliary Power Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.3"
+
+- wbs_no: "1.2.4.4"
+  class_name: HydraulicSubsystem
+  name: Hydraulic Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.4"
+
+- wbs_no: "1.2.4.5"
+  class_name: ElectricalSubsystem
+  name: Electrical Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.5"
+
+- wbs_no: "1.2.4.6"
+  class_name: CrewStationSubsystem
+  name: Crew Station Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.6"
+
+- wbs_no: "1.2.4.7"
+  class_name: EnvironmentalControlSubsystem
+  name: Environmental Control Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.7"
+
+- wbs_no: "1.2.4.8"
+  class_name: FuelSubsystem
+  name: Fuel Subsystem
+  standard_ref: "MIL-STD-881F A.4.3.4.8"
+
+- wbs_no: "1.2.4.9"
+  class_name: LandingGear
+  name: Landing Gear
+  standard_ref: "MIL-STD-881F A.4.3.4.9"
+
+- wbs_no: "1.2.4.10"
+  class_name: RotorGroup
+  name: Rotor Group
+  standard_ref: "MIL-STD-881F A.4.3.4.10"
+
+- wbs_no: "1.2.4.11"
+  class_name: DriveGroup
+  name: Drive Group
+  standard_ref: "MIL-STD-881F A.4.3.4.11"
+
+- wbs_no: "1.2.4.12"
+  class_name: VehicleSubsystemSoftwareRelease
+  name: Vehicle Subsystem Software Release
+  standard_ref: "MIL-STD-881F A.4.3.4.12"
+
+- wbs_no: "1.2.4.13"
+  class_name: OtherSubsystems
+  name: Other Subsystems
+  standard_ref: "MIL-STD-881F A.4.3.4.13"
+
+- wbs_no: "1.2.5"
+  class_name: Avionics
+  name: Avionics
+  standard_ref: "MIL-STD-881F A.4.3.5"
+
+- wbs_no: "1.2.5.1"
+  class_name: AvionicsIntegrationAssemblyTestAndCheckout
+  name: Avionics Integration, Assembly, Test and Checkout
+  standard_ref: "MIL-STD-881F A.4.3.5.1"
+
+- wbs_no: "1.2.5.2"
+  class_name: CommunicationIdentification
+  name: Communication/Identification
+  standard_ref: "MIL-STD-881F A.4.3.5.2"
+
+- wbs_no: "1.2.5.3"
+  class_name: NavigationGuidance
+  name: Navigation/Guidance
+  standard_ref: "MIL-STD-881F A.4.3.5.3"
+
+- wbs_no: "1.2.5.4"
+  class_name: MissionComputerProcessing
+  name: Mission Computer/Processing
+  standard_ref: "MIL-STD-881F A.4.3.5.4"
+
+- wbs_no: "1.2.5.5"
+  class_name: FireControl
+  name: Fire Control
+  standard_ref: "MIL-STD-881F A.4.3.5.5"
+
+- wbs_no: "1.2.5.6"
+  class_name: DataDisplayAndControls
+  name: Data Display and Controls
+  standard_ref: "MIL-STD-881F A.4.3.5.6"
+
+- wbs_no: "1.2.5.7"
+  class_name: Survivability
+  name: Survivability
+  standard_ref: "MIL-STD-881F A.4.3.5.7"
+
+- wbs_no: "1.2.5.8"
+  class_name: Reconnaissance
+  name: Reconnaissance
+  standard_ref: "MIL-STD-881F A.4.3.5.8"
+
+- wbs_no: "1.2.5.9"
+  class_name: ElectronicWarfare
+  name: Electronic Warfare
+  standard_ref: "MIL-STD-881F A.4.3.5.9"
+
+- wbs_no: "1.2.5.10"
+  class_name: AutomaticFlightControl
+  name: Automatic Flight Control
+  standard_ref: "MIL-STD-881F A.4.3.5.10"
+
+- wbs_no: "1.2.5.11"
+  class_name: HealthMonitoringSystem
+  name: Health Monitoring System
+  standard_ref: "MIL-STD-881F A.4.3.5.11"
+
+- wbs_no: "1.2.5.12"
+  class_name: StoresManagement
+  name: Stores Management
+  standard_ref: "MIL-STD-881F A.4.3.5.12"
+
+- wbs_no: "1.2.5.13"
+  class_name: AvionicsSoftwareRelease
+  name: Avionics Software Release
+  standard_ref: "MIL-STD-881F A.4.3.5.13"
+
+- wbs_no: "1.2.5.14"
+  class_name: OtherAvionicsSubsystems
+  name: Other Avionics Subsystems
+  standard_ref: "MIL-STD-881F A.4.3.5.14"
+
+- wbs_no: "1.2.6"
+  class_name: ArmamentWeaponsDelivery
+  name: Armament/Weapons Delivery
+  standard_ref: "MIL-STD-881F A.4.3.6"
+
+- wbs_no: "1.2.7"
+  class_name: AuxiliaryEquipment
+  name: Auxiliary Equipment
+  standard_ref: "MIL-STD-881F A.4.3.7"
+
+- wbs_no: "1.2.8"
+  class_name: FurnishingsAndEquipment
+  name: Furnishings and Equipment
+  standard_ref: "MIL-STD-881F A.4.3.8"
+
+- wbs_no: "1.2.9"
+  class_name: AirVehicleSoftwareRelease
+  name: Air Vehicle Software Release
+  standard_ref: "MIL-STD-881F A.4.3.9"
+
+- wbs_no: "1.2.10"
+  class_name: OtherAirVehicle
+  name: Other Air Vehicle
+  standard_ref: "MIL-STD-881F A.4.3.10"
