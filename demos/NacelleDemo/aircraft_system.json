@@ -307,9 +307,21 @@
           "geometry": {
             "reference_axis": {
               "points": [
-                {"x": 1.0, "y": 1.0, "z": 1.0},
-                {"x": 1.0, "y": 1.0, "z": 1.0},
-                {"x": 1.0, "y": 1.0, "z": 1.0}
+                {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                }
               ],
               "degree": 3
             },
@@ -318,17 +330,41 @@
                 "station": 0.0,
                 "upper_curve": {
                   "points": [
-                    {"x": 0.0, "y": 0.5, "z": 0.0},
-                    {"x": 0.0, "y": 0.0, "z": 0.4},
-                    {"x": 0.0, "y": -0.5, "z": 0.0}
+                    {
+                      "x": 0.0,
+                      "y": 0.5,
+                      "z": 0.0
+                    },
+                    {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.4
+                    },
+                    {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
                   ],
                   "degree": 3
                 },
                 "lower_curve": {
                   "points": [
-                    {"x": 0.0, "y": 0.5, "z": 0.0},
-                    {"x": 0.0, "y": 0.0, "z": -0.4},
-                    {"x": 0.0, "y": -0.5, "z": 0.0}
+                    {
+                      "x": 0.0,
+                      "y": 0.5,
+                      "z": 0.0
+                    },
+                    {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -0.4
+                    },
+                    {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
                   ],
                   "degree": 3
                 }
@@ -337,17 +373,41 @@
                 "station": 1.0,
                 "upper_curve": {
                   "points": [
-                    {"x": 0.5, "y": 0.5, "z": 0.0},
-                    {"x": 0.5, "y": 0.0, "z": 0.5},
-                    {"x": 0.5, "y": -0.5, "z": 0.0}
+                    {
+                      "x": 0.5,
+                      "y": 0.5,
+                      "z": 0.0
+                    },
+                    {
+                      "x": 0.5,
+                      "y": 0.0,
+                      "z": 0.5
+                    },
+                    {
+                      "x": 0.5,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
                   ],
                   "degree": 3
                 },
                 "lower_curve": {
                   "points": [
-                    {"x": 0.5, "y": 0.5, "z": 0.0},
-                    {"x": 0.5, "y": 0.0, "z": -0.5},
-                    {"x": 0.5, "y": -0.5, "z": 0.0}
+                    {
+                      "x": 0.5,
+                      "y": 0.5,
+                      "z": 0.0
+                    },
+                    {
+                      "x": 0.5,
+                      "y": 0.0,
+                      "z": -0.5
+                    },
+                    {
+                      "x": 0.5,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
                   ],
                   "degree": 3
                 }
@@ -356,17 +416,41 @@
                 "station": 2.0,
                 "upper_curve": {
                   "points": [
-                    {"x": 1.0, "y": 0.5, "z": 0.0},
-                    {"x": 1.0, "y": 0.0, "z": 0.3},
-                    {"x": 1.0, "y": -0.5, "z": 0.0}
+                    {
+                      "x": 1.0,
+                      "y": 0.5,
+                      "z": 0.0
+                    },
+                    {
+                      "x": 1.0,
+                      "y": 0.0,
+                      "z": 0.3
+                    },
+                    {
+                      "x": 1.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
                   ],
                   "degree": 3
                 },
                 "lower_curve": {
                   "points": [
-                    {"x": 1.0, "y": 0.5, "z": 0.0},
-                    {"x": 1.0, "y": 0.0, "z": -0.3},
-                    {"x": 1.0, "y": -0.5, "z": 0.0}
+                    {
+                      "x": 1.0,
+                      "y": 0.5,
+                      "z": 0.0
+                    },
+                    {
+                      "x": 1.0,
+                      "y": 0.0,
+                      "z": -0.3
+                    },
+                    {
+                      "x": 1.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
                   ],
                   "degree": 3
                 }
@@ -477,7 +561,7 @@
         "HydraulicSubsystem": {
           "wbs_no": "1.2.4.4"
         },
-        "ElectricalAntiIcingSystem": {
+        "ElectricalSubsystem": {
           "wbs_no": "1.2.4.5"
         },
         "CrewStationSubsystem": {
@@ -489,16 +573,16 @@
         "FuelSubsystem": {
           "wbs_no": "1.2.4.8"
         },
-        "Instruments": {
+        "LandingGear": {
           "wbs_no": "1.2.4.9"
         },
-        "PneumaticSubsystem": {
+        "RotorGroup": {
           "wbs_no": "1.2.4.10"
         },
-        "AntiIcingSubsystem": {
+        "DriveGroup": {
           "wbs_no": "1.2.4.11"
         },
-        "VehicleSubsystemSoftware": {
+        "VehicleSubsystemSoftwareRelease": {
           "wbs_no": "1.2.4.12"
         },
         "OtherSubsystems": {
@@ -548,9 +632,6 @@
         },
         "OtherAvionicsSubsystems": {
           "wbs_no": "1.2.5.14"
-        },
-        "Installation": {
-          "wbs_no": "1.2.5.15"
         }
       },
       "ArmamentWeaponsDelivery": {
@@ -576,105 +657,6 @@
       },
       "AirVehicleSoftwareRelease": {
         "wbs_no": "1.2.9"
-      },
-      "LoadAndHandlingSystem": {
-        "wbs_no": "1.2.10",
-        "AircraftHandling": {
-          "wbs_no": "1.2.10.1"
-        },
-        "LoadHandling": {
-          "wbs_no": "1.2.10.2"
-        }
-      },
-      "BallastGroup": {
-        "wbs_no": "1.2.11"
-      },
-      "ManufacturingVariation": {
-        "wbs_no": "1.2.12"
-      },
-      "Contingency": {
-        "wbs_no": "1.2.13"
-      },
-      "OperatingItems": {
-        "wbs_no": "1.2.14",
-        "Crew": {
-          "wbs_no": "1.2.14.1"
-        },
-        "UnusableFuel": {
-          "wbs_no": "1.2.14.2"
-        },
-        "TrappedOil": {
-          "wbs_no": "1.2.14.3"
-        },
-        "EngineOil": {
-          "wbs_no": "1.2.14.4"
-        },
-        "AuxFuelTanks": {
-          "wbs_no": "1.2.14.5"
-        },
-        "InternalFuelTanks": {
-          "wbs_no": "1.2.14.6"
-        },
-        "ExternalFuelTanks": {
-          "wbs_no": "1.2.14.7"
-        },
-        "WaterInjectionFluid": {
-          "wbs_no": "1.2.14.8"
-        },
-        "Baggage": {
-          "wbs_no": "1.2.14.9"
-        },
-        "GunInstallations": {
-          "wbs_no": "1.2.14.10",
-          "Guns": {
-            "wbs_no": "1.2.14.10.1"
-          },
-          "Supports": {
-            "wbs_no": "1.2.14.10.2"
-          }
-        },
-        "WeaponsProvisions": {
-          "wbs_no": "1.2.14.11"
-        },
-        "Chaff": {
-          "wbs_no": "1.2.14.12"
-        },
-        "Flares": {
-          "wbs_no": "1.2.14.13"
-        },
-        "SurvivalKits": {
-          "wbs_no": "1.2.14.14"
-        },
-        "LifeRafts": {
-          "wbs_no": "1.2.14.15"
-        },
-        "Oxygen": {
-          "wbs_no": "1.2.14.16"
-        }
-      },
-      "Passengers": {
-        "wbs_no": "1.2.15"
-      },
-      "Troops": {
-        "wbs_no": "1.2.16"
-      },
-      "Cargo": {
-        "wbs_no": "1.2.17"
-      },
-      "Ammunition": {
-        "wbs_no": "1.2.18"
-      },
-      "Weapons": {
-        "wbs_no": "1.2.19"
-      },
-      "InternalUsableFuel": {
-        "wbs_no": "1.2.20"
-      },
-      "ExternalUsableFuel": {
-        "wbs_no": "1.2.21"
-      },
-      "OtherAirVehicle": {
-        "wbs_no": "1.2.22"
       }
     },
     "PayloadMissionSystem": {
