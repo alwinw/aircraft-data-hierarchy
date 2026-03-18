@@ -1,6 +1,6 @@
 [project]
 name = "adh"
-version = "0.2.0"
+version = "0.3.0"
 description = "The Aircraft Data Hierarchy (ADH) is a modern data definition standard for the aerospace vehicle design studies. The ADH enables engineers to exchange information (i.e. geometry, disciplinary tool inputs/outputs, requirements, etc.) between tools using a common data structure and a schema that can be validated."
 readme = "README.md"
 license = "Apache-2.0"

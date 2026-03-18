@@ -1,3 +1,41 @@
+## v0.3.0 (2026-03-18)
+
+### Feat
+
+- **propulsion**: fix PropulsionDemo JSON round-trip via MultiPointCycle
+- **msosa**: add Performances container and export perf types
+- **wbs**: add MIL-STD-881F taxonomy YAML and generator script
+- **msosa**: implement Behavior model with DaveML document classes
+- **tabular**: extract DaveML table primitives
+- **msosa**: complete Requirements model with enums and container
+- **msosa**: implement Architecture base class
+- **core**: add pint units support
+
+### Fix
+
+- **demos/PropulsionDemo**: migrate imports to current adh package paths
+- **demos**: migrate NacelleDemo notebook to adh package and pydantic v2
+- **demos**: update NacelleDemo fixture to MIL-STD-881F WBS
+- **msosa**: strengthen Architecture model_config
+- **python**: remove end-of-life python 3.8 support
+- **ruff**: address ruff lint errors
+
+### Refactor
+
+- **wbs**: rename systems_parameters.Systems to SystemRecord
+- **wbs**: adopt Requirements/Performances/Behaviors containers in leaf models
+- **wbs**: collapse _generated.py into domain files
+- **wbs**: replace work_breakdown_structure with generated domain modules
+- **msosa**: SourceInfo model for authorship and metadata management based on DAVE-ML
+- **wbs**: replace CommonBaseModel with Architecture
+- **adh**: make __init__.py intentionally minimal
+- **msosa**: move and restructure architecture, behavior and requirements.py into msosa module
+- **msosa**: move performance into msosa and add enum of disciplines
+- **geom**: move units from msosa to geom module
+- **ruff**: remove relative imports
+- **adh**: shorten names to adh and wbs
+- **systems_diagrams**: lazy load libraries required for diagrams as optional extras
+
 ## v0.2.0 (2026-02-01)
 
 Initial community version release
