@@ -193,9 +193,9 @@ class SystemAttributes(BaseModel):
     fluid_flow: Optional[FluidFlowCharacteristics] = None
 
 
-class System(BaseModel):
+class SystemRecord(BaseModel):
     """
-    Represents an aircraft system.
+    Represents an aircraft system record.
 
     Attributes:
         wbs_id (str): Work Breakdown Structure ID.

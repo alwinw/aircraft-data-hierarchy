@@ -5,10 +5,9 @@ This module provides Pydantic models for representing various aspects of aircraf
 including functional blocks, data signals, physical characteristics, and system attributes.
 """
 
-from enum import Enum
-from typing import Dict, List, Literal, Optional, Tuple
-
 from pydantic import BaseModel, Field, field_validator
+from typing import List, Dict, Optional, Literal, Tuple
+from enum import Enum
 
 
 class SignalType(str, Enum):
@@ -166,7 +165,7 @@ class PowerRequirements(BaseModel):
 
     voltage: float = Field(..., gt=0)
     current: float = Field(..., gt=0)
-    frequency: Optional[float] = Field(default=None, gt=0)
+    frequency: Optional[float] = Field(None, gt=0)
     power_type: str = Field(..., min_length=1, max_length=20)
     peak_power: float = Field(..., gt=0)
     average_power: float = Field(..., gt=0)

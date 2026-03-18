@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import Field, InstanceOf, SerializeAsAny, field_validator
+from pydantic import Field, SerializeAsAny, field_validator, model_validator
 
 from adh.msosa.architecture import Architecture
 
@@ -489,6 +489,19 @@ class Shaft(EngineElement):
     HPX: Optional[float] = Field(default=None, description="Horsepower transfer")
 
 
+_ELEMENT_TYPE_MAP: dict[str, type[EngineElement]] = {
+    "inlet": Inlet,
+    "comp": Compressor,
+    "splitter": Splitter,
+    "duct": Duct,
+    "bleed": Bleed,
+    "comb": Combustor,
+    "turb": Turbine,
+    "nozz": Nozzle,
+    "shaft": Shaft,
+}
+
+
 class PropulsionCycle(Architecture):
     """
     Represents a complete engine cycle.
@@ -506,7 +519,7 @@ class PropulsionCycle(Architecture):
     """
 
     name: str = Field(..., description="The name of the engine cycle.")
-    elements: list[SerializeAsAny[InstanceOf[EngineElement]]] = Field(
+    elements: list[SerializeAsAny[EngineElement]] = Field(
         ..., description="The list of engine elements in the engine cycle."
     )
     global_connections: Optional[list[str]] = Field(
@@ -515,3 +528,15 @@ class PropulsionCycle(Architecture):
     flow_connections: Optional[list[list[str]]] = Field(
         default=None, description="The flow connections in the engine cycle."
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _coerce_elements(cls, data):
+        if isinstance(data, dict) and "elements" in data:
+            data["elements"] = [
+                _ELEMENT_TYPE_MAP.get(e.get("type", ""), EngineElement)(**e)
+                if isinstance(e, dict)
+                else e
+                for e in data["elements"]
+            ]
+        return data

@@ -1,12 +1,9 @@
 from typing import List, Optional
 
-from pydantic import Field, field_validator
+from pydantic import Field
 
-from adh.behavior import Behavior, DAVEfunc
-from adh.common_base_model import CommonBaseModel
-from adh.wbs.propulsion.propulsion_cycle import (
-    PropulsionCycle,
-)
+from adh.msosa.behavior import Behavior
+from adh.wbs.propulsion.propulsion_multipoint import FlightConditions
 
 
 class EngineElementBehavior(Behavior):
@@ -321,31 +318,6 @@ class Performance(Behavior):
     )
 
 
-class FlightConditions(CommonBaseModel):
-    """
-    Flight conditions for the engine.
-
-    Attributes
-    ----------
-    mn : Optional[float]
-        Mach number.
-    alt : Optional[float]
-        Altitude in feet.
-    d_ts : Optional[float]
-        Temperature deviation in degrees Rankine.
-    W : Optional[float]
-        Air mass flow rate.
-    """
-
-    name: str = Field(..., description="The name of the flight condition.")
-    mn: Optional[List[float]] = Field(default=None, description="Mach number")
-    alt: Optional[List[float]] = Field(default=None, description="Altitude in feet")
-    d_ts: Optional[float] = Field(
-        default=None, description="Temperature deviation in degrees Rankine"
-    )
-    W: Optional[List[float]] = Field(default=None, description="Air mass flow rate")
-
-
 class PropulsionCycleBehavior(Behavior):
     """
     Contains the analysis inputs and Engine Deck for a propulsion cycle analysis.
@@ -371,67 +343,7 @@ class PropulsionCycleBehavior(Behavior):
         default=None,
         description="The list of the performance components for the cycle.",
     )
-    engine_decks: Optional[List[DAVEfunc]] = Field(
+    engine_decks: Optional[List[Behavior]] = Field(
         default=None,
         description="The engine deck in DaveML ungridded data table format.",
-    )
-
-
-class OffDesignPoint(CommonBaseModel):
-    """
-    Represents an off-design point in a multi-point cycle analysis.
-
-    Attributes:
-        name (str): The name of the off-design point.
-        parameters (dict): The parameter values for the off-design point.
-    """
-
-    name: str = Field(..., description="The name of the off-design point.")
-    flight_conditions_od: Optional[FlightConditions] = Field(
-        default=None, description="Off-design flight conditions."
-    )
-    PC: Optional[List[float]] = Field(
-        default=None, description="List of off-design throttle percentage."
-    )
-    throttle_mode: str = Field(
-        "T4",
-        description="What quantity should be used to throttle engine for off-design cases.",
-    )
-
-    @field_validator("throttle_mode")
-    def validate_throttle_mode(cls, v):
-        allowed_methods = ["T4", "percent_thrust"]
-        if v not in allowed_methods:
-            raise ValueError(f"Throttle mode must be one of {allowed_methods}")
-        return v
-
-
-class MultiPointCycle(CommonBaseModel):
-    """
-    Represents a multi-point cycle analysis.
-
-    Attributes:
-        design_point (PropulsionCycle): The design point engine cycle.
-        od_points (List[OffDesignPoint]): The list of off-design points.
-        global_des_od_connections (dict, optional): The global design-to-off-design connections.
-        design_constants (dict, optional): The design constants for the multi-point cycle analysis.
-        seq_points (List[str], optional): The sequence of points in the multi-point cycle analysis.
-    """
-
-    design_point: PropulsionCycle = Field(
-        ..., description="The design point engine cycle."
-    )
-    od_points: List[OffDesignPoint] = Field(
-        ..., description="The list of off-design points."
-    )
-    global_des_od_connections: Optional[dict] = Field(
-        default=None, description="The global design-to-off-design connections."
-    )
-    design_constants: Optional[dict] = Field(
-        default=None,
-        description="The design constants for the multi-point cycle analysis.",
-    )
-    seq_points: Optional[List[str]] = Field(
-        default=None,
-        description="The sequence of points in the multi-point cycle analysis.",
     )

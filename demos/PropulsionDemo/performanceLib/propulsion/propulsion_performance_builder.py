@@ -3,7 +3,6 @@ from behaviorLib.propulsion.propulsion_cycle_behavior import (
     Performance,
 )
 from performanceLib.propulsion.builders.hbtf_builder import HBTFBuilder, MPhbtfBuilder
-from pydantic.v1 import utils
 
 
 class PropulsionPerformanceBuilder:
@@ -11,7 +10,7 @@ class PropulsionPerformanceBuilder:
     This parent class contains all the necessary input processing function from the ADH. The goal is for input from the ADH to be processed into python dictionaries as an
     intermediate step. This parent class contains the input function necessary to retrieve ADH data from pydantic and return them as dictionaries so they can prepared for input into the desired tools.
     For example pyCycle has a python based interface while NPSS requires an input files. Using dictionaries as an intermediary between the tools and the ADH makes
-    adapting a new tool for use with the AHD much easier.
+    adapting a new tool for use with the ADH much easier.
     """
 
     """INIT: The Parent class takes an ADHInstance as input."""
@@ -38,7 +37,7 @@ class PropulsionPerformanceBuilder:
 
     # Gets the general information about the cycle
     def getCycleInfo(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -56,7 +55,7 @@ class PropulsionPerformanceBuilder:
             "solver_settings": cyclePerf.solver_settings,
         }
 
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycleInfo["is_multi_point"] = True
             cycleInfo["od_points"] = self.getODPoints()
         return cycleInfo
@@ -77,14 +76,14 @@ class PropulsionPerformanceBuilder:
     # These functions get the engine elements
 
     def getInlet(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
         engineElements = cycle.elements
         inlets = []
         for element in engineElements:
-            # if utils.lenient_isinstance(element, Inlet):
+            # if isinstance(element, Inlet):
             if element.type == "inlet":
                 inletData = {
                     "name": element.name,
@@ -97,7 +96,7 @@ class PropulsionPerformanceBuilder:
         return inlets
 
     def getSplitter(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -105,7 +104,7 @@ class PropulsionPerformanceBuilder:
         splitters = []
         for element in engineElements:
             if element.type == "splitter":
-                # if utils.lenient_isinstance(element, Splitter):
+                # if isinstance(element, Splitter):
                 splitterData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -119,7 +118,7 @@ class PropulsionPerformanceBuilder:
         return splitters
 
     def getDuct(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -127,7 +126,7 @@ class PropulsionPerformanceBuilder:
         ducts = []
         for element in engineElements:
             if element.type == "duct":
-                # if utils.lenient_isinstance(element, Duct):
+                # if isinstance(element, Duct):
                 ductData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -140,7 +139,7 @@ class PropulsionPerformanceBuilder:
         return ducts
 
     def getCompressor(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -148,7 +147,7 @@ class PropulsionPerformanceBuilder:
         compressors = []
         for element in engineElements:
             if element.type == "comp":
-                # if utils.lenient_isinstance(element, Compressor):
+                # if isinstance(element, Compressor):
                 compData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -168,7 +167,7 @@ class PropulsionPerformanceBuilder:
         return compressors
 
     def getCombustor(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -176,7 +175,7 @@ class PropulsionPerformanceBuilder:
         combustors = []
         for element in engineElements:
             if element.type == "comb":
-                # if utils.lenient_isinstance(element, Combustor):
+                # if isinstance(element, Combustor):
                 combData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -190,7 +189,7 @@ class PropulsionPerformanceBuilder:
         return combustors
 
     def getTurbine(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -198,7 +197,7 @@ class PropulsionPerformanceBuilder:
         turbines = []
         for element in engineElements:
             if element.type == "turb":
-                # if utils.lenient_isinstance(element, Turbine):
+                # if isinstance(element, Turbine):
                 turbData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -218,7 +217,7 @@ class PropulsionPerformanceBuilder:
         return turbines
 
     def getNozzle(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -226,7 +225,7 @@ class PropulsionPerformanceBuilder:
         nozzles = []
         for element in engineElements:
             if element.type == "nozz":
-                # if utils.lenient_isinstance(element, Nozzle):
+                # if isinstance(element, Nozzle):
                 nozzData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -240,7 +239,7 @@ class PropulsionPerformanceBuilder:
         return nozzles
 
     def getShaft(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -248,7 +247,7 @@ class PropulsionPerformanceBuilder:
         shafts = []
         for element in engineElements:
             if element.type == "shaft":
-                # if utils.lenient_isinstance(element, Shaft):
+                # if isinstance(element, Shaft):
                 shaftData = {
                     "name": element.name,
                     "num_ports": element.num_ports,
@@ -260,7 +259,7 @@ class PropulsionPerformanceBuilder:
         return shafts
 
     def getBleed(self):
-        if utils.lenient_isinstance(self.ADHInstance.cycle, MultiPointCycle):
+        if isinstance(self.ADHInstance.cycle, MultiPointCycle):
             cycle = self.ADHInstance.cycle.design_point
         else:
             cycle = self.ADHInstance.cycle
@@ -268,7 +267,7 @@ class PropulsionPerformanceBuilder:
         bleeds = []
         for element in engineElements:
             if element.type == "bleed":
-                # if utils.lenient_isinstance(element, Bleed):
+                # if isinstance(element, Bleed):
                 bleedData = {
                     "name": element.name,
                     "statics": element.statics,
@@ -285,7 +284,7 @@ class PropulsionPerformanceBuilder:
         perfComps = self.ADHInstance.behavior.performance_components
         performance = []
         for perf in perfComps:
-            if utils.lenient_isinstance(perf, Performance):
+            if isinstance(perf, Performance):
                 performanceData = {
                     "name": perf.name,
                     "pt2_source": perf.pt2_source,

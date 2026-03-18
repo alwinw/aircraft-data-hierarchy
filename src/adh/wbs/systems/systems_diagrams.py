@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from adh.wbs.systems.systems_parameters import System
+from adh.wbs.systems.systems_parameters import SystemRecord
 
 if TYPE_CHECKING:
     from graphviz import Digraph
@@ -8,7 +8,7 @@ else:
     Digraph = None
 
 
-def create_system_diagram(system: System) -> Digraph:
+def create_system_diagram(system: SystemRecord) -> Digraph:
     try:
         import graphviz  # noqa: PLC0415
     except ImportError as e:
@@ -40,7 +40,7 @@ def create_system_diagram(system: System) -> Digraph:
     return dot
 
 
-def create_system_attribute_tables(system: System) -> list[tuple[str, str]]:
+def create_system_attribute_tables(system: SystemRecord) -> list[tuple[str, str]]:
     try:
         from tabulate import tabulate  # noqa: PLC0415
     except ImportError as e:
@@ -134,7 +134,7 @@ def create_system_attribute_tables(system: System) -> list[tuple[str, str]]:
     ]
 
 
-def display_system_info(system: System):
+def display_system_info(system: SystemRecord):
     try:
         from IPython.core.display import HTML, Image  # noqa: PLC0415
         from IPython.display import display  # noqa: PLC0415

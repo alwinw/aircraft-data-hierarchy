@@ -13,6 +13,11 @@ from adh.wbs.propulsion.propulsion_cycle import (
     Turbine,
 )
 from adh.wbs.propulsion.propulsion_geometry import PropulsionGeometry
+from adh.wbs.propulsion.propulsion_multipoint import (
+    FlightConditions,
+    MultiPointCycle,
+    OffDesignPoint,
+)
 
 __all__ = [
     "Bleed",
@@ -20,8 +25,11 @@ __all__ = [
     "Compressor",
     "Duct",
     "EngineElement",
+    "FlightConditions",
     "Inlet",
+    "MultiPointCycle",
     "Nozzle",
+    "OffDesignPoint",
     "Propulsion",
     "PropulsionCycle",
     "PropulsionGeometry",
