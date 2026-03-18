@@ -1,17 +1,14 @@
 import sys
 
 import openmdao.api as om
-from adh.behaviorLib.propulsion.propulsion_cycle_behavior import (
-    MultiPointCycle,
-)
-from adh.performanceLib.propulsion.propulsion_performance_builder import (
+from adh.wbs.propulsion.propulsion_multipoint import MultiPointCycle
+from performanceLib.propulsion.propulsion_performance_builder import (
     pyCycleBuilder,
 )
-from adh.performanceLib.propulsion.utils.pycycle_to_ADH import (
+from performanceLib.propulsion.utils.pycycle_to_ADH import (
     append_data_point_ADH,
     initialize_engine_deck_ADH,
 )
-from pydantic.v1 import utils
 from utils.ADH_JSON_tools import ADH_to_JSON, JSON_to_ADH
 from utils.generate_demo_adh import generate_test_ADH_propulsion
 
@@ -20,7 +17,7 @@ def HBTFprep(prob, ADHInstance):
     """
     Function that sets the initial guesses in the pyCycle problem and collects the flight condition pairs into a set of tuples
     """
-    if utils.lenient_isinstance(ADHInstance.cycle, MultiPointCycle):
+    if isinstance(ADHInstance.cycle, MultiPointCycle):
         cycle = ADHInstance.cycle.design_point
     else:
         cycle = ADHInstance.cycle

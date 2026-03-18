@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import Field, field_validator
 
-from adh.performance import ModelDescription
+from adh.msosa.performance import ModelDescription
 
 
 class PropulsionCyclePerformance(ModelDescription):

@@ -1,16 +1,18 @@
-from adh.behaviorLib.propulsion.propulsion_cycle_behavior import (
+from adh.wbs.propulsion.propulsion_multipoint import (
     FlightConditions,
     MultiPointCycle,
     OffDesignPoint,
+)
+from behaviorLib.propulsion.propulsion_cycle_behavior import (
     Performance,
     PropulsionCycleBehavior,
 )
-from adh.performanceLib.propulsion.propulsion_cycle_performance import (
+from performanceLib.propulsion.propulsion_cycle_performance import (
     PropulsionCyclePerformance,
 )
 
-from adh.behavior import Author, FileHeader
-from adh.common_base_model import Metadata
+from typing import Optional
+
 from adh.wbs.propulsion import (
     Bleed,
     Combustor,
@@ -26,10 +28,15 @@ from adh.wbs.propulsion import (
 )
 
 
+class PropulsionDemo(Propulsion):
+    """Propulsion subclass that types behavior/performance as demo-local pyCycle analysis types."""
+
+    behavior: Optional[PropulsionCycleBehavior] = None
+    performance: Optional[PropulsionCyclePerformance] = None
+
+
 def generate_test_ADH_propulsion():
     # Set-up the ADH Propulsion instance for demo purposes
-
-    metadata = Metadata(key="example_key", value="example_value")
 
     fc = FlightConditions(name="fc", mn=[0.8], alt=[35000])
     inlet = Inlet(name="inlet", type="inlet")
@@ -219,8 +226,6 @@ def generate_test_ADH_propulsion():
         performance_components=[perf],
     )
 
-    file_header = FileHeader(name="engineDeck", author=[Author(name="Safa Bakhshi")])
-
     ODpoints = []
     fc2 = FlightConditions(
         name="od_full_pwr_fc",
@@ -287,11 +292,10 @@ def generate_test_ADH_propulsion():
         od_points=[od1, od2],
     )
 
-    ADHInstance = Propulsion(
+    ADHInstance = PropulsionDemo(
         name="Engine",
         description="Main engine component",
         subcomponents=[],
-        metadata=metadata,
         cycle=multipoint,
         performance=cyclePerformance,
         behavior=cycleBehavior,

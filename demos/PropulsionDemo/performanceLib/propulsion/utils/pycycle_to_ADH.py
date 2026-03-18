@@ -1,11 +1,10 @@
 import json
 import os
 
-from adh.behavior import (
+from adh.msosa.behavior import Behavior
+from adh.tabular.tables import (
     DataPoint,
-    DAVEfunc,
     DependentVarRef,
-    FileHeader,
     Function,
     IndependentVarRef,
     UngriddedTableDef,
@@ -68,31 +67,20 @@ def initialize_engine_deck_ADH(
     """
 
     # Add Engine Deck to ADH
-    if ADHInstance.behavior.engine_decks == None:
+    new_deck = Behavior(
+        name=deck_name,
+        functions=[Function(name=f"{deck_name} Header")],
+        ungridded_table_defs=[UngriddedTableDef(name=f"{deck_name} Data")],
+    )
+    if ADHInstance.behavior.engine_decks is None:
         ADHInstance.behavior.engine_decks = []
-        ADHInstance.behavior.engine_decks.append(
-            DAVEfunc(
-                function=[Function(name=f"{deck_name} Header")],
-                ungridded_table_def=[UngriddedTableDef(name=f"{deck_name} Data")],
-            )
-        )
-    else:
-        ADHInstance.behavior.engine_decks.append(
-            DAVEfunc(
-                function=[Function(name=f"{deck_name} Header")],
-                ungridded_table_def=[UngriddedTableDef(name=f"{deck_name} Data")],
-            )
-        )
+    ADHInstance.behavior.engine_decks.append(new_deck)
 
     # The engine deck's index -accounts for multiple engine decks in the same ADH
     deck_index = len(ADHInstance.behavior.engine_decks) - 1
 
-    ADHInstance.behavior.engine_decks[deck_index].file_header = FileHeader(
-        name=deck_name
-    )
-
-    function = ADHInstance.behavior.engine_decks[deck_index].function[0]
-    engine_data = ADHInstance.behavior.engine_decks[deck_index].ungridded_table_def[0]
+    function = ADHInstance.behavior.engine_decks[deck_index].functions[0]
+    engine_data = ADHInstance.behavior.engine_decks[deck_index].ungridded_table_defs[0]
 
     independent_vars = []
     dependent_vars = []
@@ -128,7 +116,6 @@ def initialize_engine_deck_ADH(
         units_list.append(unit)
     units_string = ", ".join(units_list)
     engine_data.units = units_string
-    breakpoint()
 
     print(f"Initialized Deck {deck_index}")
 

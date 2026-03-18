@@ -177,3 +177,4 @@ include = [
 
 [tool.typos.default.extend-words]
 OT = "OT" # OTE = Operational Test and Evaluation (acronym in WBS class names)
+Fram = "Fram" # F_ram = ram drag (abbreviation in engine performance table headers)
