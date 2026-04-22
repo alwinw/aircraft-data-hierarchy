@@ -1,5 +1,7 @@
 MD007:
-  indent: 4 # unordered-list-indent
+  indent: 4
 
 MD013:
-  line_length: 120 # line length
+  code_blocks: false
+  line_length: 120
+  tables: false

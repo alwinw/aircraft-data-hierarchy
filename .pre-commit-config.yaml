@@ -87,6 +87,14 @@ repos:
 
   - repo: local
     hooks:
+      - id: replace-em-dash
+        name: Replace em dashes with hyphens
+        entry: sed -i '' 's/—/-/g'
+        language: system
+        types: [file]
+        exclude: .pre-commit-config.yaml
+        priority: 2
+
       - id: gen-wbs-classes
         name: Check WBS classes are in sync with taxonomy
         language: python

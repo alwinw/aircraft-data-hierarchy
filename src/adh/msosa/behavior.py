@@ -18,6 +18,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator
 
+from adh.msosa.fidelity import FidelityLevel
 from adh.msosa.source_info import SourceInfo
 from adh.tabular.tables import TablesMixin
 
@@ -81,6 +82,16 @@ class Behavior(TablesMixin):
     )
     sequence: Optional[list[Activity]] = Field(
         default=None, description="A sequence of activities that define the behaviour."
+    )
+    fidelity_level: Optional[FidelityLevel] = Field(
+        default=None,
+        description=(
+            "Declared analysis fidelity for this behaviour model. "
+            "L0 = empirical lookup or simple rule; L1 = parameterised model; "
+            "L2 = multi-condition simulation model (e.g. DaveML table set); "
+            "L3 = high-fidelity non-linear or time-varying model; "
+            "L4 = validated against physical test data."
+        ),
     )
     source_info: Optional[SourceInfo] = Field(
         default=None, description="Source and authorship metadata."

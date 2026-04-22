@@ -23,6 +23,12 @@ nav:
   - Home:
       - Overview: index.md
       - License: license.md
+  - Theory:
+      - Overview: theory/index.md
+      - Architecture: theory/architecture.md
+      - Requirements: theory/requirements.md
+      - Performance: theory/performance.md
+      - Behavior: theory/behavior.md
   - API Reference: reference/
 
 theme:

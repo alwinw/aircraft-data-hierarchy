@@ -22,6 +22,7 @@ from typing import Any, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
+from adh.msosa.fidelity import FidelityLevel
 from adh.msosa.source_info import SourceInfo
 
 
@@ -59,6 +60,15 @@ class PerfDisciplines(str, Enum):
 
     manufacturing = "manufacturing"
     """Producibility metrics, build rate, and assembly tolerances."""
+
+    mission = "mission"
+    """Design Reference Mission (DRM): segment definition, payload, fuel fractions, MTOW closure."""
+
+    airplane_performance = "airplane performance"
+    """Integrated performance loop: range, endurance, fuel burn, takeoff/landing distances."""
+
+    mdo = "mdo"
+    """Multidisciplinary Design Optimisation (MDO): problem formulation, DVs, constraints, coupling."""
 
 
 class DataExchange(BaseModel):
@@ -152,6 +162,16 @@ class Discipline(BaseModel):
     tools: Optional[list[ModelDescription]] = Field(
         default=None,
         description="A list of tools and models associated with the discipline.",
+    )
+    fidelity_level: Optional[FidelityLevel] = Field(
+        default=None,
+        description=(
+            "Declared analysis fidelity for this discipline. "
+            "Drives tool selection and cross-domain mismatch detection. "
+            "L0 = empirical/handbook; L1 = VLM/panel; L2 = multi-discipline "
+            "at selected conditions; L3 = high-fidelity full-envelope; "
+            "L4 = validated (outside MAGPIE scope)."
+        ),
     )
     source_info: Optional[SourceInfo] = Field(
         default=None, description="Source and authorship metadata."

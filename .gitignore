@@ -5,8 +5,6 @@
 scratch*
 lcov.info
 cov.xml
-AGENTS.md
-PLAN*.md
 
 #---------------------------------------------------------------------------------------
 # Archives.gitignore
@@ -138,6 +136,15 @@ PLAN*.md
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+#---------------------------------------------------------------------------------------
+# LLMs.gitignore
+#---------------------------------------------------------------------------------------
+PLAN*.md
+AGENTS.md
+CLAUDE*.md
+docs-thirdparty
+libs-thirdparty
 
 #---------------------------------------------------------------------------------------
 # macOS.gitignore
