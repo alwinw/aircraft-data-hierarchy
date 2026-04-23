@@ -48,26 +48,26 @@ repos:
         priority: 1
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.24.1
+    rev: v0.25
     hooks:
       - id: validate-pyproject
         priority: 0
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.42.0
+    rev: v1.45.1
     hooks:
       - id: typos
         priority: 0
 
   - repo: https://github.com/fredrikaverpil/creosote.git
-    rev: v4.2.0
+    rev: v5.2.0
     hooks:
       - id: creosote
         priority: 0
 
   # Priority 1: Formatting (e.g. ruff-format before ruff-check)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.0
+    rev: v0.15.11
     hooks:
       - id: ruff-format
         priority: 1
@@ -79,7 +79,7 @@ repos:
 
   # Priority 2: Second-pass fixers (e.g., markdownlint-fix runs after mdformat).
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.47.0
+    rev: v0.48.0
     hooks:
       - id: markdownlint-fix
         priority: 1
@@ -87,13 +87,13 @@ repos:
 
   - repo: local
     hooks:
-      - id: replace-em-dash
-        name: Replace em dashes with hyphens
-        entry: sed -i '' 's/—/-/g'
-        language: system
-        types: [file]
-        exclude: .pre-commit-config.yaml
-        priority: 2
+      # - id: replace-em-dash
+      #   name: Replace em dashes with hyphens
+      #   entry: sed -i '' 's/—/-/g'
+      #   language: system
+      #   types: [file]
+      #   exclude: .pre-commit-config.yaml
+      #   priority: 2
 
       - id: gen-wbs-classes
         name: Check WBS classes are in sync with taxonomy
