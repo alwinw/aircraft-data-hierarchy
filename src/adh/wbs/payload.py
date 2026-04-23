@@ -11,9 +11,10 @@ from typing import Optional
 from pydantic import Field
 
 from adh.msosa.architecture import Architecture
+from adh.msosa.mixin import MSoSAMixin
 
 
-class PayloadMissionSystem(Architecture):
+class PayloadMissionSystem(MSoSAMixin, Architecture):
     """Payload/Mission System. MIL-STD-881F A.4.4. WBS 1.3."""
 
     wbs_no: str = Field(default="1.3", description="WBS number per MIL-STD-881F.")
@@ -30,43 +31,43 @@ class PayloadMissionSystem(Architecture):
     other: Optional[OtherPayload] = Field(default=None)
 
 
-class PayloadIntegrationAssemblyTestAndCheckout(Architecture):
+class PayloadIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Payload Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.4.1. WBS 1.3.1."""
 
     wbs_no: str = Field(default="1.3.1", description="WBS number per MIL-STD-881F.")
 
 
-class SurvivabilityPayload(Architecture):
+class SurvivabilityPayload(MSoSAMixin, Architecture):
     """Survivability Payload. MIL-STD-881F A.4.4.2. WBS 1.3.2."""
 
     wbs_no: str = Field(default="1.3.2", description="WBS number per MIL-STD-881F.")
 
 
-class ReconnaissancePayload(Architecture):
+class ReconnaissancePayload(MSoSAMixin, Architecture):
     """Reconnaissance Payload. MIL-STD-881F A.4.4.3. WBS 1.3.3."""
 
     wbs_no: str = Field(default="1.3.3", description="WBS number per MIL-STD-881F.")
 
 
-class ElectronicWarfarePayload(Architecture):
+class ElectronicWarfarePayload(MSoSAMixin, Architecture):
     """Electronic Warfare Payload. MIL-STD-881F A.4.4.4. WBS 1.3.4."""
 
     wbs_no: str = Field(default="1.3.4", description="WBS number per MIL-STD-881F.")
 
 
-class ArmamentWeaponsDeliveryPayload(Architecture):
+class ArmamentWeaponsDeliveryPayload(MSoSAMixin, Architecture):
     """Armament/Weapons Delivery Payload. MIL-STD-881F A.4.4.5. WBS 1.3.5."""
 
     wbs_no: str = Field(default="1.3.5", description="WBS number per MIL-STD-881F.")
 
 
-class PayloadSoftwareRelease(Architecture):
+class PayloadSoftwareRelease(MSoSAMixin, Architecture):
     """Payload Software Release. MIL-STD-881F A.4.4.6. WBS 1.3.6."""
 
     wbs_no: str = Field(default="1.3.6", description="WBS number per MIL-STD-881F.")
 
 
-class OtherPayload(Architecture):
+class OtherPayload(MSoSAMixin, Architecture):
     """Other Payload. MIL-STD-881F A.4.4.7. WBS 1.3.7."""
 
     wbs_no: str = Field(default="1.3.7", description="WBS number per MIL-STD-881F.")

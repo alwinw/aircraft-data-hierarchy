@@ -6,6 +6,7 @@ import pytest
 from pydantic import ValidationError
 
 from adh.msosa import Architecture, Behaviors, MSoSAMixin, Performances, Requirements
+from adh.wbs import Avionics, Wing
 from adh.wbs.airframe.airframe import Component
 from adh.wbs.equipment import Equipment
 from adh.wbs.propulsion.propulsion import Propulsion
@@ -88,3 +89,16 @@ def test_propulsion_geometry_is_treated_as_true_architecture_node():
 def test_architecture_validation_still_applies_with_mixin():
     with pytest.raises(ValidationError, match="Invalid WBS number"):
         ExampleArchitectureNode(wbs_no="not-a-wbs")
+
+
+@pytest.mark.parametrize("model_cls", [Wing, Avionics])
+def test_generated_wbs_nodes_expose_recursive_msosa_fields(model_cls):
+    node = model_cls(
+        requirements=Requirements(),
+        performance=Performances(),
+        behavior=Behaviors(),
+    )
+
+    assert isinstance(node.requirements, Requirements)
+    assert isinstance(node.performance, Performances)
+    assert isinstance(node.behavior, Behaviors)
