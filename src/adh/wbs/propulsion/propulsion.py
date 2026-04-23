@@ -11,15 +11,13 @@ from typing import Any, Optional, Union
 from pydantic import Field
 
 from adh.msosa.architecture import Architecture
-from adh.msosa.behavior import Behaviors
-from adh.msosa.performance import Performances
-from adh.msosa.requirements import Requirements
+from adh.msosa.mixin import MSoSAMixin
 from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 from adh.wbs.propulsion.propulsion_geometry import PropulsionGeometry
 from adh.wbs.propulsion.propulsion_multipoint import MultiPointCycle
 
 
-class Propulsion(Architecture):
+class Propulsion(MSoSAMixin, Architecture):
     """
     Represents the propulsion system within an air vehicle system, detailing its specifications, functionalities, and interrelations.
 
@@ -30,9 +28,6 @@ class Propulsion(Architecture):
         cycle (Optional[PropulsionCycle]): Engine cycle of the propulsion system.
         parameters (Optional[dict[str, Any]]): Cycle or physical parameters associated with the propulsion system.
         subcomponents (Optional[list[Propulsion]]): A list of sub-components, if any, within the propulsion system.
-        requirements (Optional[Requirements]): Specific requirements associated with the propulsion system.
-        performance (Optional[Performances]): Performance disciplines for the propulsion system.
-        behavior (Optional[Behaviors]): Specific behaviors for the propulsion system.
     """
 
     name: Optional[str] = Field(
@@ -52,15 +47,6 @@ class Propulsion(Architecture):
     )
     subcomponents: Optional[list[Propulsion]] = Field(
         default=None, description="Sub-components within the propulsion system."
-    )
-    requirements: Optional[Requirements] = Field(
-        default=None, description="Specific requirements for the propulsion system."
-    )
-    performance: Optional[Performances] = Field(
-        default=None, description="Performance disciplines for the propulsion system."
-    )
-    behavior: Optional[Behaviors] = Field(
-        default=None, description="Specific behaviors for the propulsion system."
     )
 
 

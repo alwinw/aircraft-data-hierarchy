@@ -11,12 +11,10 @@ from typing import Any, Optional
 from pydantic import Field
 
 from adh.msosa.architecture import Architecture
-from adh.msosa.behavior import Behaviors
-from adh.msosa.performance import Performances
-from adh.msosa.requirements import Requirements
+from adh.msosa.mixin import MSoSAMixin
 
 
-class System(Architecture):
+class System(MSoSAMixin, Architecture):
     """
     Represents a system within aircraft systems, detailing its specifications, functionalities, and interrelations.
 
@@ -26,9 +24,6 @@ class System(Architecture):
         parameters (Optional[dict[str, Any]]): Operational or physical parameters associated with the system.
         diagram (Optional[dict[str, Any]]): Flow diagram of the system.
         subsystems (Optional[list[System]]): A list of sub-systems, if any, within this system.
-        requirements (Optional[Requirements]): Specific requirements associated with this system.
-        performance (Optional[Performances]): Performance disciplines for the system.
-        behavior (Optional[Behaviors]): Specific behaviors for the system.
     """
 
     name: Optional[str] = Field(default=None, description="The name of the system.")
@@ -43,15 +38,6 @@ class System(Architecture):
     )
     subsystems: Optional[list[System]] = Field(
         default=None, description="Sub-systems within this system."
-    )
-    requirements: Optional[Requirements] = Field(
-        default=None, description="Specific requirements for the system."
-    )
-    performance: Optional[Performances] = Field(
-        default=None, description="Performance disciplines for the system."
-    )
-    behavior: Optional[Behaviors] = Field(
-        default=None, description="Specific behaviors for the system."
     )
 
 

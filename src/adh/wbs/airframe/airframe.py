@@ -11,14 +11,12 @@ from typing import Optional
 from pydantic import Field
 
 from adh.msosa.architecture import Architecture
-from adh.msosa.behavior import Behaviors
-from adh.msosa.performance import Performances
-from adh.msosa.requirements import Requirements
+from adh.msosa.mixin import MSoSAMixin
 from adh.wbs.airframe.airframe_geometry import Geometry
 from adh.wbs.airframe.airframe_parameters import Parameters
 
 
-class Component(Architecture):
+class Component(MSoSAMixin, Architecture):
     """
     Represents a component within an aircraft's system, detailing its specifications, functionalities, and interrelations.
 
@@ -28,9 +26,6 @@ class Component(Architecture):
         geometry (Optional[Geometry]): Geometric information of the component, if applicable.
         parameters (Optional[Parameters]): Operational or physical parameters associated with the component.
         subcomponents (Optional[list[Component]]): A list of sub-components, if any, within this component.
-        requirements (Optional[Requirements]): Specific requirements associated with this component.
-        performance (Optional[Performances]): Performance disciplines for the component.
-        behavior (Optional[Behaviors]): Specific behaviors for the component.
     """
 
     name: Optional[str] = Field(default=None, description="The name of the component.")
@@ -45,15 +40,6 @@ class Component(Architecture):
     )
     subcomponents: Optional[list[Component]] = Field(
         default=None, description="Sub-components within this component."
-    )
-    requirements: Optional[Requirements] = Field(
-        default=None, description="Specific requirements for the component."
-    )
-    performance: Optional[Performances] = Field(
-        default=None, description="Performance disciplines for the component."
-    )
-    behavior: Optional[Behaviors] = Field(
-        default=None, description="Specific behaviors for the component."
     )
 
 
