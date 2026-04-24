@@ -10,13 +10,10 @@ from typing import Any, Optional
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
-from adh.msosa.behavior import Behaviors
-from adh.msosa.performance import Performances
-from adh.msosa.requirements import Requirements
+from adh.msosa.architecture import Architecture, MSoSAMixin
 
 
-class Equipment(Architecture):
+class Equipment(MSoSAMixin, Architecture):
     """
     Represents miscellaneous equipment onboard an aircraft required for it's operational use.
 
@@ -26,9 +23,6 @@ class Equipment(Architecture):
         geometry (Optional[dict[str, Any]]): Geometric information of the equipment, if applicable.
         parameters (Optional[dict[str, Any]]): Operational or physical parameters associated with the equipment.
         subequipment (Optional[list[Equipment]]): A list of sub-components, if any, within this equipment.
-        requirements (Optional[Requirements]): Specific requirements associated with this equipment.
-        performance (Optional[Performances]): Performance disciplines for the equipment.
-        behavior (Optional[Behaviors]): Specific behaviors for the equipment.
     """
 
     name: Optional[str] = Field(default=None, description="The name of the equipment.")
@@ -43,15 +37,6 @@ class Equipment(Architecture):
     )
     subequipment: Optional[list[Equipment]] = Field(
         default=None, description="Sub-equipment within this equipment."
-    )
-    requirements: Optional[Requirements] = Field(
-        default=None, description="Specific requirements for the equipment."
-    )
-    performance: Optional[Performances] = Field(
-        default=None, description="Performance disciplines for the equipment."
-    )
-    behavior: Optional[Behaviors] = Field(
-        default=None, description="Specific behaviors for the equipment."
     )
 
 

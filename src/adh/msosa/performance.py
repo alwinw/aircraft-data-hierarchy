@@ -15,15 +15,13 @@ Additional alignment with MIL-F-8785C, MIL-STD-1374, and MIL-STD-881.
 
 from __future__ import annotations
 
-import uuid
 from datetime import datetime
 from enum import Enum
 from typing import Any, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 
-from adh.msosa.fidelity import FidelityLevel
-from adh.msosa.source_info import SourceInfo
+from adh.msosa.metadata import FidelityLevel, NodeMetaMixin, SourceInfo
 
 
 class PerfDisciplines(str, Enum):
@@ -87,21 +85,14 @@ class DataExchange(BaseModel):
     )
 
 
-class ModelDescription(BaseModel):
+class ModelDescription(NodeMetaMixin, BaseModel):
     """
     The description of a tool or model.
     """
 
-    name: str = Field(
-        description="The name of the model.",
-    )
     spec_version: Optional[str] = Field(
         default=None,
         description="The specification version of the model.",
-    )
-    guid: Optional[str] = Field(
-        default=None,
-        description="The globally unique identifier of the model.",
     )
     generation_tool: Optional[str] = Field(
         default=None,
@@ -131,20 +122,6 @@ class ModelDescription(BaseModel):
         default=None,
         description="The version of the model.",
     )
-    description: Optional[str] = Field(
-        default=None,
-        description="A description of the model.",
-    )
-
-    @field_validator("guid")
-    def validate_guid(cls, v: str):
-        try:
-            uuid_obj = uuid.UUID(v, version=4)
-            return str(uuid_obj)
-        except ValueError as e:
-            raise ValueError(
-                "Invalid GUID format. Must be a valid UUID version 4"
-            ) from e
 
 
 class Discipline(BaseModel):

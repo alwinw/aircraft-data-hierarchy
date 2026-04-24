@@ -6,29 +6,28 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from adh.msosa.metadata import NodeMetaMixin
 from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 
 
-class FlightConditions(BaseModel):
+class FlightConditions(NodeMetaMixin, BaseModel):
     """Flight conditions for an off-design point."""
 
-    name: str
     mn: Optional[list[float]] = None
     alt: Optional[list[float]] = None
     d_ts: Optional[float] = None
     W: Optional[list[float]] = None
 
 
-class OffDesignPoint(BaseModel):
+class OffDesignPoint(NodeMetaMixin, BaseModel):
     """A single off-design operating point."""
 
-    name: str
     flight_conditions_od: Optional[FlightConditions] = None
     PC: Optional[list[float]] = None
     throttle_mode: str = Field(default="T4")
 
 
-class MultiPointCycle(BaseModel):
+class MultiPointCycle(NodeMetaMixin, BaseModel):
     """Engine cycle with a design point and one or more off-design points."""
 
     design_point: PropulsionCycle

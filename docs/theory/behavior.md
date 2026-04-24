@@ -47,7 +47,7 @@ keeps that meaning, but it also allows an optional activity sequence alongside t
 
 ```python
 from adh.msosa.behavior import Activity, ActivityState, Behavior, Behaviors
-from adh.msosa.fidelity import FidelityLevel
+from adh.msosa.metadata import FidelityLevel
 from adh.tabular.tables import DataPoint, UngriddedTableDef, VariableDef
 
 behaviors = Behaviors(

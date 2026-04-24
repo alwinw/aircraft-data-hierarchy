@@ -1,11 +1,11 @@
 from typing import Optional
 
-from pydantic import Field, SerializeAsAny, field_validator, model_validator
+from pydantic import BaseModel, Field, SerializeAsAny, field_validator, model_validator
 
-from adh.msosa.architecture import Architecture
+from adh.msosa.metadata import NodeMetaMixin
 
 
-class EngineElement(Architecture):
+class EngineElement(NodeMetaMixin, BaseModel):
     """
     Represents an individual element in the engine cycle.
 
@@ -14,7 +14,6 @@ class EngineElement(Architecture):
         options (dict, optional): The options associated with the engine element.
     """
 
-    name: str = Field(..., description="The name of the engine element.")
     type: str = Field(..., description="The type of engine element this is.")
     options: Optional[dict] = Field(
         default=None, description="The options associated with the engine element."
@@ -502,7 +501,7 @@ _ELEMENT_TYPE_MAP: dict[str, type[EngineElement]] = {
 }
 
 
-class PropulsionCycle(Architecture):
+class PropulsionCycle(NodeMetaMixin, BaseModel):
     """
     Represents a complete engine cycle.
 
@@ -518,7 +517,6 @@ class PropulsionCycle(Architecture):
         solver_settings (dict, optional): The solver settings for the engine cycle.
     """
 
-    name: str = Field(..., description="The name of the engine cycle.")
     elements: list[SerializeAsAny[EngineElement]] = Field(
         ..., description="The list of engine elements in the engine cycle."
     )

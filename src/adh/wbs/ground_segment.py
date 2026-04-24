@@ -10,10 +10,10 @@ from typing import Optional
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
+from adh.msosa.architecture import Architecture, MSoSAMixin
 
 
-class GroundHostSegment(Architecture):
+class GroundHostSegment(MSoSAMixin, Architecture):
     """Ground/Host Segment. MIL-STD-881F A.4.5. WBS 1.4."""
 
     wbs_no: str = Field(default="1.4", description="WBS number per MIL-STD-881F.")
@@ -31,49 +31,49 @@ class GroundHostSegment(Architecture):
     other: Optional[OtherGroundHostSegment] = Field(default=None)
 
 
-class GroundSegmentIntegrationAssemblyTestAndCheckout(Architecture):
+class GroundSegmentIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Ground Segment Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.5.1. WBS 1.4.1."""
 
     wbs_no: str = Field(default="1.4.1", description="WBS number per MIL-STD-881F.")
 
 
-class GroundControlSystems(Architecture):
+class GroundControlSystems(MSoSAMixin, Architecture):
     """Ground Control Systems. MIL-STD-881F A.4.5.2. WBS 1.4.2."""
 
     wbs_no: str = Field(default="1.4.2", description="WBS number per MIL-STD-881F.")
 
 
-class CommandAndControlSubsystem(Architecture):
+class CommandAndControlSubsystem(MSoSAMixin, Architecture):
     """Command and Control Subsystem. MIL-STD-881F A.4.5.3. WBS 1.4.3."""
 
     wbs_no: str = Field(default="1.4.3", description="WBS number per MIL-STD-881F.")
 
 
-class LaunchEquipment(Architecture):
+class LaunchEquipment(MSoSAMixin, Architecture):
     """Launch Equipment. MIL-STD-881F A.4.5.4. WBS 1.4.4."""
 
     wbs_no: str = Field(default="1.4.4", description="WBS number per MIL-STD-881F.")
 
 
-class RecoveryEquipment(Architecture):
+class RecoveryEquipment(MSoSAMixin, Architecture):
     """Recovery Equipment. MIL-STD-881F A.4.5.5. WBS 1.4.5."""
 
     wbs_no: str = Field(default="1.4.5", description="WBS number per MIL-STD-881F.")
 
 
-class TransportVehicles(Architecture):
+class TransportVehicles(MSoSAMixin, Architecture):
     """Transport Vehicles. MIL-STD-881F A.4.5.6. WBS 1.4.6."""
 
     wbs_no: str = Field(default="1.4.6", description="WBS number per MIL-STD-881F.")
 
 
-class GroundSegmentSoftwareRelease(Architecture):
+class GroundSegmentSoftwareRelease(MSoSAMixin, Architecture):
     """Ground Segment Software Release. MIL-STD-881F A.4.5.7. WBS 1.4.7."""
 
     wbs_no: str = Field(default="1.4.7", description="WBS number per MIL-STD-881F.")
 
 
-class OtherGroundHostSegment(Architecture):
+class OtherGroundHostSegment(MSoSAMixin, Architecture):
     """Other Ground/Host Segment. MIL-STD-881F A.4.5.8. WBS 1.4.8."""
 
     wbs_no: str = Field(default="1.4.8", description="WBS number per MIL-STD-881F.")

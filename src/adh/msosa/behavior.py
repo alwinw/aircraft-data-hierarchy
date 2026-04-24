@@ -18,8 +18,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator
 
-from adh.msosa.fidelity import FidelityLevel
-from adh.msosa.source_info import SourceInfo
+from adh.msosa.metadata import FidelityLevel, SourceInfo
 from adh.tabular.tables import TablesMixin
 
 

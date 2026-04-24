@@ -1,31 +1,12 @@
-"""
-ADH Source Information Models.
-
-Shared metadata for all MSoSA views (Architecture, Requirements, Performance,
-Behaviour). Captures authorship, creation/modification dates, version, and
-references to external files or documents.
-
-These models replace the DAVE-ML document-level metadata
-(Author, FileHeader, Provenance, etc.) that was previously embedded in
-``adh.tabular.tables``. By lifting metadata to the MSoSA view level, table
-primitives stay focused on data structures while every view can record its own
-source information uniformly.
-
-[1]: https://ntrs.nasa.gov/citations/20250007045
-"""
+"""Shared node metadata, provenance, and fidelity models."""
 
 from __future__ import annotations
 
 from datetime import date
+from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, Field
-
-__all__ = [
-    "Author",
-    "ExternalReference",
-    "SourceInfo",
-]
+from pydantic import UUID4, BaseModel, ConfigDict, Field, field_validator
 
 
 class Author(BaseModel):
@@ -39,12 +20,7 @@ class Author(BaseModel):
 
 
 class ExternalReference(BaseModel):
-    """Reference to an external file or document.
-
-    Use this to link an ADH node to supporting artefacts such as CAD geometry
-    (STEP/IGES), CFD meshes, test reports, specification documents, or any
-    other resource that informs the node's definition.
-    """
+    """Reference to an external file or document."""
 
     title: str = Field(description="Title or name of the referenced resource.")
     path: Optional[str] = Field(
@@ -65,13 +41,7 @@ class ExternalReference(BaseModel):
 
 
 class SourceInfo(BaseModel):
-    """Source and authorship metadata for an ADH node.
-
-    Provides a uniform way to record who created or modified an ADH node, when,
-    and what external resources informed it. Intended to be composed into every
-    MSoSA view (Architecture, Requirement, Discipline, Behaviour) as an optional
-    ``source_info`` field.
-    """
+    """Source and authorship metadata for an ADH node."""
 
     authors: Optional[list[Author]] = Field(
         default=None, description="Authors or contributors."
@@ -87,3 +57,51 @@ class SourceInfo(BaseModel):
         default=None,
         description="References to external files or documents.",
     )
+
+
+class FidelityLevel(str, Enum):
+    """L0-L4 fidelity taxonomy for ADH domain blocks."""
+
+    sketch = "L0"
+    layout = "L1"
+    detailed = "L2"
+    high_fidelity = "L3"
+    validated = "L4"
+
+
+class NodeMetaMixin(BaseModel):
+    """Shared top-level metadata for ADH node-like models."""
+
+    name: Optional[str] = Field(default=None, description="A unique model name.")
+    description: Optional[str] = Field(
+        default=None, description="A brief description of the model."
+    )
+    source_info: Optional[SourceInfo] = Field(
+        default=None, description="Source and authorship metadata."
+    )
+    uuid: Optional[UUID4] = Field(
+        default=None, description="A globally unique identifier for the model."
+    )
+
+    model_config = ConfigDict(
+        validate_assignment=True,
+        extra="allow",
+        str_strip_whitespace=True,
+        str_min_length=1,
+    )
+
+    @field_validator("name", "description", mode="before")
+    @classmethod
+    def validate_non_empty(cls, value: Optional[str]) -> Optional[str]:
+        if value is not None and not value.strip():
+            raise ValueError("Name and description fields must not be empty.")
+        return value
+
+
+__all__ = [
+    "Author",
+    "ExternalReference",
+    "FidelityLevel",
+    "NodeMetaMixin",
+    "SourceInfo",
+]

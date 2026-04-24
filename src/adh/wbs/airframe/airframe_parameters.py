@@ -6,10 +6,9 @@
 from enum import Enum
 from typing import Optional
 
-from pydantic import Field, field_validator, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-# Assuming Architecture and Spline are defined elsewhere
-from adh.msosa.architecture import Architecture
+from adh.msosa.metadata import NodeMetaMixin
 from adh.wbs.airframe.airframe_geometry import (
     Spline,
 )
@@ -23,7 +22,7 @@ from adh.wbs.airframe.airframe_geometry import (
 # ToDo: Move this class to Behavior?...or is it already redundant with something in DaveML
 
 
-class ReferenceData(Architecture):
+class ReferenceData(NodeMetaMixin, BaseModel):
     roughness: Optional[float] = Field(
         default=None,
         alias="RougHgt",
@@ -56,7 +55,7 @@ class ReferenceData(Architecture):
 # ToDo: Move this class to Behavior?...is it already redundant with comething in DaveML
 
 
-class FlightConditions(Architecture):
+class FlightConditions(NodeMetaMixin, BaseModel):
     """
     Represents flight conditions for aerodynamic calculations.
 
@@ -193,7 +192,7 @@ class FlightConditions(Architecture):
         return values
 
 
-class ConfigurationLayout(Architecture):
+class ConfigurationLayout(NodeMetaMixin, BaseModel):
     center_of_gravity_station: Optional[float] = Field(
         default=None, description="Airplane Center-of-Gravity station - in"
     )
@@ -302,7 +301,7 @@ class ConfigurationLayout(Architecture):
         return v
 
 
-class Airfoil(Architecture):
+class Airfoil(BaseModel):
     spline: Optional[Spline] = Field(
         default=None,
         description="A spline defining the contour of the airfoil section.",
@@ -409,7 +408,7 @@ class PlanformType(Enum):
     SWEPT = 3
 
 
-class LiftingSurface(Architecture):
+class LiftingSurface(BaseModel):
     tip_chord: Optional[float] = Field(default=None, ge=0, description="Tip chord")
     outboard_panel_semi_span: Optional[float] = Field(
         default=None, ge=0, description="Outboard panel semi-span"
@@ -505,7 +504,7 @@ class LiftingSurface(Architecture):
         return v
 
 
-class TwinVerticalTail(Architecture):
+class TwinVerticalTail(BaseModel):
     span_above: Optional[float] = Field(
         default=None, description="Vertical Panel Span above lifting surface"
     )
@@ -561,7 +560,7 @@ class TwinVerticalTail(Architecture):
     }
 
 
-class GroundEffectsDefinition(Architecture):
+class GroundEffectsDefinition(BaseModel):
     heights: list[Optional[float]] = Field(
         default_factory=list, description="Ground heights"
     )
@@ -625,7 +624,7 @@ class BlowingType(Enum):
     COMBINED = 4
 
 
-class SymmetricFlap(Architecture):
+class SymmetricFlap(BaseModel):
     flap_type: Optional[FlapType] = Field(
         default=None,
         description="Flap type: 1 - Plain, 2 - Single, 3 - Fowler, 4 - Double, 0 - Triple, 5 - Split, 6 - LE_Flap, 7 - LE_Slats, 8 - Krueger",
@@ -727,7 +726,7 @@ class ControlType(Enum):
     STABILIZER = 5
 
 
-class AsymmetricControl(Architecture):
+class AsymmetricControl(BaseModel):
     control_type: Optional[ControlType] = Field(
         default=None,
         description="Control type identifier: 1 - FLAP, 2 - PLUG, 3 - SLOT, 4 - AILERON, 5 - STABILIZER",
@@ -819,7 +818,7 @@ class TailShape(Enum):
     POINTED = 3
 
 
-class Body(Architecture):
+class Body(BaseModel):
     """
     Represents the parameters of a body.
 
@@ -935,7 +934,7 @@ class Body(Architecture):
         return values
 
 
-class LowAspectRatioWingBody(Architecture):
+class LowAspectRatioWingBody(BaseModel):
     body_centroid_height: Optional[float] = Field(
         default=None, description="Height of Base Area Centroid above reference plane"
     )
@@ -1055,7 +1054,7 @@ class LowAspectRatioWingBody(Architecture):
     }
 
 
-class TransverseJetControl(Architecture):
+class TransverseJetControl(BaseModel):
     qty_time: Optional[int] = Field(
         default=None, description="Number of time history values"
     )
@@ -1121,7 +1120,7 @@ class TransverseJetControl(Architecture):
     }
 
 
-class HypersonicFlapControl(Architecture):
+class HypersonicFlapControl(BaseModel):
     altitude: Optional[float] = Field(default=None, description="Altitude")
     hingeline_chord_ratio: Optional[float] = Field(
         default=None,
@@ -1175,7 +1174,7 @@ class EngineType(Enum):
     TURBOPROP = 2
 
 
-class PropellerPowerProperties(Architecture):
+class PropellerPowerProperties(BaseModel):
     thrust_incidence_angle: Optional[float] = Field(
         default=None, ge=0, description="Angle of incidence of the Engine thrust axis"
     )
@@ -1257,7 +1256,7 @@ class JetEngineType(Enum):
     RAMJET = 3
 
 
-class JetPowerProperties(Architecture):
+class JetPowerProperties(BaseModel):
     qty_engines: Optional[int] = Field(
         default=None, ge=0, description="Number of jet engines."
     )
@@ -1344,7 +1343,7 @@ class JetPowerProperties(Architecture):
 # ToDo: This aerodynamics Data seems to belong in 'Behavior' and is redundant with DaveML?
 
 
-class AerodynamicsData(Architecture):
+class AerodynamicsData(NodeMetaMixin, BaseModel):
     # Body
     CLalpha_body: list[Optional[float]] = Field(
         default_factory=list,
@@ -1700,7 +1699,7 @@ class AerodynamicsData(Architecture):
     }
 
 
-class Parameters(Architecture):
+class Parameters(BaseModel):
     reference_data: Optional[ReferenceData] = Field(
         default=None, description="Reference data for the component."
     )

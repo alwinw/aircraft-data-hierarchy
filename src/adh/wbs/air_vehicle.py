@@ -10,7 +10,7 @@ from typing import Optional
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
+from adh.msosa.architecture import Architecture, MSoSAMixin
 from adh.wbs.ground_segment import GroundHostSegment
 from adh.wbs.payload import PayloadMissionSystem
 from adh.wbs.program_common import (
@@ -29,7 +29,7 @@ from adh.wbs.program_common import (
 )
 
 
-class AircraftSystem(Architecture):
+class AircraftSystem(MSoSAMixin, Architecture):
     """Aircraft System. MIL-STD-881F A.4.1. WBS 1.0."""
 
     wbs_no: str = Field(default="1.0", description="WBS number per MIL-STD-881F.")
@@ -59,13 +59,13 @@ class AircraftSystem(Architecture):
     )
 
 
-class AircraftSystemIntegrationAssemblyTestAndCheckout(Architecture):
+class AircraftSystemIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Aircraft System, Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.2. WBS 1.1."""
 
     wbs_no: str = Field(default="1.1", description="WBS number per MIL-STD-881F.")
 
 
-class AirVehicle(Architecture):
+class AirVehicle(MSoSAMixin, Architecture):
     """Air Vehicle. MIL-STD-881F A.4.3. WBS 1.2."""
 
     wbs_no: str = Field(default="1.2", description="WBS number per MIL-STD-881F.")
@@ -83,13 +83,13 @@ class AirVehicle(Architecture):
     other: Optional[OtherAirVehicle] = Field(default=None)
 
 
-class AirVehicleIntegrationAssemblyTestAndCheckout(Architecture):
+class AirVehicleIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Air Vehicle Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.3.1. WBS 1.2.1."""
 
     wbs_no: str = Field(default="1.2.1", description="WBS number per MIL-STD-881F.")
 
 
-class Airframe(Architecture):
+class Airframe(MSoSAMixin, Architecture):
     """Airframe. MIL-STD-881F A.4.3.2. WBS 1.2.2."""
 
     wbs_no: str = Field(default="1.2.2", description="WBS number per MIL-STD-881F.")
@@ -103,49 +103,49 @@ class Airframe(Architecture):
     other: Optional[OtherAirframeComponents] = Field(default=None)
 
 
-class AirframeIntegrationAssemblyTestAndCheckout(Architecture):
+class AirframeIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Airframe Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.3.2.1. WBS 1.2.2.1."""
 
     wbs_no: str = Field(default="1.2.2.1", description="WBS number per MIL-STD-881F.")
 
 
-class Fuselage(Architecture):
+class Fuselage(MSoSAMixin, Architecture):
     """Fuselage. MIL-STD-881F A.4.3.2.2. WBS 1.2.2.2."""
 
     wbs_no: str = Field(default="1.2.2.2", description="WBS number per MIL-STD-881F.")
 
 
-class Wing(Architecture):
+class Wing(MSoSAMixin, Architecture):
     """Wing. MIL-STD-881F A.4.3.2.3. WBS 1.2.2.3."""
 
     wbs_no: str = Field(default="1.2.2.3", description="WBS number per MIL-STD-881F.")
 
 
-class Empennage(Architecture):
+class Empennage(MSoSAMixin, Architecture):
     """Empennage. MIL-STD-881F A.4.3.2.4. WBS 1.2.2.4."""
 
     wbs_no: str = Field(default="1.2.2.4", description="WBS number per MIL-STD-881F.")
 
 
-class Nacelle(Architecture):
+class Nacelle(MSoSAMixin, Architecture):
     """Nacelle. MIL-STD-881F A.4.3.2.5. WBS 1.2.2.5."""
 
     wbs_no: str = Field(default="1.2.2.5", description="WBS number per MIL-STD-881F.")
 
 
-class OtherAirframeComponents(Architecture):
+class OtherAirframeComponents(MSoSAMixin, Architecture):
     """Other Airframe Components. MIL-STD-881F A.4.3.2.6. WBS 1.2.2.6."""
 
     wbs_no: str = Field(default="1.2.2.6", description="WBS number per MIL-STD-881F.")
 
 
-class Propulsion(Architecture):
+class Propulsion(MSoSAMixin, Architecture):
     """Propulsion. MIL-STD-881F A.4.3.3. WBS 1.2.3."""
 
     wbs_no: str = Field(default="1.2.3", description="WBS number per MIL-STD-881F.")
 
 
-class VehicleSubsystems(Architecture):
+class VehicleSubsystems(MSoSAMixin, Architecture):
     """Vehicle Subsystems. MIL-STD-881F A.4.3.4. WBS 1.2.4."""
 
     wbs_no: str = Field(default="1.2.4", description="WBS number per MIL-STD-881F.")
@@ -168,85 +168,85 @@ class VehicleSubsystems(Architecture):
     other: Optional[OtherSubsystems] = Field(default=None)
 
 
-class VehicleSubsystemIntegrationAssemblyTestAndCheckout(Architecture):
+class VehicleSubsystemIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Vehicle Subsystem Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.3.4.1. WBS 1.2.4.1."""
 
     wbs_no: str = Field(default="1.2.4.1", description="WBS number per MIL-STD-881F.")
 
 
-class FlightControlSubsystem(Architecture):
+class FlightControlSubsystem(MSoSAMixin, Architecture):
     """Flight Control Subsystem. MIL-STD-881F A.4.3.4.2. WBS 1.2.4.2."""
 
     wbs_no: str = Field(default="1.2.4.2", description="WBS number per MIL-STD-881F.")
 
 
-class AuxiliaryPowerSubsystem(Architecture):
+class AuxiliaryPowerSubsystem(MSoSAMixin, Architecture):
     """Auxiliary Power Subsystem. MIL-STD-881F A.4.3.4.3. WBS 1.2.4.3."""
 
     wbs_no: str = Field(default="1.2.4.3", description="WBS number per MIL-STD-881F.")
 
 
-class HydraulicSubsystem(Architecture):
+class HydraulicSubsystem(MSoSAMixin, Architecture):
     """Hydraulic Subsystem. MIL-STD-881F A.4.3.4.4. WBS 1.2.4.4."""
 
     wbs_no: str = Field(default="1.2.4.4", description="WBS number per MIL-STD-881F.")
 
 
-class ElectricalSubsystem(Architecture):
+class ElectricalSubsystem(MSoSAMixin, Architecture):
     """Electrical Subsystem. MIL-STD-881F A.4.3.4.5. WBS 1.2.4.5."""
 
     wbs_no: str = Field(default="1.2.4.5", description="WBS number per MIL-STD-881F.")
 
 
-class CrewStationSubsystem(Architecture):
+class CrewStationSubsystem(MSoSAMixin, Architecture):
     """Crew Station Subsystem. MIL-STD-881F A.4.3.4.6. WBS 1.2.4.6."""
 
     wbs_no: str = Field(default="1.2.4.6", description="WBS number per MIL-STD-881F.")
 
 
-class EnvironmentalControlSubsystem(Architecture):
+class EnvironmentalControlSubsystem(MSoSAMixin, Architecture):
     """Environmental Control Subsystem. MIL-STD-881F A.4.3.4.7. WBS 1.2.4.7."""
 
     wbs_no: str = Field(default="1.2.4.7", description="WBS number per MIL-STD-881F.")
 
 
-class FuelSubsystem(Architecture):
+class FuelSubsystem(MSoSAMixin, Architecture):
     """Fuel Subsystem. MIL-STD-881F A.4.3.4.8. WBS 1.2.4.8."""
 
     wbs_no: str = Field(default="1.2.4.8", description="WBS number per MIL-STD-881F.")
 
 
-class LandingGear(Architecture):
+class LandingGear(MSoSAMixin, Architecture):
     """Landing Gear. MIL-STD-881F A.4.3.4.9. WBS 1.2.4.9."""
 
     wbs_no: str = Field(default="1.2.4.9", description="WBS number per MIL-STD-881F.")
 
 
-class RotorGroup(Architecture):
+class RotorGroup(MSoSAMixin, Architecture):
     """Rotor Group. MIL-STD-881F A.4.3.4.10. WBS 1.2.4.10."""
 
     wbs_no: str = Field(default="1.2.4.10", description="WBS number per MIL-STD-881F.")
 
 
-class DriveGroup(Architecture):
+class DriveGroup(MSoSAMixin, Architecture):
     """Drive Group. MIL-STD-881F A.4.3.4.11. WBS 1.2.4.11."""
 
     wbs_no: str = Field(default="1.2.4.11", description="WBS number per MIL-STD-881F.")
 
 
-class VehicleSubsystemSoftwareRelease(Architecture):
+class VehicleSubsystemSoftwareRelease(MSoSAMixin, Architecture):
     """Vehicle Subsystem Software Release. MIL-STD-881F A.4.3.4.12. WBS 1.2.4.12."""
 
     wbs_no: str = Field(default="1.2.4.12", description="WBS number per MIL-STD-881F.")
 
 
-class OtherSubsystems(Architecture):
+class OtherSubsystems(MSoSAMixin, Architecture):
     """Other Subsystems. MIL-STD-881F A.4.3.4.13. WBS 1.2.4.13."""
 
     wbs_no: str = Field(default="1.2.4.13", description="WBS number per MIL-STD-881F.")
 
 
-class Avionics(Architecture):
+class Avionics(MSoSAMixin, Architecture):
     """Avionics. MIL-STD-881F A.4.3.5. WBS 1.2.5."""
 
     wbs_no: str = Field(default="1.2.5", description="WBS number per MIL-STD-881F.")
@@ -272,115 +272,115 @@ class Avionics(Architecture):
     other: Optional[OtherAvionicsSubsystems] = Field(default=None)
 
 
-class AvionicsIntegrationAssemblyTestAndCheckout(Architecture):
+class AvionicsIntegrationAssemblyTestAndCheckout(MSoSAMixin, Architecture):
     """Avionics Integration, Assembly, Test and Checkout. MIL-STD-881F A.4.3.5.1. WBS 1.2.5.1."""
 
     wbs_no: str = Field(default="1.2.5.1", description="WBS number per MIL-STD-881F.")
 
 
-class CommunicationIdentification(Architecture):
+class CommunicationIdentification(MSoSAMixin, Architecture):
     """Communication/Identification. MIL-STD-881F A.4.3.5.2. WBS 1.2.5.2."""
 
     wbs_no: str = Field(default="1.2.5.2", description="WBS number per MIL-STD-881F.")
 
 
-class NavigationGuidance(Architecture):
+class NavigationGuidance(MSoSAMixin, Architecture):
     """Navigation/Guidance. MIL-STD-881F A.4.3.5.3. WBS 1.2.5.3."""
 
     wbs_no: str = Field(default="1.2.5.3", description="WBS number per MIL-STD-881F.")
 
 
-class MissionComputerProcessing(Architecture):
+class MissionComputerProcessing(MSoSAMixin, Architecture):
     """Mission Computer/Processing. MIL-STD-881F A.4.3.5.4. WBS 1.2.5.4."""
 
     wbs_no: str = Field(default="1.2.5.4", description="WBS number per MIL-STD-881F.")
 
 
-class FireControl(Architecture):
+class FireControl(MSoSAMixin, Architecture):
     """Fire Control. MIL-STD-881F A.4.3.5.5. WBS 1.2.5.5."""
 
     wbs_no: str = Field(default="1.2.5.5", description="WBS number per MIL-STD-881F.")
 
 
-class DataDisplayAndControls(Architecture):
+class DataDisplayAndControls(MSoSAMixin, Architecture):
     """Data Display and Controls. MIL-STD-881F A.4.3.5.6. WBS 1.2.5.6."""
 
     wbs_no: str = Field(default="1.2.5.6", description="WBS number per MIL-STD-881F.")
 
 
-class Survivability(Architecture):
+class Survivability(MSoSAMixin, Architecture):
     """Survivability. MIL-STD-881F A.4.3.5.7. WBS 1.2.5.7."""
 
     wbs_no: str = Field(default="1.2.5.7", description="WBS number per MIL-STD-881F.")
 
 
-class Reconnaissance(Architecture):
+class Reconnaissance(MSoSAMixin, Architecture):
     """Reconnaissance. MIL-STD-881F A.4.3.5.8. WBS 1.2.5.8."""
 
     wbs_no: str = Field(default="1.2.5.8", description="WBS number per MIL-STD-881F.")
 
 
-class ElectronicWarfare(Architecture):
+class ElectronicWarfare(MSoSAMixin, Architecture):
     """Electronic Warfare. MIL-STD-881F A.4.3.5.9. WBS 1.2.5.9."""
 
     wbs_no: str = Field(default="1.2.5.9", description="WBS number per MIL-STD-881F.")
 
 
-class AutomaticFlightControl(Architecture):
+class AutomaticFlightControl(MSoSAMixin, Architecture):
     """Automatic Flight Control. MIL-STD-881F A.4.3.5.10. WBS 1.2.5.10."""
 
     wbs_no: str = Field(default="1.2.5.10", description="WBS number per MIL-STD-881F.")
 
 
-class HealthMonitoringSystem(Architecture):
+class HealthMonitoringSystem(MSoSAMixin, Architecture):
     """Health Monitoring System. MIL-STD-881F A.4.3.5.11. WBS 1.2.5.11."""
 
     wbs_no: str = Field(default="1.2.5.11", description="WBS number per MIL-STD-881F.")
 
 
-class StoresManagement(Architecture):
+class StoresManagement(MSoSAMixin, Architecture):
     """Stores Management. MIL-STD-881F A.4.3.5.12. WBS 1.2.5.12."""
 
     wbs_no: str = Field(default="1.2.5.12", description="WBS number per MIL-STD-881F.")
 
 
-class AvionicsSoftwareRelease(Architecture):
+class AvionicsSoftwareRelease(MSoSAMixin, Architecture):
     """Avionics Software Release. MIL-STD-881F A.4.3.5.13. WBS 1.2.5.13."""
 
     wbs_no: str = Field(default="1.2.5.13", description="WBS number per MIL-STD-881F.")
 
 
-class OtherAvionicsSubsystems(Architecture):
+class OtherAvionicsSubsystems(MSoSAMixin, Architecture):
     """Other Avionics Subsystems. MIL-STD-881F A.4.3.5.14. WBS 1.2.5.14."""
 
     wbs_no: str = Field(default="1.2.5.14", description="WBS number per MIL-STD-881F.")
 
 
-class ArmamentWeaponsDelivery(Architecture):
+class ArmamentWeaponsDelivery(MSoSAMixin, Architecture):
     """Armament/Weapons Delivery. MIL-STD-881F A.4.3.6. WBS 1.2.6."""
 
     wbs_no: str = Field(default="1.2.6", description="WBS number per MIL-STD-881F.")
 
 
-class AuxiliaryEquipment(Architecture):
+class AuxiliaryEquipment(MSoSAMixin, Architecture):
     """Auxiliary Equipment. MIL-STD-881F A.4.3.7. WBS 1.2.7."""
 
     wbs_no: str = Field(default="1.2.7", description="WBS number per MIL-STD-881F.")
 
 
-class FurnishingsAndEquipment(Architecture):
+class FurnishingsAndEquipment(MSoSAMixin, Architecture):
     """Furnishings and Equipment. MIL-STD-881F A.4.3.8. WBS 1.2.8."""
 
     wbs_no: str = Field(default="1.2.8", description="WBS number per MIL-STD-881F.")
 
 
-class AirVehicleSoftwareRelease(Architecture):
+class AirVehicleSoftwareRelease(MSoSAMixin, Architecture):
     """Air Vehicle Software Release. MIL-STD-881F A.4.3.9. WBS 1.2.9."""
 
     wbs_no: str = Field(default="1.2.9", description="WBS number per MIL-STD-881F.")
 
 
-class OtherAirVehicle(Architecture):
+class OtherAirVehicle(MSoSAMixin, Architecture):
     """Other Air Vehicle. MIL-STD-881F A.4.3.10. WBS 1.2.10."""
 
     wbs_no: str = Field(default="1.2.10", description="WBS number per MIL-STD-881F.")

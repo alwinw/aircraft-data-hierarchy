@@ -167,7 +167,7 @@ from __future__ import annotations
 from typing import Optional
 
 from pydantic import Field
-from adh.msosa.architecture import Architecture""".splitlines()
+from adh.msosa.architecture import Architecture, MSoSAMixin""".splitlines()
 
     if cross_imports:
         lines.append("")
@@ -190,7 +190,7 @@ from adh.msosa.architecture import Architecture""".splitlines()
         noqa = _noqa_comment(class_name)
 
         docstring = f"{name}. {standard_ref}. WBS {wbs_no}."
-        lines.append(f"class {class_name}(Architecture):{noqa}")
+        lines.append(f"class {class_name}(MSoSAMixin, Architecture):{noqa}")
         lines.append(f'    """{docstring}"""')
         lines.append("")
         lines.append(
@@ -232,7 +232,49 @@ from adh.msosa.architecture import Architecture""".splitlines()
     return source.rstrip("\n") + "\n"
 
 
-def generate_init_py(entries: list[dict]) -> str:
+def _extract_manual_init_blocks(existing_content: str) -> list[str]:
+    """Return hand-maintained `from adh.wbs.*` import blocks from __init__.py."""
+    blocks: list[str] = []
+    lines = existing_content.splitlines()
+    index = 0
+
+    while index < len(lines):
+        line = lines[index]
+        match = re.match(r"from adh\.wbs\.(\w+) import\b", line)
+        if not match:
+            index += 1
+            continue
+
+        stem = match.group(1)
+        block = [line]
+        if line.endswith("("):
+            index += 1
+            while index < len(lines):
+                block.append(lines[index])
+                if lines[index] == ")":
+                    break
+                index += 1
+        if stem not in DOMAIN_STEMS:
+            blocks.append("\n".join(block))
+        index += 1
+
+    return blocks
+
+
+def _extract_manual_all_entries(
+    existing_content: str, taxonomy_names: list[str]
+) -> list[str]:
+    """Return hand-maintained `__all__` entries that are not taxonomy names."""
+    match = re.search(r"__all__ = \[(?P<body>.*?)\n\]", existing_content, re.DOTALL)
+    if not match:
+        return []
+
+    taxonomy_name_set = set(taxonomy_names)
+    entries = re.findall(r'^\s+"([^"]+)",$', match.group("body"), re.MULTILINE)
+    return [entry for entry in entries if entry not in taxonomy_name_set]
+
+
+def generate_init_py(entries: list[dict], existing_content: str | None = None) -> str:
     """Render __init__.py with taxonomy imports from domain files.
 
     Submodule imports (airframe, propulsion, systems, equipment) and their
@@ -261,18 +303,33 @@ def generate_init_py(entries: list[dict]) -> str:
     import_section = "\n".join(block for _, block in domain_blocks)
 
     all_names = sorted(set(all_taxonomy_names), key=str.casefold)
-    all_entries_str = '",\n    "'.join(all_names)
+    manual_import_blocks: list[str] = []
+    manual_all_entries: list[str] = []
+    if existing_content:
+        manual_import_blocks = _extract_manual_init_blocks(existing_content)
+        manual_all_entries = _extract_manual_all_entries(existing_content, all_names)
+
+    all_export_names = all_names + manual_all_entries
+    all_entries_str = '",\n    "'.join(all_export_names)
     all_section = f'__all__ = [\n    "{all_entries_str}",\n]\n'
 
-    return f"{header}\n{import_section}\n\n{all_section}"
+    manual_section = ""
+    if manual_import_blocks:
+        manual_section = "\n\n" + "\n".join(manual_import_blocks)
+
+    return f"{header}\n{import_section}{manual_section}\n\n{all_section}"
 
 
-def generate_all(entries: list[dict], tree: dict[str, list[dict]]) -> dict[str, str]:
+def generate_all(
+    entries: list[dict],
+    tree: dict[str, list[dict]],
+    existing_init_content: str | None = None,
+) -> dict[str, str]:
     """Return mapping of repo-relative path to file content for all generated files."""
     files: dict[str, str] = {}
     for stem in DOMAIN_STEMS:
         files[f"src/adh/wbs/{stem}.py"] = generate_domain_py(stem, entries, tree)
-    files["src/adh/wbs/__init__.py"] = generate_init_py(entries)
+    files["src/adh/wbs/__init__.py"] = generate_init_py(entries, existing_init_content)
     return files
 
 
@@ -355,7 +412,11 @@ def main() -> None:
 
     entries = load_taxonomy()
     tree = build_tree(entries)
-    files = generate_all(entries, tree)
+    existing_init_content = None
+    init_path = REPO_ROOT / "src" / "adh" / "wbs" / "__init__.py"
+    if not args.check and init_path.exists():
+        existing_init_content = init_path.read_text(encoding="utf-8")
+    files = generate_all(entries, tree, existing_init_content)
 
     if args.check:
         ok = check_subset(files, REPO_ROOT, entries, tree)

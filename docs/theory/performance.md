@@ -35,13 +35,13 @@ Each `Discipline` stores:[^performance-code]
 - `fidelity_level`: the declared analysis level in the current codebase
 - `source_info`: authorship and provenance metadata
 
-Each `ModelDescription` then carries the tool or model metadata, including `name`, `version`, `guid`, `generation_time`,
+Each `ModelDescription` then carries the tool or model metadata, including `name`, `version`, `uuid`, `generation_time`,
 and a `DataExchange` object with declared `inputs` and `outputs`.[^performance-code]
 
 ## Usage Example
 
 ```python
-from adh.msosa.fidelity import FidelityLevel
+from adh.msosa.metadata import FidelityLevel
 from adh.msosa.performance import (
     DataExchange,
     Discipline,
@@ -131,6 +131,6 @@ read as code-level evolution rather than as original paper terminology.
 [^engelbeck-prop-performance]: Engelbeck et al., NASA/CR-20250007045, Section 13.4: "Performance Branch: This branch contains a Pydantic tool class that enables the user to specify solver setting inputs, outputs and options controlling the pyCycle propulsion analysis."
 [^engelbeck-prop-behaviour]: Engelbeck et al., NASA/CR-20250007045, Section 13.4: "Behavior Branch: This branch mirrors the architecture branch but contains off-design performance at user-specified design conditions."
 [^performance-code]: Current implementation: `src/adh/msosa/performance.py`.
-[^fidelity-code]: Current implementation: `src/adh/msosa/fidelity.py`.
+[^fidelity-code]: Current implementation: `src/adh/msosa/metadata.py`.
 [^propulsion-demo-code]: Current implementation: `demos/PropulsionDemo/utils/generate_demo_adh.py` defines `PropulsionDemo` with `performance: Optional[PropulsionCyclePerformance]`.
 [^cycle-performance-code]: Current implementation: `demos/PropulsionDemo/performanceLib/propulsion/propulsion_cycle_performance.py`.

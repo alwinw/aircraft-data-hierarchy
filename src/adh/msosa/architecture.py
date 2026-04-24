@@ -18,27 +18,18 @@ from typing import Any, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from adh.msosa.source_info import SourceInfo
+from adh.msosa.behavior import Behaviors
+from adh.msosa.metadata import NodeMetaMixin
+from adh.msosa.performance import Performances
+from adh.msosa.requirements import Requirements
 
 _WBS_PATTERN = re.compile(r"^\d+(\.\d+)*$")
 
 
-class Architecture(BaseModel):
+class Architecture(NodeMetaMixin, BaseModel):
     """Base model for all WBS architecture nodes."""
 
-    name: Optional[str] = None
-    description: Optional[str] = None
     wbs_no: str = ""
-    source_info: Optional[SourceInfo] = Field(
-        default=None, description="Source and authorship metadata."
-    )
-
-    model_config = ConfigDict(
-        validate_assignment=True,
-        extra="allow",
-        str_strip_whitespace=True,
-        str_min_length=1,
-    )
 
     @field_validator("wbs_no")
     @classmethod
@@ -50,8 +41,29 @@ class Architecture(BaseModel):
         return value
 
 
+class MSoSAMixin(BaseModel):
+    """Add recursive MSoSA child views to a true architecture node."""
+
+    requirements: Optional[Requirements] = Field(
+        default=None,
+        description="Requirements child view for this architecture node.",
+    )
+    performance: Optional[Performances] = Field(
+        default=None,
+        description="Performance child view for this architecture node.",
+    )
+    behavior: Optional[Behaviors] = Field(
+        default=None,
+        description="Behavior child view for this architecture node.",
+    )
+
+
 class Metadata(BaseModel):
     """Key-value metadata for annotating architecture nodes."""
+
+    # TODO: Rename or replace this value-annotation model.
+    # It currently carries units/bounds/uncertainty metadata for helper fields and
+    # may later be replaced by a Pint-based annotation type.
 
     key: str
     value: Any = None
@@ -72,3 +84,6 @@ class Metadata(BaseModel):
         str_max_length=255,
         str_strip_whitespace=True,
     )
+
+
+__all__ = ["Architecture", "MSoSAMixin", "Metadata"]
