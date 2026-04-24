@@ -10,8 +10,7 @@ from typing import Any, Optional
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
-from adh.msosa.mixin import MSoSAMixin
+from adh.msosa.architecture import Architecture, MSoSAMixin
 
 
 class Equipment(MSoSAMixin, Architecture):

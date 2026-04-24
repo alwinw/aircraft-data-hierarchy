@@ -5,12 +5,27 @@ from typing import Optional
 import pytest
 from pydantic import ValidationError
 
-from adh.msosa import Architecture, Behaviors, MSoSAMixin, Performances, Requirements
+from adh.msosa import (
+    Architecture,
+    Behaviors,
+    MSoSAMixin,
+    NodeMetaMixin,
+    Performances,
+    Requirements,
+)
 from adh.wbs import Avionics, Wing
 from adh.wbs.airframe.airframe import Component
+from adh.wbs.airframe.airframe_geometry import Float, Geometry
+from adh.wbs.airframe.airframe_parameters import (
+    AerodynamicsData,
+    Parameters,
+    ReferenceData,
+)
 from adh.wbs.equipment import Equipment
 from adh.wbs.propulsion.propulsion import Propulsion
+from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 from adh.wbs.propulsion.propulsion_geometry import PropulsionGeometry
+from adh.wbs.propulsion.propulsion_multipoint import MultiPointCycle
 from adh.wbs.systems.systems import System
 
 
@@ -74,16 +89,28 @@ def test_mixin_fields_round_trip_with_architecture_validation():
     assert restored.child is not None
 
 
-def test_propulsion_geometry_is_treated_as_true_architecture_node():
-    geometry = PropulsionGeometry(
-        requirements=Requirements(),
-        performance=Performances(),
-        behavior=Behaviors(),
-    )
+@pytest.mark.parametrize(
+    "model_cls",
+    [PropulsionCycle, PropulsionGeometry, Float, Geometry, Parameters],
+)
+def test_non_architecture_models_do_not_expose_recursive_msosa_fields(model_cls):
+    assert not issubclass(model_cls, Architecture)
+    assert "requirements" not in model_cls.model_fields
+    assert "performance" not in model_cls.model_fields
+    assert "behavior" not in model_cls.model_fields
 
-    assert isinstance(geometry.requirements, Requirements)
-    assert isinstance(geometry.performance, Performances)
-    assert isinstance(geometry.behavior, Behaviors)
+
+@pytest.mark.parametrize(
+    "model_cls",
+    [PropulsionCycle, PropulsionGeometry, MultiPointCycle, ReferenceData],
+)
+def test_metadata_support_models_inherit_node_meta_mixin(model_cls):
+    assert issubclass(model_cls, NodeMetaMixin)
+
+
+def test_metadata_support_model_fields_expose_uuid_and_source_info():
+    assert "uuid" in AerodynamicsData.model_fields
+    assert "source_info" in AerodynamicsData.model_fields
 
 
 def test_architecture_validation_still_applies_with_mixin():

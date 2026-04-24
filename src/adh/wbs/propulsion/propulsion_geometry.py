@@ -1,8 +1,9 @@
-from adh.msosa.architecture import Architecture
-from adh.msosa.mixin import MSoSAMixin
+from pydantic import BaseModel
+
+from adh.msosa.metadata import NodeMetaMixin
 
 
-class PropulsionGeometry(MSoSAMixin, Architecture):
+class PropulsionGeometry(NodeMetaMixin, BaseModel):
     """Propulsion geometry parameters. Content deferred to PLAN_6 (Fix #5)."""
 
     pass

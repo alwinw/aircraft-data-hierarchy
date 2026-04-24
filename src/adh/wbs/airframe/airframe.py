@@ -10,8 +10,7 @@ from typing import Optional
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
-from adh.msosa.mixin import MSoSAMixin
+from adh.msosa.architecture import Architecture, MSoSAMixin
 from adh.wbs.airframe.airframe_geometry import Geometry
 from adh.wbs.airframe.airframe_parameters import Parameters
 

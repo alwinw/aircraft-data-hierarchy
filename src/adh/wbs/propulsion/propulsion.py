@@ -10,8 +10,7 @@ from typing import Any, Optional, Union
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
-from adh.msosa.mixin import MSoSAMixin
+from adh.msosa.architecture import Architecture, MSoSAMixin
 from adh.wbs.propulsion.propulsion_cycle import PropulsionCycle
 from adh.wbs.propulsion.propulsion_geometry import PropulsionGeometry
 from adh.wbs.propulsion.propulsion_multipoint import MultiPointCycle

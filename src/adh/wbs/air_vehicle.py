@@ -10,8 +10,7 @@ from typing import Optional
 
 from pydantic import Field
 
-from adh.msosa.architecture import Architecture
-from adh.msosa.mixin import MSoSAMixin
+from adh.msosa.architecture import Architecture, MSoSAMixin
 from adh.wbs.ground_segment import GroundHostSegment
 from adh.wbs.payload import PayloadMissionSystem
 from adh.wbs.program_common import (

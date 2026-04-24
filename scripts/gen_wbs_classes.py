@@ -167,8 +167,7 @@ from __future__ import annotations
 from typing import Optional
 
 from pydantic import Field
-from adh.msosa.architecture import Architecture
-from adh.msosa.mixin import MSoSAMixin""".splitlines()
+from adh.msosa.architecture import Architecture, MSoSAMixin""".splitlines()
 
     if cross_imports:
         lines.append("")

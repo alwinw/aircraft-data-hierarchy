@@ -20,7 +20,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from adh.msosa.source_info import SourceInfo
+from adh.msosa.metadata import SourceInfo
 
 
 class ReqsCategories(str, Enum):
